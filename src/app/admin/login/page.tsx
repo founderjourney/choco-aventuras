@@ -71,7 +71,7 @@ export default function AdminLogin() {
         </Link>
       </div>
 
-      <Card className="w-full max-w-md shadow-2xl bg-white/95 backdrop-blur-xl border-0 relative z-10">
+      <Card className="w-full max-w-md mx-4 sm:mx-0 shadow-2xl bg-white/95 backdrop-blur-xl border-0 relative z-10">
         <CardHeader className="text-center pb-6">
           <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-600 to-emerald-800 shadow-xl">
             <Lock className="h-10 w-10 text-white" />

@@ -97,8 +97,8 @@ export default function AdminDashboard() {
             <Link href="/" className="font-bold text-xl text-[#145A32]">
               Chocó Aventuras - Admin
             </Link>
-            <div className="flex items-center space-x-6">
-              <nav className="flex space-x-6">
+            <div className="flex items-center space-x-2 sm:space-x-6">
+              <nav className="hidden lg:flex space-x-6">
                 <Link href="/" className="text-gray-700 hover:text-[#145A32]">
                   Inicio
                 </Link>
@@ -112,18 +112,18 @@ export default function AdminDashboard() {
                   Admin
                 </Link>
               </nav>
-              <div className="flex items-center space-x-3">
-                <span className="text-sm text-gray-600">
+              <div className="flex items-center space-x-2 sm:space-x-3">
+                <span className="text-xs sm:text-sm text-gray-600 hidden sm:block">
                   Hola, {user.name}
                 </span>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={logout}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm"
                 >
-                  <LogOut className="h-4 w-4" />
-                  Salir
+                  <LogOut className="h-3 w-3 sm:h-4 sm:w-4" />
+                  <span className="hidden sm:inline">Salir</span>
                 </Button>
               </div>
             </div>
@@ -132,14 +132,14 @@ export default function AdminDashboard() {
       </header>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-[#145A32]">Panel de Administración</h1>
-          <p className="text-gray-600 mt-2">Gestiona cuadriciclos, paseos y reservas</p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#145A32]">Panel de Administración</h1>
+          <p className="text-gray-600 mt-2 text-sm sm:text-base">Gestiona cuadriciclos, paseos y reservas</p>
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Cuadriciclos</CardTitle>
@@ -194,7 +194,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Navigation Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
           <Link href="/admin/cuadriciclos" className="block">
             <Card className="hover:shadow-lg transition-shadow cursor-pointer">
               <CardHeader>

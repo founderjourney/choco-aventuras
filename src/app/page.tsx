@@ -1,9 +1,10 @@
 "use client";
 
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { MapPin, Clock, Phone, Facebook, Instagram, Star, ArrowRight, Play } from 'lucide-react';
+import { MapPin, Clock, Phone, Facebook, Instagram, Star, ArrowRight, Play, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 
 interface Paseo {
@@ -26,6 +27,7 @@ async function fetchPaseos(): Promise<{paseos: Paseo[]}> {
 }
 
 export default function Homepage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { data: paseosData, isLoading: loadingPaseos } = useQuery({
     queryKey: ['paseos'],
     queryFn: fetchPaseos,
@@ -35,19 +37,21 @@ export default function Homepage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Modern Header */}
+      {/* Responsive Header */}
       <header className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <div className="w-8 h-8 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">CA</span>
               </div>
-              <div className="font-bold text-xl bg-gradient-to-r from-emerald-700 to-emerald-900 bg-clip-text text-transparent">
+              <div className="font-bold text-lg sm:text-xl bg-gradient-to-r from-emerald-700 to-emerald-900 bg-clip-text text-transparent">
                 Chocó Aventuras
               </div>
             </div>
-            <nav className="hidden md:flex space-x-8">
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex space-x-8">
               <Link href="/" className="text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
                 Inicio
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
@@ -65,118 +69,162 @@ export default function Homepage() {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
               </Link>
             </nav>
+
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 rounded-md text-slate-700 hover:text-emerald-600 hover:bg-slate-100 transition-colors"
+            >
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
           </div>
+
+          {/* Mobile Navigation */}
+          {mobileMenuOpen && (
+            <div className="lg:hidden">
+              <div className="pb-3 pt-2 space-y-1 bg-white/95 backdrop-blur-md border-t border-slate-100">
+                <Link
+                  href="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
+                >
+                  Inicio
+                </Link>
+                <Link
+                  href="/cuadriciclos"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
+                >
+                  Cuadriciclos
+                </Link>
+                <Link
+                  href="/reservas"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
+                >
+                  Reservar
+                </Link>
+                <Link
+                  href="/admin/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
+                >
+                  Admin
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       </header>
 
-      {/* Modern Hero Section */}
+      {/* Responsive Hero Section */}
       <section className="relative min-h-screen bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-800 flex items-center justify-center overflow-hidden">
-        {/* Animated background elements */}
+        {/* Optimized animated background elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-emerald-400/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-teal-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 right-1/3 w-48 h-48 bg-white/5 rounded-full blur-2xl animate-pulse delay-500"></div>
+          <div className="absolute top-1/4 left-1/4 w-32 sm:w-64 h-32 sm:h-64 bg-emerald-400/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-40 sm:w-80 h-40 sm:h-80 bg-teal-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 right-1/3 w-24 sm:w-48 h-24 sm:h-48 bg-white/5 rounded-full blur-2xl animate-pulse delay-500"></div>
         </div>
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10" />
 
-        <div className="relative z-10 text-center text-white max-w-5xl mx-auto px-4">
-          <div className="mb-8 flex justify-center">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-6 py-3">
-              <Star className="h-5 w-5 text-yellow-400 fill-current" />
-              <span className="text-sm font-medium">Experiencia Premium en el Chocó</span>
+        <div className="relative z-10 text-center text-white max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-6 sm:mb-8 flex justify-center">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 sm:px-6 py-2 sm:py-3">
+              <Star className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 fill-current" />
+              <span className="text-xs sm:text-sm font-medium">Experiencia Premium en el Chocó</span>
             </div>
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-bold mb-8 bg-gradient-to-r from-white via-emerald-100 to-teal-100 bg-clip-text text-transparent leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 bg-gradient-to-r from-white via-emerald-100 to-teal-100 bg-clip-text text-transparent leading-tight">
             CHOCÓ
             <br />
-            <span className="text-5xl md:text-7xl">AVENTURAS</span>
+            <span className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl">AVENTURAS</span>
           </h1>
 
-          <p className="text-xl md:text-2xl mb-6 text-emerald-100 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-2xl mb-4 sm:mb-6 text-emerald-100 max-w-3xl mx-auto leading-relaxed px-4">
             Experiencias extremas en la selva del Chocó
           </p>
 
-          <p className="text-lg mb-12 text-white/90 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg mb-8 sm:mb-12 text-white/90 max-w-2xl mx-auto px-4">
             Tours en cuadriciclo, paintball natural y cultura chocoana auténtica
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4">
             <Link href="/cuadriciclos">
-              <Button size="lg" className="text-lg px-8 py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold rounded-xl shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 flex items-center gap-2">
+              <Button size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold rounded-xl shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 flex items-center justify-center gap-2">
                 RESERVA AHORA
-                <ArrowRight className="h-5 w-5" />
+                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             </Link>
 
             <Button
               variant="outline"
               size="lg"
-              className="text-lg px-8 py-4 border-2 border-white/30 text-white hover:bg-white/10 font-semibold rounded-xl backdrop-blur-sm transition-all duration-300 flex items-center gap-2"
+              className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/30 text-white hover:bg-white/10 font-semibold rounded-xl backdrop-blur-sm transition-all duration-300 flex items-center justify-center gap-2"
             >
-              <Play className="h-5 w-5" />
+              <Play className="h-4 w-4 sm:h-5 sm:w-5" />
               Ver Video
             </Button>
           </div>
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-              <div className="text-3xl font-bold text-emerald-300 mb-2">100%</div>
-              <div className="text-sm text-white/80">Experiencia Natural</div>
+          <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 text-center px-4">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 border border-white/20">
+              <div className="text-2xl sm:text-3xl font-bold text-emerald-300 mb-2">100%</div>
+              <div className="text-xs sm:text-sm text-white/80">Experiencia Natural</div>
             </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-              <div className="text-3xl font-bold text-emerald-300 mb-2">24/7</div>
-              <div className="text-sm text-white/80">Disponibilidad</div>
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 border border-white/20">
+              <div className="text-2xl sm:text-3xl font-bold text-emerald-300 mb-2">24/7</div>
+              <div className="text-xs sm:text-sm text-white/80">Disponibilidad</div>
             </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-              <div className="text-3xl font-bold text-emerald-300 mb-2">5★</div>
-              <div className="text-sm text-white/80">Calificación</div>
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 border border-white/20">
+              <div className="text-2xl sm:text-3xl font-bold text-emerald-300 mb-2">5★</div>
+              <div className="text-xs sm:text-sm text-white/80">Calificación</div>
             </div>
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        {/* Scroll indicator - hidden on mobile */}
+        <div className="hidden sm:block absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
           <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
             <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
       </section>
 
-      {/* Info Section */}
-      <section className="py-24 bg-gradient-to-b from-slate-50 to-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
+      {/* Responsive Info Section */}
+      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-slate-50 to-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             <Card className="text-center group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-              <CardContent className="p-8">
-                <div className="mb-6 inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-2xl group-hover:scale-110 transition-transform">
-                  <MapPin className="h-8 w-8 text-white" />
+              <CardContent className="p-6 sm:p-8">
+                <div className="mb-4 sm:mb-6 inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-2xl group-hover:scale-110 transition-transform">
+                  <MapPin className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-slate-800">Ubicación</h3>
-                <p className="text-slate-600 leading-relaxed">Chocó, Colombia<br />Selva Tropical Auténtica</p>
+                <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-slate-800">Ubicación</h3>
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed">Chocó, Colombia<br />Selva Tropical Auténtica</p>
               </CardContent>
             </Card>
 
             <Card className="text-center group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-              <CardContent className="p-8">
-                <div className="mb-6 inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl group-hover:scale-110 transition-transform">
-                  <Clock className="h-8 w-8 text-white" />
+              <CardContent className="p-6 sm:p-8">
+                <div className="mb-4 sm:mb-6 inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl group-hover:scale-110 transition-transform">
+                  <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-slate-800">Horarios</h3>
-                <p className="text-slate-600 leading-relaxed">
+                <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-slate-800">Horarios</h3>
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                   Todos los días<br />8:00 AM - 6:00 PM
                 </p>
               </CardContent>
             </Card>
 
             <Card className="text-center group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-              <CardContent className="p-8">
-                <div className="mb-6 inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl group-hover:scale-110 transition-transform">
-                  <Phone className="h-8 w-8 text-white" />
+              <CardContent className="p-6 sm:p-8">
+                <div className="mb-4 sm:mb-6 inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl group-hover:scale-110 transition-transform">
+                  <Phone className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-slate-800">Contacto</h3>
-                <p className="text-slate-600 leading-relaxed">
+                <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-slate-800">Contacto</h3>
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                   info@chocoaventuras.com<br />+57 300 123 4567
                 </p>
               </CardContent>
@@ -198,12 +246,12 @@ export default function Homepage() {
             </p>
           </div>
 
-          {/* Dynamic Paseos Section */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
+          {/* Responsive Dynamic Paseos Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
             {loadingPaseos ? (
-              <div className="col-span-2 text-center py-12">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto"></div>
-                <p className="text-slate-600 mt-4">Cargando experiencias...</p>
+              <div className="col-span-full text-center py-8 sm:py-12">
+                <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-emerald-600 mx-auto"></div>
+                <p className="text-slate-600 mt-4 text-sm sm:text-base">Cargando experiencias...</p>
               </div>
             ) : (
               paseos.map((paseo, index) => {
@@ -235,16 +283,16 @@ export default function Homepage() {
                 };
 
                 return (
-                  <div key={paseo.id} className="group p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100">
-                    <div className="flex items-start gap-6">
-                      <div className={`bg-gradient-to-br ${getDifficultyColor(paseo.dificultad)} rounded-2xl w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0`}>
-                        <span className="text-3xl">{getDifficultyIcon(paseo.dificultad)}</span>
+                  <div key={paseo.id} className="group p-4 sm:p-6 lg:p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100">
+                    <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                      <div className={`bg-gradient-to-br ${getDifficultyColor(paseo.dificultad)} rounded-2xl w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0 mx-auto sm:mx-0`}>
+                        <span className="text-2xl sm:text-3xl">{getDifficultyIcon(paseo.dificultad)}</span>
                       </div>
 
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-3">
-                          <h3 className="font-bold text-2xl text-slate-800">{paseo.nombre}</h3>
-                          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                      <div className="flex-1 text-center sm:text-left">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-3">
+                          <h3 className="font-bold text-xl sm:text-2xl text-slate-800">{paseo.nombre}</h3>
+                          <span className={`px-3 py-1 rounded-full text-xs font-semibold inline-block ${
                             paseo.dificultad === 'facil' ? 'bg-emerald-100 text-emerald-700' :
                             paseo.dificultad === 'intermedio' ? 'bg-amber-100 text-amber-700' :
                             'bg-red-100 text-red-700'
@@ -253,27 +301,27 @@ export default function Homepage() {
                           </span>
                         </div>
 
-                        <p className="text-slate-600 leading-relaxed mb-4">{paseo.descripcion}</p>
+                        <p className="text-slate-600 leading-relaxed mb-4 text-sm sm:text-base">{paseo.descripcion}</p>
 
-                        <div className="flex flex-wrap gap-4 text-sm text-slate-500 mb-4">
-                          <div className="flex items-center gap-1">
-                            <Clock className="h-4 w-4" />
+                        <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm text-slate-500 mb-4">
+                          <div className="flex items-center justify-center sm:justify-start gap-1">
+                            <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
                             <span>{paseo.duracion_horas}h duración</span>
                           </div>
-                          <div className="flex items-center gap-1">
-                            <MapPin className="h-4 w-4" />
+                          <div className="flex items-center justify-center sm:justify-start gap-1">
+                            <MapPin className="h-3 w-3 sm:h-4 sm:w-4" />
                             <span>{paseo.ubicacion}</span>
                           </div>
                         </div>
 
-                        <div className="flex items-center justify-between">
-                          <div className="text-2xl font-bold text-emerald-600">
+                        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-0 sm:justify-between">
+                          <div className="text-xl sm:text-2xl font-bold text-emerald-600">
                             ${paseo.precio.toLocaleString()}
                           </div>
                           <Link href="/reservas">
-                            <Button className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-xl transition-all duration-300 flex items-center gap-2">
+                            <Button className="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 px-4 py-2 text-sm sm:text-base">
                               Reservar
-                              <ArrowRight className="h-4 w-4" />
+                              <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
                             </Button>
                           </Link>
                         </div>
