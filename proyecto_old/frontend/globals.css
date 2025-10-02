@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Chocó Aventuras Brand Colors */
+    --choco-dark-green: 145 56% 19%; /* #145A32 */
+    --choco-atrato-blue: 210 78% 43%; /* #1565C0 */
+    --choco-gold: 48 87% 50%; /* #F1C40F */
+    --choco-adrenaline-red: 4 75% 56%; /* #E53935 */
+    --choco-vibrant-orange: 32 100% 49%; /* #FB8C00 */
+    --choco-deep-black: 0 0% 13%; /* #212121 */
+    --choco-light-gray: 0 0% 96%; /* #F5F5F5 */
+    --choco-pure-white: 0 0% 100%; /* #FFFFFF */
+
+    /* Tailwind variables using Chocó Aventuras colors */
+    --background: var(--choco-pure-white);
+    --foreground: var(--choco-deep-black);
+    --card: var(--choco-pure-white);
+    --card-foreground: var(--choco-deep-black);
+    --popover: var(--choco-pure-white);
+    --popover-foreground: var(--choco-deep-black);
+    --primary: var(--choco-dark-green);
+    --primary-foreground: var(--choco-pure-white);
+    --secondary: var(--choco-atrato-blue);
+    --secondary-foreground: var(--choco-pure-white);
+    --muted: var(--choco-light-gray);
+    --muted-foreground: 0 0% 45%;
+    --accent: var(--choco-gold);
+    --accent-foreground: var(--choco-deep-black);
+    --destructive: var(--choco-adrenaline-red);
+    --destructive-foreground: var(--choco-pure-white);
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: var(--choco-atrato-blue);
+    --chart-1: var(--choco-gold);
+    --chart-2: var(--choco-atrato-blue);
+    --chart-3: var(--choco-dark-green);
+    --chart-4: var(--choco-vibrant-orange);
+    --chart-5: var(--choco-adrenaline-red);
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+}
