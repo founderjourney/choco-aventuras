@@ -23,7 +23,7 @@ interface Paseo {
 }
 
 async function fetchPaseos(): Promise<{paseos: Paseo[]}> {
-  const response = await fetch('/api/paseos');
+  const response = await fetch('/api/paseos?include_inactive=true');
   if (!response.ok) throw new Error('Error fetching paseos');
   return response.json();
 }
@@ -89,10 +89,12 @@ export default function AdminPaseos() {
             <h1 className="text-3xl font-bold text-[#145A32]">Gestión de Paseos</h1>
             <p className="text-gray-600 mt-2">Administra las experiencias y rutas disponibles</p>
           </div>
-          <Button className="bg-[#1565C0] hover:bg-[#0d47a1]">
-            <Plus className="h-4 w-4 mr-2" />
-            Agregar Paseo
-          </Button>
+          <Link href="/admin/paseos/nuevo">
+            <Button className="bg-[#1565C0] hover:bg-[#0d47a1]">
+              <Plus className="h-4 w-4 mr-2" />
+              Agregar Paseo
+            </Button>
+          </Link>
         </div>
 
         {/* Stats Cards */}
@@ -155,14 +157,18 @@ export default function AdminPaseos() {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <Button variant="outline" size="sm">
-                        <Eye className="h-4 w-4 mr-2" />
-                        Ver
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Edit2 className="h-4 w-4 mr-2" />
-                        Editar
-                      </Button>
+                      <Link href={`/admin/paseos/${paseo.id}`}>
+                        <Button variant="outline" size="sm" className="w-full">
+                          <Eye className="h-4 w-4 mr-2" />
+                          Ver
+                        </Button>
+                      </Link>
+                      <Link href={`/admin/paseos/${paseo.id}/editar`}>
+                        <Button variant="outline" size="sm" className="w-full">
+                          <Edit2 className="h-4 w-4 mr-2" />
+                          Editar
+                        </Button>
+                      </Link>
                     </div>
                   </div>
 

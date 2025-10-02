@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -50,14 +51,51 @@ const getEstadoColor = (estado: string) => {
   }
 };
 
+async function updateReservaStatus(id: number, estado: string) {
+  const response = await fetch(`/api/reservas/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ estado }),
+  });
+  if (!response.ok) throw new Error('Error updating reserva');
+  return response.json();
+}
+
 export default function AdminReservas() {
   const queryClient = useQueryClient();
-  const [filters, setFilters] = useState({ estado: '', fecha: '' });
+  const { toast } = useToast();
+  const [filters, setFilters] = useState({ estado: 'todos', fecha: '' });
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['admin-reservas', filters],
-    queryFn: () => fetchReservas(filters),
+    queryFn: () => fetchReservas({
+      estado: filters.estado === 'todos' ? '' : filters.estado,
+      fecha: filters.fecha
+    }),
   });
+
+  const updateStatusMutation = useMutation({
+    mutationFn: ({ id, estado }: { id: number; estado: string }) => updateReservaStatus(id, estado),
+    onSuccess: (data, variables) => {
+      toast({
+        title: "Estado actualizado",
+        description: `Reserva ${variables.estado === 'confirmada' ? 'confirmada' :
+                     variables.estado === 'cancelada' ? 'cancelada' : 'actualizada'} exitosamente.`,
+      });
+      queryClient.invalidateQueries({ queryKey: ['admin-reservas'] });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "No se pudo actualizar el estado de la reserva.",
+        variant: "destructive",
+      });
+    }
+  });
+
+  const handleStatusChange = (reservaId: number, newStatus: string) => {
+    updateStatusMutation.mutate({ id: reservaId, estado: newStatus });
+  };
 
   if (isLoading) return <div className="p-8">Cargando reservas...</div>;
   if (error) return <div className="p-8">Error cargando reservas</div>;
@@ -170,12 +208,12 @@ export default function AdminReservas() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium mb-2">Estado</label>
-                <Select value={filters.estado} onValueChange={(value) => setFilters(prev => ({...prev, estado: value}))}>
+                <Select value={filters.estado} onValueChange={(value) => setFilters(prev => ({...prev, estado: value === 'todos' ? '' : value}))}>
                   <SelectTrigger>
                     <SelectValue placeholder="Todos los estados" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Todos los estados</SelectItem>
+                    <SelectItem value="todos">Todos los estados</SelectItem>
                     <SelectItem value="pendiente">Pendiente</SelectItem>
                     <SelectItem value="confirmada">Confirmada</SelectItem>
                     <SelectItem value="cancelada">Cancelada</SelectItem>
@@ -283,20 +321,60 @@ export default function AdminReservas() {
                   )}
 
                   {/* Actions */}
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 flex-wrap">
                     {reserva.estado === 'pendiente' && (
                       <>
-                        <Button size="sm" className="bg-green-600 hover:bg-green-700">
-                          Confirmar
+                        <Button
+                          size="sm"
+                          className="bg-green-600 hover:bg-green-700"
+                          onClick={() => handleStatusChange(reserva.id, 'confirmada')}
+                          disabled={updateStatusMutation.isPending}
+                        >
+                          {updateStatusMutation.isPending ? 'Actualizando...' : 'Confirmar'}
                         </Button>
-                        <Button size="sm" variant="destructive">
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          onClick={() => handleStatusChange(reserva.id, 'cancelada')}
+                          disabled={updateStatusMutation.isPending}
+                        >
                           Cancelar
                         </Button>
                       </>
                     )}
                     {reserva.estado === 'confirmada' && (
-                      <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-                        Marcar Completada
+                      <>
+                        <Button
+                          size="sm"
+                          className="bg-blue-600 hover:bg-blue-700"
+                          onClick={() => handleStatusChange(reserva.id, 'completada')}
+                          disabled={updateStatusMutation.isPending}
+                        >
+                          Marcar Completada
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleStatusChange(reserva.id, 'cancelada')}
+                          disabled={updateStatusMutation.isPending}
+                        >
+                          Cancelar
+                        </Button>
+                      </>
+                    )}
+                    {reserva.estado === 'completada' && (
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm text-green-600 font-medium">✅ Completada</span>
+                      </div>
+                    )}
+                    {reserva.estado === 'cancelada' && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleStatusChange(reserva.id, 'pendiente')}
+                        disabled={updateStatusMutation.isPending}
+                      >
+                        Reactivar
                       </Button>
                     )}
                     <Button size="sm" variant="outline">

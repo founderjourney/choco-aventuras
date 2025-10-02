@@ -132,13 +132,44 @@ export const db = {
     }
   },
   paseos: {
-    findAll: async (): Promise<Paseo[]> => {
+    findAll: async (includeInactive = false): Promise<Paseo[]> => {
       await new Promise(resolve => setTimeout(resolve, 100));
-      return mockPaseos.filter(p => p.activo);
+      return includeInactive ? mockPaseos : mockPaseos.filter(p => p.activo);
     },
     findById: async (id: number): Promise<Paseo | null> => {
       await new Promise(resolve => setTimeout(resolve, 100));
       return mockPaseos.find(p => p.id === id) || null;
+    },
+    create: async (data: Omit<Paseo, 'id' | 'created_at' | 'updated_at'>): Promise<Paseo> => {
+      await new Promise(resolve => setTimeout(resolve, 100));
+      const newPaseo: Paseo = {
+        ...data,
+        id: mockPaseos.length + 1,
+        created_at: new Date(),
+        updated_at: new Date()
+      };
+      mockPaseos.push(newPaseo);
+      return newPaseo;
+    },
+    update: async (id: number, data: Partial<Omit<Paseo, 'id' | 'created_at' | 'updated_at'>>): Promise<Paseo | null> => {
+      await new Promise(resolve => setTimeout(resolve, 100));
+      const index = mockPaseos.findIndex(p => p.id === id);
+      if (index === -1) return null;
+
+      mockPaseos[index] = {
+        ...mockPaseos[index],
+        ...data,
+        updated_at: new Date()
+      };
+      return mockPaseos[index];
+    },
+    delete: async (id: number): Promise<boolean> => {
+      await new Promise(resolve => setTimeout(resolve, 100));
+      const index = mockPaseos.findIndex(p => p.id === id);
+      if (index === -1) return false;
+
+      mockPaseos.splice(index, 1);
+      return true;
     }
   },
   reservas: {
