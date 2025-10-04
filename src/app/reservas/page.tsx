@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
+import Footer from '@/components/Footer';
 
 interface Cuadriciclo {
   id: number;
@@ -165,20 +166,37 @@ export default function ReservasPage() {
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/" className="font-bold text-xl text-[#145A32]">
-              Chocó Aventuras
+            <Link href="/" className="font-bold text-xl text-[#145A32] logo-container">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center logo-icon">
+                  <span className="text-white font-bold text-sm">CA</span>
+                </div>
+                Chocó Aventuras
+              </div>
             </Link>
             <nav className="flex space-x-6">
-              <Link href="/" className="text-gray-700 hover:text-[#145A32]">
+              <Link href="/" className="nav-item text-gray-700 hover:text-[#145A32]">
                 Inicio
               </Link>
-              <Link href="/cuadriciclos" className="text-gray-700 hover:text-[#145A32]">
+              <Link href="/nosotros" className="nav-item text-gray-700 hover:text-[#145A32]">
+                Nosotros
+              </Link>
+              <Link href="/tours" className="nav-item text-gray-700 hover:text-[#145A32]">
+                Tours
+              </Link>
+              <Link href="/cuadriciclos" className="nav-item text-gray-700 hover:text-[#145A32]">
                 Cuadriciclos
               </Link>
-              <Link href="/reservas" className="text-[#145A32] font-semibold">
+              <Link href="/experiencias" className="nav-item text-gray-700 hover:text-[#145A32]">
+                Experiencias
+              </Link>
+              <Link href="/contacto" className="nav-item text-gray-700 hover:text-[#145A32]">
+                Contacto
+              </Link>
+              <Link href="/reservas" className="nav-item text-[#145A32] font-semibold">
                 Reservar
               </Link>
-              <Link href="/admin/login" className="text-gray-700 hover:text-[#145A32]">
+              <Link href="/admin/login" className="nav-item text-gray-700 hover:text-[#145A32]">
                 Admin
               </Link>
             </nav>
@@ -381,6 +399,9 @@ export default function ReservasPage() {
           </Card>
         </div>
       </div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

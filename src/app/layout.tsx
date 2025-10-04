@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { QueryProvider } from "@/components/providers/QueryProvider";
 import { Toaster } from "@/components/ui/toaster";
+import Head from "next/head";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,6 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <head>
+        <link rel="stylesheet" href="/choco-aventuras-effects.css" />
+      </head>
       <body className={`${inter.className} antialiased`}>
         <QueryProvider>
           {children}

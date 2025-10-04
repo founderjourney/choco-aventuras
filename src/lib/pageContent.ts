@@ -1,0 +1,105 @@
+// Sistema de almacenamiento de contenido de páginas
+// En producción esto se conectaría a una base de datos
+
+export interface PageContent {
+  id: string;
+  titulo: string;
+  slug: string;
+  contenido: string;
+  estado: 'publicada' | 'borrador';
+  fechaCreacion: string;
+  ultimaModificacion: string;
+  elementos: PageElement[];
+}
+
+export interface PageElement {
+  id: string;
+  tipo: 'texto' | 'imagen' | 'titulo' | 'boton';
+  contenido: string;
+  orden: number;
+}
+
+// Simulación de base de datos en localStorage
+const STORAGE_KEY = 'choco_aventuras_pages';
+
+export function getPages(): PageContent[] {
+  if (typeof window === 'undefined') return [];
+
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : getDefaultPages();
+  } catch {
+    return getDefaultPages();
+  }
+}
+
+export function savePage(page: PageContent): void {
+  if (typeof window === 'undefined') return;
+
+  const pages = getPages();
+  const existingIndex = pages.findIndex(p => p.id === page.id);
+
+  if (existingIndex >= 0) {
+    pages[existingIndex] = { ...page, ultimaModificacion: new Date().toISOString() };
+  } else {
+    pages.push({ ...page, fechaCreacion: new Date().toISOString(), ultimaModificacion: new Date().toISOString() });
+  }
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(pages));
+}
+
+export function deletePage(id: string): void {
+  if (typeof window === 'undefined') return;
+
+  const pages = getPages().filter(p => p.id !== id);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(pages));
+}
+
+export function getPageBySlug(slug: string): PageContent | null {
+  return getPages().find(p => p.slug === slug) || null;
+}
+
+function getDefaultPages(): PageContent[] {
+  return [
+    {
+      id: 'nosotros',
+      titulo: 'Nosotros',
+      slug: 'nosotros',
+      contenido: 'Somos la primera experiencia de turismo extremo en Quibdó que combina cuatrimotos, paintball y cultura local en plena selva tropical.',
+      estado: 'publicada',
+      fechaCreacion: '2024-01-15',
+      ultimaModificacion: '2024-01-20',
+      elementos: []
+    },
+    {
+      id: 'tours',
+      titulo: 'Tours',
+      slug: 'tours',
+      contenido: 'Descubre nuestros emocionantes tours de aventura en la selva del Chocó.',
+      estado: 'publicada',
+      fechaCreacion: '2024-01-16',
+      ultimaModificacion: '2024-01-22',
+      elementos: []
+    },
+    {
+      id: 'experiencias',
+      titulo: 'Experiencias',
+      slug: 'experiencias',
+      contenido: 'Vive experiencias únicas 100% en la selva del Chocó.',
+      estado: 'publicada',
+      fechaCreacion: '2024-01-17',
+      ultimaModificacion: '2024-01-23',
+      elementos: []
+    },
+    {
+      id: 'contacto',
+      titulo: 'Contacto',
+      slug: 'contacto',
+      contenido: 'Contáctanos para reservar tu próxima aventura.',
+      estado: 'publicada',
+      fechaCreacion: '2024-01-18',
+      ultimaModificacion: '2024-01-24',
+      elementos: []
+    }
+  ];
+}

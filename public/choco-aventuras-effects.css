@@ -1,0 +1,646 @@
+/* ========================================
+   CHOCÓ AVENTURAS - EFECTOS PERSONALIZADOS
+   Efectos que reflejan aventura, naturaleza y adrenalina
+   ======================================== */
+
+/* 🌿 EFECTOS DE PARTÍCULAS DE SELVA TROPICAL */
+.jungle-particles {
+  position: relative;
+  overflow: hidden;
+}
+
+.jungle-particles::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, rgba(46, 125, 50, 0.4), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(76, 175, 80, 0.3), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(139, 195, 74, 0.5), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(102, 187, 106, 0.4), transparent);
+  background-repeat: repeat;
+  background-size: 100px 100px;
+  animation: floatingLeaves 20s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes floatingLeaves {
+  0% { transform: translateY(100vh) rotate(0deg); }
+  100% { transform: translateY(-100px) rotate(360deg); }
+}
+
+/* 🏍️ EFECTOS DE VIBRACIÓN PARA CUATRIMOTOS */
+.quad-vibration {
+  animation: quadShake 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes quadShake {
+  0% { transform: translateX(0) rotate(-0.5deg); }
+  100% { transform: translateX(2px) rotate(0.5deg); }
+}
+
+/* ⚡ EFECTOS DE ADRENALINA PARA BOTONES */
+.adrenaline-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background: linear-gradient(45deg, #E53935, #FF5722);
+  box-shadow: 0 4px 15px rgba(229, 57, 53, 0.4);
+}
+
+.adrenaline-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.adrenaline-button:hover::before {
+  left: 100%;
+}
+
+.adrenaline-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(229, 57, 53, 0.6);
+  background: linear-gradient(45deg, #D32F2F, #E53935);
+}
+
+/* 🌊 EFECTOS DE AGUA PARA AVENTURAS ACUÁTICAS */
+.water-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.water-ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(33, 150, 243, 0.3), transparent 70%);
+  transform: translate(-50%, -50%);
+  animation: rippleEffect 2s ease-out infinite;
+}
+
+@keyframes rippleEffect {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
+}
+
+/* 🔥 EFECTOS DE FUEGO PARA PAINTBALL */
+.paintball-explosion {
+  position: relative;
+}
+
+.paintball-explosion::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, #FF6D00 0%, #FF8F00 30%, transparent 70%);
+  border-radius: 50%;
+  animation: paintballPop 1.5s ease-out infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes paintballPop {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  50% {
+    width: 30px;
+    height: 30px;
+    opacity: 0.8;
+  }
+  100% {
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+  }
+}
+
+/* 🌟 EFECTOS DE BRILLO PARA DESTACAR */
+.adventure-glow {
+  position: relative;
+  background: linear-gradient(45deg, #145A32, #1565C0);
+  overflow: hidden;
+}
+
+.adventure-glow::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(transparent, rgba(241, 196, 15, 0.3), transparent 30%);
+  animation: rotatingGlow 3s linear infinite;
+}
+
+@keyframes rotatingGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 🏔️ EFECTOS DE MONTAÑA PARALLAX */
+.mountain-parallax {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.mountain-parallax::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(20, 90, 50, 0.7), rgba(21, 101, 192, 0.5));
+  animation: atmosphereFlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes atmosphereFlow {
+  0% { background: linear-gradient(rgba(20, 90, 50, 0.7), rgba(21, 101, 192, 0.5)); }
+  100% { background: linear-gradient(rgba(21, 101, 192, 0.5), rgba(20, 90, 50, 0.7)); }
+}
+
+/* 🎯 EFECTOS HOVER PARA TARJETAS DE AVENTURA */
+.adventure-card {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.adventure-card:hover {
+  transform: rotateY(5deg) rotateX(5deg) translateY(-10px);
+  box-shadow:
+    0 20px 40px rgba(20, 90, 50, 0.3),
+    0 0 30px rgba(241, 196, 15, 0.2);
+}
+
+.adventure-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(241, 196, 15, 0.1) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.adventure-card:hover::before {
+  opacity: 1;
+}
+
+/* 🌪️ EFECTOS DE VIENTO PARA MOVIMIENTO */
+.wind-effect {
+  animation: windSway 4s ease-in-out infinite;
+}
+
+@keyframes windSway {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(5px) rotate(1deg); }
+  75% { transform: translateX(-3px) rotate(-0.5deg); }
+}
+
+/* 💨 EFECTOS DE VELOCIDAD PARA CUATRIMOTOS */
+.speed-lines {
+  position: relative;
+  overflow: hidden;
+}
+
+.speed-lines::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #F1C40F, transparent);
+  transform: translateY(-50%);
+  animation: speedRush 1s ease-in-out infinite;
+}
+
+@keyframes speedRush {
+  0% { left: -100%; opacity: 0; }
+  50% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+/* 🌈 EFECTOS DE CULTURA CHOCOANA */
+.choco-culture {
+  background: linear-gradient(45deg, #145A32, #F1C40F, #E53935, #1565C0);
+  background-size: 400% 400%;
+  animation: culturalColors 6s ease infinite;
+}
+
+@keyframes culturalColors {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🎪 EFECTOS DE FESTIVAL SAN PACHO */
+.san-pacho-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.san-pacho-effect::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background:
+    radial-gradient(circle at 25% 25%, #F1C40F 0%, transparent 25%),
+    radial-gradient(circle at 75% 75%, #E53935 0%, transparent 25%),
+    radial-gradient(circle at 50% 50%, #145A32 0%, transparent 25%);
+  animation: festivalLights 3s ease-in-out infinite;
+  opacity: 0.3;
+}
+
+@keyframes festivalLights {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  33% { transform: rotate(120deg) scale(1.1); }
+  66% { transform: rotate(240deg) scale(0.9); }
+}
+
+/* 🏃‍♂️ EFECTOS DE MOVIMIENTO PARA LOADING */
+.adventure-loading {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(20, 90, 50, 0.3);
+  border-radius: 50%;
+  border-top-color: #145A32;
+  animation: adventureSpinner 1s ease-in-out infinite;
+}
+
+@keyframes adventureSpinner {
+  to { transform: rotate(360deg); }
+}
+
+/* 🌿 EFECTOS ESPECIALES PARA TEXTO */
+.jungle-text {
+  background: linear-gradient(45deg, #145A32, #4CAF50, #8BC34A);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: jungleTextFlow 3s ease infinite;
+}
+
+@keyframes jungleTextFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🚀 EFECTOS ULTRA MODERNOS PARA BOTONES Y MENÚ */
+
+/* Efectos de hover modernos para navegación */
+.nav-item {
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+}
+
+.nav-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #F1C40F, #E53935);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: translateX(-50%);
+}
+
+.nav-item:hover::before {
+  width: 100%;
+}
+
+.nav-item:hover {
+  transform: translateY(-2px);
+  color: #145A32 !important;
+  text-shadow: 0 0 20px rgba(20, 90, 50, 0.3);
+}
+
+/* Efectos de logo con pulsación */
+.logo-container {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.logo-container:hover {
+  transform: scale(1.05) rotate(2deg);
+  filter: drop-shadow(0 0 15px rgba(20, 90, 50, 0.4));
+}
+
+.logo-container:hover .logo-icon {
+  animation: logoPulse 0.6s ease-in-out;
+}
+
+@keyframes logoPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* Efectos de botón magnético */
+.magnetic-button {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.magnetic-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s;
+}
+
+.magnetic-button:hover::before {
+  left: 100%;
+}
+
+.magnetic-button:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto de ondas para botones principales */
+.wave-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.wave-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.wave-button:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+.wave-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Efectos de cristal (glassmorphism) */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-effect:hover {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Efectos de partículas en hover */
+.particle-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.particle-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(241, 196, 15, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(229, 57, 53, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(20, 90, 50, 0.3) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: particleFloat 3s ease-in-out infinite;
+}
+
+.particle-hover:hover::before {
+  opacity: 1;
+}
+
+@keyframes particleFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(180deg); }
+}
+
+/* Efecto de escritura para títulos */
+.typing-effect {
+  overflow: hidden;
+  border-right: 3px solid #F1C40F;
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: #F1C40F; }
+}
+
+/* Efectos de neón para elementos especiales */
+.neon-glow {
+  text-shadow:
+    0 0 5px #F1C40F,
+    0 0 10px #F1C40F,
+    0 0 15px #F1C40F,
+    0 0 20px #F1C40F;
+  transition: all 0.3s ease;
+}
+
+.neon-glow:hover {
+  text-shadow:
+    0 0 5px #F1C40F,
+    0 0 10px #F1C40F,
+    0 0 15px #F1C40F,
+    0 0 20px #F1C40F,
+    0 0 25px #F1C40F,
+    0 0 30px #F1C40F;
+}
+
+/* Efectos de menú hamburguesa animado */
+.burger-menu {
+  transition: all 0.3s ease;
+}
+
+.burger-menu:hover {
+  transform: scale(1.1) rotate(90deg);
+  color: #E53935;
+}
+
+/* Efectos de cards con transformación 3D */
+.card-3d {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card-3d:hover {
+  transform: rotateY(10deg) rotateX(5deg) translateY(-10px) scale(1.02);
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.15),
+    0 0 40px rgba(241, 196, 15, 0.2);
+}
+
+/* Efectos de estadísticas pulsantes */
+.stat-pulse {
+  transition: all 0.3s ease;
+}
+
+.stat-pulse:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 30px rgba(241, 196, 15, 0.3);
+}
+
+.stat-pulse:hover .stat-number {
+  animation: numberPulse 0.6s ease-in-out;
+  color: #F1C40F;
+}
+
+@keyframes numberPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* Efectos de menú móvil deslizante */
+.mobile-menu-item {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-menu-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(20, 90, 50, 0.1), rgba(241, 196, 15, 0.1));
+  transition: width 0.3s ease;
+}
+
+.mobile-menu-item:hover::before {
+  width: 100%;
+}
+
+.mobile-menu-item:hover {
+  transform: translateX(10px);
+  background: rgba(20, 90, 50, 0.05);
+  border-radius: 8px;
+}
+
+/* Efectos de video play button */
+.play-button-effect {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.play-button-effect::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  animation: playRipple 2s ease-out infinite;
+}
+
+.play-button-effect:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes playRipple {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}
+
+/* 🎮 EFECTOS INTERACTIVOS RESPONSIVOS */
+@media (max-width: 768px) {
+  .adventure-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .adrenaline-button:hover {
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .speed-lines::after {
+    animation-duration: 0.8s;
+  }
+
+  .magnetic-button:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+
+  .card-3d:hover {
+    transform: translateY(-5px) scale(1.01);
+  }
+}

@@ -248,6 +248,59 @@ export default function AdminDashboard() {
           </Link>
         </div>
 
+        {/* Nueva sección CMS */}
+        <div className="mb-6 sm:mb-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#145A32] mb-4">Sistema de Gestión de Contenido</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <Link href="/admin/paginas" className="block">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer border-l-4 border-[#E53935]">
+                <CardHeader>
+                  <CardTitle className="text-[#E53935] flex items-center gap-2">
+                    📄 Gestión de Páginas
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-gray-600">
+                    Crear, editar y gestionar todas las páginas del sitio web con editor visual
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs">Editor Visual</Badge>
+                    <Badge variant="outline" className="text-xs">Arrastrar y Soltar</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
+            <Card className="opacity-60 border-l-4 border-gray-300">
+              <CardHeader>
+                <CardTitle className="text-gray-500 flex items-center gap-2">
+                  🖼️ Gestión de Medios
+                  <Badge variant="secondary" className="text-xs ml-auto">Próximamente</Badge>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-gray-500">
+                  Subir, organizar y gestionar imágenes y videos para el sitio
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="opacity-60 border-l-4 border-gray-300">
+              <CardHeader>
+                <CardTitle className="text-gray-500 flex items-center gap-2">
+                  🎨 Personalización
+                  <Badge variant="secondary" className="text-xs ml-auto">Próximamente</Badge>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-gray-500">
+                  Cambiar colores, fuentes y estilos del sitio web
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
         {/* Recent Reservas */}
         <Card>
           <CardHeader>

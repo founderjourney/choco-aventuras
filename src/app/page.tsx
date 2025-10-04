@@ -41,8 +41,8 @@ export default function Homepage() {
       <header className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2 sm:gap-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center">
+            <div className="flex items-center gap-2 sm:gap-3 logo-container">
+              <div className="w-8 h-8 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center logo-icon">
                 <span className="text-white font-bold text-sm">CA</span>
               </div>
               <div className="font-bold text-lg sm:text-xl bg-gradient-to-r from-emerald-700 to-emerald-900 bg-clip-text text-transparent">
@@ -51,21 +51,37 @@ export default function Homepage() {
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex space-x-8">
-              <Link href="/" className="text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
+            <nav className="hidden lg:flex space-x-6">
+              <Link href="/" className="nav-item text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
                 Inicio
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
               </Link>
-              <Link href="/cuadriciclos" className="text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
-                Cuadriciclos
+              <Link href="/nosotros" className="nav-item text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
+                Nosotros
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
               </Link>
-              <Link href="/reservas" className="text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
-                Reservar
+              <Link href="/tours" className="nav-item text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
+                Tours
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
               </Link>
-              <Link href="/admin/login" className="text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
-                Admin
+              <Link href="/cuatrimotos" className="nav-item text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
+                Cuatrimotos
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
+              </Link>
+              <span className="nav-item text-slate-500 font-medium cursor-not-allowed relative group opacity-60">
+                Paintball
+                <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full ml-2 particle-hover">Próximamente</span>
+              </span>
+              <Link href="/experiencias" className="nav-item text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
+                Experiencias
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
+              </Link>
+              <Link href="/reservas" className="nav-item text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
+                Reservas
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
+              </Link>
+              <Link href="/contacto" className="nav-item text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
+                Contacto
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
               </Link>
             </nav>
@@ -73,7 +89,7 @@ export default function Homepage() {
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-md text-slate-700 hover:text-emerald-600 hover:bg-slate-100 transition-colors"
+              className="lg:hidden p-2 rounded-md text-slate-700 hover:text-emerald-600 hover:bg-slate-100 transition-colors burger-menu"
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -86,30 +102,55 @@ export default function Homepage() {
                 <Link
                   href="/"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
+                  className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
                 >
                   Inicio
                 </Link>
                 <Link
-                  href="/cuadriciclos"
+                  href="/nosotros"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
+                  className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
                 >
-                  Cuadriciclos
+                  Nosotros
+                </Link>
+                <Link
+                  href="/tours"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
+                >
+                  Tours
+                </Link>
+                <Link
+                  href="/cuatrimotos"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
+                >
+                  Cuatrimotos
+                </Link>
+                <div className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-500 opacity-60 cursor-not-allowed">
+                  Paintball
+                  <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full ml-2 particle-hover">Próximamente</span>
+                </div>
+                <Link
+                  href="/experiencias"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
+                >
+                  Experiencias
                 </Link>
                 <Link
                   href="/reservas"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
+                  className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
                 >
-                  Reservar
+                  Reservas
                 </Link>
                 <Link
-                  href="/admin/login"
+                  href="/contacto"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
+                  className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
                 >
-                  Admin
+                  Contacto
                 </Link>
               </div>
             </div>
@@ -118,7 +159,18 @@ export default function Homepage() {
       </header>
 
       {/* Responsive Hero Section */}
-      <section className="relative min-h-screen bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-800 flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-800 flex items-center justify-center overflow-hidden mountain-parallax jungle-particles">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/choco-aventuras-hero.jpg')"
+          }}
+        />
+
+        {/* Gradient Overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/70 via-emerald-800/60 to-teal-800/70" />
+
         {/* Optimized animated background elements */}
         <div className="absolute inset-0">
           <div className="absolute top-1/4 left-1/4 w-32 sm:w-64 h-32 sm:h-64 bg-emerald-400/10 rounded-full blur-3xl animate-pulse"></div>
@@ -126,33 +178,37 @@ export default function Homepage() {
           <div className="absolute top-1/2 right-1/3 w-24 sm:w-48 h-24 sm:h-48 bg-white/5 rounded-full blur-2xl animate-pulse delay-500"></div>
         </div>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/20" />
 
         <div className="relative z-10 text-center text-white max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6 sm:mb-8 flex justify-center">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 sm:px-6 py-2 sm:py-3">
-              <Star className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 fill-current" />
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 sm:px-6 py-2 sm:py-3 glass-effect particle-hover">
+              <Star className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 fill-current neon-glow" />
               <span className="text-xs sm:text-sm font-medium">Experiencia Premium en el Chocó</span>
             </div>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 bg-gradient-to-r from-white via-emerald-100 to-teal-100 bg-clip-text text-transparent leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 bg-gradient-to-r from-white via-emerald-100 to-teal-100 bg-clip-text text-transparent leading-tight wind-effect">
             CHOCÓ
             <br />
             <span className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl">AVENTURAS</span>
           </h1>
 
           <p className="text-lg sm:text-xl md:text-2xl mb-4 sm:mb-6 text-emerald-100 max-w-3xl mx-auto leading-relaxed px-4">
-            Experiencias extremas en la selva del Chocó
+            La primera experiencia de turismo extremo en Quibdó
           </p>
 
           <p className="text-base sm:text-lg mb-8 sm:mb-12 text-white/90 max-w-2xl mx-auto px-4">
-            Tours en cuadriciclo, paintball natural y cultura chocoana auténtica
+            Cuatrimotos, paintball y cultura local en plena selva tropical.
+          </p>
+
+          <p className="text-lg sm:text-xl mb-8 sm:mb-12 text-emerald-200 font-bold max-w-2xl mx-auto px-4">
+            ¡Aquí la aventura no se cuenta... se vive! 🏍️ 🎯
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4">
             <Link href="/cuadriciclos">
-              <Button size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold rounded-xl shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 flex items-center justify-center gap-2">
+              <Button size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold rounded-xl shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 flex items-center justify-center gap-2 adrenaline-button magnetic-button wave-button">
                 RESERVA AHORA
                 <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
@@ -161,7 +217,7 @@ export default function Homepage() {
             <Button
               variant="outline"
               size="lg"
-              className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/30 text-white hover:bg-white/10 font-semibold rounded-xl backdrop-blur-sm transition-all duration-300 flex items-center justify-center gap-2"
+              className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/30 text-white hover:bg-white/10 font-semibold rounded-xl backdrop-blur-sm transition-all duration-300 flex items-center justify-center gap-2 glass-effect play-button-effect"
             >
               <Play className="h-4 w-4 sm:h-5 sm:w-5" />
               Ver Video
@@ -169,16 +225,16 @@ export default function Homepage() {
           </div>
 
           <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 text-center px-4">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 border border-white/20">
-              <div className="text-2xl sm:text-3xl font-bold text-emerald-300 mb-2">100%</div>
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 border border-white/20 stat-pulse">
+              <div className="text-2xl sm:text-3xl font-bold text-emerald-300 mb-2 stat-number neon-glow">100%</div>
               <div className="text-xs sm:text-sm text-white/80">Experiencia Natural</div>
             </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 border border-white/20">
-              <div className="text-2xl sm:text-3xl font-bold text-emerald-300 mb-2">24/7</div>
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 border border-white/20 stat-pulse">
+              <div className="text-2xl sm:text-3xl font-bold text-emerald-300 mb-2 stat-number neon-glow">24/7</div>
               <div className="text-xs sm:text-sm text-white/80">Disponibilidad</div>
             </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 border border-white/20">
-              <div className="text-2xl sm:text-3xl font-bold text-emerald-300 mb-2">5★</div>
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 border border-white/20 stat-pulse">
+              <div className="text-2xl sm:text-3xl font-bold text-emerald-300 mb-2 stat-number neon-glow">5★</div>
               <div className="text-xs sm:text-sm text-white/80">Calificación</div>
             </div>
           </div>
@@ -196,36 +252,36 @@ export default function Homepage() {
       <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            <Card className="text-center group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+            <Card className="text-center group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white/80 backdrop-blur-sm card-3d">
               <CardContent className="p-6 sm:p-8">
                 <div className="mb-4 sm:mb-6 inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-2xl group-hover:scale-110 transition-transform">
                   <MapPin className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-slate-800">Ubicación</h3>
-                <p className="text-sm sm:text-base text-slate-600 leading-relaxed">Chocó, Colombia<br />Selva Tropical Auténtica</p>
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed">Quibdó, Chocó<br />KM7 VIA YUTO</p>
               </CardContent>
             </Card>
 
-            <Card className="text-center group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+            <Card className="text-center group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white/80 backdrop-blur-sm card-3d">
               <CardContent className="p-6 sm:p-8">
                 <div className="mb-4 sm:mb-6 inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl group-hover:scale-110 transition-transform">
                   <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-slate-800">Horarios</h3>
                 <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                  Todos los días<br />8:00 AM - 6:00 PM
+                  Todos los días<br />7:00 AM - 5:00 PM
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="text-center group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+            <Card className="text-center group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white/80 backdrop-blur-sm card-3d">
               <CardContent className="p-6 sm:p-8">
                 <div className="mb-4 sm:mb-6 inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl group-hover:scale-110 transition-transform">
                   <Phone className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-slate-800">Contacto</h3>
                 <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                  info@chocoaventuras.com<br />+57 300 123 4567
+                  chocoaventurascuatri@gmail.com<br />KM7 VIA YUTO
                 </p>
               </CardContent>
             </Card>
@@ -283,7 +339,7 @@ export default function Homepage() {
                 };
 
                 return (
-                  <div key={paseo.id} className="group p-4 sm:p-6 lg:p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100">
+                  <div key={paseo.id} className="group p-4 sm:p-6 lg:p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100 card-3d particle-hover">
                     <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
                       <div className={`bg-gradient-to-br ${getDifficultyColor(paseo.dificultad)} rounded-2xl w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0 mx-auto sm:mx-0`}>
                         <span className="text-2xl sm:text-3xl">{getDifficultyIcon(paseo.dificultad)}</span>
@@ -384,7 +440,7 @@ export default function Homepage() {
                 </h3>
               </div>
               <p className="text-slate-300 leading-relaxed mb-6">
-                Experiencias únicas en la selva del Chocó que combinan aventura, cultura y naturaleza auténtica.
+                Somos la primera experiencia de turismo extremo en Quibdó que combina cuatrimotos, paintball y cultura local en plena selva tropical.
               </p>
               <div className="flex items-center gap-2 text-emerald-400">
                 <Star className="h-5 w-5 fill-current" />
@@ -397,15 +453,15 @@ export default function Homepage() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Phone className="h-5 w-5 text-emerald-400" />
-                  <span className="text-slate-300">+57 300 123 4567</span>
+                  <span className="text-slate-300">KM7 VIA YUTO</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="text-emerald-400">✉</span>
-                  <span className="text-slate-300">info@chocoaventuras.com</span>
+                  <span className="text-slate-300">chocoaventurascuatri@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <MapPin className="h-5 w-5 text-emerald-400" />
-                  <span className="text-slate-300">Chocó, Colombia</span>
+                  <span className="text-slate-300">Quibdó, Chocó</span>
                 </div>
               </div>
             </div>
@@ -428,6 +484,14 @@ export default function Homepage() {
                   rel="noopener noreferrer"
                 >
                   <Instagram className="h-6 w-6 text-slate-300 group-hover:text-white" />
+                </a>
+                <a
+                  href="#"
+                  className="w-12 h-12 bg-slate-700 hover:bg-emerald-600 rounded-xl flex items-center justify-center transition-all duration-300 group"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="text-slate-300 group-hover:text-white font-bold text-lg">📱</span>
                 </a>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed">
