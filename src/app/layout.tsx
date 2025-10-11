@@ -23,6 +23,7 @@ export default function RootLayout({
     <html lang="es">
       <head>
         <link rel="stylesheet" href="/choco-aventuras-effects.css" />
+        <link rel="stylesheet" href="/oro18k-effects.css" />
       </head>
       <body className={`${inter.className} antialiased`}>
         <QueryProvider>
