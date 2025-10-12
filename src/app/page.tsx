@@ -1,428 +1,612 @@
 "use client";
 
-import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { MapPin, Clock, Phone, Facebook, Instagram, Star, ArrowRight, Play, Menu, X } from 'lucide-react';
+import {
+  Menu, X, ShoppingCart, Search, User, Star, ArrowDown,
+  Instagram, Facebook, Youtube, Phone, MapPin, Mail,
+  ChevronDown, ArrowRight, Play, Heart, ArrowUp
+} from 'lucide-react';
 import Link from 'next/link';
-
-interface Paseo {
-  id: number;
-  nombre: string;
-  descripcion: string;
-  duracion_horas: number;
-  precio: number;
-  dificultad: 'facil' | 'intermedio' | 'dificil';
-  ubicacion: string;
-  incluye: string[];
-  fotos: string[];
-  activo: boolean;
-}
-
-async function fetchPaseos(): Promise<{paseos: Paseo[]}> {
-  const response = await fetch('/api/paseos');
-  if (!response.ok) throw new Error('Error fetching paseos');
-  return response.json();
-}
 
 export default function Homepage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { data: paseosData, isLoading: loadingPaseos } = useQuery({
-    queryKey: ['paseos'],
-    queryFn: fetchPaseos,
-  });
+  const [sideCartOpen, setSideCartOpen] = useState(false);
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
+  const [accountModalOpen, setAccountModalOpen] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
+  const [animatedTextIndex, setAnimatedTextIndex] = useState(0);
+  const [isSticky, setIsSticky] = useState(false);
 
-  const paseos = paseosData?.paseos || [];
+  const animatedTexts = ["LA AVENTURA", "TU ADRENALINA", "EL CHOCÓ"];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnimatedTextIndex((prev) => (prev + 1) % animatedTexts.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Responsive Header */}
-      <header className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-slate-100">
+      {/* Header Sticky */}
+      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isSticky ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white/90 backdrop-blur-sm'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2 sm:gap-3 logo-container">
-              <div className="w-8 h-8 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center logo-icon">
-                <span className="text-white font-bold text-sm">CA</span>
-              </div>
-              <div className="font-bold text-lg sm:text-xl bg-gradient-to-r from-emerald-700 to-emerald-900 bg-clip-text text-transparent">
-                Chocó Aventuras
-              </div>
+          <div className="flex justify-between items-center h-16 lg:h-20">
+            {/* Logo */}
+            <div className="flex items-center">
+              <Link href="/" className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">CA</span>
+                </div>
+                <div className="hidden sm:block">
+                  <div className="text-2xl font-bold text-emerald-600">Chocó</div>
+                  <div className="text-sm text-gray-600">AVENTURAS</div>
+                </div>
+              </Link>
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex space-x-6">
-              <Link href="/" className="nav-item text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
-                Inicio
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
+            <nav className="hidden lg:flex items-center space-x-8">
+              <Link href="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                INICIO
               </Link>
-              <Link href="/nosotros" className="nav-item text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
-                Nosotros
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
+              <Link href="/nosotros" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                NOSOTROS
               </Link>
-              <Link href="/tours" className="nav-item text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
-                Tours
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
+              <Link href="/tours" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                TOURS
               </Link>
-              <Link href="/cuatrimotos" className="nav-item text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
-                Cuatrimotos
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
+              <Link href="/cuadriciclos" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                CUADRICICLOS
               </Link>
-              <span className="nav-item text-slate-500 font-medium cursor-not-allowed relative group opacity-60">
-                Paintball
-                <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full ml-2 particle-hover">Próximamente</span>
-              </span>
-              <Link href="/experiencias" className="nav-item text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
-                Experiencias
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
+              <Link href="/experiencias" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                EXPERIENCIAS
               </Link>
-              <Link href="/reservas" className="nav-item text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
-                Reservas
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
+              <Link href="/reservas" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                RESERVAS
               </Link>
-              <Link href="/contacto" className="nav-item text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
-                Contacto
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
+              <Link href="/contacto" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                CONTACTO
               </Link>
             </nav>
 
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-md text-slate-700 hover:text-emerald-600 hover:bg-slate-100 transition-colors burger-menu"
-            >
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
+            {/* Header Icons */}
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => setSearchModalOpen(true)}
+                className="p-2 text-gray-700 hover:text-emerald-600 transition-colors"
+              >
+                <Search className="h-5 w-5" />
+              </button>
+              <button
+                onClick={() => setAccountModalOpen(true)}
+                className="p-2 text-gray-700 hover:text-emerald-600 transition-colors"
+              >
+                <User className="h-5 w-5" />
+              </button>
+              <button
+                onClick={() => setSideCartOpen(true)}
+                className="relative p-2 text-gray-700 hover:text-emerald-600 transition-colors"
+              >
+                <ShoppingCart className="h-5 w-5" />
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  0
+                </span>
+              </button>
 
-          {/* Mobile Navigation */}
-          {mobileMenuOpen && (
-            <div className="lg:hidden">
-              <div className="pb-3 pt-2 space-y-1 bg-white/95 backdrop-blur-md border-t border-slate-100">
-                <Link
-                  href="/"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
-                >
-                  Inicio
-                </Link>
-                <Link
-                  href="/nosotros"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
-                >
-                  Nosotros
-                </Link>
-                <Link
-                  href="/tours"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
-                >
-                  Tours
-                </Link>
-                <Link
-                  href="/cuatrimotos"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
-                >
-                  Cuatrimotos
-                </Link>
-                <div className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-500 opacity-60 cursor-not-allowed">
-                  Paintball
-                  <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full ml-2 particle-hover">Próximamente</span>
-                </div>
-                <Link
-                  href="/experiencias"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
-                >
-                  Experiencias
-                </Link>
-                <Link
-                  href="/reservas"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
-                >
-                  Reservas
-                </Link>
-                <Link
-                  href="/contacto"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
-                >
-                  Contacto
-                </Link>
-              </div>
+              {/* Mobile menu button */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="lg:hidden p-2 text-gray-700 hover:text-emerald-600 transition-colors"
+              >
+                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
             </div>
-          )}
+          </div>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden bg-white/95 backdrop-blur-md border-t">
+            <div className="px-4 py-2 space-y-1">
+              <Link href="/" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">INICIO</Link>
+              <Link href="/nosotros" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">NOSOTROS</Link>
+              <Link href="/tours" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">TOURS</Link>
+              <Link href="/cuadriciclos" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">CUADRICICLOS</Link>
+              <Link href="/experiencias" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">EXPERIENCIAS</Link>
+              <Link href="/reservas" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">RESERVAS</Link>
+              <Link href="/contacto" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">CONTACTO</Link>
+            </div>
+          </div>
+        )}
       </header>
 
-      {/* Responsive Hero Section */}
-      <section className="relative min-h-screen bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-800 flex items-center justify-center overflow-hidden mountain-parallax jungle-particles">
-        {/* Background Image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: "url('/choco-aventuras-hero.jpg')"
-          }}
-        />
-
-        {/* Gradient Overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/70 via-emerald-800/60 to-teal-800/70" />
-
-        {/* Optimized animated background elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-32 sm:w-64 h-32 sm:h-64 bg-emerald-400/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-40 sm:w-80 h-40 sm:h-80 bg-teal-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 right-1/3 w-24 sm:w-48 h-24 sm:h-48 bg-white/5 rounded-full blur-2xl animate-pulse delay-500"></div>
+      {/* Hero Section con Video */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Video Background */}
+        <div className="absolute inset-0 w-full h-full">
+          <iframe
+            className="absolute inset-0 w-full h-full object-cover"
+            src="https://www.youtube.com/embed/1vISNKDpBno?autoplay=1&mute=1&loop=1&controls=0&playlist=1vISNKDpBno"
+            allow="autoplay; fullscreen"
+            style={{ pointerEvents: 'none' }}
+          />
         </div>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/20" />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/50" />
 
-        <div className="relative z-10 text-center text-white max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-6 sm:mb-8 flex justify-center">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 sm:px-6 py-2 sm:py-3 glass-effect particle-hover">
-              <Star className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 fill-current neon-glow" />
-              <span className="text-xs sm:text-sm font-medium">Experiencia Premium en el Chocó</span>
-            </div>
+        {/* Content */}
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
+          <div className="mb-8">
+            <p className="text-sm text-white/80 mb-4">- Bienvenido -</p>
+            <h1 className="text-6xl md:text-8xl font-bold mb-4">
+              <span className="text-emerald-400">CHOCÓ</span>
+              <br />
+              <span className="text-white">AVENTURAS</span>
+            </h1>
+            <p className="text-xl text-white/90 mb-8">
+              La primera experiencia de turismo extremo en Quibdó
+            </p>
+            <Button
+              className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg rounded-none uppercase font-semibold"
+              onClick={() => document.getElementById('cuadriciclos')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              RESERVAR
+              <ArrowDown className="ml-2 h-5 w-5" />
+            </Button>
           </div>
+        </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 bg-gradient-to-r from-white via-emerald-100 to-teal-100 bg-clip-text text-transparent leading-tight wind-effect">
-            CHOCÓ
+        {/* Shape Divider */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+          <svg className="relative block w-full h-16" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M602.45,3.86h0S572.9,116.24,281.94,120H923C632,116.24,602.45,3.86,602.45,3.86Z" fill="white"></path>
+          </svg>
+        </div>
+      </section>
+
+      {/* Segunda Sección - EXPLORA */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Video Background */}
+        <div className="absolute inset-0 w-full h-full">
+          <iframe
+            className="absolute inset-0 w-full h-full object-cover"
+            src="https://www.youtube.com/embed/uq49IDyz4e4?autoplay=1&mute=1&loop=1&controls=0&playlist=uq49IDyz4e4"
+            allow="autoplay; fullscreen"
+            style={{ pointerEvents: 'none' }}
+          />
+        </div>
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/50" />
+
+        {/* Content */}
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
+          <h2 className="text-5xl md:text-7xl font-bold mb-4">
+            EXPLORA
             <br />
-            <span className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl">AVENTURAS</span>
-          </h1>
-
-          <p className="text-lg sm:text-xl md:text-2xl mb-4 sm:mb-6 text-emerald-100 max-w-3xl mx-auto leading-relaxed px-4">
-            La primera experiencia de turismo extremo en Quibdó
-          </p>
-
-          <p className="text-base sm:text-lg mb-8 sm:mb-12 text-white/90 max-w-2xl mx-auto px-4">
+            TU AVENTURA
+          </h2>
+          <p className="text-xl text-white/90 mb-12">
             Cuatrimotos, paintball y cultura local en plena selva tropical.
           </p>
 
-          <p className="text-lg sm:text-xl mb-8 sm:mb-12 text-emerald-200 font-bold max-w-2xl mx-auto px-4">
-            ¡Aquí la aventura no se cuenta... se vive! 🏍️ 🎯
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4">
-            <Link href="/cuadriciclos">
-              <Button size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold rounded-xl shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 flex items-center justify-center gap-2 adrenaline-button magnetic-button wave-button">
-                RESERVA AHORA
-                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
-              </Button>
-            </Link>
-
-            <Button
-              variant="outline"
-              size="lg"
-              className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/30 text-white hover:bg-white/10 font-semibold rounded-xl backdrop-blur-sm transition-all duration-300 flex items-center justify-center gap-2 glass-effect play-button-effect"
-            >
-              <Play className="h-4 w-4 sm:h-5 sm:w-5" />
-              Ver Video
+          <div className="flex flex-col md:flex-row gap-6 justify-center">
+            <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-8 py-4 backdrop-blur-sm">
+              🌟 AVENTURAS INCREIBLES
+            </Button>
+            <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-8 py-4 backdrop-blur-sm">
+              🏍️ CONOCER LOS PASEOS
+            </Button>
+            <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-8 py-4 backdrop-blur-sm">
+              🏍️ RESERVAR AHORA
             </Button>
           </div>
-
-          <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 text-center px-4">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 border border-white/20 stat-pulse">
-              <div className="text-2xl sm:text-3xl font-bold text-emerald-300 mb-2 stat-number neon-glow">100%</div>
-              <div className="text-xs sm:text-sm text-white/80">Experiencia Natural</div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 border border-white/20 stat-pulse">
-              <div className="text-2xl sm:text-3xl font-bold text-emerald-300 mb-2 stat-number neon-glow">24/7</div>
-              <div className="text-xs sm:text-sm text-white/80">Disponibilidad</div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 border border-white/20 stat-pulse">
-              <div className="text-2xl sm:text-3xl font-bold text-emerald-300 mb-2 stat-number neon-glow">5★</div>
-              <div className="text-xs sm:text-sm text-white/80">Calificación</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Scroll indicator - hidden on mobile */}
-        <div className="hidden sm:block absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
-          </div>
         </div>
       </section>
 
-      {/* Responsive Info Section */}
-      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-slate-50 to-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            <Card className="text-center group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white/80 backdrop-blur-sm card-3d">
-              <CardContent className="p-6 sm:p-8">
-                <div className="mb-4 sm:mb-6 inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-2xl group-hover:scale-110 transition-transform">
-                  <MapPin className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-slate-800">Ubicación</h3>
-                <p className="text-sm sm:text-base text-slate-600 leading-relaxed">Quibdó, Chocó<br />KM7 VIA YUTO</p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white/80 backdrop-blur-sm card-3d">
-              <CardContent className="p-6 sm:p-8">
-                <div className="mb-4 sm:mb-6 inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl group-hover:scale-110 transition-transform">
-                  <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-slate-800">Horarios</h3>
-                <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                  Todos los días<br />7:00 AM - 5:00 PM
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white/80 backdrop-blur-sm card-3d">
-              <CardContent className="p-6 sm:p-8">
-                <div className="mb-4 sm:mb-6 inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl group-hover:scale-110 transition-transform">
-                  <Phone className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-slate-800">Contacto</h3>
-                <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                  chocoaventurascuatri@gmail.com<br />KM7 VIA YUTO
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-50/50 to-blue-50/50"></div>
-        <div className="relative max-w-6xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-emerald-700 to-emerald-900 bg-clip-text text-transparent">
-              Nuestras Experiencias
-            </h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Aventuras únicas que combinan adrenalina, naturaleza y cultura chocoana
-            </p>
-          </div>
-
-          {/* Responsive Dynamic Paseos Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
-            {loadingPaseos ? (
-              <div className="col-span-full text-center py-8 sm:py-12">
-                <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-emerald-600 mx-auto"></div>
-                <p className="text-slate-600 mt-4 text-sm sm:text-base">Cargando experiencias...</p>
-              </div>
-            ) : (
-              paseos.map((paseo, index) => {
-                const getDifficultyColor = (dificultad: string) => {
-                  switch (dificultad) {
-                    case 'facil': return 'from-emerald-500 to-emerald-700';
-                    case 'intermedio': return 'from-amber-500 to-orange-600';
-                    case 'dificil': return 'from-red-500 to-red-700';
-                    default: return 'from-blue-500 to-blue-700';
-                  }
-                };
-
-                const getDifficultyIcon = (dificultad: string) => {
-                  switch (dificultad) {
-                    case 'facil': return '🌱';
-                    case 'intermedio': return '⚡';
-                    case 'dificil': return '🔥';
-                    default: return '🏍️';
-                  }
-                };
-
-                const getDifficultyText = (dificultad: string) => {
-                  switch (dificultad) {
-                    case 'facil': return 'Principiante';
-                    case 'intermedio': return 'Intermedio';
-                    case 'dificil': return 'Experto';
-                    default: return 'Cualquier nivel';
-                  }
-                };
-
-                return (
-                  <div key={paseo.id} className="group p-4 sm:p-6 lg:p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100 card-3d particle-hover">
-                    <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
-                      <div className={`bg-gradient-to-br ${getDifficultyColor(paseo.dificultad)} rounded-2xl w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0 mx-auto sm:mx-0`}>
-                        <span className="text-2xl sm:text-3xl">{getDifficultyIcon(paseo.dificultad)}</span>
-                      </div>
-
-                      <div className="flex-1 text-center sm:text-left">
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-3">
-                          <h3 className="font-bold text-xl sm:text-2xl text-slate-800">{paseo.nombre}</h3>
-                          <span className={`px-3 py-1 rounded-full text-xs font-semibold inline-block ${
-                            paseo.dificultad === 'facil' ? 'bg-emerald-100 text-emerald-700' :
-                            paseo.dificultad === 'intermedio' ? 'bg-amber-100 text-amber-700' :
-                            'bg-red-100 text-red-700'
-                          }`}>
-                            {getDifficultyText(paseo.dificultad)}
-                          </span>
-                        </div>
-
-                        <p className="text-slate-600 leading-relaxed mb-4 text-sm sm:text-base">{paseo.descripcion}</p>
-
-                        <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm text-slate-500 mb-4">
-                          <div className="flex items-center justify-center sm:justify-start gap-1">
-                            <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
-                            <span>{paseo.duracion_horas}h duración</span>
-                          </div>
-                          <div className="flex items-center justify-center sm:justify-start gap-1">
-                            <MapPin className="h-3 w-3 sm:h-4 sm:w-4" />
-                            <span>{paseo.ubicacion}</span>
-                          </div>
-                        </div>
-
-                        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-0 sm:justify-between">
-                          <div className="text-xl sm:text-2xl font-bold text-emerald-600">
-                            ${paseo.precio.toLocaleString()}
-                          </div>
-                          <Link href="/reservas">
-                            <Button className="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 px-4 py-2 text-sm sm:text-base">
-                              Reservar
-                              <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
-                            </Button>
-                          </Link>
-                        </div>
-                      </div>
+      {/* Flip Cards */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Card 1 - Paseo Selva */}
+            <div className="group relative h-80 perspective-1000">
+              <div className="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d group-hover:rotate-y-180">
+                {/* Frente */}
+                <div className="absolute inset-0 backface-hidden rounded-2xl overflow-hidden">
+                  <div
+                    className="w-full h-full bg-cover bg-center relative"
+                    style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
+                  >
+                    <div className="absolute inset-0 bg-black/40" />
+                    <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                      <p className="text-sm mb-2">Aventura en la selva tropical</p>
+                      <h3 className="text-3xl font-bold">PASEO SELVA</h3>
                     </div>
                   </div>
-                );
-              })
+                </div>
+
+                {/* Reverso */}
+                <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-emerald-600 flex items-center justify-center">
+                  <Button className="bg-white text-emerald-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
+                    VER PASEO
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2 - Aventura Extrema */}
+            <div className="group relative h-80 perspective-1000">
+              <div className="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d group-hover:rotate-y-180">
+                {/* Frente */}
+                <div className="absolute inset-0 backface-hidden rounded-2xl overflow-hidden">
+                  <div
+                    className="w-full h-full bg-cover bg-center relative"
+                    style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
+                  >
+                    <div className="absolute inset-0 bg-black/40" />
+                    <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                      <p className="text-sm mb-2">Adrenalina pura en cuatrimoto</p>
+                      <h3 className="text-3xl font-bold">AVENTURA EXTREMA</h3>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Reverso */}
+                <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-orange-600 flex items-center justify-center">
+                  <Button className="bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
+                    RESERVAR
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Sección Cuadriciclos */}
+      <section id="cuadriciclos" className="relative py-20 overflow-hidden">
+        {/* Video Background */}
+        <div className="absolute inset-0 w-full h-full">
+          <div className="w-full h-full bg-gradient-to-r from-emerald-900 to-gray-900" />
+        </div>
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/60" />
+
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4">
+          {/* Header */}
+          <div className="text-center text-white mb-16">
+            <p className="text-lg mb-4">Vive la aventura, siente la adrenalina.</p>
+            <h2 className="text-5xl md:text-7xl font-bold mb-4">
+              <span className="text-emerald-400">CHOCÓ</span>
+              <br />
+              <span className="text-white">CUADRICICLOS</span>
+            </h2>
+          </div>
+
+          {/* Grid de Cuadriciclos */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Cuadriciclo Principal - YAMAHA GRIZZLY 700 */}
+            <div className="group relative h-80 rounded-lg overflow-hidden cursor-pointer">
+              <div
+                className="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
+                style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/60 transition-all duration-300" />
+              <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                <div className="mb-4">
+                  <span className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                    🔥 YAMAHA GRIZZLY
+                  </span>
+                </div>
+                <h3 className="text-2xl font-bold mb-2">YAMAHA GRIZZLY 700</h3>
+                <p className="text-sm text-white/90 mb-4">Modelo 2009 - Edición Roja. Potencia máxima para aventura extrema</p>
+                <div className="text-xl font-bold text-red-400">Consultar precios</div>
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <Button className="bg-red-600 text-white hover:bg-red-700 px-8 py-3">
+                  RESERVAR
+                </Button>
+              </div>
+            </div>
+
+            {/* Cuadriciclo 2 - Disponible según inventario */}
+            <div className="group relative h-80 rounded-lg overflow-hidden cursor-pointer opacity-60">
+              <div
+                className="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
+                style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
+              />
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/70 transition-all duration-300" />
+              <div className="absolute inset-0 flex flex-col justify-center items-center p-8 text-white text-center">
+                <div className="mb-4">
+                  <span className="bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                    🔧 PRÓXIMAMENTE
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold mb-2">SEGUNDO CUADRICICLO</h3>
+                <p className="text-sm text-white/90">Ampliando nuestra flota para más aventuras</p>
+              </div>
+            </div>
+
+            {/* Cuadriciclo 3 - Futuro */}
+            <div className="group relative h-80 rounded-lg overflow-hidden cursor-pointer opacity-60">
+              <div
+                className="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
+                style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
+              />
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/70 transition-all duration-300" />
+              <div className="absolute inset-0 flex flex-col justify-center items-center p-8 text-white text-center">
+                <div className="mb-4">
+                  <span className="bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                    🚀 EN DESARROLLO
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold mb-2">TERCER CUADRICICLO</h3>
+                <p className="text-sm text-white/90">Más opciones para tu aventura perfecta</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Image Accordion */}
+      <section className="py-20">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row h-96 rounded-2xl overflow-hidden shadow-2xl">
+            {/* Panel 1 - Instagram Community */}
+            <div className="group flex-1 relative overflow-hidden cursor-pointer transition-all duration-500 hover:flex-[2]">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-500/60 to-purple-600/60" />
+              <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                <h3 className="text-2xl font-bold mb-4">Sé parte de nuestra comunidad aventurera</h3>
+                <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white w-fit">
+                  Instagram
+                </Button>
+              </div>
+            </div>
+
+            {/* Panel 2 - YouTube Adventures (Activo por defecto) */}
+            <div className="group flex-[2] relative overflow-hidden cursor-pointer transition-all duration-500 hover:flex-[3]">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-red-500/60 to-red-700/60" />
+              <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                <h3 className="text-2xl font-bold mb-4">Quieres ver nuestras aventuras extremas</h3>
+                <Button className="bg-red-600 hover:bg-red-700 text-white w-fit">
+                  <Youtube className="h-5 w-5 mr-2" />
+                  YouTube
+                </Button>
+              </div>
+            </div>
+
+            {/* Panel 3 - Facebook Discovery */}
+            <div className="group flex-1 relative overflow-hidden cursor-pointer transition-all duration-500 hover:flex-[2]">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/60 to-blue-700/60" />
+              <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                <h3 className="text-2xl font-bold mb-4">Hay mucho por explorar en el Chocó</h3>
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white w-fit">
+                  <Facebook className="h-5 w-5 mr-2" />
+                  Facebook
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Formulario Multi-Step */}
+      <section className="relative py-20 overflow-hidden">
+        {/* Video Background */}
+        <div className="absolute inset-0 w-full h-full">
+          <div className="w-full h-full bg-gradient-to-r from-gray-900 to-black" />
+        </div>
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/60" />
+
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
+          <p className="text-sm mb-4">-aventura extrema-</p>
+          <h2 className="text-4xl md:text-6xl font-bold mb-8">
+            Dudas sobre nuestros paseos
+          </h2>
+          <p className="text-xl mb-12">
+            Queremos que vivas la aventura con total seguridad.
+          </p>
+
+          {/* Formulario */}
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 max-w-2xl mx-auto">
+            {/* Progress Bar */}
+            <div className="mb-8">
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-sm">Step {currentStep} of 3</span>
+                <div className="flex gap-2">
+                  {[1, 2, 3].map((step) => (
+                    <div
+                      key={step}
+                      className={`w-3 h-3 rounded-full ${
+                        step <= currentStep ? 'bg-emerald-400' : 'bg-white/30'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div className="w-full bg-white/20 rounded-full h-2">
+                <div
+                  className="bg-emerald-400 h-2 rounded-full transition-all duration-300"
+                  style={{ width: `${(currentStep / 3) * 100}%` }}
+                />
+              </div>
+            </div>
+
+            {/* Step Content */}
+            {currentStep === 1 && (
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-left mb-2 text-sm">Como deseas que te contactemos</label>
+                  <select className="w-full p-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70">
+                    <option value="">Selecciona una opción</option>
+                    <option value="email">Correo Electrónico</option>
+                    <option value="phone">Teléfono</option>
+                    <option value="whatsapp">WhatsApp</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-left mb-2 text-sm">Qué tipo de aventura te interesa</label>
+                  <select className="w-full p-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70">
+                    <option value="">Selecciona una opción</option>
+                    <option value="paseo-selva">Paseo en la Selva</option>
+                    <option value="aventura-extrema">Aventura Extrema</option>
+                    <option value="alquiler-cuadriciclos">Alquiler de Cuadriciclos</option>
+                    <option value="reservar-paseo">Reservar Paseo Completo</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-left mb-2 text-sm">Cual es tu nombre</label>
+                  <input
+                    type="text"
+                    placeholder="Tu nombre"
+                    className="w-full p-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70"
+                  />
+                </div>
+                <Button
+                  onClick={() => setCurrentStep(2)}
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3"
+                >
+                  Siguiente
+                </Button>
+              </div>
+            )}
+
+            {currentStep === 2 && (
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-left mb-2 text-sm">Cual es tu Correo Electrónico</label>
+                  <input
+                    type="email"
+                    placeholder="tu@email.com"
+                    className="w-full p-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-left mb-2 text-sm">Cual es tu número de Teléfono</label>
+                  <input
+                    type="tel"
+                    placeholder="+57 300 000 0000"
+                    className="w-full p-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70"
+                  />
+                </div>
+                <div className="flex gap-4">
+                  <Button
+                    onClick={() => setCurrentStep(1)}
+                    variant="outline"
+                    className="flex-1 border-white/30 text-white hover:bg-white/10"
+                  >
+                    Anterior
+                  </Button>
+                  <Button
+                    onClick={() => setCurrentStep(3)}
+                    className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white"
+                  >
+                    Siguiente
+                  </Button>
+                </div>
+              </div>
+            )}
+
+            {currentStep === 3 && (
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-left mb-2 text-sm">
+                    Queremos que nos compartas información acerca del paseo o cuadriciclo que te interesa
+                  </label>
+                  <textarea
+                    rows={4}
+                    placeholder="Cuéntanos sobre tu experiencia deseada, nivel de adrenalina, duración del paseo..."
+                    className="w-full p-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 resize-none"
+                  />
+                </div>
+                <div className="flex gap-4">
+                  <Button
+                    onClick={() => setCurrentStep(2)}
+                    variant="outline"
+                    className="flex-1 border-white/30 text-white hover:bg-white/10"
+                  >
+                    Anterior
+                  </Button>
+                  <Button
+                    className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+                  >
+                    Enviar
+                  </Button>
+                </div>
+              </div>
             )}
           </div>
+        </div>
+      </section>
 
-          {/* Static Features Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="group text-center p-6 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100">
-              <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <span className="text-2xl">👨‍🏫</span>
-              </div>
-              <h3 className="font-bold text-lg mb-2 text-slate-800">Guías Locales</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">Expertos nativos del territorio</p>
-            </div>
+      {/* Sección WhatsApp */}
+      <section className="py-20 bg-gradient-to-r from-green-600 to-green-700">
+        <div className="max-w-4xl mx-auto px-4 text-center text-white">
+          <h2 className="text-4xl md:text-6xl font-bold mb-8">
+            Contáctanos
+            <br />
+            en un clic
+          </h2>
+          <p className="text-xl mb-12">
+            Reserva tu aventura por WhatsApp
+          </p>
 
-            <div className="group text-center p-6 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100">
-              <div className="bg-gradient-to-br from-purple-500 to-purple-700 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <span className="text-2xl">🛡️</span>
-              </div>
-              <h3 className="font-bold text-lg mb-2 text-slate-800">Seguridad Total</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">Equipos de protección profesional</p>
-            </div>
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block"
+          >
+            <Button className="bg-white text-green-600 hover:bg-gray-100 px-12 py-6 text-2xl font-bold rounded-full shadow-2xl hover:scale-105 transition-all duration-300">
+              🏍️ RESERVAR AVENTURA
+            </Button>
+          </a>
+        </div>
+      </section>
 
-            <div className="group text-center p-6 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100">
-              <div className="bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <span className="text-2xl">🌿</span>
-              </div>
-              <h3 className="font-bold text-lg mb-2 text-slate-800">Cultura Chocoana</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">Tradiciones auténticas locales</p>
-            </div>
-
-            <div className="group text-center p-6 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100">
-              <div className="bg-gradient-to-br from-teal-500 to-teal-700 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <span className="text-2xl">👥</span>
-              </div>
-              <h3 className="font-bold text-lg mb-2 text-slate-800">Grupos y Empresas</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">Team building empresarial</p>
-            </div>
-          </div>
+      {/* Texto Animado */}
+      <section className="py-20 bg-black text-white">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-4xl md:text-6xl font-bold">
+            DESCUBRE{' '}
+            <span className="text-emerald-400 transition-all duration-1000">
+              {animatedTexts[animatedTextIndex]}
+            </span>
+            <br />
+            VIVE HOY TU AVENTURA
+          </h2>
         </div>
       </section>
 
@@ -514,6 +698,144 @@ export default function Homepage() {
           </div>
         </div>
       </footer>
+
+      {/* Side Cart */}
+      {sideCartOpen && (
+        <div className="fixed inset-0 z-50">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setSideCartOpen(false)} />
+          <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl">
+            <div className="flex items-center justify-between p-6 border-b">
+              <h3 className="text-lg font-semibold">Carrito</h3>
+              <button onClick={() => setSideCartOpen(false)}>
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            <div className="p-6">
+              <p className="text-gray-500 text-center">Tu carrito está vacío</p>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 p-6 border-t bg-gray-50">
+              <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white mb-3">
+                Ver carrito
+              </Button>
+              <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
+                Finalizar compra
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Search Modal */}
+      {searchModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setSearchModalOpen(false)} />
+          <div className="relative bg-white rounded-2xl p-8 max-w-lg w-full mx-4">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-lg font-semibold">Buscar aventuras</h3>
+              <button onClick={() => setSearchModalOpen(false)}>
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            <div className="flex gap-4">
+              <input
+                type="text"
+                placeholder="¿Qué aventura buscas?"
+                className="flex-1 p-3 border border-gray-300 rounded-lg"
+              />
+              <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
+                <Search className="h-5 w-5" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Account Modal */}
+      {accountModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setAccountModalOpen(false)} />
+          <div className="relative bg-white rounded-2xl p-8 max-w-md w-full mx-4">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-lg font-semibold">Mi Cuenta</h3>
+              <button onClick={() => setAccountModalOpen(false)}>
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            <div className="space-y-4">
+              <input
+                type="email"
+                placeholder="Email"
+                className="w-full p-3 border border-gray-300 rounded-lg"
+              />
+              <input
+                type="password"
+                placeholder="Contraseña"
+                className="w-full p-3 border border-gray-300 rounded-lg"
+              />
+              <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">
+                Iniciar Sesión
+              </Button>
+              <p className="text-center text-sm text-gray-600">
+                ¿No tienes cuenta? <a href="#" className="text-emerald-600 hover:underline">Regístrate</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Chaty Widget */}
+      <div className="fixed left-6 bottom-6 z-40">
+        <div className="flex flex-col gap-3">
+          <a
+            href="tel:+57300000000"
+            className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+            style={{ backgroundColor: '#03E78B' }}
+          >
+            <Phone className="h-6 w-6 text-white" />
+          </a>
+          <a
+            href="#"
+            className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+            style={{ backgroundColor: '#49E670' }}
+          >
+            <span className="text-white text-xl">📱</span>
+          </a>
+          <a
+            href="mailto:chocoaventurascuatri@gmail.com"
+            className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+            style={{ backgroundColor: '#FF485F' }}
+          >
+            <Mail className="h-6 w-6 text-white" />
+          </a>
+          <a
+            href="#"
+            className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+          >
+            <Instagram className="h-6 w-6 text-white" />
+          </a>
+          <a
+            href="sms:+57300000000"
+            className="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+            style={{ backgroundColor: '#FF549C' }}
+          >
+            <span className="text-white text-xl">💬</span>
+          </a>
+          <button
+            className="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+            style={{ backgroundColor: '#253974' }}
+          >
+            <Mail className="h-6 w-6 text-white" />
+          </button>
+        </div>
+      </div>
+
+      {/* Back to Top */}
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="fixed right-6 bottom-6 w-12 h-12 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg shadow-lg hover:scale-110 transition-all"
+      >
+        <ArrowUp className="h-6 w-6 mx-auto" />
+      </button>
     </div>
   );
 }
