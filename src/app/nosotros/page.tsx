@@ -3,12 +3,12 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { Play, ChevronDown, Facebook, Instagram, MessageCircle, Menu, X, Search, User, ShoppingCart } from 'lucide-react';
+import { Play, ChevronDown, Facebook, Instagram, MessageCircle } from 'lucide-react';
+import Navigation from '@/components/Navigation';
 
 export default function NosotrosPage() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -16,101 +16,26 @@ export default function NosotrosPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white sticky top-0 z-50 border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo */}
-            <Link href="/" className="flex items-center">
-              <div className="w-10 h-10 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">CA</span>
-              </div>
-              <div className="ml-3 hidden sm:block">
-                <div className="text-2xl font-bold text-emerald-600">Chocó</div>
-                <div className="text-sm text-gray-600">AVENTURAS</div>
-              </div>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                INICIO
-              </Link>
-              <Link href="/nosotros" className="text-emerald-600 font-semibold transition-colors">
-                NOSOTROS
-              </Link>
-              <Link href="/tours" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                TOURS
-              </Link>
-              <Link href="/cuadriciclos" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                CUATRIMOTOS
-              </Link>
-              <Link href="/experiencias" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                EXPERIENCIAS
-              </Link>
-              <Link href="/contacto" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                CONTACTO
-              </Link>
-            </nav>
-
-            {/* Header Icons */}
-            <div className="flex items-center gap-4">
-              <button className="p-2 text-gray-700 hover:text-emerald-600 transition-colors">
-                <Search className="h-5 w-5" />
-              </button>
-              <button className="p-2 text-gray-700 hover:text-emerald-600 transition-colors">
-                <User className="h-5 w-5" />
-              </button>
-              <button className="relative p-2 text-gray-700 hover:text-emerald-600 transition-colors">
-                <ShoppingCart className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  0
-                </span>
-              </button>
-
-              {/* Mobile menu button */}
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 text-gray-700 hover:text-emerald-600 transition-colors"
-              >
-                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t">
-            <div className="px-4 py-2 space-y-1">
-              <Link href="/" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">INICIO</Link>
-              <Link href="/nosotros" className="block px-3 py-2 text-emerald-600 font-semibold">NOSOTROS</Link>
-              <Link href="/tours" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">TOURS</Link>
-              <Link href="/cuadriciclos" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">CUATRIMOTOS</Link>
-              <Link href="/experiencias" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">EXPERIENCIAS</Link>
-              <Link href="/contacto" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">CONTACTO</Link>
-            </div>
-          </div>
-        )}
-      </header>
+      <Navigation />
 
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center bg-gradient-to-r from-emerald-50 to-white">
-        <div className="absolute inset-0 bg-cover bg-center opacity-10"
-             style={{backgroundImage: "url('https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3')"}} />
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center"
+             style={{backgroundImage: "url('https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80')"}} />
+        <div className="absolute inset-0 bg-black/40" />
 
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-          <h1 className="text-3xl md:text-5xl font-bold mb-8">
-            <span className="text-emerald-600">SOBRE</span>
-            <span className="text-gray-900">NOSOTROS</span>
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl md:text-5xl font-bold mb-8 text-white">
+            <span className="text-emerald-400">SOBRE</span>{" "}
+            <span className="text-white">NOSOTROS</span>
           </h1>
 
-          <div className="w-24 h-1 bg-emerald-600 mx-auto mb-8"></div>
+          <div className="w-24 h-1 bg-emerald-400 mx-auto mb-8"></div>
 
-          <p className="text-lg text-gray-600 mb-4">
-            FABRICAMOS AVENTURAS MEMORABLES EN LA
+          <p className="text-lg text-gray-200 mb-4">
+            CREAMOS AVENTURAS MEMORABLES EN LA
           </p>
-          <p className="text-base text-emerald-600 font-semibold">
+          <p className="text-base text-emerald-400 font-semibold">
             SELVA DEL CHOCÓ
           </p>
         </div>
@@ -118,10 +43,35 @@ export default function NosotrosPage() {
 
       {/* Nuestra Historia Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left Column - Content */}
-            <div className="order-2 lg:order-1">
+            {/* Left Column - Video */}
+            <div className="order-1 lg:order-1">
+              <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-100 shadow-lg">
+                {!isVideoPlaying ? (
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-gray-900/60 flex items-center justify-center">
+                    <div
+                      className="w-20 h-20 bg-emerald-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-700 transition-all duration-300 group shadow-lg"
+                      onClick={() => setIsVideoPlaying(true)}
+                    >
+                      <Play className="w-8 h-8 text-white ml-1 group-hover:scale-110 transition-transform" />
+                    </div>
+                    <div className="absolute inset-0 bg-cover bg-center"
+                         style={{backgroundImage: "url('https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3')"}} />
+                  </div>
+                ) : (
+                  <iframe
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/uq49IDyz4e4?autoplay=1"
+                    allow="autoplay; fullscreen"
+                    allowFullScreen
+                  />
+                )}
+              </div>
+            </div>
+
+            {/* Right Column - Content */}
+            <div className="order-2 lg:order-2">
               <p className="text-emerald-600 text-sm font-semibold tracking-widest uppercase mb-4">
                 NUESTRA HISTORIA
               </p>
@@ -162,38 +112,13 @@ export default function NosotrosPage() {
                 </Link>
               </div>
             </div>
-
-            {/* Right Column - Video */}
-            <div className="order-1 lg:order-2">
-              <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-100 shadow-lg">
-                {!isVideoPlaying ? (
-                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-gray-900/60 flex items-center justify-center">
-                    <div
-                      className="w-20 h-20 bg-emerald-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-700 transition-all duration-300 group shadow-lg"
-                      onClick={() => setIsVideoPlaying(true)}
-                    >
-                      <Play className="w-8 h-8 text-white ml-1 group-hover:scale-110 transition-transform" />
-                    </div>
-                    <div className="absolute inset-0 bg-cover bg-center"
-                         style={{backgroundImage: "url('https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3')"}} />
-                  </div>
-                ) : (
-                  <iframe
-                    className="w-full h-full"
-                    src="https://www.youtube.com/embed/uq49IDyz4e4?autoplay=1"
-                    allow="autoplay; fullscreen"
-                    allowFullScreen
-                  />
-                )}
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       {/* Modern Photo Slider Section */}
       <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <p className="text-emerald-600 text-sm font-semibold tracking-widest uppercase mb-4">
               NUESTRAS AVENTURAS
@@ -329,7 +254,7 @@ export default function NosotrosPage() {
 
       {/* Contáctanos Section */}
       <section className="py-20 bg-gray-900 text-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl md:text-4xl font-bold mb-8">
             <span className="text-emerald-400">CONTÁCTANOS</span> EN UN CLIC
           </h2>
@@ -355,7 +280,7 @@ export default function NosotrosPage() {
 
       {/* FAQ Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <p className="text-emerald-600 text-sm font-semibold tracking-widest uppercase mb-4">
               RESPUESTAS RÁPIDAS
@@ -405,7 +330,7 @@ export default function NosotrosPage() {
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8">
             {/* Logo y descripción */}
             <div className="space-y-4">

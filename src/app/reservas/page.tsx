@@ -11,6 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
+import Navigation from '@/components/Navigation';
 
 interface Cuatrimoto {
   id: number;
@@ -162,51 +163,11 @@ export default function ReservasPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="font-bold text-xl text-[#145A32] logo-container">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center logo-icon">
-                  <span className="text-white font-bold text-sm">CA</span>
-                </div>
-                Chocó Aventuras
-              </div>
-            </Link>
-            <nav className="flex space-x-6">
-              <Link href="/" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Inicio
-              </Link>
-              <Link href="/nosotros" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Nosotros
-              </Link>
-              <Link href="/tours" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Tours
-              </Link>
-              <Link href="/cuadriciclos" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Cuatrimotos
-              </Link>
-              <Link href="/experiencias" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Experiencias
-              </Link>
-              <Link href="/contacto" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Contacto
-              </Link>
-              <Link href="/reservas" className="nav-item text-[#145A32] font-semibold">
-                Reservar
-              </Link>
-              <Link href="/admin/login" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Admin
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Navigation />
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-[#145A32] mb-8">Hacer una Reserva</h1>
+        <h1 className="text-3xl font-bold text-[#145A32] mb-8">Reservas</h1>
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Formulario */}

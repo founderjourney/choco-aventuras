@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { TreePine, Target, Music, Users, Clock, Shield, MapPin, ArrowRight } from 'lucide-react';
 import Footer from '@/components/Footer';
 import CallToAction from '@/components/CallToAction';
+import Navigation from '@/components/Navigation';
 
 export default function ExperienciasPage() {
   const experiencias = [
@@ -65,48 +66,11 @@ export default function ExperienciasPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="font-bold text-xl text-[#145A32] logo-container">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center logo-icon">
-                  <span className="text-white font-bold text-sm">CA</span>
-                </div>
-                Chocó Aventuras
-              </div>
-            </Link>
-            <nav className="flex space-x-6">
-              <Link href="/" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Inicio
-              </Link>
-              <Link href="/nosotros" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Nosotros
-              </Link>
-              <Link href="/tours" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Tours
-              </Link>
-              <Link href="/cuadriciclos" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Cuatrimotos
-              </Link>
-              <Link href="/experiencias" className="nav-item text-[#145A32] font-semibold">
-                Experiencias
-              </Link>
-              <Link href="/contacto" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Contacto
-              </Link>
-              <Link href="/admin/login" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Admin
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-[#145A32] to-[#1565C0] py-20 jungle-particles mountain-parallax">
-        <div className="max-w-6xl mx-auto px-4 text-center text-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <h1 className="text-3xl font-bold mb-6 jungle-text wind-effect">
             Experiencias Únicas
           </h1>
@@ -118,7 +82,7 @@ export default function ExperienciasPage() {
 
       {/* Experiencias Grid */}
       <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-2xl font-bold text-[#145A32] mb-4 jungle-text">
               Nuestras 4 Experiencias Principales
@@ -148,9 +112,9 @@ export default function ExperienciasPage() {
                     ))}
                   </div>
 
-                  <Link href="/tours">
+                  <Link href="/reservas">
                     <Button className="w-full bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold py-3 adrenaline-button magnetic-button">
-                      VER TOURS DISPONIBLES
+                      RESERVAR EXPERIENCIA
                       <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
                   </Link>
@@ -163,7 +127,7 @@ export default function ExperienciasPage() {
 
       {/* Sección Destacada - ¿Por qué somos únicos? */}
       <section className="py-16 bg-[#F5F5F5]">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-2xl font-bold text-[#145A32] mb-6 jungle-text">
               ¿Por qué somos únicos en Colombia?
@@ -215,7 +179,7 @@ export default function ExperienciasPage() {
 
       {/* Lo que incluye cada experiencia */}
       <section className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-center text-[#145A32] mb-12 jungle-text">
             Qué Incluye Cada Experiencia
           </h2>
@@ -284,7 +248,7 @@ export default function ExperienciasPage() {
 
       {/* Requerimientos */}
       <section className="py-16 bg-[#F5F5F5]">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-[#145A32] mb-12 jungle-text">
             Requerimientos para las Experiencias
           </h2>
@@ -339,7 +303,7 @@ export default function ExperienciasPage() {
       <CallToAction
         titulo="¿Listo para Vivir la Aventura?"
         descripcion="Experimenta lo que solo el Chocó puede ofrecerte: naturaleza, adrenalina y cultura en un solo lugar"
-        botonPrimario={{ texto: "VER TODOS LOS TOURS", href: "/tours" }}
+        botonPrimario={{ texto: "RESERVAR EXPERIENCIA", href: "/reservas" }}
         botonSecundario={{ texto: "VER CUATRIMOTOS", href: "/cuatrimotos" }}
       />
 

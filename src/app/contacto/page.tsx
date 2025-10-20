@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { MapPin, Phone, Mail, Facebook, Instagram, MessageCircle, Menu, X, Search, User, ShoppingCart } from 'lucide-react';
+import { MapPin, Phone, Mail, Facebook, Instagram, MessageCircle } from 'lucide-react';
+import Navigation from '@/components/Navigation';
 
 export default function ContactoPage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
@@ -29,83 +29,7 @@ export default function ContactoPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white sticky top-0 z-50 border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo */}
-            <Link href="/" className="flex items-center">
-              <div className="w-10 h-10 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">CA</span>
-              </div>
-              <div className="ml-3 hidden sm:block">
-                <div className="text-2xl font-bold text-emerald-600">Chocó</div>
-                <div className="text-sm text-gray-600">AVENTURAS</div>
-              </div>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                INICIO
-              </Link>
-              <Link href="/nosotros" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                NOSOTROS
-              </Link>
-              <Link href="/tours" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                TOURS
-              </Link>
-              <Link href="/cuadriciclos" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                CUATRIMOTOS
-              </Link>
-              <Link href="/experiencias" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                EXPERIENCIAS
-              </Link>
-              <Link href="/contacto" className="text-emerald-600 font-semibold transition-colors">
-                CONTACTO
-              </Link>
-            </nav>
-
-            {/* Header Icons */}
-            <div className="flex items-center gap-4">
-              <button className="p-2 text-gray-700 hover:text-emerald-600 transition-colors">
-                <Search className="h-5 w-5" />
-              </button>
-              <button className="p-2 text-gray-700 hover:text-emerald-600 transition-colors">
-                <User className="h-5 w-5" />
-              </button>
-              <button className="relative p-2 text-gray-700 hover:text-emerald-600 transition-colors">
-                <ShoppingCart className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  0
-                </span>
-              </button>
-
-              {/* Mobile menu button */}
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 text-gray-700 hover:text-emerald-600 transition-colors"
-              >
-                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t">
-            <div className="px-4 py-2 space-y-1">
-              <Link href="/" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">INICIO</Link>
-              <Link href="/nosotros" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">NOSOTROS</Link>
-              <Link href="/tours" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">TOURS</Link>
-              <Link href="/cuadriciclos" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">CUATRIMOTOS</Link>
-              <Link href="/experiencias" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">EXPERIENCIAS</Link>
-              <Link href="/contacto" className="block px-3 py-2 text-emerald-600 font-semibold">CONTACTO</Link>
-            </div>
-          </div>
-        )}
-      </header>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
@@ -117,7 +41,7 @@ export default function ContactoPage() {
         <div className="absolute inset-0 bg-black/50" />
 
         {/* Content */}
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-8">
             <span className="text-emerald-400">CONTÁC</span>
             <span className="text-white">TANOS</span>
@@ -145,7 +69,7 @@ export default function ContactoPage() {
 
       {/* Contact Information & Form Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Left Column - Contact Info */}
             <div>
@@ -296,7 +220,7 @@ export default function ContactoPage() {
 
       {/* Photo Gallery Section */}
       <section className="py-20 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 h-96">
             {/* Photo 1 */}
             <div className="group relative overflow-hidden cursor-pointer">
@@ -350,7 +274,7 @@ export default function ContactoPage() {
 
       {/* WhatsApp Contact Section */}
       <section className="py-20 bg-gray-900 text-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl md:text-4xl font-bold mb-8">
             <span className="text-emerald-400">CONTÁCTANOS</span>
             <span className="text-white">EN UN CLIC</span>
@@ -380,7 +304,7 @@ export default function ContactoPage() {
 
       {/* Footer */}
       <footer className="bg-black text-white py-16">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8">
             {/* Logo y descripción */}
             <div className="space-y-4">

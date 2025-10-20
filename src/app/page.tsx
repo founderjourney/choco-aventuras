@@ -4,20 +4,19 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
-  Menu, X, ShoppingCart, Search, User, Star, ArrowDown,
+  Star, ArrowDown,
   Instagram, Facebook, Youtube, Phone, MapPin, Mail,
   ChevronDown, ArrowRight, Play, Heart, ArrowUp
 } from 'lucide-react';
 import Link from 'next/link';
+import Navigation from '@/components/Navigation';
 
 export default function Homepage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [sideCartOpen, setSideCartOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [accountModalOpen, setAccountModalOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [animatedTextIndex, setAnimatedTextIndex] = useState(0);
-  const [isSticky, setIsSticky] = useState(false);
 
   const animatedTexts = ["LA AVENTURA", "TU ADRENALINA", "EL CHOCÓ"];
 
@@ -28,110 +27,10 @@ export default function Homepage() {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsSticky(window.scrollY > 0);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header Sticky */}
-      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isSticky ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white/90 backdrop-blur-sm'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 lg:h-20">
-            {/* Logo */}
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">CA</span>
-                </div>
-                <div className="hidden sm:block">
-                  <div className="text-2xl font-bold text-emerald-600">Chocó</div>
-                  <div className="text-sm text-gray-600">AVENTURAS</div>
-                </div>
-              </Link>
-            </div>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                INICIO
-              </Link>
-              <Link href="/nosotros" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                NOSOTROS
-              </Link>
-              <Link href="/tours" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                TOURS
-              </Link>
-              <Link href="/cuadriciclos" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                CUATRIMOTOS
-              </Link>
-              <Link href="/experiencias" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                EXPERIENCIAS
-              </Link>
-              <Link href="/reservas" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                RESERVAS
-              </Link>
-              <Link href="/contacto" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                CONTACTO
-              </Link>
-            </nav>
-
-            {/* Header Icons */}
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setSearchModalOpen(true)}
-                className="p-2 text-gray-700 hover:text-emerald-600 transition-colors"
-              >
-                <Search className="h-5 w-5" />
-              </button>
-              <button
-                onClick={() => setAccountModalOpen(true)}
-                className="p-2 text-gray-700 hover:text-emerald-600 transition-colors"
-              >
-                <User className="h-5 w-5" />
-              </button>
-              <button
-                onClick={() => setSideCartOpen(true)}
-                className="relative p-2 text-gray-700 hover:text-emerald-600 transition-colors"
-              >
-                <ShoppingCart className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  0
-                </span>
-              </button>
-
-              {/* Mobile menu button */}
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 text-gray-700 hover:text-emerald-600 transition-colors"
-              >
-                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-white/95 backdrop-blur-md border-t">
-            <div className="px-4 py-2 space-y-1">
-              <Link href="/" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">INICIO</Link>
-              <Link href="/nosotros" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">NOSOTROS</Link>
-              <Link href="/tours" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">TOURS</Link>
-              <Link href="/cuadriciclos" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">CUATRIMOTOS</Link>
-              <Link href="/experiencias" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">EXPERIENCIAS</Link>
-              <Link href="/reservas" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">RESERVAS</Link>
-              <Link href="/contacto" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">CONTACTO</Link>
-            </div>
-          </div>
-        )}
-      </header>
+      <Navigation />
 
       {/* Hero Section con Video */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -149,7 +48,7 @@ export default function Homepage() {
         <div className="absolute inset-0 bg-black/50" />
 
         {/* Content */}
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <p className="text-sm text-white/80 mb-4">- Bienvenido -</p>
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
@@ -194,7 +93,7 @@ export default function Homepage() {
         <div className="absolute inset-0 bg-black/50" />
 
         {/* Content */}
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             EXPLORA ELIGE Y VIVE LA ACCIÓN
           </h2>
@@ -218,7 +117,7 @@ export default function Homepage() {
 
       {/* Flip Cards */}
       <section className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8">
             {/* Card 1 - Paseo Selva */}
             <div className="group relative h-80 perspective-1000">
@@ -286,7 +185,7 @@ export default function Homepage() {
         <div className="absolute inset-0 bg-black/60" />
 
         {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center text-white mb-16">
             <p className="text-lg mb-4">Vive la aventura, siente la adrenalina.</p>
@@ -364,7 +263,7 @@ export default function Homepage() {
 
       {/* Image Accordion */}
       <section className="py-20">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row h-96 rounded-2xl overflow-hidden shadow-2xl">
             {/* Panel 1 - Instagram Community */}
             <div className="group flex-1 relative overflow-hidden cursor-pointer transition-all duration-500 hover:flex-[2]">
@@ -427,7 +326,7 @@ export default function Homepage() {
         <div className="absolute inset-0 bg-black/60" />
 
         {/* Content */}
-        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <p className="text-sm mb-4">-aventura extrema-</p>
           <h2 className="text-2xl md:text-4xl font-bold mb-8">
             Dudas sobre nuestros paseos
@@ -571,7 +470,7 @@ export default function Homepage() {
 
       {/* Sección WhatsApp */}
       <section className="py-20 bg-gradient-to-r from-green-600 to-green-700">
-        <div className="max-w-4xl mx-auto px-4 text-center text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <h2 className="text-2xl md:text-4xl font-bold mb-8">
             Contáctanos
             <br />
@@ -596,7 +495,7 @@ export default function Homepage() {
 
       {/* Texto Animado */}
       <section className="py-20 bg-black text-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-6xl font-bold">
             DESCUBRE{' '}
             <span className="text-emerald-400 transition-all duration-1000">
@@ -610,7 +509,7 @@ export default function Homepage() {
 
       {/* Modern Footer */}
       <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 text-white py-16">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-12">
             <div>
               <div className="flex items-center gap-3 mb-6">

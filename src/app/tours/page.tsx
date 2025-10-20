@@ -101,7 +101,7 @@ export default function ToursPage() {
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-[#145A32] to-[#1565C0] py-20 jungle-particles mountain-parallax">
-        <div className="max-w-6xl mx-auto px-4 text-center text-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <h1 className="text-3xl font-bold mb-6 jungle-text wind-effect">
             Nuestros Tours de Aventura
           </h1>
@@ -117,7 +117,7 @@ export default function ToursPage() {
 
       {/* Tours Grid */}
       <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-2xl font-bold text-[#145A32] mb-4 jungle-text">
               Experiencias de Aventura
@@ -190,7 +190,7 @@ export default function ToursPage() {
 
       {/* Información Importante */}
       <section className="py-16 bg-[#F5F5F5]">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-[#145A32] mb-12 jungle-text">
             Información Importante
           </h2>
@@ -237,7 +237,7 @@ export default function ToursPage() {
 
       {/* Testimonios */}
       <section className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-[#145A32] mb-12 jungle-text">
             Lo que Dicen Nuestros Aventureros
           </h2>

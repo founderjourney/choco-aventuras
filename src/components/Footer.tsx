@@ -33,8 +33,8 @@ export default function Footer() {
               <Link href="/nosotros" className="block text-emerald-100 hover:text-[#F1C40F] transition-colors">
                 Nosotros
               </Link>
-              <Link href="/tours" className="block text-emerald-100 hover:text-[#F1C40F] transition-colors">
-                Tours
+              <Link href="/reservas" className="block text-emerald-100 hover:text-[#F1C40F] transition-colors">
+                Reservas
               </Link>
               <Link href="/cuadriciclos" className="block text-emerald-100 hover:text-[#F1C40F] transition-colors">
                 Cuatrimotos
