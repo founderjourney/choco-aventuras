@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -9,7 +10,8 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Link from 'next/link';
 import { ArrowLeft, Search, Calendar, Phone, Mail, Car, MapPin } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth } from '@/hooks/use-auth';
 
 interface Reserva {
   id: number;
@@ -62,6 +64,7 @@ async function updateReservaStatus(id: number, estado: string) {
 }
 
 export default function AdminReservas() {
+  const { user, isLoading: authLoading, requireAuth } = useAuth();
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const [filters, setFilters] = useState({ estado: 'todos', fecha: '' });
@@ -97,8 +100,18 @@ export default function AdminReservas() {
     updateStatusMutation.mutate({ id: reservaId, estado: newStatus });
   };
 
-  if (isLoading) return <div className="p-8">Cargando reservas...</div>;
+  useEffect(() => {
+    if (!authLoading) {
+      requireAuth();
+    }
+  }, [authLoading, requireAuth]);
+
+  if (authLoading || isLoading) return <div className="p-8">Cargando reservas...</div>;
   if (error) return <div className="p-8">Error cargando reservas</div>;
+  if (!user) {
+    return null; // Redirecting to login
+  }
+
 
   const stats = {
     total: data?.reservas.length || 0,

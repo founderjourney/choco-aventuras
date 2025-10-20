@@ -4,6 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
 import { ArrowLeft, TrendingUp, Calendar, DollarSign, Users, Car, MapPin } from 'lucide-react';
+import { useAuth } from '@/hooks/use-auth';
+import { useEffect } from 'react';
 
 interface ReporteData {
   ventasTotales: number;
@@ -76,13 +78,23 @@ async function fetchReporteData(): Promise<ReporteData> {
 }
 
 export default function AdminDashboardReportes() {
+  const { user, isLoading: authLoading, requireAuth } = useAuth();
   const { data, isLoading, error } = useQuery({
     queryKey: ['admin-dashboard-reportes'],
     queryFn: fetchReporteData,
   });
 
-  if (isLoading) return <div className="p-8">Cargando reportes...</div>;
+  useEffect(() => {
+    if (!authLoading) {
+      requireAuth();
+    }
+  }, [authLoading, requireAuth]);
+
+  if (authLoading || isLoading) return <div className="p-8">Cargando reportes...</div>;
   if (error) return <div className="p-8">Error cargando reportes</div>;
+  if (!user) {
+    return null; // Redirecting to login
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">

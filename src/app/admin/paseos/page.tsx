@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useQuery } from '@tanstack/react-query';
@@ -6,6 +7,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft, Plus, Edit2, Eye, MapPin, Clock, DollarSign } from 'lucide-react';
+import { useAuth } from '@/hooks/use-auth';
+import { useEffect } from 'react';
 
 interface Paseo {
   id: number;
@@ -38,13 +41,24 @@ const getDificultadColor = (dificultad: string) => {
 };
 
 export default function AdminPaseos() {
+  const { user, isLoading: authLoading, requireAuth } = useAuth();
   const { data, isLoading, error } = useQuery({
     queryKey: ['admin-paseos'],
     queryFn: fetchPaseos,
   });
 
-  if (isLoading) return <div className="p-8">Cargando paseos...</div>;
+  useEffect(() => {
+    if (!authLoading) {
+      requireAuth();
+    }
+  }, [authLoading, requireAuth]);
+
+  if (authLoading || isLoading) return <div className="p-8">Cargando paseos...</div>;
   if (error) return <div className="p-8">Error cargando paseos</div>;
+  if (!user) {
+    return null; // Redirecting to login
+  }
+
 
   return (
     <div className="min-h-screen bg-gray-50">
