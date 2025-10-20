@@ -42,7 +42,7 @@ interface Paseo {
 }
 
 async function fetchCuatrimotos(): Promise<{cuatrimotos: Cuatrimoto[]}> {
-  const response = await fetch('/api/cuatrimotos');
+  const response = await fetch('/api/cuadriciclos');
   if (!response.ok) throw new Error('Error fetching cuatrimotos');
   return response.json();
 }

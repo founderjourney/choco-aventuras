@@ -40,7 +40,7 @@ interface Reserva {
 
 async function fetchDashboardStats(): Promise<DashboardStats> {
   const [cuatrimotos, reservas, paseos] = await Promise.all([
-    fetch('/api/cuatrimotos').then(r => r.json()),
+    fetch('/api/cuadriciclos').then(r => r.json()),
     fetch('/api/reservas').then(r => r.json()),
     fetch('/api/paseos').then(r => r.json())
   ]);

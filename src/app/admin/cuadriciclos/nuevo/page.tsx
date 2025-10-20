@@ -30,7 +30,7 @@ interface CuatrimotoForm {
 }
 
 async function createCuatrimoto(data: Omit<CuatrimotoForm, 'año' | 'precio_hora' | 'precio_dia'> & { año: number | null; precio_hora: number; precio_dia: number; fotos: string[] }) {
-  const response = await fetch('/api/cuatrimotos', {
+  const response = await fetch('/api/cuadriciclos', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
