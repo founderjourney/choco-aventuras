@@ -195,7 +195,7 @@ export default function AdminDashboard() {
 
         {/* Navigation Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
-          <Link href="/admin/cuatrimotos" className="block">
+          <Link href="/admin/cuadriciclos" className="block">
             <Card className="hover:shadow-lg transition-shadow cursor-pointer">
               <CardHeader>
                 <CardTitle className="text-[#145A32]">Gestionar Cuatrimotos</CardTitle>
