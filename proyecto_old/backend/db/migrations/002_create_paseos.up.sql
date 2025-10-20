@@ -33,9 +33,7 @@ CREATE INDEX idx_paseos_activo ON paseos(activo);
 DROP INDEX idx_reservas_fecha_inicio;
 CREATE INDEX idx_reservas_fecha_paseo ON reservas(fecha_paseo);
 
--- Remove precio_hora and precio_dia from cuadriciclos (not needed anymore)
-ALTER TABLE cuadriciclos DROP COLUMN precio_hora;
-ALTER TABLE cuadriciclos DROP COLUMN precio_dia;
+
 
 -- Insert 4 example paseos
 INSERT INTO paseos (nombre, descripcion, duracion_horas, precio, dificultad, incluye, requisitos, activo) VALUES 
