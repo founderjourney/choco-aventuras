@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Footer from '@/components/Footer';
 import CallToAction from '@/components/CallToAction';
 
-interface Cuadriciclo {
+interface Cuatrimoto {
   id: number;
   nombre: string;
   marca: string;
@@ -21,22 +21,22 @@ interface Cuadriciclo {
   caracteristicas: string[];
 }
 
-async function fetchCuadriciclos(): Promise<{cuadriciclos: Cuadriciclo[]}> {
-  const response = await fetch('/api/cuadriciclos');
+async function fetchCuatrimotos(): Promise<{cuatrimotos: Cuatrimoto[]}> {
+  const response = await fetch('/api/cuatrimotos');
   if (!response.ok) {
-    throw new Error('Error fetching cuadriciclos');
+    throw new Error('Error fetching cuatrimotos');
   }
   return response.json();
 }
 
-export default function CuadriciclosPage() {
+export default function CuatrimotosPage() {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['cuadriciclos'],
-    queryFn: fetchCuadriciclos,
+    queryKey: ['cuatrimotos'],
+    queryFn: fetchCuatrimotos,
   });
 
-  if (isLoading) return <div className="p-8">Cargando cuadriciclos...</div>;
-  if (error) return <div className="p-8">Error cargando cuadriciclos</div>;
+  if (isLoading) return <div className="p-8">Cargando cuatrimotos...</div>;
+  if (error) return <div className="p-8">Error cargando cuatrimotos</div>;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -63,7 +63,7 @@ export default function CuadriciclosPage() {
                 Tours
               </Link>
               <Link href="/cuadriciclos" className="nav-item text-[#145A32] font-semibold">
-                Cuadriciclos
+                Cuatrimotos
               </Link>
               <Link href="/experiencias" className="nav-item text-gray-700 hover:text-[#145A32]">
                 Experiencias
@@ -81,7 +81,7 @@ export default function CuadriciclosPage() {
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-[#145A32] mb-8">Nuestros Cuadriciclos</h1>
+        <h1 className="text-3xl font-bold text-[#145A32] mb-8">Nuestras Cuatrimotos</h1>
 
         {/* Hero Section de Cuatrimotos */}
         <div className="bg-gradient-to-r from-[#145A32] to-[#1565C0] rounded-3xl p-8 mb-12 text-white jungle-particles adventure-glow">
@@ -107,7 +107,6 @@ export default function CuadriciclosPage() {
                   <span>Enfoque cultural chocoano (música y fiestas de San Pacho)</span>
                 </div>
               </div>
-              <p className="text-lg italic">"Aquí la aventura no se cuenta... ¡se vive!"</p>
             </div>
             <div className="text-center">
               <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6">
@@ -143,47 +142,47 @@ export default function CuadriciclosPage() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {data?.cuadriciclos.map((cuadriciclo) => (
-            <Card key={cuadriciclo.id} className="overflow-hidden adventure-card">
+          {data?.cuatrimotos.map((cuatrimoto) => (
+            <Card key={cuatrimoto.id} className="overflow-hidden adventure-card">
               <CardHeader>
-                <CardTitle className="text-xl">{cuadriciclo.nombre}</CardTitle>
-                <p className="text-gray-600">{cuadriciclo.marca} {cuadriciclo.modelo}</p>
+                <CardTitle className="text-xl">{cuatrimoto.nombre}</CardTitle>
+                <p className="text-gray-600">{cuatrimoto.marca} {cuatrimoto.modelo}</p>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-sm text-gray-600">Año:</span>
-                    <span>{cuadriciclo.año || 'N/A'}</span>
+                    <span>{cuatrimoto.año || 'N/A'}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-sm text-gray-600">Color:</span>
-                    <span>{cuadriciclo.color}</span>
+                    <span>{cuatrimoto.color}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-sm text-gray-600">Estado:</span>
                     <span className={`px-2 py-1 rounded text-xs ${
-                      cuadriciclo.estado === 'disponible'
+                      cuatrimoto.estado === 'disponible'
                         ? 'bg-green-100 text-green-800'
-                        : cuadriciclo.estado === 'ocupado'
+                        : cuatrimoto.estado === 'ocupado'
                         ? 'bg-red-100 text-red-800'
                         : 'bg-yellow-100 text-yellow-800'
                     }`}>
-                      {cuadriciclo.estado}
+                      {cuatrimoto.estado}
                     </span>
                   </div>
                   <div className="border-t pt-3">
                     <p className="text-lg font-semibold text-[#145A32]">
-                      ${cuadriciclo.precio_hora.toLocaleString()}/hora
+                      ${cuatrimoto.precio_hora.toLocaleString()}/hora
                     </p>
                     <p className="text-sm text-gray-600">
-                      ${cuadriciclo.precio_dia.toLocaleString()}/día
+                      ${cuatrimoto.precio_dia.toLocaleString()}/día
                     </p>
                   </div>
-                  {cuadriciclo.descripcion && (
-                    <p className="text-sm text-gray-700">{cuadriciclo.descripcion}</p>
+                  {cuatrimoto.descripcion && (
+                    <p className="text-sm text-gray-700">{cuatrimoto.descripcion}</p>
                   )}
                   <div className="flex flex-wrap gap-1">
-                    {cuadriciclo.caracteristicas.map((caracteristica, index) => (
+                    {cuatrimoto.caracteristicas.map((caracteristica, index) => (
                       <span
                         key={index}
                         className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded"

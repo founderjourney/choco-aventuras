@@ -10,15 +10,15 @@ interface ReporteData {
   ventasMes: number;
   reservasHoy: number;
   clientesUnicos: number;
-  cuadricicloMasUsado: string;
+  cuatrimotoMasUsado: string;
   paseoMasPopular: string;
   ingresosPorMes: { mes: string; ingresos: number }[];
   reservasPorEstado: { estado: string; cantidad: number }[];
 }
 
 async function fetchReporteData(): Promise<ReporteData> {
-  const [cuadriciclos, reservas, paseos] = await Promise.all([
-    fetch('/api/cuadriciclos').then(r => r.json()),
+  const [cuatrimotos, reservas, paseos] = await Promise.all([
+    fetch('/api/cuatrimotos').then(r => r.json()),
     fetch('/api/reservas').then(r => r.json()),
     fetch('/api/paseos').then(r => r.json())
   ]);
@@ -37,13 +37,13 @@ async function fetchReporteData(): Promise<ReporteData> {
 
   const clientesUnicos = new Set(reservas.reservas.map((r: any) => r.cliente_email)).size;
 
-  // Cuadriciclo más usado
-  const cuadricicloUsage = reservas.reservas.reduce((acc: any, r: any) => {
-    acc[r.cuadriciclo_nombre] = (acc[r.cuadriciclo_nombre] || 0) + 1;
+  // Cuatrimoto más usado
+  const cuatrimotoUsage = reservas.reservas.reduce((acc: any, r: any) => {
+    acc[r.cuatrimoto_nombre] = (acc[r.cuatrimoto_nombre] || 0) + 1;
     return acc;
   }, {});
-  const cuadricicloMasUsado = Object.keys(cuadricicloUsage).reduce((a, b) =>
-    cuadricicloUsage[a] > cuadricicloUsage[b] ? a : b, Object.keys(cuadricicloUsage)[0]
+  const cuatrimotoMasUsado = Object.keys(cuatrimotoUsage).reduce((a, b) =>
+    cuatrimotoUsage[a] > cuatrimotoUsage[b] ? a : b, Object.keys(cuatrimotoUsage)[0]
   ) || 'N/A';
 
   // Paseo más popular
@@ -68,7 +68,7 @@ async function fetchReporteData(): Promise<ReporteData> {
     ventasMes,
     reservasHoy,
     clientesUnicos,
-    cuadricicloMasUsado,
+    cuatrimotoMasUsado,
     paseoMasPopular,
     ingresosPorMes: [], // Placeholder
     reservasPorEstado
@@ -98,7 +98,7 @@ export default function AdminDashboardReportes() {
                 Inicio
               </Link>
               <Link href="/cuadriciclos" className="text-gray-700 hover:text-[#145A32]">
-                Cuadriciclos
+                Cuatrimotos
               </Link>
               <Link href="/reservas" className="text-gray-700 hover:text-[#145A32]">
                 Reservar
@@ -189,15 +189,15 @@ export default function AdminDashboardReportes() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Car className="h-5 w-5 text-[#145A32]" />
-                Cuadriciclo Más Usado
+                Cuatrimoto Más Usado
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-[#145A32] mb-2">
-                {data?.cuadricicloMasUsado || 'N/A'}
+                {data?.cuatrimotoMasUsado || 'N/A'}
               </div>
               <p className="text-sm text-gray-600">
-                El cuadriciclo con más reservas
+                El cuatrimoto con más reservas
               </p>
             </CardContent>
           </Card>
@@ -297,7 +297,7 @@ export default function AdminDashboardReportes() {
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span>2 cuadriciclos en mantenimiento</span>
+                <span>2 cuatrimotos en mantenimiento</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>

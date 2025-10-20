@@ -69,7 +69,7 @@ export default function Homepage() {
                 TOURS
               </Link>
               <Link href="/cuadriciclos" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
-                CUADRICICLOS
+                CUATRIMOTOS
               </Link>
               <Link href="/experiencias" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
                 EXPERIENCIAS
@@ -124,7 +124,7 @@ export default function Homepage() {
               <Link href="/" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">INICIO</Link>
               <Link href="/nosotros" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">NOSOTROS</Link>
               <Link href="/tours" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">TOURS</Link>
-              <Link href="/cuadriciclos" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">CUADRICICLOS</Link>
+              <Link href="/cuadriciclos" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">CUATRIMOTOS</Link>
               <Link href="/experiencias" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">EXPERIENCIAS</Link>
               <Link href="/reservas" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">RESERVAS</Link>
               <Link href="/contacto" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">CONTACTO</Link>
@@ -158,13 +158,13 @@ export default function Homepage() {
               <span className="text-white">AVENTURAS</span>
             </h1>
             <p className="text-xl text-white/90 mb-8">
-              La primera experiencia de turismo extremo en Quibdó
+              Dispara, acelera y conquista la aventura
             </p>
             <Button
               className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg rounded-none uppercase font-semibold"
-              onClick={() => document.getElementById('cuadriciclos')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => document.getElementById('cuatrimotos')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              RESERVAR
+              Reservar
               <ArrowDown className="ml-2 h-5 w-5" />
             </Button>
           </div>
@@ -196,23 +196,21 @@ export default function Homepage() {
         {/* Content */}
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
           <h2 className="text-5xl md:text-7xl font-bold mb-4">
-            EXPLORA
-            <br />
-            TU AVENTURA
+            EXPLORA ELIGE Y VIVE LA ACCIÓN
           </h2>
           <p className="text-xl text-white/90 mb-12">
-            Cuatrimotos, paintball y cultura local en plena selva tropical.
+            Cuatrimotos y paintball en el corazón del Chocó: pensados para aventureros como tú.
           </p>
 
           <div className="flex flex-col md:flex-row gap-6 justify-center">
             <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-8 py-4 backdrop-blur-sm">
-              🌟 AVENTURAS INCREIBLES
+              CUATRIMOTOS
             </Button>
             <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-8 py-4 backdrop-blur-sm">
-              🏍️ CONOCER LOS PASEOS
+              PAINTBALL
             </Button>
             <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-8 py-4 backdrop-blur-sm">
-              🏍️ RESERVAR AHORA
+              EXPERIENCIAS
             </Button>
           </div>
         </div>
@@ -234,7 +232,7 @@ export default function Homepage() {
                     <div className="absolute inset-0 bg-black/40" />
                     <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
                       <p className="text-sm mb-2">Aventura en la selva tropical</p>
-                      <h3 className="text-3xl font-bold">PASEO SELVA</h3>
+                      <h3 className="text-3xl font-bold">RUTAS EN CUATRIMOTO</h3>
                     </div>
                   </div>
                 </div>
@@ -242,7 +240,7 @@ export default function Homepage() {
                 {/* Reverso */}
                 <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-emerald-600 flex items-center justify-center">
                   <Button className="bg-white text-emerald-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
-                    VER PASEO
+                    Reservar
                   </Button>
                 </div>
               </div>
@@ -259,8 +257,8 @@ export default function Homepage() {
                   >
                     <div className="absolute inset-0 bg-black/40" />
                     <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                      <p className="text-sm mb-2">Adrenalina pura en cuatrimoto</p>
-                      <h3 className="text-3xl font-bold">AVENTURA EXTREMA</h3>
+                      <p className="text-sm mb-2">Combate con adrenalina pura</p>
+                      <h3 className="text-3xl font-bold">BATALLAS DE PAINTBALL</h3>
                     </div>
                   </div>
                 </div>
@@ -268,7 +266,7 @@ export default function Homepage() {
                 {/* Reverso */}
                 <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-orange-600 flex items-center justify-center">
                   <Button className="bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
-                    RESERVAR
+                    Próximamente
                   </Button>
                 </div>
               </div>
@@ -277,8 +275,8 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* Sección Cuadriciclos */}
-      <section id="cuadriciclos" className="relative py-20 overflow-hidden">
+      {/* Sección Cuatrimotos */}
+      <section id="cuatrimotos" className="relative py-20 overflow-hidden">
         {/* Video Background */}
         <div className="absolute inset-0 w-full h-full">
           <div className="w-full h-full bg-gradient-to-r from-emerald-900 to-gray-900" />
@@ -295,13 +293,13 @@ export default function Homepage() {
             <h2 className="text-5xl md:text-7xl font-bold mb-4">
               <span className="text-emerald-400">CHOCÓ</span>
               <br />
-              <span className="text-white">CUADRICICLOS</span>
+              <span className="text-white">CUATRIMOTOS</span>
             </h2>
           </div>
 
-          {/* Grid de Cuadriciclos */}
+          {/* Grid de Cuatrimotos */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Cuadriciclo Principal - YAMAHA GRIZZLY 700 */}
+            {/* Cuatrimoto Principal - YAMAHA GRIZZLY 700 */}
             <div className="group relative h-80 rounded-lg overflow-hidden cursor-pointer">
               <div
                 className="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
@@ -325,7 +323,7 @@ export default function Homepage() {
               </div>
             </div>
 
-            {/* Cuadriciclo 2 - Disponible según inventario */}
+            {/* Cuatrimoto 2 - Disponible según inventario */}
             <div className="group relative h-80 rounded-lg overflow-hidden cursor-pointer opacity-60">
               <div
                 className="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
@@ -338,12 +336,12 @@ export default function Homepage() {
                     🔧 PRÓXIMAMENTE
                   </span>
                 </div>
-                <h3 className="text-xl font-bold mb-2">SEGUNDO CUADRICICLO</h3>
+                <h3 className="text-xl font-bold mb-2">SEGUNDO CUATRIMOTO</h3>
                 <p className="text-sm text-white/90">Ampliando nuestra flota para más aventuras</p>
               </div>
             </div>
 
-            {/* Cuadriciclo 3 - Futuro */}
+            {/* Cuatrimoto 3 - Futuro */}
             <div className="group relative h-80 rounded-lg overflow-hidden cursor-pointer opacity-60">
               <div
                 className="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
@@ -356,7 +354,7 @@ export default function Homepage() {
                     🚀 EN DESARROLLO
                   </span>
                 </div>
-                <h3 className="text-xl font-bold mb-2">TERCER CUADRICICLO</h3>
+                <h3 className="text-xl font-bold mb-2">TERCER CUATRIMOTO</h3>
                 <p className="text-sm text-white/90">Más opciones para tu aventura perfecta</p>
               </div>
             </div>
@@ -481,7 +479,7 @@ export default function Homepage() {
                     <option value="">Selecciona una opción</option>
                     <option value="paseo-selva">Paseo en la Selva</option>
                     <option value="aventura-extrema">Aventura Extrema</option>
-                    <option value="alquiler-cuadriciclos">Alquiler de Cuadriciclos</option>
+                    <option value="alquiler-cuatrimotos">Alquiler de Cuatrimotos</option>
                     <option value="reservar-paseo">Reservar Paseo Completo</option>
                   </select>
                 </div>
@@ -543,7 +541,7 @@ export default function Homepage() {
               <div className="space-y-6">
                 <div>
                   <label className="block text-left mb-2 text-sm">
-                    Queremos que nos compartas información acerca del paseo o cuadriciclo que te interesa
+                    Queremos que nos compartas información acerca del paseo o cuatrimoto que te interesa
                   </label>
                   <textarea
                     rows={4}

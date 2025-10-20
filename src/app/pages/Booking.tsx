@@ -22,7 +22,7 @@ export default function Booking() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const cuadricicloId = searchParams.get('cuadriciclo');
+  const cuatrimotoId = searchParams.get('cuatrimoto');
 
   const [formData, setFormData] = useState({
     cliente_nombre: '',
@@ -37,13 +37,13 @@ export default function Booking() {
 
   const [selectedPaseos, setSelectedPaseos] = useState<number[]>([]);
 
-  const { data: cuadriciclo, isLoading: cuadricicloLoading } = useQuery({
-    queryKey: ['cuadriciclo', cuadricicloId],
+  const { data: cuatrimoto, isLoading: cuatrimotoLoading } = useQuery({
+    queryKey: ['cuatrimoto', cuatrimotoId],
     queryFn: async () => {
-      if (!cuadricicloId) return null;
-      return await backend.cuadriciclos.get({ id: parseInt(cuadricicloId) });
+      if (!cuatrimotoId) return null;
+      return await backend.cuatrimotos.get({ id: parseInt(cuatrimotoId) });
     },
-    enabled: !!cuadricicloId,
+    enabled: !!cuatrimotoId,
   });
 
   const { data: paseosData, isLoading: paseosLoading } = useQuery({
@@ -99,7 +99,7 @@ export default function Booking() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!cuadriciclo) return;
+    if (!cuatrimoto) return;
     
     if (selectedPaseos.length === 0) {
       toast({
@@ -123,7 +123,7 @@ export default function Booking() {
 
     for (const paseoId of selectedPaseos) {
       const reservaData = {
-        cuadriciclo_id: cuadriciclo.id,
+        cuatrimoto_id: cuatrimoto.id,
         paseo_id: paseoId,
         cliente_nombre: formData.cliente_nombre,
         cliente_telefono: formData.cliente_telefono,
@@ -141,15 +141,15 @@ export default function Booking() {
     }
   };
 
-  if (!cuadricicloId) {
+  if (!cuatrimotoId) {
     return (
       <div className="min-h-screen">
         <Header />
         <div className="max-w-2xl mx-auto px-4 py-8">
           <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4">Cuadriciclo no encontrado</h1>
+            <h1 className="text-2xl font-bold mb-4">Cuatrimoto no encontrado</h1>
             <Link to="/cuadriciclos">
-              <Button>Ver Cuadriciclos Disponibles</Button>
+              <Button>Ver Cuatrimotos Disponibles</Button>
             </Link>
           </div>
         </div>
@@ -157,7 +157,7 @@ export default function Booking() {
     );
   }
 
-  if (cuadricicloLoading || paseosLoading) {
+  if (cuatrimotoLoading || paseosLoading) {
     return (
       <div className="min-h-screen">
         <Header />
@@ -168,13 +168,13 @@ export default function Booking() {
     );
   }
 
-  if (!cuadriciclo) {
+  if (!cuatrimoto) {
     return (
       <div className="min-h-screen">
         <Header />
         <div className="max-w-2xl mx-auto px-4 py-8">
           <div className="text-center text-red-600">
-            Cuadriciclo no encontrado
+            Cuatrimoto no encontrado
           </div>
         </div>
       </div>
@@ -389,12 +389,12 @@ export default function Booking() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <h4 className="font-semibold mb-2">Cuadriciclo</h4>
+                  <h4 className="font-semibold mb-2">Cuatrimoto</h4>
                   <div className="aspect-video bg-gray-200 rounded-lg mb-2">
-                    {cuadriciclo.fotos.length > 0 ? (
+                    {cuatrimoto.fotos.length > 0 ? (
                       <img
-                        src={cuadriciclo.fotos[0]}
-                        alt={cuadriciclo.nombre}
+                        src={cuatrimoto.fotos[0]}
+                        alt={cuatrimoto.nombre}
                         className="w-full h-full object-cover rounded-lg"
                       />
                     ) : (
@@ -403,9 +403,9 @@ export default function Booking() {
                       </div>
                     )}
                   </div>
-                  <p className="font-medium">{cuadriciclo.nombre}</p>
+                  <p className="font-medium">{cuatrimoto.nombre}</p>
                   <p className="text-sm text-gray-600">
-                    {cuadriciclo.marca} {cuadriciclo.modelo}
+                    {cuatrimoto.marca} {cuatrimoto.modelo}
                   </p>
                 </div>
 

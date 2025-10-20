@@ -12,7 +12,7 @@ import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 
-interface Cuadriciclo {
+interface Cuatrimoto {
   id: number;
   nombre: string;
   marca: string;
@@ -40,9 +40,9 @@ interface Paseo {
   activo: boolean;
 }
 
-async function fetchCuadriciclos(): Promise<{cuadriciclos: Cuadriciclo[]}> {
-  const response = await fetch('/api/cuadriciclos');
-  if (!response.ok) throw new Error('Error fetching cuadriciclos');
+async function fetchCuatrimotos(): Promise<{cuatrimotos: Cuatrimoto[]}> {
+  const response = await fetch('/api/cuatrimotos');
+  if (!response.ok) throw new Error('Error fetching cuatrimotos');
   return response.json();
 }
 
@@ -53,7 +53,7 @@ async function fetchPaseos(): Promise<{paseos: Paseo[]}> {
 }
 
 async function createReserva(data: {
-  cuadriciclo_id: number;
+  cuatrimoto_id: number;
   paseo_id: number;
   cliente_nombre: string;
   cliente_telefono: string;
@@ -75,7 +75,7 @@ export default function ReservasPage() {
   const queryClient = useQueryClient();
 
   const [formData, setFormData] = useState({
-    cuadriciclo_id: '',
+    cuatrimoto_id: '',
     paseo_id: '',
     cliente_nombre: '',
     cliente_telefono: '',
@@ -85,9 +85,9 @@ export default function ReservasPage() {
     notas: ''
   });
 
-  const { data: cuadriciclosData, isLoading: loadingCuadriciclos } = useQuery({
-    queryKey: ['cuadriciclos'],
-    queryFn: fetchCuadriciclos,
+  const { data: cuatrimotosData, isLoading: loadingCuatrimotos } = useQuery({
+    queryKey: ['cuatrimotos'],
+    queryFn: fetchCuatrimotos,
   });
 
   const { data: paseosData, isLoading: loadingPaseos } = useQuery({
@@ -104,7 +104,7 @@ export default function ReservasPage() {
       });
       queryClient.invalidateQueries({ queryKey: ['reservas'] });
       setFormData({
-        cuadriciclo_id: '',
+        cuatrimoto_id: '',
         paseo_id: '',
         cliente_nombre: '',
         cliente_telefono: '',
@@ -126,7 +126,7 @@ export default function ReservasPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.cuadriciclo_id || !formData.paseo_id || !formData.cliente_nombre ||
+    if (!formData.cuatrimoto_id || !formData.paseo_id || !formData.cliente_nombre ||
         !formData.cliente_telefono || !formData.cliente_email || !formData.fecha_paseo || !formData.hora_paseo) {
       toast({
         title: "Campos requeridos",
@@ -139,7 +139,7 @@ export default function ReservasPage() {
     const fechaCompleta = new Date(`${formData.fecha_paseo}T${formData.hora_paseo}:00`);
 
     createReservaMutation.mutate({
-      cuadriciclo_id: parseInt(formData.cuadriciclo_id),
+      cuatrimoto_id: parseInt(formData.cuatrimoto_id),
       paseo_id: parseInt(formData.paseo_id),
       cliente_nombre: formData.cliente_nombre,
       cliente_telefono: formData.cliente_telefono,
@@ -149,14 +149,14 @@ export default function ReservasPage() {
     });
   };
 
-  const selectedCuadriciclo = cuadriciclosData?.cuadriciclos.find(c => c.id === parseInt(formData.cuadriciclo_id));
+  const selectedCuatrimoto = cuatrimotosData?.cuatrimotos.find(c => c.id === parseInt(formData.cuatrimoto_id));
   const selectedPaseo = paseosData?.paseos.find(p => p.id === parseInt(formData.paseo_id));
 
-  const precioTotal = selectedCuadriciclo && selectedPaseo
-    ? (selectedCuadriciclo.precio_hora * selectedPaseo.duracion_horas) + selectedPaseo.precio
+  const precioTotal = selectedCuatrimoto && selectedPaseo
+    ? (selectedCuatrimoto.precio_hora * selectedPaseo.duracion_horas) + selectedPaseo.precio
     : 0;
 
-  if (loadingCuadriciclos || loadingPaseos) {
+  if (loadingCuatrimotos || loadingPaseos) {
     return <div className="p-8">Cargando formulario de reservas...</div>;
   }
 
@@ -185,7 +185,7 @@ export default function ReservasPage() {
                 Tours
               </Link>
               <Link href="/cuadriciclos" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Cuadriciclos
+                Cuatrimotos
               </Link>
               <Link href="/experiencias" className="nav-item text-gray-700 hover:text-[#145A32]">
                 Experiencias
@@ -216,19 +216,19 @@ export default function ReservasPage() {
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Selección de Cuadriciclo */}
+                {/* Selección de Cuatrimoto */}
                 <div className="space-y-2 relative">
-                  <Label htmlFor="cuadriciclo">Cuadriciclo *</Label>
-                  <Select value={formData.cuadriciclo_id} onValueChange={(value) => setFormData(prev => ({...prev, cuadriciclo_id: value}))}>
+                  <Label htmlFor="cuatrimoto">Cuatrimoto *</Label>
+                  <Select value={formData.cuatrimoto_id} onValueChange={(value) => setFormData(prev => ({...prev, cuatrimoto_id: value}))}>
                     <SelectTrigger className="relative z-10">
-                      <SelectValue placeholder="Selecciona un cuadriciclo" />
+                      <SelectValue placeholder="Selecciona una cuatrimoto" />
                     </SelectTrigger>
                     <SelectContent className="relative z-[9999]">
-                      {cuadriciclosData?.cuadriciclos.filter(c => c.estado === 'disponible').map((cuadriciclo) => (
-                        <SelectItem key={cuadriciclo.id} value={cuadriciclo.id.toString()}>
+                      {cuatrimotosData?.cuatrimotos.filter(c => c.estado === 'disponible').map((cuatrimoto) => (
+                        <SelectItem key={cuatrimoto.id} value={cuatrimoto.id.toString()}>
                           <div className="flex flex-col">
-                            <span className="font-medium">{cuadriciclo.nombre}</span>
-                            <span className="text-xs text-gray-500">${cuadriciclo.precio_hora.toLocaleString()}/hora</span>
+                            <span className="font-medium">{cuatrimoto.nombre}</span>
+                            <span className="text-xs text-gray-500">${cuatrimoto.precio_hora.toLocaleString()}/hora</span>
                           </div>
                         </SelectItem>
                       ))}
@@ -349,13 +349,13 @@ export default function ReservasPage() {
               <CardTitle>Resumen de la Reserva</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {selectedCuadriciclo && (
+              {selectedCuatrimoto && (
                 <div className="p-4 bg-gray-50 rounded-lg">
-                  <h4 className="font-semibold text-[#145A32]">Cuadriciclo Seleccionado</h4>
-                  <p className="text-sm text-gray-600">{selectedCuadriciclo.nombre}</p>
-                  <p className="text-sm">{selectedCuadriciclo.marca} {selectedCuadriciclo.modelo} ({selectedCuadriciclo.año})</p>
-                  <p className="text-sm">Color: {selectedCuadriciclo.color}</p>
-                  <p className="font-semibold">${selectedCuadriciclo.precio_hora.toLocaleString()}/hora</p>
+                  <h4 className="font-semibold text-[#145A32]">Cuatrimoto Seleccionado</h4>
+                  <p className="text-sm text-gray-600">{selectedCuatrimoto.nombre}</p>
+                  <p className="text-sm">{selectedCuatrimoto.marca} {selectedCuatrimoto.modelo} ({selectedCuatrimoto.año})</p>
+                  <p className="text-sm">Color: {selectedCuatrimoto.color}</p>
+                  <p className="font-semibold">${selectedCuatrimoto.precio_hora.toLocaleString()}/hora</p>
                 </div>
               )}
 
@@ -387,9 +387,9 @@ export default function ReservasPage() {
                 <div className="p-4 bg-[#145A32] text-white rounded-lg">
                   <h4 className="font-semibold">Precio Total</h4>
                   <p className="text-2xl font-bold">${precioTotal.toLocaleString()}</p>
-                  {selectedCuadriciclo && selectedPaseo && (
+                  {selectedCuatrimoto && selectedPaseo && (
                     <div className="text-sm mt-2 space-y-1">
-                      <p>Cuadriciclo: ${(selectedCuadriciclo.precio_hora * selectedPaseo.duracion_horas).toLocaleString()}</p>
+                      <p>Cuatrimoto: ${(selectedCuatrimoto.precio_hora * selectedPaseo.duracion_horas).toLocaleString()}</p>
                       <p>Paseo: ${selectedPaseo.precio.toLocaleString()}</p>
                     </div>
                   )}

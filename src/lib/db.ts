@@ -1,10 +1,10 @@
 // Mock database for development
 // In production, this would connect to PostgreSQL
 
-import { Cuadriciclo, Paseo, Reserva } from '@/types';
+import { Cuatrimoto, Paseo, Reserva } from '@/types';
 
 // Mock data for development
-const mockCuadriciclos: Cuadriciclo[] = [
+const mockCuatrimotos: Cuatrimoto[] = [
   {
     id: 1,
     nombre: "Yamaha Grizzly 700 Rojo",
@@ -14,7 +14,7 @@ const mockCuadriciclos: Cuadriciclo[] = [
     color: "Rojo Edition Special",
     precio_hora: 150000,
     precio_dia: 800000,
-    descripcion: "Cuadriciclo deportivo edición especial, perfecto para aventuras extremas en el Chocó.",
+    descripcion: "Cuatrimoto deportiva edición especial, perfecta para aventuras extremas en el Chocó.",
     fotos: ["/cuadri1.jpg", "/cuadri1-2.jpg"],
     estado: "disponible",
     caracteristicas: ["700cc", "4x4", "Deportivo", "Edition Special", "Reversa"],
@@ -30,7 +30,7 @@ const mockCuadriciclos: Cuadriciclo[] = [
     color: "Negro",
     precio_hora: 150000,
     precio_dia: 800000,
-    descripcion: "Cuadriciclo robusto y confiable, ideal para todo tipo de terrenos.",
+    descripcion: "Cuatrimoto robusta y confiable, ideal para todo tipo de terrenos.",
     fotos: ["/cuadri2.jpg"],
     estado: "disponible",
     caracteristicas: ["700cc", "4x4", "Automático", "Frenos de disco", "Suspensión independiente"],
@@ -46,7 +46,7 @@ const mockCuadriciclos: Cuadriciclo[] = [
     color: "Azul",
     precio_hora: 150000,
     precio_dia: 800000,
-    descripcion: "Cuadriciclo potente y versátil, perfecto para expediciones largas.",
+    descripcion: "Cuatrimoto potente y versátil, perfecta para expediciones largas.",
     fotos: ["/cuadri3.jpg"],
     estado: "disponible",
     caracteristicas: ["700cc", "4x4", "Potente", "Resistente", "Cómodo"],
@@ -89,7 +89,7 @@ const mockPaseos: Paseo[] = [
 const mockReservas: Reserva[] = [
   {
     id: 1,
-    cuadriciclo_id: 1,
+    cuatrimoto_id: 1,
     paseo_id: 1,
     cliente_nombre: "Juan Pérez",
     cliente_telefono: "+57 300 123 4567",
@@ -97,12 +97,12 @@ const mockReservas: Reserva[] = [
     fecha_paseo: new Date("2024-01-15T10:00:00"),
     precio_total: 350000,
     estado: "confirmada",
-    notas: "Primera vez en cuadriciclo",
+    notas: "Primera vez en cuatrimoto",
     created_at: new Date(),
     updated_at: new Date(),
-    cuadriciclo_nombre: "Yamaha Raptor 700",
-    cuadriciclo_marca: "Yamaha",
-    cuadriciclo_modelo: "Raptor 700",
+    cuatrimoto_nombre: "Yamaha Raptor 700",
+    cuatrimoto_marca: "Yamaha",
+    cuatrimoto_modelo: "Raptor 700",
     paseo_nombre: "Aventura en el Bosque",
     paseo_duracion: 2
   }
@@ -110,25 +110,25 @@ const mockReservas: Reserva[] = [
 
 // Mock database operations
 export const db = {
-  cuadriciclos: {
-    findAll: async (): Promise<Cuadriciclo[]> => {
+  cuatrimotos: {
+    findAll: async (): Promise<Cuatrimoto[]> => {
       await new Promise(resolve => setTimeout(resolve, 100)); // Simulate async
-      return mockCuadriciclos;
+      return mockCuatrimotos;
     },
-    findById: async (id: number): Promise<Cuadriciclo | null> => {
+    findById: async (id: number): Promise<Cuatrimoto | null> => {
       await new Promise(resolve => setTimeout(resolve, 100));
-      return mockCuadriciclos.find(c => c.id === id) || null;
+      return mockCuatrimotos.find(c => c.id === id) || null;
     },
-    create: async (data: Omit<Cuadriciclo, 'id' | 'created_at' | 'updated_at'>): Promise<Cuadriciclo> => {
+    create: async (data: Omit<Cuatrimoto, 'id' | 'created_at' | 'updated_at'>): Promise<Cuatrimoto> => {
       await new Promise(resolve => setTimeout(resolve, 100));
-      const newCuadriciclo: Cuadriciclo = {
+      const newCuatrimoto: Cuatrimoto = {
         ...data,
-        id: mockCuadriciclos.length + 1,
+        id: mockCuatrimotos.length + 1,
         created_at: new Date(),
         updated_at: new Date()
       };
-      mockCuadriciclos.push(newCuadriciclo);
-      return newCuadriciclo;
+      mockCuatrimotos.push(newCuatrimoto);
+      return newCuatrimoto;
     }
   },
   paseos: {
@@ -191,7 +191,7 @@ export const db = {
       return result;
     },
     create: async (data: {
-      cuadriciclo_id: number;
+      cuatrimoto_id: number;
       paseo_id: number;
       cliente_nombre: string;
       cliente_telefono: string;
@@ -201,14 +201,14 @@ export const db = {
     }): Promise<Reserva> => {
       await new Promise(resolve => setTimeout(resolve, 100));
 
-      const cuadriciclo = await db.cuadriciclos.findById(data.cuadriciclo_id);
+      const cuatrimoto = await db.cuatrimotos.findById(data.cuatrimoto_id);
       const paseo = await db.paseos.findById(data.paseo_id);
 
-      if (!cuadriciclo || !paseo) {
-        throw new Error('Cuadriciclo o paseo no encontrado');
+      if (!cuatrimoto || !paseo) {
+        throw new Error('Cuatrimoto o paseo no encontrado');
       }
 
-      const precio_total = cuadriciclo.precio_hora * paseo.duracion_horas + paseo.precio;
+      const precio_total = cuatrimoto.precio_hora * paseo.duracion_horas + paseo.precio;
 
       const newReserva: Reserva = {
         id: mockReservas.length + 1,
@@ -217,9 +217,9 @@ export const db = {
         estado: 'pendiente',
         created_at: new Date(),
         updated_at: new Date(),
-        cuadriciclo_nombre: cuadriciclo.nombre,
-        cuadriciclo_marca: cuadriciclo.marca,
-        cuadriciclo_modelo: cuadriciclo.modelo,
+        cuatrimoto_nombre: cuatrimoto.nombre,
+        cuatrimoto_marca: cuatrimoto.marca,
+        cuatrimoto_modelo: cuatrimoto.modelo,
         paseo_nombre: paseo.nombre,
         paseo_duracion: paseo.duracion_horas
       };

@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Choco Aventuras - Alquiler de Cuadriciclos",
-  description: "Aventuras en cuadriciclo para toda la familia",
+  title: "Choco Aventuras - Alquiler de Cuatrimotos",
+  description: "Aventuras en cuatrimoto para toda la familia",
 };
 
 export default function RootLayout({

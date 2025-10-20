@@ -64,7 +64,7 @@ export default function Homepage() {
                 Tours
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
               </Link>
-              <Link href="/cuatrimotos" className="nav-item text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
+              <Link href="/cuadriciclos" className="nav-item text-slate-700 hover:text-emerald-600 font-medium transition-colors relative group">
                 Cuatrimotos
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all group-hover:w-full"></span>
               </Link>
@@ -121,7 +121,7 @@ export default function Homepage() {
                   Tours
                 </Link>
                 <Link
-                  href="/cuatrimotos"
+                  href="/cuadriciclos"
                   onClick={() => setMobileMenuOpen(false)}
                   className="mobile-menu-item block px-3 py-2 text-base font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-colors rounded-md"
                 >

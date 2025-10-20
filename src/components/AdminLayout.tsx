@@ -70,16 +70,16 @@ export default function AdminLayout() {
                 </Button>
               </Link>
 
-              <Link to="/admin/cuadriciclos">
+              <Link to="/admin/cuatrimotos">
                 <Button
-                  variant={isActive('/admin/cuadriciclos') ? 'default' : 'ghost'}
+                  variant={isActive('/admin/cuatrimotos') ? 'default' : 'ghost'}
                   className={cn(
                     'w-full justify-start',
-                    isActive('/admin/cuadriciclos') && 'bg-blue-600 text-white hover:bg-blue-700'
+                    isActive('/admin/cuatrimotos') && 'bg-blue-600 text-white hover:bg-blue-700'
                   )}
                 >
                   <Users className="h-4 w-4 mr-3" />
-                  Cuadriciclos
+                  Cuatrimotos
                 </Button>
               </Link>
 

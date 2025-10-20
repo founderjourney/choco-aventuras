@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft, Plus, Edit2, Eye } from 'lucide-react';
 
-interface Cuadriciclo {
+interface Cuatrimoto {
   id: number;
   nombre: string;
   marca: string;
@@ -24,20 +24,20 @@ interface Cuadriciclo {
   updated_at: Date;
 }
 
-async function fetchCuadriciclos(): Promise<{cuadriciclos: Cuadriciclo[]}> {
-  const response = await fetch('/api/cuadriciclos');
-  if (!response.ok) throw new Error('Error fetching cuadriciclos');
+async function fetchCuatrimotos(): Promise<{cuatrimotos: Cuatrimoto[]}> {
+  const response = await fetch('/api/cuatrimotos');
+  if (!response.ok) throw new Error('Error fetching cuatrimotos');
   return response.json();
 }
 
-export default function AdminCuadriciclos() {
+export default function AdminCuatrimotos() {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['admin-cuadriciclos'],
-    queryFn: fetchCuadriciclos,
+    queryKey: ['admin-cuatrimotos'],
+    queryFn: fetchCuatrimotos,
   });
 
-  if (isLoading) return <div className="p-8">Cargando cuadriciclos...</div>;
-  if (error) return <div className="p-8">Error cargando cuadriciclos</div>;
+  if (isLoading) return <div className="p-8">Cargando cuatrimotos...</div>;
+  if (error) return <div className="p-8">Error cargando cuatrimotos</div>;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -53,7 +53,7 @@ export default function AdminCuadriciclos() {
                 Inicio
               </Link>
               <Link href="/cuadriciclos" className="text-gray-700 hover:text-[#145A32]">
-                Cuadriciclos
+                Cuatrimotos
               </Link>
               <Link href="/reservas" className="text-gray-700 hover:text-[#145A32]">
                 Reservar
@@ -79,13 +79,13 @@ export default function AdminCuadriciclos() {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-[#145A32]">Gestión de Cuadriciclos</h1>
-            <p className="text-gray-600 mt-2">Administra el inventario de cuadriciclos</p>
+            <h1 className="text-3xl font-bold text-[#145A32]">Gestión de Cuatrimotos</h1>
+            <p className="text-gray-600 mt-2">Administra el inventario de cuatrimotos</p>
           </div>
-          <Link href="/admin/cuadriciclos/nuevo">
+          <Link href="/admin/cuatrimotos/nuevo">
             <Button className="bg-[#145A32] hover:bg-[#0f4428]">
               <Plus className="h-4 w-4 mr-2" />
-              Agregar Cuadriciclo
+              Agregar Cuatrimoto
             </Button>
           </Link>
         </div>
@@ -94,11 +94,11 @@ export default function AdminCuadriciclos() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Total Cuadriciclos</CardTitle>
+              <CardTitle className="text-lg">Total Cuatrimotos</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-[#145A32]">
-                {data?.cuadriciclos.length || 0}
+                {data?.cuatrimotos.length || 0}
               </div>
             </CardContent>
           </Card>
@@ -109,7 +109,7 @@ export default function AdminCuadriciclos() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-green-600">
-                {data?.cuadriciclos.filter(c => c.estado === 'disponible').length || 0}
+                {data?.cuatrimotos.filter(c => c.estado === 'disponible').length || 0}
               </div>
             </CardContent>
           </Card>
@@ -120,63 +120,63 @@ export default function AdminCuadriciclos() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-yellow-600">
-                {data?.cuadriciclos.filter(c => c.estado === 'mantenimiento').length || 0}
+                {data?.cuatrimotos.filter(c => c.estado === 'mantenimiento').length || 0}
               </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Cuadriciclos List */}
+        {/* Cuatrimotos List */}
         <Card>
           <CardHeader>
-            <CardTitle>Lista de Cuadriciclos</CardTitle>
+            <CardTitle>Lista de Cuatrimotos</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {data?.cuadriciclos.map((cuadriciclo) => (
-                <div key={cuadriciclo.id} className="flex items-center justify-between p-6 border rounded-lg hover:shadow-md transition-shadow">
+              {data?.cuatrimotos.map((cuatrimoto) => (
+                <div key={cuatrimoto.id} className="flex items-center justify-between p-6 border rounded-lg hover:shadow-md transition-shadow">
                   <div className="flex-1">
                     <div className="flex items-center gap-4 mb-2">
-                      <h3 className="text-xl font-semibold">{cuadriciclo.nombre}</h3>
+                      <h3 className="text-xl font-semibold">{cuatrimoto.nombre}</h3>
                       <Badge variant={
-                        cuadriciclo.estado === 'disponible' ? 'default' :
-                        cuadriciclo.estado === 'ocupado' ? 'destructive' :
+                        cuatrimoto.estado === 'disponible' ? 'default' :
+                        cuatrimoto.estado === 'ocupado' ? 'destructive' :
                         'secondary'
                       }>
-                        {cuadriciclo.estado}
+                        {cuatrimoto.estado}
                       </Badge>
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-600">
                       <div>
-                        <span className="font-medium">Marca:</span> {cuadriciclo.marca}
+                        <span className="font-medium">Marca:</span> {cuatrimoto.marca}
                       </div>
                       <div>
-                        <span className="font-medium">Modelo:</span> {cuadriciclo.modelo}
+                        <span className="font-medium">Modelo:</span> {cuatrimoto.modelo}
                       </div>
                       <div>
-                        <span className="font-medium">Año:</span> {cuadriciclo.año || 'N/A'}
+                        <span className="font-medium">Año:</span> {cuatrimoto.año || 'N/A'}
                       </div>
                       <div>
-                        <span className="font-medium">Color:</span> {cuadriciclo.color}
+                        <span className="font-medium">Color:</span> {cuatrimoto.color}
                       </div>
                     </div>
 
                     <div className="mt-3 grid grid-cols-2 gap-4 text-sm">
                       <div>
-                        <span className="font-medium text-[#145A32]">Precio/hora:</span> ${cuadriciclo.precio_hora.toLocaleString()}
+                        <span className="font-medium text-[#145A32]">Precio/hora:</span> ${cuatrimoto.precio_hora.toLocaleString()}
                       </div>
                       <div>
-                        <span className="font-medium text-[#145A32]">Precio/día:</span> ${cuadriciclo.precio_dia.toLocaleString()}
+                        <span className="font-medium text-[#145A32]">Precio/día:</span> ${cuatrimoto.precio_dia.toLocaleString()}
                       </div>
                     </div>
 
-                    {cuadriciclo.descripcion && (
-                      <p className="mt-2 text-sm text-gray-700">{cuadriciclo.descripcion}</p>
+                    {cuatrimoto.descripcion && (
+                      <p className="mt-2 text-sm text-gray-700">{cuatrimoto.descripcion}</p>
                     )}
 
                     <div className="mt-3 flex flex-wrap gap-2">
-                      {cuadriciclo.caracteristicas.map((caracteristica, index) => (
+                      {cuatrimoto.caracteristicas.map((caracteristica, index) => (
                         <span
                           key={index}
                           className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded"
@@ -200,18 +200,18 @@ export default function AdminCuadriciclos() {
                 </div>
               ))}
 
-              {(!data?.cuadriciclos || data.cuadriciclos.length === 0) && (
+              {(!data?.cuatrimotos || data.cuatrimotos.length === 0) && (
                 <div className="text-center py-12">
                   <div className="text-gray-400 mb-4">
                     <div className="h-16 w-16 mx-auto bg-gray-200 rounded-full flex items-center justify-center">
                       <span className="text-3xl">🏍️</span>
                     </div>
                   </div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">No hay cuadriciclos</h3>
-                  <p className="text-gray-500 mb-4">Comienza agregando tu primer cuadriciclo</p>
+                  <h3 className="text-lg font-medium text-gray-900 mb-2">No hay cuatrimotos</h3>
+                  <p className="text-gray-500 mb-4">Comienza agregando tu primer cuatrimoto</p>
                   <Button className="bg-[#145A32] hover:bg-[#0f4428]">
                     <Plus className="h-4 w-4 mr-2" />
-                    Agregar Primer Cuadriciclo
+                    Agregar Primer Cuatrimoto
                   </Button>
                 </div>
               )}

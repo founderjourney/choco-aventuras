@@ -1,4 +1,4 @@
-export interface Cuadriciclo {
+export interface Cuatrimoto {
   id: number;
   nombre: string;
   marca: string;
@@ -32,7 +32,7 @@ export interface Paseo {
 
 export interface Reserva {
   id: number;
-  cuadriciclo_id: number;
+  cuatrimoto_id: number;
   paseo_id: number;
   cliente_nombre: string;
   cliente_telefono: string;
@@ -43,15 +43,15 @@ export interface Reserva {
   notas: string | null;
   created_at: Date;
   updated_at: Date;
-  cuadriciclo_nombre: string;
-  cuadriciclo_marca: string;
-  cuadriciclo_modelo: string;
+  cuatrimoto_nombre: string;
+  cuatrimoto_marca: string;
+  cuatrimoto_modelo: string;
   paseo_nombre: string;
   paseo_duracion: number;
 }
 
-export interface ListCuadriciclosResponse {
-  cuadriciclos: Cuadriciclo[];
+export interface ListCuatrimotosResponse {
+  cuatrimotos: Cuatrimoto[];
 }
 
 export interface ListPaseosResponse {
@@ -63,7 +63,7 @@ export interface ListReservasResponse {
 }
 
 export interface CreateReservaRequest {
-  cuadriciclo_id: number;
+  cuatrimoto_id: number;
   paseo_id: number;
   cliente_nombre: string;
   cliente_telefono: string;

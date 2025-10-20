@@ -88,7 +88,7 @@ export default function ExperienciasPage() {
                 Tours
               </Link>
               <Link href="/cuadriciclos" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Cuadriciclos
+                Cuatrimotos
               </Link>
               <Link href="/experiencias" className="nav-item text-[#145A32] font-semibold">
                 Experiencias
@@ -113,10 +113,6 @@ export default function ExperienciasPage() {
           <p className="text-xl mb-8 max-w-4xl mx-auto">
             100% en la selva del Chocó - Vive la adrenalina, descubre la cultura y conecta con la naturaleza más pura de Colombia
           </p>
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-6 py-3 glass-effect particle-hover">
-            <span className="text-[#F1C40F] text-2xl">🌿</span>
-            <span className="font-medium">Aquí la aventura no se cuenta... ¡se vive!</span>
-          </div>
         </div>
       </section>
 
@@ -344,7 +340,7 @@ export default function ExperienciasPage() {
         titulo="¿Listo para Vivir la Aventura?"
         descripcion="Experimenta lo que solo el Chocó puede ofrecerte: naturaleza, adrenalina y cultura en un solo lugar"
         botonPrimario={{ texto: "VER TODOS LOS TOURS", href: "/tours" }}
-        botonSecundario={{ texto: "VER CUADRICICLOS", href: "/cuadriciclos" }}
+        botonSecundario={{ texto: "VER CUATRIMOTOS", href: "/cuatrimotos" }}
       />
 
       {/* Footer */}

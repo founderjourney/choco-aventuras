@@ -13,37 +13,37 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Plus, Edit, Trash2, Settings, Check, X } from 'lucide-react';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import backend from '~backend/client';
-import type { Cuadriciclo } from '~backend/cuadriciclos/list';
+import type { Cuatrimoto } from '~backend/cuatrimotos/list';
 import { appConfig } from '../../config';
 
-export default function AdminCuadriciclos() {
+export default function AdminCuatrimotos() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [editingCuadriciclo, setEditingCuadriciclo] = useState<Cuadriciclo | null>(null);
+  const [editingCuatrimoto, setEditingCuatrimoto] = useState<Cuatrimoto | null>(null);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [bulkAction, setBulkAction] = useState<string>('');
 
-  const { data: cuadriciclos, isLoading } = useQuery({
-    queryKey: ['cuadriciclos'],
+  const { data: cuatrimotos, isLoading } = useQuery({
+    queryKey: ['cuatrimotos'],
     queryFn: async () => {
-      const response = await backend.cuadriciclos.list();
-      return response.cuadriciclos;
+      const response = await backend.cuatrimotos.list();
+      return response.cuatrimotos;
     },
   });
 
   const createMutation = useMutation({
-    mutationFn: async (data: any) => await backend.cuadriciclos.create(data),
+    mutationFn: async (data: any) => await backend.cuatrimotos.create(data),
     onSuccess: () => {
-      toast({ title: "Cuadriciclo creado exitosamente" });
-      queryClient.invalidateQueries({ queryKey: ['cuadriciclos'] });
+      toast({ title: "Cuatrimoto creada exitosamente" });
+      queryClient.invalidateQueries({ queryKey: ['cuatrimotos'] });
       setIsCreateDialogOpen(false);
     },
     onError: (error) => {
-      console.error('Error creating cuadriciclo:', error);
+      console.error('Error creating cuatrimoto:', error);
       toast({
-        title: "Error al crear cuadriciclo",
+        title: "Error al crear cuatrimoto",
         description: "Por favor, inténtalo de nuevo.",
         variant: "destructive",
       });
@@ -51,17 +51,17 @@ export default function AdminCuadriciclos() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: async ({ id, ...data }: any) => await backend.cuadriciclos.update({ id, ...data }),
+    mutationFn: async ({ id, ...data }: any) => await backend.cuatrimotos.update({ id, ...data }),
     onSuccess: () => {
-      toast({ title: "Cuadriciclo actualizado exitosamente" });
-      queryClient.invalidateQueries({ queryKey: ['cuadriciclos'] });
+      toast({ title: "Cuatrimoto actualizado exitosamente" });
+      queryClient.invalidateQueries({ queryKey: ['cuatrimotos'] });
       setIsEditDialogOpen(false);
-      setEditingCuadriciclo(null);
+      setEditingCuatrimoto(null);
     },
     onError: (error) => {
-      console.error('Error updating cuadriciclo:', error);
+      console.error('Error updating cuatrimoto:', error);
       toast({
-        title: "Error al actualizar cuadriciclo",
+        title: "Error al actualizar cuatrimoto",
         description: "Por favor, inténtalo de nuevo.",
         variant: "destructive",
       });
@@ -69,16 +69,16 @@ export default function AdminCuadriciclos() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: async (id: number) => await backend.cuadriciclos.deleteCuadriciclo({ id }),
+    mutationFn: async (id: number) => await backend.cuatrimotos.deleteCuatrimoto({ id }),
     onSuccess: () => {
-      toast({ title: "Cuadriciclo eliminado exitosamente" });
-      queryClient.invalidateQueries({ queryKey: ['cuadriciclos'] });
+      toast({ title: "Cuatrimoto eliminado exitosamente" });
+      queryClient.invalidateQueries({ queryKey: ['cuatrimotos'] });
     },
     onError: (error) => {
-      console.error('Error deleting cuadriciclo:', error);
+      console.error('Error deleting cuatrimoto:', error);
       toast({
-        title: "Error al eliminar cuadriciclo",
-        description: "No se puede eliminar un cuadriciclo con reservas activas.",
+        title: "Error al eliminar cuatrimoto",
+        description: "No se puede eliminar un cuatrimoto con reservas activas.",
         variant: "destructive",
       });
     },
@@ -86,46 +86,46 @@ export default function AdminCuadriciclos() {
 
   const bulkUpdateMutation = useMutation({
     mutationFn: async ({ ids, updates }: { ids: number[], updates: any }) => 
-      await backend.cuadriciclos.bulkUpdate({ ids, updates }),
+      await backend.cuatrimotos.bulkUpdate({ ids, updates }),
     onSuccess: (data) => {
       toast({ 
-        title: `${data.count} cuadriciclos actualizados exitosamente` 
+        title: `${data.count} cuatrimotos actualizados exitosamente` 
       });
-      queryClient.invalidateQueries({ queryKey: ['cuadriciclos'] });
+      queryClient.invalidateQueries({ queryKey: ['cuatrimotos'] });
       setSelectedIds([]);
       setBulkAction('');
     },
     onError: (error) => {
-      console.error('Error updating cuadriciclos:', error);
+      console.error('Error updating cuatrimotos:', error);
       toast({
-        title: "Error al actualizar cuadriciclos",
+        title: "Error al actualizar cuatrimotos",
         description: "Por favor, inténtalo de nuevo.",
         variant: "destructive",
       });
     },
   });
 
-  const handleEdit = (cuadriciclo: Cuadriciclo) => {
-    setEditingCuadriciclo(cuadriciclo);
+  const handleEdit = (cuatrimoto: Cuatrimoto) => {
+    setEditingCuatrimoto(cuatrimoto);
     setIsEditDialogOpen(true);
   };
 
   const handleDelete = (id: number) => {
-    if (confirm('¿Estás seguro de que quieres eliminar este cuadriciclo?')) {
+    if (confirm('¿Estás seguro de que quieres eliminar este cuatrimoto?')) {
       deleteMutation.mutate(id);
     }
   };
 
-  const handleStatusChange = (cuadriciclo: Cuadriciclo, newStatus: string) => {
+  const handleStatusChange = (cuatrimoto: Cuatrimoto, newStatus: string) => {
     updateMutation.mutate({
-      id: cuadriciclo.id,
+      id: cuatrimoto.id,
       estado: newStatus,
     });
   };
 
   const handleSelectAll = (checked: boolean) => {
     if (checked) {
-      setSelectedIds(cuadriciclos?.map(c => c.id) || []);
+      setSelectedIds(cuatrimotos?.map(c => c.id) || []);
     } else {
       setSelectedIds([]);
     }
@@ -169,21 +169,21 @@ export default function AdminCuadriciclos() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Gestión de Cuadriciclos</h1>
-            <p className="text-gray-600">Administra tu flota de cuadriciclos</p>
+            <h1 className="text-3xl font-bold">Gestión de Cuatrimotos</h1>
+            <p className="text-gray-600">Administra tu flota de cuatrimotos</p>
           </div>
           <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
             <DialogTrigger asChild>
               <Button>
                 <Plus className="h-4 w-4 mr-2" />
-                Agregar Cuadriciclo
+                Agregar Cuatrimoto
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-2xl">
               <DialogHeader>
-                <DialogTitle>Nuevo Cuadriciclo</DialogTitle>
+                <DialogTitle>Nuevo Cuatrimoto</DialogTitle>
               </DialogHeader>
-              <CuadricicloForm
+              <CuatrimotoForm
                 onSubmit={(data) => createMutation.mutate(data)}
                 isLoading={createMutation.isPending}
               />
@@ -195,7 +195,7 @@ export default function AdminCuadriciclos() {
         {selectedIds.length > 0 && (
           <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
             <span className="text-sm font-medium">
-              {selectedIds.length} cuadriciclo{selectedIds.length > 1 ? 's' : ''} seleccionado{selectedIds.length > 1 ? 's' : ''}
+              {selectedIds.length} cuatrimoto{selectedIds.length > 1 ? 's' : ''} seleccionado{selectedIds.length > 1 ? 's' : ''}
             </span>
             <Select value={bulkAction} onValueChange={setBulkAction}>
               <SelectTrigger className="w-48">
@@ -227,37 +227,37 @@ export default function AdminCuadriciclos() {
         )}
 
         {/* Select All */}
-        {cuadriciclos && cuadriciclos.length > 0 && (
+        {cuatrimotos && cuatrimotos.length > 0 && (
           <div className="flex items-center gap-2">
             <Checkbox
               id="select-all"
-              checked={selectedIds.length === cuadriciclos.length}
+              checked={selectedIds.length === cuatrimotos.length}
               onCheckedChange={handleSelectAll}
             />
             <Label htmlFor="select-all" className="text-sm">
-              Seleccionar todos ({cuadriciclos.length})
+              Seleccionar todos ({cuatrimotos.length})
             </Label>
           </div>
         )}
       </div>
 
-      {/* Cuadriciclos Grid */}
+      {/* Cuatrimotos Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {cuadriciclos?.map((cuadriciclo) => (
-          <Card key={cuadriciclo.id} className={selectedIds.includes(cuadriciclo.id) ? "ring-2 ring-blue-500" : ""}>
+        {cuatrimotos?.map((cuatrimoto) => (
+          <Card key={cuatrimoto.id} className={selectedIds.includes(cuatrimoto.id) ? "ring-2 ring-blue-500" : ""}>
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Checkbox
-                    checked={selectedIds.includes(cuadriciclo.id)}
-                    onCheckedChange={(checked) => handleSelectOne(cuadriciclo.id, checked as boolean)}
+                    checked={selectedIds.includes(cuatrimoto.id)}
+                    onCheckedChange={(checked) => handleSelectOne(cuatrimoto.id, checked as boolean)}
                   />
-                  <CardTitle className="text-lg">{cuadriciclo.nombre}</CardTitle>
+                  <CardTitle className="text-lg">{cuatrimoto.nombre}</CardTitle>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Select
-                    value={cuadriciclo.estado}
-                    onValueChange={(value) => handleStatusChange(cuadriciclo, value)}
+                    value={cuatrimoto.estado}
+                    onValueChange={(value) => handleStatusChange(cuatrimoto, value)}
                   >
                     <SelectTrigger className="w-32">
                       <SelectValue />
@@ -273,10 +273,10 @@ export default function AdminCuadriciclos() {
             </CardHeader>
             <CardContent>
               <div className="aspect-video bg-gray-200 rounded-lg mb-4">
-                {cuadriciclo.fotos.length > 0 ? (
+                {cuatrimoto.fotos.length > 0 ? (
                   <img
-                    src={cuadriciclo.fotos[0]}
-                    alt={cuadriciclo.nombre}
+                    src={cuatrimoto.fotos[0]}
+                    alt={cuatrimoto.nombre}
                     className="w-full h-full object-cover rounded-lg"
                   />
                 ) : (
@@ -288,37 +288,37 @@ export default function AdminCuadriciclos() {
 
               <div className="space-y-2 mb-4">
                 <p className="text-sm text-gray-600">
-                  <strong>Marca:</strong> {cuadriciclo.marca} {cuadriciclo.modelo}
+                  <strong>Marca:</strong> {cuatrimoto.marca} {cuatrimoto.modelo}
                 </p>
-                {cuadriciclo.año && (
+                {cuatrimoto.año && (
                   <p className="text-sm text-gray-600">
-                    <strong>Año:</strong> {cuadriciclo.año}
+                    <strong>Año:</strong> {cuatrimoto.año}
                   </p>
                 )}
                 <p className="text-sm text-gray-600">
-                  <strong>Color:</strong> {cuadriciclo.color}
+                  <strong>Color:</strong> {cuatrimoto.color}
                 </p>
                 <div className="flex justify-between">
                   <span className="text-sm">
-                    <strong>Hora:</strong> {appConfig.currency}{cuadriciclo.precio_hora}
+                    <strong>Hora:</strong> {appConfig.currency}{cuatrimoto.precio_hora}
                   </span>
                   <span className="text-sm">
-                    <strong>Día:</strong> {appConfig.currency}{cuadriciclo.precio_dia}
+                    <strong>Día:</strong> {appConfig.currency}{cuatrimoto.precio_dia}
                   </span>
                 </div>
               </div>
 
-              {cuadriciclo.caracteristicas.length > 0 && (
+              {cuatrimoto.caracteristicas.length > 0 && (
                 <div className="mb-4">
                   <div className="flex flex-wrap gap-1">
-                    {cuadriciclo.caracteristicas.slice(0, 3).map((caracteristica, index) => (
+                    {cuatrimoto.caracteristicas.slice(0, 3).map((caracteristica, index) => (
                       <Badge key={index} variant="secondary" className="text-xs">
                         {caracteristica}
                       </Badge>
                     ))}
-                    {cuadriciclo.caracteristicas.length > 3 && (
+                    {cuatrimoto.caracteristicas.length > 3 && (
                       <Badge variant="secondary" className="text-xs">
-                        +{cuadriciclo.caracteristicas.length - 3}
+                        +{cuatrimoto.caracteristicas.length - 3}
                       </Badge>
                     )}
                   </div>
@@ -329,7 +329,7 @@ export default function AdminCuadriciclos() {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => handleEdit(cuadriciclo)}
+                  onClick={() => handleEdit(cuatrimoto)}
                   className="flex-1"
                 >
                   <Edit className="h-4 w-4 mr-1" />
@@ -338,7 +338,7 @@ export default function AdminCuadriciclos() {
                 <Button
                   variant="destructive"
                   size="sm"
-                  onClick={() => handleDelete(cuadriciclo.id)}
+                  onClick={() => handleDelete(cuatrimoto.id)}
                   className="flex-1"
                 >
                   <Trash2 className="h-4 w-4 mr-1" />
@@ -354,12 +354,12 @@ export default function AdminCuadriciclos() {
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>Editar Cuadriciclo</DialogTitle>
+            <DialogTitle>Editar Cuatrimoto</DialogTitle>
           </DialogHeader>
-          {editingCuadriciclo && (
-            <CuadricicloForm
-              initialData={editingCuadriciclo}
-              onSubmit={(data) => updateMutation.mutate({ id: editingCuadriciclo.id, ...data })}
+          {editingCuatrimoto && (
+            <CuatrimotoForm
+              initialData={editingCuatrimoto}
+              onSubmit={(data) => updateMutation.mutate({ id: editingCuatrimoto.id, ...data })}
               isLoading={updateMutation.isPending}
             />
           )}
@@ -369,13 +369,13 @@ export default function AdminCuadriciclos() {
   );
 }
 
-interface CuadricicloFormProps {
-  initialData?: Cuadriciclo;
+interface CuatrimotoFormProps {
+  initialData?: Cuatrimoto;
   onSubmit: (data: any) => void;
   isLoading: boolean;
 }
 
-function CuadricicloForm({ initialData, onSubmit, isLoading }: CuadricicloFormProps) {
+function CuatrimotoForm({ initialData, onSubmit, isLoading }: CuatrimotoFormProps) {
   const [formData, setFormData] = useState({
     nombre: initialData?.nombre || '',
     marca: initialData?.marca || '',

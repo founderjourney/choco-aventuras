@@ -83,7 +83,7 @@ export default function ToursPage() {
                 Tours
               </Link>
               <Link href="/cuadriciclos" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Cuadriciclos
+                Cuatrimotos
               </Link>
               <Link href="/experiencias" className="nav-item text-gray-700 hover:text-[#145A32]">
                 Experiencias
@@ -251,7 +251,7 @@ export default function ToursPage() {
                   ))}
                 </div>
                 <p className="text-gray-700 mb-4 italic">
-                  "Una experiencia increíble! Los cuatrimotos son potentes y los guías conocen cada rincón de la selva."
+                  &quot;Una experiencia increíble! Los cuatrimotos son potentes y los guías conocen cada rincón de la selva.&quot;
                 </p>
                 <h4 className="font-bold text-[#145A32]">María González</h4>
                 <span className="text-gray-600 text-sm">Bogotá</span>
@@ -266,7 +266,7 @@ export default function ToursPage() {
                   ))}
                 </div>
                 <p className="text-gray-700 mb-4 italic">
-                  "El paintball en la selva es único! Nunca había jugado en un escenario tan natural y emocionante."
+                  &quot;El paintball en la selva es único! Nunca había jugado en un escenario tan natural y emocionante.&quot;
                 </p>
                 <h4 className="font-bold text-[#145A32]">Carlos Ramírez</h4>
                 <span className="text-gray-600 text-sm">Medellín</span>
@@ -281,7 +281,7 @@ export default function ToursPage() {
                   ))}
                 </div>
                 <p className="text-gray-700 mb-4 italic">
-                  "La cultura chocoana es fascinante. Los guías locales te hacen sentir parte de la comunidad."
+                  &quot;La cultura chocoana es fascinante. Los guías locales te hacen sentir parte de la comunidad.&quot;
                 </p>
                 <h4 className="font-bold text-[#145A32]">Ana Martínez</h4>
                 <span className="text-gray-600 text-sm">Cali</span>

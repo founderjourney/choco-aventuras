@@ -24,7 +24,7 @@ export default function Header() {
               to="/cuadriciclos" 
               className="text-gray-700 hover:text-[#145A32] transition-colors"
             >
-              Cuadriciclos
+              Cuatrimotos
             </Link>
             <a 
               href={`mailto:${businessConfig.email}`}
@@ -38,7 +38,7 @@ export default function Header() {
           <div className="flex items-center space-x-4">
             <Link to="/cuadriciclos">
               <Button variant="outline" size="sm" className="hidden sm:inline-flex">
-                Ver Cuadriciclos
+                Ver Cuatrimotos
               </Button>
             </Link>
             <Link to="/reservar">

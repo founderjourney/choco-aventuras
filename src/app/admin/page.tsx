@@ -10,8 +10,8 @@ import { useAuth } from '@/hooks/use-auth';
 import { useEffect } from 'react';
 
 interface DashboardStats {
-  total_cuadriciclos: number;
-  cuadriciclos_disponibles: number;
+  total_cuatrimotos: number;
+  cuatrimotos_disponibles: number;
   total_reservas: number;
   reservas_pendientes: number;
   reservas_confirmadas: number;
@@ -20,7 +20,7 @@ interface DashboardStats {
 
 interface Reserva {
   id: number;
-  cuadriciclo_id: number;
+  cuatrimoto_id: number;
   paseo_id: number;
   cliente_nombre: string;
   cliente_telefono: string;
@@ -31,23 +31,23 @@ interface Reserva {
   notas?: string;
   created_at: Date;
   updated_at: Date;
-  cuadriciclo_nombre: string;
-  cuadriciclo_marca: string;
-  cuadriciclo_modelo: string;
+  cuatrimoto_nombre: string;
+  cuatrimoto_marca: string;
+  cuatrimoto_modelo: string;
   paseo_nombre: string;
   paseo_duracion: number;
 }
 
 async function fetchDashboardStats(): Promise<DashboardStats> {
-  const [cuadriciclos, reservas, paseos] = await Promise.all([
-    fetch('/api/cuadriciclos').then(r => r.json()),
+  const [cuatrimotos, reservas, paseos] = await Promise.all([
+    fetch('/api/cuatrimotos').then(r => r.json()),
     fetch('/api/reservas').then(r => r.json()),
     fetch('/api/paseos').then(r => r.json())
   ]);
 
   return {
-    total_cuadriciclos: cuadriciclos.cuadriciclos.length,
-    cuadriciclos_disponibles: cuadriciclos.cuadriciclos.filter((c: any) => c.estado === 'disponible').length,
+    total_cuatrimotos: cuatrimotos.cuatrimotos.length,
+    cuatrimotos_disponibles: cuatrimotos.cuatrimotos.filter((c: any) => c.estado === 'disponible').length,
     total_reservas: reservas.reservas.length,
     reservas_pendientes: reservas.reservas.filter((r: any) => r.estado === 'pendiente').length,
     reservas_confirmadas: reservas.reservas.filter((r: any) => r.estado === 'confirmada').length,
@@ -103,7 +103,7 @@ export default function AdminDashboard() {
                   Inicio
                 </Link>
                 <Link href="/cuadriciclos" className="text-gray-700 hover:text-[#145A32]">
-                  Cuadriciclos
+                  Cuatrimotos
                 </Link>
                 <Link href="/reservas" className="text-gray-700 hover:text-[#145A32]">
                   Reservar
@@ -135,20 +135,20 @@ export default function AdminDashboard() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         <div className="mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-[#145A32]">Panel de Administración</h1>
-          <p className="text-gray-600 mt-2 text-sm sm:text-base">Gestiona cuadriciclos, paseos y reservas</p>
+          <p className="text-gray-600 mt-2 text-sm sm:text-base">Gestiona cuatrimotos, paseos y reservas</p>
         </div>
 
         {/* Quick Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Cuadriciclos</CardTitle>
+              <CardTitle className="text-sm font-medium">Cuatrimotos</CardTitle>
               <Car className="h-4 w-4 text-[#145A32]" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats?.total_cuadriciclos || 0}</div>
+              <div className="text-2xl font-bold">{stats?.total_cuatrimotos || 0}</div>
               <p className="text-xs text-green-600">
-                {stats?.cuadriciclos_disponibles || 0} disponibles
+                {stats?.cuatrimotos_disponibles || 0} disponibles
               </p>
             </CardContent>
           </Card>
@@ -195,14 +195,14 @@ export default function AdminDashboard() {
 
         {/* Navigation Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
-          <Link href="/admin/cuadriciclos" className="block">
+          <Link href="/admin/cuatrimotos" className="block">
             <Card className="hover:shadow-lg transition-shadow cursor-pointer">
               <CardHeader>
-                <CardTitle className="text-[#145A32]">Gestionar Cuadriciclos</CardTitle>
+                <CardTitle className="text-[#145A32]">Gestionar Cuatrimotos</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-gray-600">
-                  Agregar, editar y gestionar el inventario de cuadriciclos
+                  Agregar, editar y gestionar el inventario de cuatrimotos
                 </p>
               </CardContent>
             </Card>
@@ -313,7 +313,7 @@ export default function AdminDashboard() {
                   <div>
                     <p className="font-semibold">{reserva.cliente_nombre}</p>
                     <p className="text-sm text-gray-600">
-                      {reserva.cuadriciclo_nombre} - {reserva.paseo_nombre}
+                      {reserva.cuatrimoto_nombre} - {reserva.paseo_nombre}
                     </p>
                     <p className="text-sm text-gray-500">
                       {new Date(reserva.fecha_paseo).toLocaleDateString('es-CO')}

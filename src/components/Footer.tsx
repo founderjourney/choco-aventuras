@@ -19,7 +19,7 @@ export default function Footer() {
               La primera experiencia de turismo extremo en Quibdó que combina cuatrimotos, paintball y cultura local.
             </p>
             <p className="text-[#F1C40F] font-bold italic">
-              "Aquí la aventura no se cuenta... ¡se vive!"
+              &quot;Aquí la aventura no se cuenta... ¡se vive!&quot;
             </p>
           </div>
 
@@ -37,7 +37,7 @@ export default function Footer() {
                 Tours
               </Link>
               <Link href="/cuadriciclos" className="block text-emerald-100 hover:text-[#F1C40F] transition-colors">
-                Cuadriciclos
+                Cuatrimotos
               </Link>
               <Link href="/experiencias" className="block text-emerald-100 hover:text-[#F1C40F] transition-colors">
                 Experiencias

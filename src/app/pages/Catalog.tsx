@@ -9,21 +9,21 @@ import { ArrowLeft, Calendar, DollarSign } from 'lucide-react';
 import Header from '../components/Header';
 import LoadingSpinner from '../components/LoadingSpinner';
 import backend from '~backend/client';
-import type { Cuadriciclo } from '~backend/cuadriciclos/list';
+import type { Cuatrimoto } from '~backend/cuatrimotos/list';
 import { appConfig } from '../config';
 
 export default function Catalog() {
   const [statusFilter, setStatusFilter] = useState<string>('all');
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['cuadriciclos'],
+    queryKey: ['cuatrimotos'],
     queryFn: async () => {
-      const response = await backend.cuadriciclos.list();
-      return response.cuadriciclos;
+      const response = await backend.cuatrimotos.list();
+      return response.cuatrimotos;
     },
   });
 
-  const filteredCuadriciclos = data?.filter(cuad => 
+  const filteredCuatrimotos = data?.filter(cuad => 
     statusFilter === 'all' || cuad.estado === statusFilter
   ) || [];
 
@@ -44,7 +44,7 @@ export default function Catalog() {
         <Header />
         <div className="max-w-6xl mx-auto px-4 py-8">
           <div className="text-center text-red-600">
-            Error al cargar los cuadriciclos. Por favor, inténtalo de nuevo.
+            Error al cargar los cuatrimotos. Por favor, inténtalo de nuevo.
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@ export default function Catalog() {
                 Volver
               </Button>
             </Link>
-            <h1 className="text-3xl font-bold">Cuadriciclos Disponibles</h1>
+            <h1 className="text-3xl font-bold">Cuatrimotos Disponibles</h1>
           </div>
 
           {/* Filters */}
@@ -84,23 +84,23 @@ export default function Catalog() {
           </div>
         </div>
 
-        {/* Cuadriciclos Grid */}
-        {filteredCuadriciclos.length === 0 ? (
+        {/* Cuatrimotos Grid */}
+        {filteredCuatrimotos.length === 0 ? (
           <div className="text-center py-12">
             <Calendar className="h-16 w-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-500 mb-2">
-              No hay cuadriciclos disponibles
+              No hay cuatrimotos disponibles
             </h3>
             <p className="text-gray-400">
               {statusFilter === 'disponible' 
-                ? 'No hay cuadriciclos disponibles en este momento.'
-                : 'No se encontraron cuadriciclos con el filtro seleccionado.'}
+                ? 'No hay cuatrimotos disponibles en este momento.'
+                : 'No se encontraron cuatrimotos con el filtro seleccionado.'}
             </p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredCuadriciclos.map((cuadriciclo) => (
-              <CuadricicloCard key={cuadriciclo.id} cuadriciclo={cuadriciclo} />
+            {filteredCuatrimotos.map((cuatrimoto) => (
+              <CuatrimotoCard key={cuatrimoto.id} cuatrimoto={cuatrimoto} />
             ))}
           </div>
         )}
@@ -109,16 +109,16 @@ export default function Catalog() {
   );
 }
 
-function CuadricicloCard({ cuadriciclo }: { cuadriciclo: Cuadriciclo }) {
-  const isAvailable = cuadriciclo.estado === 'disponible';
+function CuatrimotoCard({ cuatrimoto }: { cuatrimoto: Cuatrimoto }) {
+  const isAvailable = cuatrimoto.estado === 'disponible';
   
   return (
     <Card className="overflow-hidden transition-transform hover:scale-105">
       <div className="aspect-video bg-gray-200 relative">
-        {cuadriciclo.fotos.length > 0 ? (
+        {cuatrimoto.fotos.length > 0 ? (
           <img
-            src={cuadriciclo.fotos[0]}
-            alt={cuadriciclo.nombre}
+            src={cuatrimoto.fotos[0]}
+            alt={cuatrimoto.nombre}
             className="w-full h-full object-cover"
           />
         ) : (
@@ -130,21 +130,21 @@ function CuadricicloCard({ cuadriciclo }: { cuadriciclo: Cuadriciclo }) {
           className={`absolute top-2 right-2 ${
             isAvailable 
               ? 'bg-green-500 hover:bg-green-600' 
-              : cuadriciclo.estado === 'ocupado'
+              : cuatrimoto.estado === 'ocupado'
               ? 'bg-red-500 hover:bg-red-600'
               : 'bg-yellow-500 hover:bg-yellow-600'
           }`}
         >
-          {cuadriciclo.estado.charAt(0).toUpperCase() + cuadriciclo.estado.slice(1)}
+          {cuatrimoto.estado.charAt(0).toUpperCase() + cuatrimoto.estado.slice(1)}
         </Badge>
       </div>
       
       <CardContent className="p-4">
-        <h3 className="text-xl font-bold mb-2">{cuadriciclo.nombre}</h3>
+        <h3 className="text-xl font-bold mb-2">{cuatrimoto.nombre}</h3>
         <p className="text-gray-600 mb-2">
-          {cuadriciclo.marca} {cuadriciclo.modelo} {cuadriciclo.año && `(${cuadriciclo.año})`}
+          {cuatrimoto.marca} {cuatrimoto.modelo} {cuatrimoto.año && `(${cuatrimoto.año})`}
         </p>
-        <p className="text-gray-500 text-sm mb-4">{cuadriciclo.descripcion}</p>
+        <p className="text-gray-500 text-sm mb-4">{cuatrimoto.descripcion}</p>
         
         <div className="flex items-center justify-between mb-4">
           <div className="text-center">
@@ -152,28 +152,28 @@ function CuadricicloCard({ cuadriciclo }: { cuadriciclo: Cuadriciclo }) {
               <DollarSign className="h-4 w-4 mr-1" />
               Por Hora
             </div>
-            <div className="text-lg font-bold">{appConfig.currency}{cuadriciclo.precio_hora}</div>
+            <div className="text-lg font-bold">{appConfig.currency}{cuatrimoto.precio_hora}</div>
           </div>
           <div className="text-center">
             <div className="flex items-center text-sm text-gray-600">
               <DollarSign className="h-4 w-4 mr-1" />
               Por Día
             </div>
-            <div className="text-lg font-bold">{appConfig.currency}{cuadriciclo.precio_dia}</div>
+            <div className="text-lg font-bold">{appConfig.currency}{cuatrimoto.precio_dia}</div>
           </div>
         </div>
 
-        {cuadriciclo.caracteristicas.length > 0 && (
+        {cuatrimoto.caracteristicas.length > 0 && (
           <div className="mb-4">
             <div className="flex flex-wrap gap-1">
-              {cuadriciclo.caracteristicas.slice(0, 3).map((caracteristica, index) => (
+              {cuatrimoto.caracteristicas.slice(0, 3).map((caracteristica, index) => (
                 <Badge key={index} variant="secondary" className="text-xs">
                   {caracteristica}
                 </Badge>
               ))}
-              {cuadriciclo.caracteristicas.length > 3 && (
+              {cuatrimoto.caracteristicas.length > 3 && (
                 <Badge variant="secondary" className="text-xs">
-                  +{cuadriciclo.caracteristicas.length - 3} más
+                  +{cuatrimoto.caracteristicas.length - 3} más
                 </Badge>
               )}
             </div>
@@ -182,7 +182,7 @@ function CuadricicloCard({ cuadriciclo }: { cuadriciclo: Cuadriciclo }) {
       </CardContent>
       
       <CardFooter className="p-4 pt-0">
-        <Link to={`/reservar?cuadriciclo=${cuadriciclo.id}`} className="w-full">
+        <Link to={`/reservar?cuatrimoto=${cuatrimoto.id}`} className="w-full">
           <Button 
             className="w-full" 
             disabled={!isAvailable}

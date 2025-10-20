@@ -216,7 +216,7 @@ export default function EditarPaseo() {
                   Inicio
                 </Link>
                 <Link href="/cuadriciclos" className="text-gray-700 hover:text-[#145A32]">
-                  Cuadriciclos
+                  Cuatrimotos
                 </Link>
                 <Link href="/reservas" className="text-gray-700 hover:text-[#145A32]">
                   Reservar

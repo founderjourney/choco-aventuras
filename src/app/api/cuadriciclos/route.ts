@@ -3,12 +3,12 @@ import { db } from '@/lib/db';
 
 export async function GET() {
   try {
-    const cuadriciclos = await db.cuadriciclos.findAll();
-    return NextResponse.json({ cuadriciclos });
+    const cuatrimotos = await db.cuatrimotos.findAll();
+    return NextResponse.json({ cuatrimotos });
   } catch (error) {
-    console.error('Error fetching cuadriciclos:', error);
+    console.error('Error fetching cuatrimotos:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch cuadriciclos' },
+      { error: 'Failed to fetch cuatrimotos' },
       { status: 500 }
     );
   }
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const cuadriciclo = await db.cuadriciclos.create({
+    const cuatrimoto = await db.cuatrimotos.create({
       nombre: data.nombre,
       marca: data.marca,
       modelo: data.modelo,
@@ -43,11 +43,11 @@ export async function POST(request: NextRequest) {
       caracteristicas: data.caracteristicas || []
     });
 
-    return NextResponse.json(cuadriciclo, { status: 201 });
+    return NextResponse.json(cuatrimoto, { status: 201 });
   } catch (error) {
-    console.error('Error creating cuadriciclo:', error);
+    console.error('Error creating cuatrimoto:', error);
     return NextResponse.json(
-      { error: 'Failed to create cuadriciclo' },
+      { error: 'Failed to create cuatrimoto' },
       { status: 500 }
     );
   }

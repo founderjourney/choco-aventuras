@@ -77,7 +77,7 @@ export default function AdminDashboard() {
           <CardContent>
             <div className="text-2xl font-bold">{stats?.cuadris_ocupados || 0}</div>
             <p className="text-xs text-muted-foreground">
-              de {stats?.total_cuadriciclos || 0} total
+              de {stats?.total_cuatrimotos || 0} total
             </p>
           </CardContent>
         </Card>
@@ -124,7 +124,7 @@ export default function AdminDashboard() {
                       Paseo: {reserva.paseo_nombre} ({reserva.paseo_duracion}h)
                     </div>
                     <div className="text-sm text-gray-500">
-                      {reserva.cuadriciclo_nombre} - {new Date(reserva.fecha_paseo).toLocaleTimeString('es-ES', {
+                      {reserva.cuatrimoto_nombre} - {new Date(reserva.fecha_paseo).toLocaleTimeString('es-ES', {
                         hour: '2-digit',
                         minute: '2-digit',
                       })}

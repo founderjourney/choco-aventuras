@@ -1,0 +1,17 @@
+slide hero 1, cambiar para eso: "Bienvenido
+CHOCÓ AVENTURAS
+Dispara, acelera y conquista la aventura
+Reservar"
+
+
+slide 2, cambiar para eso: "EXPLORA ELIGE Y VIVE LA ACCIÓN 
+Cuatrimotos y paintball en el corazón del Chocó: pensados para aventureros como tú.
+" - abajo hay 3 botones, cambiar para esos 3: "CUATRIMOTOS     PAINTBALL    EXPERIENCIAS"
+
+continuacion de la explicacion del cliente sobre los slides arriba: El primero(slide 1):
+RUTAS EN CUATRIMOTO. Cuando gire que salga un botón que diga reservar
+
+El otro(slide 2):
+BATALLAS DE PAINTBALL. Cuando gire que el botón diga próximamente
+
+

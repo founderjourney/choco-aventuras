@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
     // Basic validation
     const requiredFields = [
-      'cuadriciclo_id',
+      'cuatrimoto_id',
       'paseo_id',
       'cliente_nombre',
       'cliente_telefono',
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     }
 
     const reserva = await db.reservas.create({
-      cuadriciclo_id: Number(data.cuadriciclo_id),
+      cuatrimoto_id: Number(data.cuatrimoto_id),
       paseo_id: Number(data.paseo_id),
       cliente_nombre: data.cliente_nombre,
       cliente_telefono: data.cliente_telefono,

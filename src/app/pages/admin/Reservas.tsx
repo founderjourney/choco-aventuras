@@ -67,7 +67,7 @@ export default function AdminReservas() {
   };
 
   const handleContactWhatsApp = (reserva: Reserva) => {
-    const message = `Hola ${reserva.cliente_nombre}, te contactamos sobre tu reserva del paseo "${reserva.paseo_nombre}" con el cuadriciclo ${reserva.cuadriciclo_nombre} para el ${new Date(reserva.fecha_paseo).toLocaleDateString('es-ES')}.`;
+    const message = `Hola ${reserva.cliente_nombre}, te contactamos sobre tu reserva del paseo "${reserva.paseo_nombre}" con el cuatrimoto ${reserva.cuatrimoto_nombre} para el ${new Date(reserva.fecha_paseo).toLocaleDateString('es-ES')}.`;
     const whatsappUrl = `https://wa.me/${reserva.cliente_telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -192,12 +192,12 @@ export default function AdminReservas() {
                       </div>
 
                       <div>
-                        <span className="text-gray-500">Cuadriciclo:</span>
+                        <span className="text-gray-500">Cuatrimoto:</span>
                         <p className="font-medium">
-                          {reserva.cuadriciclo_nombre}
+                          {reserva.cuatrimoto_nombre}
                         </p>
                         <p className="text-gray-600">
-                          {reserva.cuadriciclo_marca} {reserva.cuadriciclo_modelo}
+                          {reserva.cuatrimoto_marca} {reserva.cuatrimoto_modelo}
                         </p>
                       </div>
 

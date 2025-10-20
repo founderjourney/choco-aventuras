@@ -13,7 +13,7 @@ import { useState } from 'react';
 
 interface Reserva {
   id: number;
-  cuadriciclo_id: number;
+  cuatrimoto_id: number;
   paseo_id: number;
   cliente_nombre: string;
   cliente_telefono: string;
@@ -24,9 +24,9 @@ interface Reserva {
   notas?: string;
   created_at: Date;
   updated_at: Date;
-  cuadriciclo_nombre: string;
-  cuadriciclo_marca: string;
-  cuadriciclo_modelo: string;
+  cuatrimoto_nombre: string;
+  cuatrimoto_marca: string;
+  cuatrimoto_modelo: string;
   paseo_nombre: string;
   paseo_duracion: number;
 }
@@ -121,7 +121,7 @@ export default function AdminReservas() {
                 Inicio
               </Link>
               <Link href="/cuadriciclos" className="text-gray-700 hover:text-[#145A32]">
-                Cuadriciclos
+                Cuatrimotos
               </Link>
               <Link href="/reservas" className="text-gray-700 hover:text-[#145A32]">
                 Reservar
@@ -148,7 +148,7 @@ export default function AdminReservas() {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-[#145A32]">Gestión de Reservas</h1>
-            <p className="text-gray-600 mt-2">Administra todas las reservas de cuadriciclos</p>
+            <p className="text-gray-600 mt-2">Administra todas las reservas de cuatrimotos</p>
           </div>
         </div>
 
@@ -296,8 +296,8 @@ export default function AdminReservas() {
 
                     <div className="flex items-center gap-2 text-sm">
                       <Car className="h-4 w-4 text-[#145A32]" />
-                      <span className="font-medium">Cuadriciclo:</span>
-                      <span>{reserva.cuadriciclo_nombre}</span>
+                      <span className="font-medium">Cuatrimoto:</span>
+                      <span>{reserva.cuatrimoto_nombre}</span>
                     </div>
 
                     <div className="flex items-center gap-2 text-sm">

@@ -1,247 +1,475 @@
 "use client";
 
-import { Card, CardContent } from '@/components/ui/card';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { MapPin, Clock, Shield, Users, Heart, Star } from 'lucide-react';
-import Footer from '@/components/Footer';
-import CallToAction from '@/components/CallToAction';
+import { Play, ChevronDown, Facebook, Instagram, MessageCircle, Menu, X, Search, User, ShoppingCart } from 'lucide-react';
 
 export default function NosotrosPage() {
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+      <header className="bg-white sticky top-0 z-50 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/" className="font-bold text-xl text-[#145A32] logo-container">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center logo-icon">
-                  <span className="text-white font-bold text-sm">CA</span>
-                </div>
-                Chocó Aventuras
+            {/* Logo */}
+            <Link href="/" className="flex items-center">
+              <div className="w-10 h-10 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">CA</span>
+              </div>
+              <div className="ml-3 hidden sm:block">
+                <div className="text-2xl font-bold text-emerald-600">Chocó</div>
+                <div className="text-sm text-gray-600">AVENTURAS</div>
               </div>
             </Link>
-            <nav className="flex space-x-6">
-              <Link href="/" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Inicio
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-8">
+              <Link href="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                INICIO
               </Link>
-              <Link href="/nosotros" className="nav-item text-[#145A32] font-semibold">
-                Nosotros
+              <Link href="/nosotros" className="text-emerald-600 font-semibold transition-colors">
+                NOSOTROS
               </Link>
-              <Link href="/tours" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Tours
+              <Link href="/tours" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                TOURS
               </Link>
-              <Link href="/cuadriciclos" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Cuadriciclos
+              <Link href="/cuadriciclos" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                CUATRIMOTOS
               </Link>
-              <Link href="/experiencias" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Experiencias
+              <Link href="/experiencias" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                EXPERIENCIAS
               </Link>
-              <Link href="/contacto" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Contacto
-              </Link>
-              <Link href="/admin/login" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Admin
+              <Link href="/contacto" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                CONTACTO
               </Link>
             </nav>
+
+            {/* Header Icons */}
+            <div className="flex items-center gap-4">
+              <button className="p-2 text-gray-700 hover:text-emerald-600 transition-colors">
+                <Search className="h-5 w-5" />
+              </button>
+              <button className="p-2 text-gray-700 hover:text-emerald-600 transition-colors">
+                <User className="h-5 w-5" />
+              </button>
+              <button className="relative p-2 text-gray-700 hover:text-emerald-600 transition-colors">
+                <ShoppingCart className="h-5 w-5" />
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  0
+                </span>
+              </button>
+
+              {/* Mobile menu button */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="lg:hidden p-2 text-gray-700 hover:text-emerald-600 transition-colors"
+              >
+                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
+            </div>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden bg-white border-t">
+            <div className="px-4 py-2 space-y-1">
+              <Link href="/" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">INICIO</Link>
+              <Link href="/nosotros" className="block px-3 py-2 text-emerald-600 font-semibold">NOSOTROS</Link>
+              <Link href="/tours" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">TOURS</Link>
+              <Link href="/cuadriciclos" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">CUATRIMOTOS</Link>
+              <Link href="/experiencias" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">EXPERIENCIAS</Link>
+              <Link href="/contacto" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">CONTACTO</Link>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-[#145A32] to-[#1565C0] py-20 jungle-particles adventure-glow">
-        <div className="max-w-6xl mx-auto px-4 text-center text-white">
-          <h1 className="text-5xl font-bold mb-6 jungle-text wind-effect">
-            Sobre Chocó Aventuras
+      <section className="relative min-h-[60vh] flex items-center justify-center bg-gradient-to-r from-emerald-50 to-white">
+        <div className="absolute inset-0 bg-cover bg-center opacity-10"
+             style={{backgroundImage: "url('https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3')"}} />
+
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
+          <h1 className="text-5xl md:text-7xl font-bold mb-8">
+            <span className="text-emerald-600">SOBRE</span>
+            <span className="text-gray-900">NOSOTROS</span>
           </h1>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">
-            Somos la primera experiencia de turismo extremo en Quibdó que combina adrenalina, naturaleza y cultura chocoana
+
+          <div className="w-24 h-1 bg-emerald-600 mx-auto mb-8"></div>
+
+          <p className="text-xl text-gray-600 mb-4">
+            FABRICAMOS AVENTURAS MEMORABLES EN LA
           </p>
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-6 py-3 glass-effect">
-            <Star className="h-5 w-5 text-[#F1C40F] fill-current neon-glow" />
-            <span className="font-medium">Aquí la aventura no se cuenta... ¡se vive!</span>
-          </div>
+          <p className="text-lg text-emerald-600 font-semibold">
+            SELVA DEL CHOCÓ
+          </p>
         </div>
       </section>
 
-      {/* Nuestra Historia */}
-      <section className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-[#145A32] mb-6 jungle-text">
-                Nuestra Historia
+      {/* Nuestra Historia Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left Column - Content */}
+            <div className="order-2 lg:order-1">
+              <p className="text-emerald-600 text-sm font-semibold tracking-widest uppercase mb-4">
+                NUESTRA HISTORIA
+              </p>
+
+              <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900">
+                <span className="text-emerald-600">EL ARTE</span> DE CREAR<br />
+                <span className="text-2xl font-normal text-gray-600">AVENTURAS</span>
               </h2>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                <strong>Chocó Aventuras</strong> nace del amor por la selva tropical del Chocó y la pasión por las experiencias extremas. Somos pioneros en ofrecer turismo de aventura en Quibdó, combinando la emoción de los cuatrimotos con la autenticidad de la cultura chocoana.
-              </p>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                Nos especializamos en crear experiencias únicas que conectan a nuestros visitantes con la naturaleza exuberante del Chocó, mientras viven la adrenalina de recorrer trochas y senderos únicos en el mundo.
-              </p>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-[#F1C40F] rounded-full flex items-center justify-center">
-                  <Heart className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-[#145A32]">Pasión por la Aventura</h3>
-                  <p className="text-gray-600">Desde 2020 creando memorias inolvidables</p>
-                </div>
+
+              <div className="space-y-6 text-gray-600 leading-relaxed">
+                <p className="text-lg">
+                  <strong className="text-gray-900">Chocó Aventuras</strong> es una empresa familiar con más de
+                  una década de experiencia, dedicada al turismo de aventura que fusiona la emoción extrema
+                  con las técnicas más modernas de guianza especializada. Cada experiencia que creamos cuenta
+                  una historia única de adrenalina y conexión con la naturaleza.
+                </p>
+
+                <p>
+                  En nuestras instalaciones, ubicadas en el <strong className="text-emerald-600">
+                  KM7 Vía Yuto, Quibdó - Chocó</strong>, un equipo de guías especializados trabaja
+                  día a día para brindar aventuras excepcionales que reflejan la biodiversidad y
+                  cultura de nuestra región.
+                </p>
+
+                <p>
+                  <strong className="text-gray-900">Nuestra Pasión por la Aventura:</strong> La selva
+                  tropical del Chocó ha inspirado nuestra tradición por más de una década, convirtiendo
+                  cada cuatrimoto y experiencia en símbolos de aventura y adrenalina que trascienden
+                  expectativas.
+                </p>
+              </div>
+
+              <div className="mt-8">
+                <Link href="/contacto">
+                  <Button className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-lg">
+                    Contactanos
+                  </Button>
+                </Link>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-[#145A32] to-[#1565C0] rounded-3xl p-8 text-white card-3d">
-              <h3 className="text-2xl font-bold mb-6">Nuestra Misión</h3>
-              <p className="text-lg mb-6 leading-relaxed">
-                Ofrecer experiencias de turismo extremo auténticas que combinen cuatrimotos, paintball y cultura local en plena selva tropical, garantizando seguridad, diversión y un contacto directo con la naturaleza del Chocó.
-              </p>
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4">
-                <h4 className="font-bold mb-2">Nuestra Visión</h4>
-                <p className="text-sm">Ser el referente de turismo de aventura en el Chocó, promoviendo la riqueza natural y cultural de nuestra región.</p>
+
+            {/* Right Column - Video */}
+            <div className="order-1 lg:order-2">
+              <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-100 shadow-lg">
+                {!isVideoPlaying ? (
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-gray-900/60 flex items-center justify-center">
+                    <div
+                      className="w-20 h-20 bg-emerald-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-700 transition-all duration-300 group shadow-lg"
+                      onClick={() => setIsVideoPlaying(true)}
+                    >
+                      <Play className="w-8 h-8 text-white ml-1 group-hover:scale-110 transition-transform" />
+                    </div>
+                    <div className="absolute inset-0 bg-cover bg-center"
+                         style={{backgroundImage: "url('https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3')"}} />
+                  </div>
+                ) : (
+                  <iframe
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/uq49IDyz4e4?autoplay=1"
+                    allow="autoplay; fullscreen"
+                    allowFullScreen
+                  />
+                )}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Nuestros Valores */}
-      <section className="py-16 bg-[#F5F5F5]">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-[#145A32] mb-12 jungle-text">
-            Nuestros Valores
+      {/* Modern Photo Slider Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <p className="text-emerald-600 text-sm font-semibold tracking-widest uppercase mb-4">
+              NUESTRAS AVENTURAS
+            </p>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+              <span className="text-emerald-600">MOMENTOS</span> ÉPICOS
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Descubre la magia del Chocó a través de nuestras experiencias capturadas
+            </p>
+          </div>
+
+          {/* Photo Grid Slider */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Photo 1 - Cuatrimotos */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[4/5] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3')"}}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-xl font-bold mb-2">Rutas Extremas</h3>
+                <p className="text-sm opacity-90">Cuatrimotos por senderos únicos</p>
+              </div>
+              <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
+                <span className="text-white font-bold">🏍️</span>
+              </div>
+            </div>
+
+            {/* Photo 2 - Selva */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[4/5] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3')"}}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-xl font-bold mb-2">Selva Tropical</h3>
+                <p className="text-sm opacity-90">Biodiversidad única del Chocó</p>
+              </div>
+              <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
+                <span className="text-white font-bold">🌿</span>
+              </div>
+            </div>
+
+            {/* Photo 3 - Paintball */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[4/5] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3')"}}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-xl font-bold mb-2">Combate Extremo</h3>
+                <p className="text-sm opacity-90">Paintball en escenarios naturales</p>
+              </div>
+              <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
+                <span className="text-white font-bold">🎯</span>
+              </div>
+            </div>
+
+            {/* Photo 4 - Aventura Grupal */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[4/5] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1530549387789-4c1017266635?ixlib=rb-4.0.3')"}}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-xl font-bold mb-2">Aventura Grupal</h3>
+                <p className="text-sm opacity-90">Experiencias compartidas</p>
+              </div>
+              <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
+                <span className="text-white font-bold">👥</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Photos Row */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+            {/* Photo 5 - Panorámica */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[3/2] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3')"}}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-xl font-bold mb-2">Paisajes Únicos</h3>
+                <p className="text-sm opacity-90">Vistas panorámicas del Chocó</p>
+              </div>
+            </div>
+
+            {/* Photo 6 - Equipos */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[3/2] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3')"}}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-xl font-bold mb-2">Equipos Premium</h3>
+                <p className="text-sm opacity-90">Tecnología de última generación</p>
+              </div>
+            </div>
+
+            {/* Photo 7 - Cultura Local */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[3/2] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3')"}}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-xl font-bold mb-2">Cultura Chocoana</h3>
+                <p className="text-sm opacity-90">Tradiciones y gastronomía local</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Call to Action */}
+          <div className="text-center mt-12">
+            <p className="text-gray-600 mb-6">¿Listo para crear tus propios momentos épicos?</p>
+            <Link href="/contacto">
+              <Button className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+                Reserva Tu Aventura
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Contáctanos Section */}
+      <section className="py-20 bg-gray-900 text-white">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-4xl md:text-6xl font-bold mb-8">
+            <span className="text-emerald-400">CONTÁCTANOS</span> EN UN CLIC
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center hover:shadow-xl transition-all duration-300 card-3d">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-[#145A32] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Shield className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-[#145A32] mb-4">Seguridad Garantizada</h3>
-                <p className="text-gray-700">
-                  Equipos de protección profesionales y acompañamiento de guías expertos que conocen el territorio chocoano.
-                </p>
-              </CardContent>
-            </Card>
 
-            <Card className="text-center hover:shadow-xl transition-all duration-300 card-3d">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-[#1565C0] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Users className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-[#145A32] mb-4">Guías Locales</h3>
-                <p className="text-gray-700">
-                  Personas expertas de la región que conocen cada sendero, cada trocha y cada secreto de la selva chocoana.
-                </p>
-              </CardContent>
-            </Card>
+          <div className="w-24 h-1 bg-emerald-400 mx-auto mb-8"></div>
 
-            <Card className="text-center hover:shadow-xl transition-all duration-300 card-3d">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-[#F1C40F] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Heart className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-[#145A32] mb-4">Cultura Auténtica</h3>
-                <p className="text-gray-700">
-                  Incluimos la identidad chocoana, música tradicional y las famosas fiestas de San Pacho en nuestras experiencias.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+            Reserva tu aventura por <span className="text-emerald-400">WhatsApp</span>
+          </p>
+
+          <a
+            href="https://wa.me/573117030436"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button className="bg-green-600 hover:bg-green-700 text-white px-12 py-6 text-lg rounded-full shadow-xl flex items-center gap-4 mx-auto">
+              <MessageCircle className="w-7 h-7" />
+              <span className="font-bold text-xl">+57 311 703 0436</span>
+            </Button>
+          </a>
         </div>
       </section>
 
-      {/* Información de Empresa */}
-      <section className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-3xl font-bold text-[#145A32] mb-8 jungle-text">
-                Información de la Empresa
-              </h2>
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-[#145A32] rounded-lg flex items-center justify-center flex-shrink-0">
-                    <MapPin className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[#145A32] mb-2">Ubicación</h3>
-                    <p className="text-gray-700">KM7 VIA YUTO, Quibdó - Chocó</p>
-                    <p className="text-sm text-gray-600">En plena selva tropical del Pacífico colombiano</p>
-                  </div>
-                </div>
+      {/* FAQ Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <p className="text-emerald-600 text-sm font-semibold tracking-widest uppercase mb-4">
+              RESPUESTAS RÁPIDAS
+            </p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-8">
+              PREGUNTAS FRECUENTES
+            </h2>
+          </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-[#1565C0] rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Clock className="h-6 w-6 text-white" />
+          <div className="space-y-4">
+            {[
+              {
+                question: "¿Qué incluye el tour en cuatrimoto?",
+                answer: "Incluye equipo de seguridad, guía especializado, recorrido por la selva tropical y refrigerio."
+              },
+              {
+                question: "¿Cuánto dura una aventura típica?",
+                answer: "Nuestros tours varían entre 2 a 6 horas dependiendo del paquete seleccionado."
+              },
+              {
+                question: "¿Es necesario tener experiencia previa?",
+                answer: "No, ofrecemos tours para principiantes y avanzados. Nuestros guías te enseñarán todo lo necesario."
+              },
+              {
+                question: "¿Cuál es la edad mínima para participar?",
+                answer: "La edad mínima es 16 años para cuatrimotos y 12 años para paintball con supervisión de adultos."
+              }
+            ].map((faq, index) => (
+              <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
+                <button
+                  className="w-full text-left p-6 bg-white hover:bg-gray-50 transition-all duration-300 flex justify-between items-center"
+                  onClick={() => toggleFaq(index)}
+                >
+                  <span className="text-gray-900 font-medium text-lg">{faq.question}</span>
+                  <ChevronDown className={`w-6 h-6 text-emerald-600 transition-transform duration-300 ${openFaq === index ? 'rotate-180' : ''}`} />
+                </button>
+                {openFaq === index && (
+                  <div className="p-6 bg-gray-50 border-t border-gray-200">
+                    <p className="text-gray-600 text-base leading-relaxed">{faq.answer}</p>
                   </div>
-                  <div>
-                    <h3 className="font-bold text-[#145A32] mb-2">Horarios de Atención</h3>
-                    <p className="text-gray-700">Todos los días: 7:00 AM - 5:00 PM</p>
-                    <p className="text-sm text-gray-600">Disponibles para aventuras durante todo el año</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-[#F1C40F] rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Users className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[#145A32] mb-2">Servicios Especializados</h3>
-                    <p className="text-gray-700">Actividades para grupos y empresas</p>
-                    <p className="text-sm text-gray-600">Ideal para integración y team building</p>
-                  </div>
-                </div>
+                )}
               </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-[#145A32] to-[#1565C0] rounded-3xl p-8 text-white">
-              <h3 className="text-2xl font-bold mb-6">¿Por qué elegirnos?</h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <span className="text-[#F1C40F]">🌿</span>
-                  <span>Experiencias 100% en la selva del Chocó</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-[#F1C40F]">🏍️</span>
-                  <span>Tours por rutas extremas únicas</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-[#F1C40F]">🎯</span>
-                  <span>Paintball en escenarios naturales</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-[#F1C40F]">🎭</span>
-                  <span>Enfoque cultural chocoano auténtico</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-[#F1C40F]">👥</span>
-                  <span>Guías locales expertos</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-[#F1C40F]">🛡️</span>
-                  <span>Seguridad garantizada</span>
-                </div>
-              </div>
-
-              <div className="mt-8 p-4 bg-white/10 backdrop-blur-md rounded-lg">
-                <p className="text-lg font-bold italic text-center">
-                  "Aquí la aventura no se cuenta... ¡se vive!"
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
-
-      {/* Call to Action */}
-      <CallToAction
-        titulo="¿Listo para la Aventura?"
-        descripcion="Únete a nosotros y vive experiencias únicas en el corazón de la selva chocoana"
-        botonPrimario={{ texto: "VER CUADRICICLOS", href: "/cuadriciclos" }}
-        botonSecundario={{ texto: "CONTÁCTANOS", href: "/contacto" }}
-      />
 
       {/* Footer */}
-      <Footer />
+      <footer className="bg-gray-900 text-white py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8">
+            {/* Logo y descripción */}
+            <div className="space-y-4">
+              <div className="flex items-center">
+                <div className="w-10 h-10 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold">CA</span>
+                </div>
+                <div className="ml-3">
+                  <div className="text-emerald-400 font-bold text-lg">CHOCÓ AVENTURAS</div>
+                </div>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Somos la primera experiencia de turismo extremo en Quibdó que combina cuatrimotos,
+                paintball y cultura local en plena selva tropical del Chocó.
+              </p>
+            </div>
+
+            {/* Links */}
+            <div>
+              <h3 className="text-white font-semibold mb-4 text-sm tracking-widest uppercase">LINKS</h3>
+              <div className="space-y-2">
+                {['Inicio', 'Tours', 'Cuatrimotos', 'Experiencias', 'Contáctanos'].map((link) => (
+                  <Link key={link} href="#" className="block text-gray-400 hover:text-emerald-400 text-sm transition-colors">
+                    {link}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Acerca de */}
+            <div>
+              <h3 className="text-white font-semibold mb-4 text-sm tracking-widest uppercase">ACERCA DE</h3>
+              <div className="space-y-2">
+                {['KM7 Vía Yuto', 'Quibdó - Chocó', 'chocoaventurascuatri@gmail.com'].map((item) => (
+                  <div key={item} className="text-gray-400 text-sm">{item}</div>
+                ))}
+                <div className="text-emerald-400 text-sm">+57 311 703 0436</div>
+              </div>
+            </div>
+
+            {/* Social Media */}
+            <div>
+              <h3 className="text-white font-semibold mb-4 text-sm tracking-widest uppercase">SOCIAL MEDIA</h3>
+              <div className="flex space-x-4">
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-all duration-300">
+                  <Facebook className="w-5 h-5 text-gray-400 hover:text-white" />
+                </a>
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-all duration-300">
+                  <MessageCircle className="w-5 h-5 text-gray-400 hover:text-green-400" />
+                </a>
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-all duration-300">
+                  <Instagram className="w-5 h-5 text-gray-400 hover:text-pink-400" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-800 mt-12 pt-8 text-center">
+            <p className="text-gray-500 text-sm">
+              © 2024 Chocó Aventuras. Todos los derechos reservados.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -1,415 +1,451 @@
 "use client";
 
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import Link from 'next/link';
-import { MapPin, Clock, Mail, Phone, Facebook, Instagram, MessageCircle, Send } from 'lucide-react';
 import { useState } from 'react';
-import Footer from '@/components/Footer';
-import CallToAction from '@/components/CallToAction';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { MapPin, Phone, Mail, Facebook, Instagram, MessageCircle, Menu, X, Search, User, ShoppingCart } from 'lucide-react';
 
 export default function ContactoPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
-    telefono: '',
     mensaje: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Aquí se manejaría el envío del formulario
-    console.log('Formulario enviado:', formData);
-    alert('¡Mensaje enviado! Te contactaremos pronto.');
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission
+    console.log('Form submitted:', formData);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+      <header className="bg-white sticky top-0 z-50 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/" className="font-bold text-xl text-[#145A32] logo-container">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center logo-icon">
-                  <span className="text-white font-bold text-sm">CA</span>
-                </div>
-                Chocó Aventuras
+            {/* Logo */}
+            <Link href="/" className="flex items-center">
+              <div className="w-10 h-10 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">CA</span>
+              </div>
+              <div className="ml-3 hidden sm:block">
+                <div className="text-2xl font-bold text-emerald-600">Chocó</div>
+                <div className="text-sm text-gray-600">AVENTURAS</div>
               </div>
             </Link>
-            <nav className="flex space-x-6">
-              <Link href="/" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Inicio
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-8">
+              <Link href="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                INICIO
               </Link>
-              <Link href="/nosotros" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Nosotros
+              <Link href="/nosotros" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                NOSOTROS
               </Link>
-              <Link href="/tours" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Tours
+              <Link href="/tours" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                TOURS
               </Link>
-              <Link href="/cuadriciclos" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Cuadriciclos
+              <Link href="/cuadriciclos" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                CUATRIMOTOS
               </Link>
-              <Link href="/experiencias" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Experiencias
+              <Link href="/experiencias" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                EXPERIENCIAS
               </Link>
-              <Link href="/contacto" className="nav-item text-[#145A32] font-semibold">
-                Contacto
-              </Link>
-              <Link href="/admin/login" className="nav-item text-gray-700 hover:text-[#145A32]">
-                Admin
+              <Link href="/contacto" className="text-emerald-600 font-semibold transition-colors">
+                CONTACTO
               </Link>
             </nav>
+
+            {/* Header Icons */}
+            <div className="flex items-center gap-4">
+              <button className="p-2 text-gray-700 hover:text-emerald-600 transition-colors">
+                <Search className="h-5 w-5" />
+              </button>
+              <button className="p-2 text-gray-700 hover:text-emerald-600 transition-colors">
+                <User className="h-5 w-5" />
+              </button>
+              <button className="relative p-2 text-gray-700 hover:text-emerald-600 transition-colors">
+                <ShoppingCart className="h-5 w-5" />
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  0
+                </span>
+              </button>
+
+              {/* Mobile menu button */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="lg:hidden p-2 text-gray-700 hover:text-emerald-600 transition-colors"
+              >
+                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
+            </div>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden bg-white border-t">
+            <div className="px-4 py-2 space-y-1">
+              <Link href="/" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">INICIO</Link>
+              <Link href="/nosotros" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">NOSOTROS</Link>
+              <Link href="/tours" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">TOURS</Link>
+              <Link href="/cuadriciclos" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">CUATRIMOTOS</Link>
+              <Link href="/experiencias" className="block px-3 py-2 text-gray-700 hover:text-emerald-600">EXPERIENCIAS</Link>
+              <Link href="/contacto" className="block px-3 py-2 text-emerald-600 font-semibold">CONTACTO</Link>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-[#145A32] to-[#1565C0] py-20 jungle-particles mountain-parallax">
-        <div className="max-w-6xl mx-auto px-4 text-center text-white">
-          <h1 className="text-5xl font-bold mb-6 jungle-text wind-effect">
-            Contáctanos
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 bg-cover bg-center"
+             style={{backgroundImage: "url('https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3')"}} />
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/50" />
+
+        {/* Content */}
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8">
+            <span className="text-emerald-400">CONTÁC</span>
+            <span className="text-white">TANOS</span>
           </h1>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">
-            ¿Listo para vivir la aventura? Estamos aquí para ayudarte a planear tu experiencia perfecta en el Chocó
+
+          <div className="w-24 h-1 bg-emerald-400 mx-auto mb-8"></div>
+
+          <p className="text-lg text-gray-200">
+            SOPORTE
           </p>
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-6 py-3 glass-effect particle-hover">
-            <MessageCircle className="h-5 w-5 text-[#F1C40F]" />
-            <span className="font-medium">Te respondemos en menos de 24 horas</span>
+
+          {/* Breadcrumb */}
+          <div className="mt-8 flex items-center justify-center gap-2 text-sm text-gray-300">
+            <Link href="/" className="hover:text-emerald-400 transition-colors">Home</Link>
+            <span>›</span>
+            <span className="text-emerald-400">Contacto</span>
           </div>
+        </div>
+
+        {/* Bottom Arrow */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+          <div className="w-6 h-6 border-b-2 border-r-2 border-emerald-400 transform rotate-45 animate-bounce"></div>
         </div>
       </section>
 
-      {/* Información de Contacto */}
-      <section className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-[#145A32] mb-12 jungle-text">
-            Información de Contacto
-          </h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            <Card className="text-center hover:shadow-lg transition-all duration-300 card-3d">
-              <CardContent className="p-6">
-                <div className="w-16 h-16 bg-[#145A32] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <MapPin className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="font-bold text-[#145A32] mb-2">Ubicación</h3>
-                <p className="text-gray-700">KM7 VIA YUTO</p>
-                <p className="text-gray-600 text-sm">Quibdó, Chocó</p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center hover:shadow-lg transition-all duration-300 card-3d">
-              <CardContent className="p-6">
-                <div className="w-16 h-16 bg-[#1565C0] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Clock className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="font-bold text-[#145A32] mb-2">Horarios</h3>
-                <p className="text-gray-700">7:00 AM - 5:00 PM</p>
-                <p className="text-gray-600 text-sm">Todos los días</p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center hover:shadow-lg transition-all duration-300 card-3d">
-              <CardContent className="p-6">
-                <div className="w-16 h-16 bg-[#F1C40F] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Mail className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="font-bold text-[#145A32] mb-2">Email</h3>
-                <p className="text-gray-700 text-sm">chocoaventurascuatri@gmail.com</p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center hover:shadow-lg transition-all duration-300 card-3d">
-              <CardContent className="p-6">
-                <div className="w-16 h-16 bg-[#E53935] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Phone className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="font-bold text-[#145A32] mb-2">Reservas</h3>
-                <p className="text-gray-700">WhatsApp</p>
-                <p className="text-gray-600 text-sm">Disponible 24/7</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Formulario de Contacto */}
-      <section className="py-16 bg-[#F5F5F5]">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Formulario */}
+      {/* Contact Information & Form Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-16">
+            {/* Left Column - Contact Info */}
             <div>
-              <h2 className="text-3xl font-bold text-[#145A32] mb-6 jungle-text">
-                Envíanos un Mensaje
-              </h2>
-              <p className="text-gray-700 mb-8">
-                Completa el formulario y te contactaremos para ayudarte a planear tu aventura perfecta.
-              </p>
+              <div className="mb-8">
+                <p className="text-emerald-600 text-sm font-semibold tracking-widest uppercase mb-4">
+                  NOS COMPLACE ASESORARTE
+                </p>
+                <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                  Contactenos
+                </h2>
+                <div className="w-16 h-1 bg-emerald-600 mb-6"></div>
+                <p className="text-gray-600 leading-relaxed">
+                  Si deseas realizar cualquier consulta acerca de nuestras aventuras,
+                  ponte en contacto con nosotros y estaremos encantados de ayudarte.
+                </p>
+              </div>
 
-              <Card className="card-3d">
-                <CardContent className="p-8">
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div>
-                      <label htmlFor="nombre" className="block text-sm font-medium text-[#145A32] mb-2">
-                        Nombre Completo *
-                      </label>
-                      <Input
-                        id="nombre"
-                        name="nombre"
-                        type="text"
-                        required
-                        value={formData.nombre}
-                        onChange={handleChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145A32] focus:border-transparent"
-                        placeholder="Tu nombre completo"
-                      />
+              {/* Contact Details */}
+              <div className="space-y-6">
+                <div className="text-center mb-8">
+                  <h3 className="text-lg font-bold text-gray-900 mb-4">INFORMACIÓN</h3>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-emerald-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-1">Ubicación</h4>
+                    <p className="text-gray-600">KM7 Vía Yuto, Quibdó - Chocó</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-6 h-6 text-emerald-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-1">Teléfono</h4>
+                    <p className="text-gray-600">(311) 703-04-36</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6 text-emerald-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-1">Email</h4>
+                    <p className="text-gray-600">chocoaventurascuatri@gmail.com</p>
+                  </div>
+                </div>
+
+                {/* Links Section */}
+                <div className="mt-8">
+                  <h3 className="text-lg font-bold text-gray-900 mb-4">LINKS</h3>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <Facebook className="w-4 h-4 text-emerald-600" />
+                      <span className="text-gray-600 text-sm">Chocó Aventuras</span>
                     </div>
-
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-[#145A32] mb-2">
-                        Email *
-                      </label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145A32] focus:border-transparent"
-                        placeholder="tu@email.com"
-                      />
+                    <div className="flex items-center gap-2">
+                      <Instagram className="w-4 h-4 text-emerald-600" />
+                      <span className="text-gray-600 text-sm">@chocoaventuras</span>
                     </div>
-
-                    <div>
-                      <label htmlFor="telefono" className="block text-sm font-medium text-[#145A32] mb-2">
-                        Teléfono / WhatsApp
-                      </label>
-                      <Input
-                        id="telefono"
-                        name="telefono"
-                        type="tel"
-                        value={formData.telefono}
-                        onChange={handleChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145A32] focus:border-transparent"
-                        placeholder="+57 300 123 4567"
-                      />
+                    <div className="flex items-center gap-2">
+                      <Phone className="w-4 h-4 text-emerald-600" />
+                      <span className="text-gray-600 text-sm">(311) 703-04-36</span>
                     </div>
-
-                    <div>
-                      <label htmlFor="mensaje" className="block text-sm font-medium text-[#145A32] mb-2">
-                        Mensaje *
-                      </label>
-                      <Textarea
-                        id="mensaje"
-                        name="mensaje"
-                        required
-                        rows={5}
-                        value={formData.mensaje}
-                        onChange={handleChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#145A32] focus:border-transparent"
-                        placeholder="Cuéntanos qué tipo de aventura te interesa, cuántas personas son, fechas aproximadas..."
-                      />
-                    </div>
-
-                    <Button
-                      type="submit"
-                      className="w-full bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold py-4 text-lg adrenaline-button magnetic-button wave-button"
-                    >
-                      <Send className="h-5 w-5 mr-2" />
-                      ENVIAR MENSAJE
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Información Adicional */}
-            <div className="space-y-8">
-              <Card className="card-3d">
-                <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold text-[#145A32] mb-6">¿Tienes Preguntas?</h3>
-                  <div className="space-y-4">
-                    <div className="border-l-4 border-[#F1C40F] pl-4">
-                      <h4 className="font-bold text-[#145A32]">¿Necesito experiencia previa?</h4>
-                      <p className="text-gray-700">No necesitas experiencia. Nuestros guías te enseñarán todo lo necesario.</p>
-                    </div>
-                    <div className="border-l-4 border-[#F1C40F] pl-4">
-                      <h4 className="font-bold text-[#145A32]">¿Qué debo llevar?</h4>
-                      <p className="text-gray-700">Ropa cómoda que se pueda ensuciar y calzado cerrado. Todo el equipo de seguridad lo proporcionamos.</p>
-                    </div>
-                    <div className="border-l-4 border-[#F1C40F] pl-4">
-                      <h4 className="font-bold text-[#145A32]">¿Hacen tours para grupos?</h4>
-                      <p className="text-gray-700">Sí, somos especialistas en actividades para grupos empresariales y team building.</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+            {/* Right Column - Contact Form */}
+            <div className="bg-gray-50 p-8 rounded-2xl">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label className="block text-gray-700 font-medium mb-2">
+                    ¿Cómo te llamas? *
+                  </label>
+                  <input
+                    type="text"
+                    name="nombre"
+                    value={formData.nombre}
+                    onChange={handleInputChange}
+                    placeholder="Tu Nombre"
+                    className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+                    required
+                  />
+                </div>
 
-              <Card className="bg-gradient-to-r from-[#145A32] to-[#1565C0] text-white card-3d">
-                <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold mb-6">Políticas de Reserva</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-[#F1C40F] rounded-full mt-2"></div>
-                      <p><strong>Depósito:</strong> 50% del valor del servicio</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-[#F1C40F] rounded-full mt-2"></div>
-                      <p><strong>Edad mínima:</strong> 14 años (menores con adulto)</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-[#F1C40F] rounded-full mt-2"></div>
-                      <p><strong>Documentos:</strong> Cédula o pasaporte obligatorio</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-[#F1C40F] rounded-full mt-2"></div>
-                      <p><strong>Cancelación:</strong> 24 horas de anticipación</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                <div>
+                  <label className="block text-gray-700 font-medium mb-2">
+                    Correo Electrónico *
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="tu@email.com"
+                    className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-gray-700 font-medium mb-2">
+                    ¿Con qué necesitas ayuda?
+                  </label>
+                  <select className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors">
+                    <option value="">Selecciona una opción</option>
+                    <option value="cuatrimotos">Tours en Cuatrimoto</option>
+                    <option value="paintball">Combate de Paintball</option>
+                    <option value="grupos">Aventuras Grupales</option>
+                    <option value="reservas">Hacer una Reserva</option>
+                    <option value="otro">Otra consulta</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-gray-700 font-medium mb-2">
+                    ¿Cuál es tu pregunta, comentario o sugerencia? *
+                  </label>
+                  <textarea
+                    name="mensaje"
+                    value={formData.mensaje}
+                    onChange={handleInputChange}
+                    rows={5}
+                    placeholder="Cuéntanos sobre tu consulta o la aventura que tienes en mente..."
+                    className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors resize-none"
+                    required
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-4 text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  Enviar
+                </Button>
+              </form>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Redes Sociales */}
-      <section className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-[#145A32] mb-8 jungle-text">
-            Síguenos en Redes Sociales
+      {/* Photo Gallery Section */}
+      <section className="py-20 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 h-96">
+            {/* Photo 1 */}
+            <div className="group relative overflow-hidden cursor-pointer">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3')"}}
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/60 transition-all duration-300" />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="text-white text-center">
+                  <h3 className="text-2xl font-bold mb-2">Aventuras Extremas</h3>
+                  <p className="text-sm">Cuatrimotos en la selva</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Photo 2 */}
+            <div className="group relative overflow-hidden cursor-pointer">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3')"}}
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/60 transition-all duration-300" />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="text-white text-center">
+                  <h3 className="text-2xl font-bold mb-2">Paintball Extremo</h3>
+                  <p className="text-sm">Combates en escenarios naturales</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Photo 3 */}
+            <div className="group relative overflow-hidden cursor-pointer">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3')"}}
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/60 transition-all duration-300" />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="text-white text-center">
+                  <h3 className="text-2xl font-bold mb-2">Hay Mucho Por Descubrir</h3>
+                  <Button className="mt-4 bg-emerald-600 hover:bg-emerald-700 text-white">
+                    Facebook
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WhatsApp Contact Section */}
+      <section className="py-20 bg-gray-900 text-white">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-4xl md:text-6xl font-bold mb-8">
+            <span className="text-emerald-400">CONTÁCTANOS</span>
+            <span className="text-white">EN UN CLIC</span>
           </h2>
-          <p className="text-xl text-gray-600 mb-8">
-            Mantente al día con nuestras aventuras y promociones especiales
+
+          <div className="w-24 h-1 bg-emerald-400 mx-auto mb-8"></div>
+
+          <p className="text-lg text-gray-300 mb-4">
+            ATENCIÓN RÁPIDA
+          </p>
+          <p className="text-emerald-400 text-lg font-semibold mb-12">
+            POR WHATSAPP
           </p>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center hover:shadow-lg transition-all duration-300 card-3d particle-hover">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-[#1877F2] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Facebook className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="font-bold text-[#145A32] mb-2">Facebook</h3>
-                <p className="text-gray-700 mb-4">Fotos y videos de nuestras aventuras</p>
-                <Button variant="outline" className="border-[#1877F2] text-[#1877F2] hover:bg-[#1877F2] hover:text-white magnetic-button">
-                  Seguir
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center hover:shadow-lg transition-all duration-300 card-3d particle-hover">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-gradient-to-r from-[#F58529] to-[#DD2A7B] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Instagram className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="font-bold text-[#145A32] mb-2">Instagram</h3>
-                <p className="text-gray-700 mb-4">Stories y reels de nuestras experiencias</p>
-                <Button variant="outline" className="border-[#E4405F] text-[#E4405F] hover:bg-[#E4405F] hover:text-white magnetic-button">
-                  Seguir
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center hover:shadow-lg transition-all duration-300 card-3d particle-hover">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold text-lg">TT</span>
-                </div>
-                <h3 className="font-bold text-[#145A32] mb-2">TikTok</h3>
-                <p className="text-gray-700 mb-4">Videos cortos llenos de adrenalina</p>
-                <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white magnetic-button">
-                  Seguir
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
+          <a
+            href="https://wa.me/573117030436"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block"
+          >
+            <div className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full text-xl font-bold transition-all duration-300 hover:scale-105 shadow-2xl">
+              📱 +57 311703 0436
+            </div>
+          </a>
         </div>
       </section>
-
-      {/* Mapa y Ubicación */}
-      <section className="py-16 bg-[#F5F5F5]">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-[#145A32] mb-12 jungle-text">
-            Cómo Llegar
-          </h2>
-
-          <div className="grid lg:grid-cols-2 gap-12">
-            <Card className="card-3d">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold text-[#145A32] mb-6">Ubicación</h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <MapPin className="h-6 w-6 text-[#145A32] mt-1" />
-                    <div>
-                      <p className="font-bold">KM7 VIA YUTO</p>
-                      <p className="text-gray-700">Quibdó, Chocó, Colombia</p>
-                    </div>
-                  </div>
-                  <div className="bg-[#F5F5F5] p-4 rounded-lg">
-                    <h4 className="font-bold text-[#145A32] mb-2">Instrucciones:</h4>
-                    <ol className="text-gray-700 space-y-2 text-sm">
-                      <li>1. Desde Quibdó, tomar la vía hacia Yuto</li>
-                      <li>2. Avanzar 7 kilómetros por la carretera principal</li>
-                      <li>3. Buscar las señales de "Chocó Aventuras"</li>
-                      <li>4. Llegar a nuestras instalaciones en plena selva</li>
-                    </ol>
-                  </div>
-                  <div className="bg-gradient-to-r from-[#145A32] to-[#1565C0] text-white p-4 rounded-lg">
-                    <p className="font-bold mb-2">💡 Consejo:</p>
-                    <p className="text-sm">Te recomendamos usar GPS o contactarnos por WhatsApp para guiarte mejor al lugar.</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="card-3d">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold text-[#145A32] mb-6">Contacto Directo</h3>
-                <div className="space-y-6">
-                  <div className="bg-[#25D366] text-white p-4 rounded-lg text-center">
-                    <h4 className="font-bold mb-2">WhatsApp</h4>
-                    <p className="mb-4">La forma más rápida de contactarnos</p>
-                    <Button className="bg-white text-[#25D366] hover:bg-gray-100 font-bold magnetic-button">
-                      Enviar WhatsApp
-                    </Button>
-                  </div>
-
-                  <div className="bg-[#145A32] text-white p-4 rounded-lg text-center">
-                    <h4 className="font-bold mb-2">Email</h4>
-                    <p className="mb-2 text-sm">chocoaventurascuatri@gmail.com</p>
-                    <p className="text-xs opacity-90">Respuesta en menos de 24 horas</p>
-                  </div>
-
-                  <div className="border-2 border-[#F1C40F] p-4 rounded-lg text-center">
-                    <h4 className="font-bold text-[#145A32] mb-2">Horarios de Atención</h4>
-                    <p className="text-gray-700">Lunes a Domingo</p>
-                    <p className="font-bold text-[#145A32]">7:00 AM - 5:00 PM</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action Final */}
-      <CallToAction
-        botonSecundario={{ texto: "VER TOURS", href: "/tours" }}
-      />
 
       {/* Footer */}
-      <Footer />
+      <footer className="bg-black text-white py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8">
+            {/* Logo y descripción */}
+            <div className="space-y-4">
+              <div className="flex items-center">
+                <div className="w-10 h-10 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold">CA</span>
+                </div>
+                <div className="ml-3">
+                  <div className="text-emerald-400 font-bold text-lg">CHOCÓ AVENTURAS</div>
+                </div>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Nuestra amplia experiencia en el sector nos permite crear la gran variedad de
+                servicios. Contamos desde aventuras en cuatrimoto hasta combates de paintball
+                y experiencias culturales únicas.
+              </p>
+            </div>
+
+            {/* Links */}
+            <div>
+              <h3 className="text-white font-semibold mb-4 text-sm tracking-widest uppercase">LINKS</h3>
+              <div className="space-y-2">
+                {['Inicio', 'Tours', 'Cuatrimotos', 'Experiencias'].map((link) => (
+                  <Link key={link} href="#" className="block text-gray-400 hover:text-emerald-400 text-sm transition-colors">
+                    {link}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Acerca de */}
+            <div>
+              <h3 className="text-white font-semibold mb-4 text-sm tracking-widest uppercase">ACERCA DE</h3>
+              <div className="space-y-2">
+                <div className="text-gray-400 text-sm">Chocó-Quibdó</div>
+                <div className="text-gray-400 text-sm">Aventuras</div>
+                <div className="text-gray-400 text-sm">Escríbenos</div>
+                <div className="text-emerald-400 text-sm">+57 311703 0436</div>
+              </div>
+            </div>
+
+            {/* Social Media */}
+            <div>
+              <h3 className="text-white font-semibold mb-4 text-sm tracking-widest uppercase">SOCIAL MEDIA</h3>
+              <div className="flex space-x-4">
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-all duration-300">
+                  <Facebook className="w-5 h-5 text-gray-400 hover:text-white" />
+                </a>
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-all duration-300">
+                  <MessageCircle className="w-5 h-5 text-gray-400 hover:text-green-400" />
+                </a>
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-all duration-300">
+                  <Instagram className="w-5 h-5 text-gray-400 hover:text-pink-400" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-800 mt-12 pt-8 text-center">
+            <p className="text-gray-500 text-sm">
+              © 2024 Chocó Aventuras. Todos los derechos reservados.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -14,19 +14,19 @@ export async function GET(
       );
     }
 
-    const cuadriciclo = await db.cuadriciclos.findById(id);
-    if (!cuadriciclo) {
+    const cuatrimoto = await db.cuatrimotos.findById(id);
+    if (!cuatrimoto) {
       return NextResponse.json(
-        { error: 'Cuadriciclo not found' },
+        { error: 'Cuatrimoto not found' },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(cuadriciclo);
+    return NextResponse.json(cuatrimoto);
   } catch (error) {
-    console.error('Error fetching cuadriciclo:', error);
+    console.error('Error fetching cuatrimoto:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch cuadriciclo' },
+      { error: 'Failed to fetch cuatrimoto' },
       { status: 500 }
     );
   }

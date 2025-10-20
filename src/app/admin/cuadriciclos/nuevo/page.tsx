@@ -16,7 +16,7 @@ import { ArrowLeft, Save, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-interface CuadricicloForm {
+interface CuatrimotoForm {
   nombre: string;
   marca: string;
   modelo: string;
@@ -29,13 +29,13 @@ interface CuadricicloForm {
   caracteristicas: string[];
 }
 
-async function createCuadriciclo(data: Omit<CuadricicloForm, 'año' | 'precio_hora' | 'precio_dia'> & { año: number | null; precio_hora: number; precio_dia: number; fotos: string[] }) {
-  const response = await fetch('/api/cuadriciclos', {
+async function createCuatrimoto(data: Omit<CuatrimotoForm, 'año' | 'precio_hora' | 'precio_dia'> & { año: number | null; precio_hora: number; precio_dia: number; fotos: string[] }) {
+  const response = await fetch('/api/cuatrimotos', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   });
-  if (!response.ok) throw new Error('Error creating cuadriciclo');
+  if (!response.ok) throw new Error('Error creating cuatrimoto');
   return response.json();
 }
 
@@ -46,13 +46,13 @@ const CARACTERISTICAS_DISPONIBLES = [
   'Dirección asistida', 'Luces LED', 'Winch incluido'
 ];
 
-export default function NuevoCuadriciclo() {
+export default function NuevoCuatrimoto() {
   const router = useRouter();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { user, isLoading: authLoading, requireAuth } = useAuth();
 
-  const [formData, setFormData] = useState<CuadricicloForm>({
+  const [formData, setFormData] = useState<CuatrimotoForm>({
     nombre: '',
     marca: 'Yamaha',
     modelo: '',
@@ -72,19 +72,19 @@ export default function NuevoCuadriciclo() {
   }, [authLoading, requireAuth]);
 
   const createMutation = useMutation({
-    mutationFn: createCuadriciclo,
+    mutationFn: createCuatrimoto,
     onSuccess: () => {
       toast({
-        title: "¡Cuadriciclo creado!",
-        description: "El cuadriciclo ha sido agregado exitosamente.",
+        title: "¡Cuatrimoto creado!",
+        description: "El cuatrimoto ha sido agregado exitosamente.",
       });
-      queryClient.invalidateQueries({ queryKey: ['admin-cuadriciclos'] });
-      router.push('/admin/cuadriciclos');
+      queryClient.invalidateQueries({ queryKey: ['admin-cuatrimotos'] });
+      router.push('/admin/cuatrimotos');
     },
     onError: () => {
       toast({
         title: "Error",
-        description: "Hubo un problema al crear el cuadriciclo.",
+        description: "Hubo un problema al crear el cuatrimoto.",
         variant: "destructive",
       });
     }
@@ -103,7 +103,7 @@ export default function NuevoCuadriciclo() {
       return;
     }
 
-    const cuadricicloData = {
+    const cuatrimotoData = {
       ...formData,
       año: formData.año ? parseInt(formData.año) : null,
       precio_hora: parseInt(formData.precio_hora),
@@ -111,7 +111,7 @@ export default function NuevoCuadriciclo() {
       fotos: [] // Por ahora sin fotos
     };
 
-    createMutation.mutate(cuadricicloData);
+    createMutation.mutate(cuatrimotoData);
   };
 
   const handleCaracteristicaChange = (caracteristica: string, checked: boolean) => {
@@ -146,7 +146,7 @@ export default function NuevoCuadriciclo() {
                   Inicio
                 </Link>
                 <Link href="/cuadriciclos" className="text-gray-700 hover:text-[#145A32]">
-                  Cuadriciclos
+                  Cuatrimotos
                 </Link>
                 <Link href="/reservas" className="text-gray-700 hover:text-[#145A32]">
                   Reservar
@@ -169,8 +169,8 @@ export default function NuevoCuadriciclo() {
             Admin
           </Link>
           <span className="text-gray-400">/</span>
-          <Link href="/admin/cuadriciclos" className="text-gray-600 hover:text-[#145A32]">
-            Cuadriciclos
+          <Link href="/admin/cuatrimotos" className="text-gray-600 hover:text-[#145A32]">
+            Cuatrimotos
           </Link>
           <span className="text-gray-400">/</span>
           <span className="text-[#145A32]">Nuevo</span>
@@ -179,10 +179,10 @@ export default function NuevoCuadriciclo() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-[#145A32]">Agregar Cuadriciclo</h1>
-            <p className="text-gray-600 mt-2">Completa la información del nuevo cuadriciclo</p>
+            <h1 className="text-3xl font-bold text-[#145A32]">Agregar Cuatrimoto</h1>
+            <p className="text-gray-600 mt-2">Completa la información del nuevo cuatrimoto</p>
           </div>
-          <Link href="/admin/cuadriciclos">
+          <Link href="/admin/cuatrimotos">
             <Button variant="outline" className="flex items-center gap-2">
               <ArrowLeft className="h-4 w-4" />
               Volver
@@ -193,7 +193,7 @@ export default function NuevoCuadriciclo() {
         {/* Form */}
         <Card>
           <CardHeader>
-            <CardTitle>Información del Cuadriciclo</CardTitle>
+            <CardTitle>Información del Cuatrimoto</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -307,7 +307,7 @@ export default function NuevoCuadriciclo() {
                   id="descripcion"
                   value={formData.descripcion}
                   onChange={(e) => setFormData(prev => ({...prev, descripcion: e.target.value}))}
-                  placeholder="Describe las características principales del cuadriciclo..."
+                  placeholder="Describe las características principales del cuatrimoto..."
                   rows={3}
                 />
               </div>
@@ -339,9 +339,9 @@ export default function NuevoCuadriciclo() {
                   disabled={createMutation.isPending}
                 >
                   <Save className="h-4 w-4" />
-                  {createMutation.isPending ? 'Guardando...' : 'Guardar Cuadriciclo'}
+                  {createMutation.isPending ? 'Guardando...' : 'Guardar Cuatrimoto'}
                 </Button>
-                <Link href="/admin/cuadriciclos">
+                <Link href="/admin/cuatrimotos">
                   <Button variant="outline" className="flex items-center gap-2">
                     <X className="h-4 w-4" />
                     Cancelar
