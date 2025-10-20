@@ -87,7 +87,7 @@ export default function CuatrimotosPage() {
         <div className="bg-gradient-to-r from-[#145A32] to-[#1565C0] rounded-3xl p-8 mb-12 text-white jungle-particles adventure-glow">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
-              <h2 className="text-4xl font-bold mb-4 jungle-text quad-vibration">YAMAHA GRIZZLY 700</h2>
+              <h2 className="text-2xl font-bold mb-4 jungle-text quad-vibration">YAMAHA GRIZZLY 700</h2>
               <p className="text-xl mb-6">Modelo 2009 - Edición Especial Rojo</p>
               <div className="space-y-3 mb-6">
                 <div className="flex items-center gap-3">

@@ -152,12 +152,12 @@ export default function Homepage() {
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
           <div className="mb-8">
             <p className="text-sm text-white/80 mb-4">- Bienvenido -</p>
-            <h1 className="text-6xl md:text-8xl font-bold mb-4">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">
               <span className="text-emerald-400">CHOCÓ</span>
               <br />
               <span className="text-white">AVENTURAS</span>
             </h1>
-            <p className="text-xl text-white/90 mb-8">
+            <p className="text-lg text-white/90 mb-8">
               Dispara, acelera y conquista la aventura
             </p>
             <Button
@@ -195,10 +195,10 @@ export default function Homepage() {
 
         {/* Content */}
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-          <h2 className="text-5xl md:text-7xl font-bold mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
             EXPLORA ELIGE Y VIVE LA ACCIÓN
           </h2>
-          <p className="text-xl text-white/90 mb-12">
+          <p className="text-lg text-white/90 mb-12">
             Cuatrimotos y paintball en el corazón del Chocó: pensados para aventureros como tú.
           </p>
 
@@ -290,7 +290,7 @@ export default function Homepage() {
           {/* Header */}
           <div className="text-center text-white mb-16">
             <p className="text-lg mb-4">Vive la aventura, siente la adrenalina.</p>
-            <h2 className="text-5xl md:text-7xl font-bold mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
               <span className="text-emerald-400">CHOCÓ</span>
               <br />
               <span className="text-white">CUATRIMOTOS</span>
@@ -429,7 +429,7 @@ export default function Homepage() {
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
           <p className="text-sm mb-4">-aventura extrema-</p>
-          <h2 className="text-4xl md:text-6xl font-bold mb-8">
+          <h2 className="text-2xl md:text-4xl font-bold mb-8">
             Dudas sobre nuestros paseos
           </h2>
           <p className="text-xl mb-12">
@@ -572,7 +572,7 @@ export default function Homepage() {
       {/* Sección WhatsApp */}
       <section className="py-20 bg-gradient-to-r from-green-600 to-green-700">
         <div className="max-w-4xl mx-auto px-4 text-center text-white">
-          <h2 className="text-4xl md:text-6xl font-bold mb-8">
+          <h2 className="text-2xl md:text-4xl font-bold mb-8">
             Contáctanos
             <br />
             en un clic

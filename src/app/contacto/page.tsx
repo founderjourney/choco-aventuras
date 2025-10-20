@@ -118,7 +118,7 @@ export default function ContactoPage() {
 
         {/* Content */}
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-8">
             <span className="text-emerald-400">CONTÁC</span>
             <span className="text-white">TANOS</span>
           </h1>
@@ -153,7 +153,7 @@ export default function ContactoPage() {
                 <p className="text-emerald-600 text-sm font-semibold tracking-widest uppercase mb-4">
                   NOS COMPLACE ASESORARTE
                 </p>
-                <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">
                   Contactenos
                 </h2>
                 <div className="w-16 h-1 bg-emerald-600 mb-6"></div>
@@ -351,17 +351,17 @@ export default function ContactoPage() {
       {/* WhatsApp Contact Section */}
       <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-6xl font-bold mb-8">
+          <h2 className="text-2xl md:text-4xl font-bold mb-8">
             <span className="text-emerald-400">CONTÁCTANOS</span>
             <span className="text-white">EN UN CLIC</span>
           </h2>
 
           <div className="w-24 h-1 bg-emerald-400 mx-auto mb-8"></div>
 
-          <p className="text-lg text-gray-300 mb-4">
+          <p className="text-base text-gray-300 mb-4">
             ATENCIÓN RÁPIDA
           </p>
-          <p className="text-emerald-400 text-lg font-semibold mb-12">
+          <p className="text-emerald-400 text-base font-semibold mb-12">
             POR WHATSAPP
           </p>
 

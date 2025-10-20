@@ -107,7 +107,7 @@ export default function ExperienciasPage() {
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-[#145A32] to-[#1565C0] py-20 jungle-particles mountain-parallax">
         <div className="max-w-6xl mx-auto px-4 text-center text-white">
-          <h1 className="text-5xl font-bold mb-6 jungle-text wind-effect">
+          <h1 className="text-3xl font-bold mb-6 jungle-text wind-effect">
             Experiencias Únicas
           </h1>
           <p className="text-xl mb-8 max-w-4xl mx-auto">
@@ -120,7 +120,7 @@ export default function ExperienciasPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-[#145A32] mb-4 jungle-text">
+            <h2 className="text-2xl font-bold text-[#145A32] mb-4 jungle-text">
               Nuestras 4 Experiencias Principales
             </h2>
             <p className="text-xl text-gray-600">
@@ -165,7 +165,7 @@ export default function ExperienciasPage() {
       <section className="py-16 bg-[#F5F5F5]">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-[#145A32] mb-6 jungle-text">
+            <h2 className="text-2xl font-bold text-[#145A32] mb-6 jungle-text">
               ¿Por qué somos únicos en Colombia?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -216,7 +216,7 @@ export default function ExperienciasPage() {
       {/* Lo que incluye cada experiencia */}
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-[#145A32] mb-12 jungle-text">
+          <h2 className="text-2xl font-bold text-center text-[#145A32] mb-12 jungle-text">
             Qué Incluye Cada Experiencia
           </h2>
 

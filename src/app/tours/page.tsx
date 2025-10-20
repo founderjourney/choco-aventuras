@@ -102,7 +102,7 @@ export default function ToursPage() {
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-[#145A32] to-[#1565C0] py-20 jungle-particles mountain-parallax">
         <div className="max-w-6xl mx-auto px-4 text-center text-white">
-          <h1 className="text-5xl font-bold mb-6 jungle-text wind-effect">
+          <h1 className="text-3xl font-bold mb-6 jungle-text wind-effect">
             Nuestros Tours de Aventura
           </h1>
           <p className="text-xl mb-8 max-w-3xl mx-auto">
@@ -119,7 +119,7 @@ export default function ToursPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-[#145A32] mb-4 jungle-text">
+            <h2 className="text-2xl font-bold text-[#145A32] mb-4 jungle-text">
               Experiencias de Aventura
             </h2>
             <p className="text-xl text-gray-600">

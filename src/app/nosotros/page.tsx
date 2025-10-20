@@ -100,17 +100,17 @@ export default function NosotrosPage() {
              style={{backgroundImage: "url('https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3')"}} />
 
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-8">
+          <h1 className="text-3xl md:text-5xl font-bold mb-8">
             <span className="text-emerald-600">SOBRE</span>
             <span className="text-gray-900">NOSOTROS</span>
           </h1>
 
           <div className="w-24 h-1 bg-emerald-600 mx-auto mb-8"></div>
 
-          <p className="text-xl text-gray-600 mb-4">
+          <p className="text-lg text-gray-600 mb-4">
             FABRICAMOS AVENTURAS MEMORABLES EN LA
           </p>
-          <p className="text-lg text-emerald-600 font-semibold">
+          <p className="text-base text-emerald-600 font-semibold">
             SELVA DEL CHOCÓ
           </p>
         </div>
@@ -126,13 +126,13 @@ export default function NosotrosPage() {
                 NUESTRA HISTORIA
               </p>
 
-              <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900">
+              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900">
                 <span className="text-emerald-600">EL ARTE</span> DE CREAR<br />
-                <span className="text-2xl font-normal text-gray-600">AVENTURAS</span>
+                <span className="text-xl font-normal text-gray-600">AVENTURAS</span>
               </h2>
 
               <div className="space-y-6 text-gray-600 leading-relaxed">
-                <p className="text-lg">
+                <p className="text-base">
                   <strong className="text-gray-900">Chocó Aventuras</strong> es una empresa familiar con más de
                   una década de experiencia, dedicada al turismo de aventura que fusiona la emoción extrema
                   con las técnicas más modernas de guianza especializada. Cada experiencia que creamos cuenta
@@ -198,7 +198,7 @@ export default function NosotrosPage() {
             <p className="text-emerald-600 text-sm font-semibold tracking-widest uppercase mb-4">
               NUESTRAS AVENTURAS
             </p>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
               <span className="text-emerald-600">MOMENTOS</span> ÉPICOS
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -330,13 +330,13 @@ export default function NosotrosPage() {
       {/* Contáctanos Section */}
       <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-6xl font-bold mb-8">
+          <h2 className="text-2xl md:text-4xl font-bold mb-8">
             <span className="text-emerald-400">CONTÁCTANOS</span> EN UN CLIC
           </h2>
 
           <div className="w-24 h-1 bg-emerald-400 mx-auto mb-8"></div>
 
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-300 mb-12 max-w-2xl mx-auto">
             Reserva tu aventura por <span className="text-emerald-400">WhatsApp</span>
           </p>
 
@@ -360,7 +360,7 @@ export default function NosotrosPage() {
             <p className="text-emerald-600 text-sm font-semibold tracking-widest uppercase mb-4">
               RESPUESTAS RÁPIDAS
             </p>
-            <h2 className="text-4xl font-bold text-gray-900 mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8">
               PREGUNTAS FRECUENTES
             </h2>
           </div>
