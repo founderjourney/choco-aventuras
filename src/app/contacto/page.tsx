@@ -218,54 +218,66 @@ export default function ContactoPage() {
         </div>
       </section>
 
-      {/* Photo Gallery Section */}
-      <section className="py-20 bg-gray-900">
+      {/* Gallery Section */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 h-96">
-            {/* Photo 1 */}
-            <div className="group relative overflow-hidden cursor-pointer">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
+              <span className="text-emerald-600">CONOCE</span> NUESTRAS AVENTURAS
+            </h2>
+            <p className="text-lg text-gray-600">Explora lo que ofrecemos en el Chocó</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Card 1 - Cuatrimotos */}
+            <div className="group relative overflow-hidden rounded-2xl shadow-lg h-80 bg-white">
               <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                 style={{backgroundImage: "url('https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3')"}}
               />
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/60 transition-all duration-300" />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="text-white text-center">
-                  <h3 className="text-2xl font-bold mb-2">Aventuras Extremas</h3>
-                  <p className="text-sm">Cuatrimotos en la selva</p>
-                </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <h3 className="text-xl font-bold mb-2">Alquiler de Cuatrimotos</h3>
+                <p className="text-sm mb-4 opacity-90">Aventuras por la selva tropical del Chocó</p>
+                <Link href="/cuadriciclos">
+                  <Button className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm px-4 py-2">
+                    Ver Cuatrimotos
+                  </Button>
+                </Link>
               </div>
             </div>
 
-            {/* Photo 2 */}
-            <div className="group relative overflow-hidden cursor-pointer">
+            {/* Card 2 - Paintball */}
+            <div className="group relative overflow-hidden rounded-2xl shadow-lg h-80 bg-white">
               <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                 style={{backgroundImage: "url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3')"}}
               />
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/60 transition-all duration-300" />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="text-white text-center">
-                  <h3 className="text-2xl font-bold mb-2">Paintball Extremo</h3>
-                  <p className="text-sm">Combates en escenarios naturales</p>
-                </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <h3 className="text-xl font-bold mb-2">Paintball</h3>
+                <p className="text-sm mb-4 opacity-90">Próximamente - Combates en escenarios naturales</p>
+                <Button disabled className="bg-gray-600 text-white text-sm px-4 py-2 opacity-75">
+                  Próximamente
+                </Button>
               </div>
             </div>
 
-            {/* Photo 3 */}
-            <div className="group relative overflow-hidden cursor-pointer">
+            {/* Card 3 - Experiencias */}
+            <div className="group relative overflow-hidden rounded-2xl shadow-lg h-80 bg-white">
               <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                 style={{backgroundImage: "url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3')"}}
               />
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/60 transition-all duration-300" />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="text-white text-center">
-                  <h3 className="text-2xl font-bold mb-2">Hay Mucho Por Descubrir</h3>
-                  <Button className="mt-4 bg-emerald-600 hover:bg-emerald-700 text-white">
-                    Facebook
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <h3 className="text-xl font-bold mb-2">Explora el Chocó</h3>
+                <p className="text-sm mb-4 opacity-90">Cultura y naturaleza en un solo lugar</p>
+                <Link href="/experiencias">
+                  <Button className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm px-4 py-2">
+                    Ver Experiencias
                   </Button>
-                </div>
+                </Link>
               </div>
             </div>
           </div>
@@ -273,19 +285,19 @@ export default function ContactoPage() {
       </section>
 
       {/* WhatsApp Contact Section */}
-      <section className="py-20 bg-gray-900 text-white">
+      <section className="py-20 bg-emerald-600 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl md:text-4xl font-bold mb-8">
-            <span className="text-emerald-400">CONTÁCTANOS</span>
+            <span className="text-white">CONTÁCTANOS</span>
             <span className="text-white">EN UN CLIC</span>
           </h2>
 
           <div className="w-24 h-1 bg-emerald-400 mx-auto mb-8"></div>
 
-          <p className="text-base text-gray-300 mb-4">
+          <p className="text-base text-emerald-100 mb-4">
             ATENCIÓN RÁPIDA
           </p>
-          <p className="text-emerald-400 text-base font-semibold mb-12">
+          <p className="text-white text-base font-semibold mb-12">
             POR WHATSAPP
           </p>
 

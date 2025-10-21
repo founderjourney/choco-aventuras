@@ -16,7 +16,7 @@ export default function Footer() {
               <h3 className="text-xl font-bold">Chocó Aventuras</h3>
             </div>
             <p className="text-emerald-100 mb-4 leading-relaxed">
-              La primera experiencia de turismo extremo en Quibdó que combina cuatrimotos, paintball y cultura local.
+              Alquiler de cuatrimotos para turismo de aventura en Quibdó. Próximamente paintball y cultura local.
             </p>
             <p className="text-[#F1C40F] font-bold italic">
               &quot;Aquí la aventura no se cuenta... ¡se vive!&quot;
@@ -76,11 +76,11 @@ export default function Footer() {
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <span className="text-[#F1C40F]"></span>
-                <span className="text-emerald-100 text-sm">Tours en Cuatrimoto</span>
+                <span className="text-emerald-100 text-sm">Alquiler de Cuatrimotos</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-[#F1C40F]"></span>
-                <span className="text-emerald-100 text-sm">Paintball Natural</span>
+                <span className="text-emerald-100 text-sm">Paintball (Próximamente)</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-[#F1C40F]"></span>

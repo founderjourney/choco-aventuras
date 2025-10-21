@@ -33,7 +33,7 @@ export default function NosotrosPage() {
           <div className="w-24 h-1 bg-emerald-400 mx-auto mb-8"></div>
 
           <p className="text-lg text-gray-200 mb-4">
-            CREAMOS AVENTURAS MEMORABLES EN LA
+            OFRECEMOS ALQUILER DE CUATRIMOTOS EN LA
           </p>
           <p className="text-base text-emerald-400 font-semibold">
             SELVA DEL CHOCÓ
@@ -77,30 +77,28 @@ export default function NosotrosPage() {
               </p>
 
               <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900">
-                <span className="text-emerald-600">EL ARTE</span> DE CREAR<br />
-                <span className="text-xl font-normal text-gray-600">AVENTURAS</span>
+                <span className="text-emerald-600">ALQUILER</span> DE CUATRIMOTOS<br />
+                <span className="text-xl font-normal text-gray-600">Y AVENTURAS</span>
               </h2>
 
               <div className="space-y-6 text-gray-600 leading-relaxed">
                 <p className="text-base">
-                  <strong className="text-gray-900">Chocó Aventuras</strong> es una empresa familiar con más de
-                  una década de experiencia, dedicada al turismo de aventura que fusiona la emoción extrema
-                  con las técnicas más modernas de guianza especializada. Cada experiencia que creamos cuenta
-                  una historia única de adrenalina y conexión con la naturaleza.
+                  <strong className="text-gray-900">Chocó Aventuras</strong> se especializa en el alquiler
+                  de cuatrimotos para turismo de aventura. Ofrecemos experiencias únicas que combinan
+                  emoción y conexión con la naturaleza en la selva tropical del Chocó.
                 </p>
 
                 <p>
-                  En nuestras instalaciones, ubicadas en el <strong className="text-emerald-600">
-                  KM7 Vía Yuto, Quibdó - Chocó</strong>, un equipo de guías especializados trabaja
-                  día a día para brindar aventuras excepcionales que reflejan la biodiversidad y
-                  cultura de nuestra región.
+                  Ubicados en el <strong className="text-emerald-600">
+                  KM7 Vía Yuto, Quibdó - Chocó</strong>, ofrecemos alquiler de cuatrimotos
+                  con guías especializados para aventuras seguras que te permiten explorar
+                  la biodiversidad y cultura de nuestra región.
                 </p>
 
                 <p>
-                  <strong className="text-gray-900">Nuestra Pasión por la Aventura:</strong> La selva
-                  tropical del Chocó ha inspirado nuestra tradición por más de una década, convirtiendo
-                  cada cuatrimoto y experiencia en símbolos de aventura y adrenalina que trascienden
-                  expectativas.
+                  <strong className="text-gray-900">Servicios que Ofrecemos:</strong> Alquiler de cuatrimotos
+                  para recorridos por la selva tropical, con equipos de seguridad incluidos.
+                  Próximamente también tendremos disponible paintball para complementar tu experiencia de aventura.
                 </p>
               </div>
 
@@ -270,9 +268,9 @@ export default function NosotrosPage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Button className="bg-green-600 hover:bg-green-700 text-white px-12 py-6 text-lg rounded-full shadow-xl flex items-center gap-4 mx-auto">
-              <MessageCircle className="w-7 h-7" />
-              <span className="font-bold text-xl">+57 311 703 0436</span>
+            <Button className="bg-green-600 hover:bg-green-700 text-white px-8 md:px-12 py-4 md:py-6 text-base md:text-lg rounded-full shadow-xl flex items-center gap-2 md:gap-4 mx-auto">
+              <MessageCircle className="w-5 h-5 md:w-7 md:h-7" />
+              <span className="font-bold text-lg md:text-xl">+57 311 703 0436</span>
             </Button>
           </a>
         </div>
@@ -343,8 +341,8 @@ export default function NosotrosPage() {
                 </div>
               </div>
               <p className="text-gray-400 text-sm leading-relaxed">
-                Somos la primera experiencia de turismo extremo en Quibdó que combina cuatrimotos,
-                paintball y cultura local en plena selva tropical del Chocó.
+                Ofrecemos alquiler de cuatrimotos para turismo de aventura en la selva tropical del Chocó.
+                Próximamente también paintball y experiencias culturales locales.
               </p>
             </div>
 

@@ -121,7 +121,7 @@ export default function Homepage() {
           <div className="grid md:grid-cols-2 gap-8">
             {/* Card 1 - Paseo Selva */}
             <div className="group relative h-80 perspective-1000">
-              <div className="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d group-hover:rotate-y-180">
+              <div className="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d group-hover:rotate-y-180 md:group-hover:rotate-y-180 [&.flipped]:rotate-y-180">
                 {/* Frente */}
                 <div className="absolute inset-0 backface-hidden rounded-2xl overflow-hidden">
                   <div
@@ -133,21 +133,34 @@ export default function Homepage() {
                       <p className="text-sm mb-2">Aventura en la selva tropical</p>
                       <h3 className="text-3xl font-bold">RUTAS EN CUATRIMOTO</h3>
                     </div>
+                    {/* Botón para móvil */}
+                    <div className="absolute inset-0 flex items-center justify-center md:hidden">
+                      <Button
+                        className="bg-emerald-600/90 text-white hover:bg-emerald-700 px-6 py-3 text-sm font-semibold backdrop-blur-sm"
+                        onClick={(e) => {
+                          e.currentTarget.closest('.group')?.classList.toggle('flipped');
+                        }}
+                      >
+                        Ver más
+                      </Button>
+                    </div>
                   </div>
                 </div>
 
                 {/* Reverso */}
                 <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-emerald-600 flex items-center justify-center">
-                  <Button className="bg-white text-emerald-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
-                    Reservar
-                  </Button>
+                  <Link href="/cuadriciclos">
+                    <Button className="bg-white text-emerald-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
+                      RESERVAR
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
 
             {/* Card 2 - Aventura Extrema */}
             <div className="group relative h-80 perspective-1000">
-              <div className="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d group-hover:rotate-y-180">
+              <div className="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d group-hover:rotate-y-180 md:group-hover:rotate-y-180 [&.flipped]:rotate-y-180">
                 {/* Frente */}
                 <div className="absolute inset-0 backface-hidden rounded-2xl overflow-hidden">
                   <div
@@ -159,13 +172,24 @@ export default function Homepage() {
                       <p className="text-sm mb-2">Combate con adrenalina pura</p>
                       <h3 className="text-3xl font-bold">BATALLAS DE PAINTBALL</h3>
                     </div>
+                    {/* Botón para móvil */}
+                    <div className="absolute inset-0 flex items-center justify-center md:hidden">
+                      <Button
+                        className="bg-orange-600/90 text-white hover:bg-orange-700 px-6 py-3 text-sm font-semibold backdrop-blur-sm"
+                        onClick={(e) => {
+                          e.currentTarget.closest('.group')?.classList.toggle('flipped');
+                        }}
+                      >
+                        Ver más
+                      </Button>
+                    </div>
                   </div>
                 </div>
 
                 {/* Reverso */}
                 <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-orange-600 flex items-center justify-center">
                   <Button className="bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
-                    Próximamente
+                    PRÓXIMAMENTE
                   </Button>
                 </div>
               </div>
@@ -272,9 +296,9 @@ export default function Homepage() {
                 style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
               />
               <div className="absolute inset-0 bg-gradient-to-br from-pink-500/60 to-purple-600/60" />
-              <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                <h3 className="text-2xl font-bold mb-4">Sé parte de nuestra comunidad aventurera</h3>
-                <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white w-fit">
+              <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
+                <h3 className="text-lg md:text-xl font-bold mb-4 leading-tight">Únete a nuestra comunidad</h3>
+                <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white w-fit text-sm px-4 py-2">
                   Instagram
                 </Button>
               </div>
@@ -287,10 +311,10 @@ export default function Homepage() {
                 style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
               />
               <div className="absolute inset-0 bg-gradient-to-br from-red-500/60 to-red-700/60" />
-              <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                <h3 className="text-2xl font-bold mb-4">Quieres ver nuestras aventuras extremas</h3>
-                <Button className="bg-red-600 hover:bg-red-700 text-white w-fit">
-                  <Youtube className="h-5 w-5 mr-2" />
+              <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
+                <h3 className="text-lg md:text-xl font-bold mb-4 leading-tight">Mira nuestras aventuras</h3>
+                <Button className="bg-red-600 hover:bg-red-700 text-white w-fit text-sm px-4 py-2">
+                  <Youtube className="h-4 w-4 mr-2" />
                   YouTube
                 </Button>
               </div>
@@ -303,10 +327,10 @@ export default function Homepage() {
                 style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
               />
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/60 to-blue-700/60" />
-              <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                <h3 className="text-2xl font-bold mb-4">Hay mucho por explorar en el Chocó</h3>
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white w-fit">
-                  <Facebook className="h-5 w-5 mr-2" />
+              <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
+                <h3 className="text-lg md:text-xl font-bold mb-4 leading-tight">Explora el Chocó</h3>
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white w-fit text-sm px-4 py-2">
+                  <Facebook className="h-4 w-4 mr-2" />
                   Facebook
                 </Button>
               </div>
@@ -486,8 +510,8 @@ export default function Homepage() {
             rel="noopener noreferrer"
             className="inline-block"
           >
-            <Button className="bg-white text-green-600 hover:bg-gray-100 px-12 py-6 text-2xl font-bold rounded-full shadow-2xl hover:scale-105 transition-all duration-300">
-               RESERVAR AVENTURA
+            <Button className="bg-white text-green-600 hover:bg-gray-100 px-6 md:px-12 py-4 md:py-6 text-lg md:text-2xl font-bold rounded-full shadow-2xl hover:scale-105 transition-all duration-300">
+               RESERVAR
             </Button>
           </a>
         </div>
@@ -496,13 +520,13 @@ export default function Homepage() {
       {/* Texto Animado */}
       <section className="py-20 bg-black text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-6xl font-bold">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold">
             DESCUBRE{' '}
             <span className="text-emerald-400 transition-all duration-1000">
               {animatedTexts[animatedTextIndex]}
             </span>
             <br />
-            VIVE HOY TU AVENTURA
+            VIVE LA AVENTURA
           </h2>
         </div>
       </section>
@@ -681,50 +705,60 @@ export default function Homepage() {
       )}
 
       {/* Chaty Widget */}
-      <div className="fixed left-6 bottom-6 z-40">
+      <div className="fixed left-6 bottom-6 z-40 group">
         <div className="flex flex-col gap-3">
-          <a
-            href="tel:+57300000000"
-            className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
-            style={{ backgroundColor: '#03E78B' }}
+          {/* Botón principal */}
+          <button
+            className="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300 animate-pulse"
+            onClick={() => document.querySelector('.contact-buttons')?.classList.toggle('show')}
           >
             <Phone className="h-6 w-6 text-white" />
-          </a>
-          <a
-            href="#"
-            className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
-            style={{ backgroundColor: '#49E670' }}
-          >
-            <span className="text-white text-xl"></span>
-          </a>
-          <a
-            href="mailto:chocoaventurascuatri@gmail.com"
-            className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
-            style={{ backgroundColor: '#FF485F' }}
-          >
-            <Mail className="h-6 w-6 text-white" />
-          </a>
-          <a
-            href="#"
-            className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
-          >
-            <Instagram className="h-6 w-6 text-white" />
-          </a>
-          <a
-            href="sms:+57300000000"
-            className="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
-            style={{ backgroundColor: '#FF549C' }}
-          >
-            <span className="text-white text-xl"></span>
-          </a>
-          <button
-            className="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
-            style={{ backgroundColor: '#253974' }}
-          >
-            <Mail className="h-6 w-6 text-white" />
           </button>
+
+          {/* Botones secundarios */}
+          <div className="contact-buttons flex flex-col gap-3 opacity-0 scale-95 transition-all duration-300 transform translate-y-4">
+            <a
+              href="https://wa.me/573117030436"
+              className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+              style={{ backgroundColor: '#49E670' }}
+            >
+              <span className="text-white text-xl">📱</span>
+            </a>
+            <a
+              href="mailto:chocoaventurascuatri@gmail.com"
+              className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+              style={{ backgroundColor: '#FF485F' }}
+            >
+              <Mail className="h-6 w-6 text-white" />
+            </a>
+            <a
+              href="#"
+              className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+            >
+              <Instagram className="h-6 w-6 text-white" />
+            </a>
+          </div>
         </div>
       </div>
+
+      <style jsx global>{`
+        .contact-buttons.show {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+        .transform-style-preserve-3d {
+          transform-style: preserve-3d;
+        }
+        .backface-hidden {
+          backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+          transform: rotateY(180deg);
+        }
+      `}</style>
 
       {/* Back to Top */}
       <button
