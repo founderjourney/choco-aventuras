@@ -327,7 +327,7 @@ export default function EditarPaseo() {
                             <span className="text-yellow-600">🟡 Intermedio</span>
                           </SelectItem>
                           <SelectItem value="dificil">
-                            <span className="text-red-600">🔴 Difícil</span>
+                            <span className="text-red-600"> Difícil</span>
                           </SelectItem>
                         </SelectContent>
                       </Select>

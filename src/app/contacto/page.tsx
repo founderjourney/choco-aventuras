@@ -296,7 +296,7 @@ export default function ContactoPage() {
             className="inline-block"
           >
             <div className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full text-xl font-bold transition-all duration-300 hover:scale-105 shadow-2xl">
-              📱 +57 311703 0436
+               +57 311703 0436
             </div>
           </a>
         </div>

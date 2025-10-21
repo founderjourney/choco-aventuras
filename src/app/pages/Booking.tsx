@@ -317,7 +317,7 @@ export default function Booking() {
                   </div>
 
                   <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 space-y-3">
-                    <h4 className="font-semibold text-yellow-800">📋 Políticas y Requisitos</h4>
+                    <h4 className="font-semibold text-yellow-800"> Políticas y Requisitos</h4>
                     <div className="text-sm text-yellow-700 space-y-2">
                       <div>
                         <strong>Edad mínima:</strong> Varía según el paseo (consulta los requisitos de cada paseo)
@@ -399,7 +399,7 @@ export default function Booking() {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center rounded-lg">
-                        <span className="text-6xl">🏍️</span>
+                        <span className="text-6xl"></span>
                       </div>
                     )}
                   </div>

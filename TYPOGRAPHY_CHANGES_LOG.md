@@ -1,13 +1,13 @@
-# 📏 REGISTRO DE CAMBIOS TIPOGRÁFICOS
+#  REGISTRO DE CAMBIOS TIPOGRÁFICOS
 
-## ✅ STATUS: CAMBIOS APLICADOS EXITOSAMENTE
+##  STATUS: CAMBIOS APLICADOS EXITOSAMENTE
 **Fecha de aplicación:** 2025-10-20
 **Commit:** 9afd439 - "fix: Optimize typography sizes across all pages for better UX"
-**Desplegado en Vercel:** ✅ Completado
+**Desplegado en Vercel:**  Completado
 
-## 🔄 PARA DESHACER: REVERTIR ESTOS CAMBIOS EXACTOS
+##  PARA DESHACER: REVERTIR ESTOS CAMBIOS EXACTOS
 
-### 📋 PÁGINA NOSOTROS (src/app/nosotros/page.tsx)
+###  PÁGINA NOSOTROS (src/app/nosotros/page.tsx)
 
 #### CAMBIOS A REALIZAR:
 ```
@@ -24,7 +24,7 @@ LÍNEA ~354: text-4xl md:text-6xl → text-2xl md:text-4xl
 LÍNEA ~361: text-xl → text-lg
 ```
 
-### 📋 PÁGINA CONTACTO (src/app/contacto/page.tsx)
+###  PÁGINA CONTACTO (src/app/contacto/page.tsx)
 
 #### CAMBIOS A REALIZAR:
 ```
@@ -35,7 +35,7 @@ LÍNEA ~361: text-lg → text-base
 LÍNEA ~364: text-lg → text-base
 ```
 
-### 📋 PÁGINA PRINCIPAL (src/app/page.tsx)
+###  PÁGINA PRINCIPAL (src/app/page.tsx)
 
 #### CAMBIOS A REALIZAR:
 ```
@@ -45,7 +45,7 @@ LÍNEA ~195: text-6xl md:text-8xl → text-4xl md:text-6xl
 LÍNEA ~203: text-xl → text-lg
 ```
 
-## 🔙 COMANDO PARA REVERTIR:
+##  COMANDO PARA REVERTIR:
 ```bash
 # Restaurar desde git si es necesario
 git checkout HEAD~1 -- src/app/nosotros/page.tsx src/app/contacto/page.tsx src/app/page.tsx

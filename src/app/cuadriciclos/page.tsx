@@ -55,19 +55,19 @@ export default function CuatrimotosPage() {
               <p className="text-xl mb-6">Modelo 2009 - Edición Especial Rojo</p>
               <div className="space-y-3 mb-6">
                 <div className="flex items-center gap-3">
-                  <span className="text-[#F1C40F]">🏍️</span>
+                  <span className="text-[#F1C40F]"></span>
                   <span>Experiencias 100% en la selva del Chocó</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-[#F1C40F]">🌿</span>
+                  <span className="text-[#F1C40F]"></span>
                   <span>Tours por rutas extremas (aventura sobre barro, trochas y selva)</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-[#F1C40F]">🎯</span>
+                  <span className="text-[#F1C40F]"></span>
                   <span>Paintball en escenarios naturales</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-[#F1C40F]">🎭</span>
+                  <span className="text-[#F1C40F]"></span>
                   <span>Enfoque cultural chocoano (música y fiestas de San Pacho)</span>
                 </div>
               </div>
@@ -89,7 +89,7 @@ export default function CuatrimotosPage() {
         {/* Requerimientos de Seguridad */}
         <div className="bg-[#F5F5F5] rounded-2xl p-6 mb-8">
           <h3 className="text-2xl font-bold text-[#145A32] mb-4 flex items-center gap-2">
-            🛡️ Requerimientos de Seguridad
+             Requerimientos de Seguridad
           </h3>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="space-y-2">

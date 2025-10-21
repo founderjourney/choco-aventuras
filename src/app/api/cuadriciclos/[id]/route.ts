@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/db';
+import { getDb } from '@/lib/db';
 
 export async function GET(
   request: NextRequest,
@@ -14,6 +14,7 @@ export async function GET(
       );
     }
 
+    const db = await getDb();
     const cuatrimoto = await db.cuatrimotos.findById(id);
     if (!cuatrimoto) {
       return NextResponse.json(

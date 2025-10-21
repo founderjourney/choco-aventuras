@@ -281,7 +281,7 @@ export default function AdminCuadriciclos() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center rounded-lg">
-                    <span className="text-4xl">🏍️</span>
+                    <span className="text-4xl"></span>
                   </div>
                 )}
               </div>

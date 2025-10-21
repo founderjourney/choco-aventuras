@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/lib/db';
+import { getDb } from '@/lib/db';
 import { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
@@ -8,6 +8,7 @@ export async function GET(request: NextRequest) {
   const fecha = searchParams.get('fecha') || undefined;
 
   try {
+    const db = await getDb();
     const reservas = await db.reservas.findAll({ estado, fecha });
     return NextResponse.json({ reservas });
   } catch (error) {
@@ -18,6 +19,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    const db = await getDb();
     const newReserva = await db.reservas.create(body);
     return NextResponse.json(newReserva, { status: 201 });
   } catch (error) {

@@ -123,7 +123,7 @@ function CuadricicloCard({ cuadriciclo }: { cuadriciclo: Cuadriciclo }) {
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
-            <span className="text-6xl">🏍️</span>
+            <span className="text-6xl"></span>
           </div>
         )}
         <Badge 

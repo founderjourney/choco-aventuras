@@ -203,7 +203,7 @@ export default function Homepage() {
           </p>
 
           <p className="text-lg sm:text-xl mb-8 sm:mb-12 text-emerald-200 font-bold max-w-2xl mx-auto px-4">
-            ¡Aquí la aventura no se cuenta... se vive! 🏍️ 🎯
+            ¡Aquí la aventura no se cuenta... se vive!  
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4">
@@ -322,10 +322,10 @@ export default function Homepage() {
 
                 const getDifficultyIcon = (dificultad: string) => {
                   switch (dificultad) {
-                    case 'facil': return '🌱';
-                    case 'intermedio': return '⚡';
-                    case 'dificil': return '🔥';
-                    default: return '🏍️';
+                    case 'facil': return '';
+                    case 'intermedio': return '';
+                    case 'dificil': return '';
+                    default: return '';
                   }
                 };
 
@@ -393,7 +393,7 @@ export default function Homepage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="group text-center p-6 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100">
               <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <span className="text-2xl">👨‍🏫</span>
+                <span className="text-2xl"></span>
               </div>
               <h3 className="font-bold text-lg mb-2 text-slate-800">Guías Locales</h3>
               <p className="text-slate-600 text-sm leading-relaxed">Expertos nativos del territorio</p>
@@ -401,7 +401,7 @@ export default function Homepage() {
 
             <div className="group text-center p-6 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100">
               <div className="bg-gradient-to-br from-purple-500 to-purple-700 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <span className="text-2xl">🛡️</span>
+                <span className="text-2xl"></span>
               </div>
               <h3 className="font-bold text-lg mb-2 text-slate-800">Seguridad Total</h3>
               <p className="text-slate-600 text-sm leading-relaxed">Equipos de protección profesional</p>
@@ -409,7 +409,7 @@ export default function Homepage() {
 
             <div className="group text-center p-6 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100">
               <div className="bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <span className="text-2xl">🌿</span>
+                <span className="text-2xl"></span>
               </div>
               <h3 className="font-bold text-lg mb-2 text-slate-800">Cultura Chocoana</h3>
               <p className="text-slate-600 text-sm leading-relaxed">Tradiciones auténticas locales</p>
@@ -417,7 +417,7 @@ export default function Homepage() {
 
             <div className="group text-center p-6 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100">
               <div className="bg-gradient-to-br from-teal-500 to-teal-700 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <span className="text-2xl">👥</span>
+                <span className="text-2xl"></span>
               </div>
               <h3 className="font-bold text-lg mb-2 text-slate-800">Grupos y Empresas</h3>
               <p className="text-slate-600 text-sm leading-relaxed">Team building empresarial</p>
@@ -456,7 +456,7 @@ export default function Homepage() {
                   <span className="text-slate-300">KM7 VIA YUTO</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-emerald-400">✉</span>
+                  <span className="text-emerald-400"></span>
                   <span className="text-slate-300">chocoaventurascuatri@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-3">
@@ -491,7 +491,7 @@ export default function Homepage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="text-slate-300 group-hover:text-white font-bold text-lg">📱</span>
+                  <span className="text-slate-300 group-hover:text-white font-bold text-lg"></span>
                 </a>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed">

@@ -3,7 +3,7 @@
    Efectos que reflejan aventura, naturaleza y adrenalina
    ======================================== */
 
-/* 🌿 EFECTOS DE PARTÍCULAS DE SELVA TROPICAL */
+/*  EFECTOS DE PARTÍCULAS DE SELVA TROPICAL */
 .jungle-particles {
   position: relative;
   overflow: hidden;
@@ -33,7 +33,7 @@
   100% { transform: translateY(-100px) rotate(360deg); }
 }
 
-/* 🏍️ EFECTOS DE VIBRACIÓN PARA CUATRIMOTOS */
+/*  EFECTOS DE VIBRACIÓN PARA CUATRIMOTOS */
 .quad-vibration {
   animation: quadShake 0.3s ease-in-out infinite alternate;
 }
@@ -43,7 +43,7 @@
   100% { transform: translateX(2px) rotate(0.5deg); }
 }
 
-/* ⚡ EFECTOS DE ADRENALINA PARA BOTONES */
+/*  EFECTOS DE ADRENALINA PARA BOTONES */
 .adrenaline-button {
   position: relative;
   overflow: hidden;
@@ -73,7 +73,7 @@
   background: linear-gradient(45deg, #D32F2F, #E53935);
 }
 
-/* 🌊 EFECTOS DE AGUA PARA AVENTURAS ACUÁTICAS */
+/*  EFECTOS DE AGUA PARA AVENTURAS ACUÁTICAS */
 .water-ripple {
   position: relative;
   overflow: hidden;
@@ -105,7 +105,7 @@
   }
 }
 
-/* 🔥 EFECTOS DE FUEGO PARA PAINTBALL */
+/*  EFECTOS DE FUEGO PARA PAINTBALL */
 .paintball-explosion {
   position: relative;
 }
@@ -141,7 +141,7 @@
   }
 }
 
-/* 🌟 EFECTOS DE BRILLO PARA DESTACAR */
+/*  EFECTOS DE BRILLO PARA DESTACAR */
 .adventure-glow {
   position: relative;
   background: linear-gradient(45deg, #145A32, #1565C0);
@@ -164,7 +164,7 @@
   100% { transform: rotate(360deg); }
 }
 
-/* 🏔️ EFECTOS DE MONTAÑA PARALLAX */
+/*  EFECTOS DE MONTAÑA PARALLAX */
 .mountain-parallax {
   background-attachment: fixed;
   background-position: center;
@@ -189,7 +189,7 @@
   100% { background: linear-gradient(rgba(21, 101, 192, 0.5), rgba(20, 90, 50, 0.7)); }
 }
 
-/* 🎯 EFECTOS HOVER PARA TARJETAS DE AVENTURA */
+/*  EFECTOS HOVER PARA TARJETAS DE AVENTURA */
 .adventure-card {
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform-style: preserve-3d;
@@ -219,7 +219,7 @@
   opacity: 1;
 }
 
-/* 🌪️ EFECTOS DE VIENTO PARA MOVIMIENTO */
+/*  EFECTOS DE VIENTO PARA MOVIMIENTO */
 .wind-effect {
   animation: windSway 4s ease-in-out infinite;
 }
@@ -230,7 +230,7 @@
   75% { transform: translateX(-3px) rotate(-0.5deg); }
 }
 
-/* 💨 EFECTOS DE VELOCIDAD PARA CUATRIMOTOS */
+/*  EFECTOS DE VELOCIDAD PARA CUATRIMOTOS */
 .speed-lines {
   position: relative;
   overflow: hidden;
@@ -254,7 +254,7 @@
   100% { left: 100%; opacity: 0; }
 }
 
-/* 🌈 EFECTOS DE CULTURA CHOCOANA */
+/*  EFECTOS DE CULTURA CHOCOANA */
 .choco-culture {
   background: linear-gradient(45deg, #145A32, #F1C40F, #E53935, #1565C0);
   background-size: 400% 400%;
@@ -267,7 +267,7 @@
   100% { background-position: 0% 50%; }
 }
 
-/* 🎪 EFECTOS DE FESTIVAL SAN PACHO */
+/*  EFECTOS DE FESTIVAL SAN PACHO */
 .san-pacho-effect {
   position: relative;
   overflow: hidden;
@@ -294,7 +294,7 @@
   66% { transform: rotate(240deg) scale(0.9); }
 }
 
-/* 🏃‍♂️ EFECTOS DE MOVIMIENTO PARA LOADING */
+/*  EFECTOS DE MOVIMIENTO PARA LOADING */
 .adventure-loading {
   display: inline-block;
   width: 40px;
@@ -309,7 +309,7 @@
   to { transform: rotate(360deg); }
 }
 
-/* 🌿 EFECTOS ESPECIALES PARA TEXTO */
+/*  EFECTOS ESPECIALES PARA TEXTO */
 .jungle-text {
   background: linear-gradient(45deg, #145A32, #4CAF50, #8BC34A);
   background-size: 200% 200%;
@@ -325,7 +325,7 @@
   100% { background-position: 0% 50%; }
 }
 
-/* 🚀 EFECTOS ULTRA MODERNOS PARA BOTONES Y MENÚ */
+/*  EFECTOS ULTRA MODERNOS PARA BOTONES Y MENÚ */
 
 /* Efectos de hover modernos para navegación */
 .nav-item {
@@ -622,7 +622,7 @@
   100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
 }
 
-/* 🎮 EFECTOS INTERACTIVOS RESPONSIVOS */
+/*  EFECTOS INTERACTIVOS RESPONSIVOS */
 @media (max-width: 768px) {
   .adventure-card:hover {
     transform: translateY(-5px);

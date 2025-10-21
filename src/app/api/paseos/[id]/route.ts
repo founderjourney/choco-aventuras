@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/lib/db';
+import { getDb } from '@/lib/db';
 
 export async function GET(
   request: Request,
@@ -7,6 +7,7 @@ export async function GET(
 ) {
   try {
     const id = parseInt(params.id);
+    const db = await getDb();
     const paseo = await db.paseos.findById(id);
 
     if (!paseo) {
@@ -33,6 +34,7 @@ export async function PUT(
   try {
     const id = parseInt(params.id);
     const data = await request.json();
+    const db = await getDb();
     const paseo = await db.paseos.update(id, data);
 
     if (!paseo) {
@@ -58,6 +60,7 @@ export async function DELETE(
 ) {
   try {
     const id = parseInt(params.id);
+    const db = await getDb();
     const success = await db.paseos.delete(id);
 
     if (!success) {

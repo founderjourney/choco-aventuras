@@ -75,23 +75,23 @@ export default function Footer() {
             <h4 className="font-bold text-lg mb-4 text-[#F1C40F]">Nuestros Servicios</h4>
             <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <span className="text-[#F1C40F]">🏍️</span>
+                <span className="text-[#F1C40F]"></span>
                 <span className="text-emerald-100 text-sm">Tours en Cuatrimoto</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-[#F1C40F]">🎯</span>
+                <span className="text-[#F1C40F]"></span>
                 <span className="text-emerald-100 text-sm">Paintball Natural</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-[#F1C40F]">🌿</span>
+                <span className="text-[#F1C40F]"></span>
                 <span className="text-emerald-100 text-sm">Experiencias de Selva</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-[#F1C40F]">🎭</span>
+                <span className="text-[#F1C40F]"></span>
                 <span className="text-emerald-100 text-sm">Cultura Chocoana</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-[#F1C40F]">👥</span>
+                <span className="text-[#F1C40F]"></span>
                 <span className="text-emerald-100 text-sm">Team Building</span>
               </div>
             </div>

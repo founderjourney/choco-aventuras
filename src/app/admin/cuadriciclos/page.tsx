@@ -218,7 +218,7 @@ export default function AdminCuatrimotos() {
                 <div className="text-center py-12">
                   <div className="text-gray-400 mb-4">
                     <div className="h-16 w-16 mx-auto bg-gray-200 rounded-full flex items-center justify-center">
-                      <span className="text-3xl">🏍️</span>
+                      <span className="text-3xl"></span>
                     </div>
                   </div>
                   <h3 className="text-lg font-medium text-gray-900 mb-2">No hay cuatrimotos</h3>

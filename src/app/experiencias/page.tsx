@@ -141,7 +141,7 @@ export default function ExperienciasPage() {
             <Card className="text-center card-3d">
               <CardContent className="p-8">
                 <div className="w-16 h-16 bg-[#145A32] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-white text-2xl">🏍️</span>
+                  <span className="text-white text-2xl"></span>
                 </div>
                 <h3 className="text-xl font-bold text-[#145A32] mb-4">Yamaha Grizzly 700</h3>
                 <p className="text-gray-700">
@@ -153,7 +153,7 @@ export default function ExperienciasPage() {
             <Card className="text-center card-3d">
               <CardContent className="p-8">
                 <div className="w-16 h-16 bg-[#1565C0] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-white text-2xl">🌿</span>
+                  <span className="text-white text-2xl"></span>
                 </div>
                 <h3 className="text-xl font-bold text-[#145A32] mb-4">100% Selva Tropical</h3>
                 <p className="text-gray-700">
@@ -165,7 +165,7 @@ export default function ExperienciasPage() {
             <Card className="text-center card-3d">
               <CardContent className="p-8">
                 <div className="w-16 h-16 bg-[#F1C40F] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-white text-2xl">🎭</span>
+                  <span className="text-white text-2xl"></span>
                 </div>
                 <h3 className="text-xl font-bold text-[#145A32] mb-4">Cultura Auténtica</h3>
                 <p className="text-gray-700">
@@ -257,7 +257,7 @@ export default function ExperienciasPage() {
             <Card className="text-center card-3d">
               <CardContent className="p-6">
                 <div className="w-16 h-16 bg-[#E53935] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white text-xl">👤</span>
+                  <span className="text-white text-xl"></span>
                 </div>
                 <h3 className="font-bold text-[#145A32] mb-3">Edad y Documentos</h3>
                 <ul className="text-sm text-gray-700 space-y-2">
@@ -271,7 +271,7 @@ export default function ExperienciasPage() {
             <Card className="text-center card-3d">
               <CardContent className="p-6">
                 <div className="w-16 h-16 bg-[#F1C40F] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white text-xl">👕</span>
+                  <span className="text-white text-xl"></span>
                 </div>
                 <h3 className="font-bold text-[#145A32] mb-3">Ropa Adecuada</h3>
                 <ul className="text-sm text-gray-700 space-y-2">
@@ -285,7 +285,7 @@ export default function ExperienciasPage() {
             <Card className="text-center card-3d">
               <CardContent className="p-6">
                 <div className="w-16 h-16 bg-[#145A32] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white text-xl">💰</span>
+                  <span className="text-white text-xl"></span>
                 </div>
                 <h3 className="font-bold text-[#145A32] mb-3">Reserva</h3>
                 <ul className="text-sm text-gray-700 space-y-2">

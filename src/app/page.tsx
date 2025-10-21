@@ -208,7 +208,7 @@ export default function Homepage() {
               <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
                 <div className="mb-4">
                   <span className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    🔥 YAMAHA GRIZZLY
+                     YAMAHA GRIZZLY
                   </span>
                 </div>
                 <h3 className="text-2xl font-bold mb-2">YAMAHA GRIZZLY 700</h3>
@@ -232,7 +232,7 @@ export default function Homepage() {
               <div className="absolute inset-0 flex flex-col justify-center items-center p-8 text-white text-center">
                 <div className="mb-4">
                   <span className="bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    🔧 PRÓXIMAMENTE
+                     PRÓXIMAMENTE
                   </span>
                 </div>
                 <h3 className="text-xl font-bold mb-2">SEGUNDO CUATRIMOTO</h3>
@@ -250,7 +250,7 @@ export default function Homepage() {
               <div className="absolute inset-0 flex flex-col justify-center items-center p-8 text-white text-center">
                 <div className="mb-4">
                   <span className="bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    🚀 EN DESARROLLO
+                     EN DESARROLLO
                   </span>
                 </div>
                 <h3 className="text-xl font-bold mb-2">TERCER CUATRIMOTO</h3>
@@ -487,7 +487,7 @@ export default function Homepage() {
             className="inline-block"
           >
             <Button className="bg-white text-green-600 hover:bg-gray-100 px-12 py-6 text-2xl font-bold rounded-full shadow-2xl hover:scale-105 transition-all duration-300">
-              🏍️ RESERVAR AVENTURA
+               RESERVAR AVENTURA
             </Button>
           </a>
         </div>
@@ -537,7 +537,7 @@ export default function Homepage() {
                   <span className="text-slate-300">KM7 VIA YUTO</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-emerald-400">✉</span>
+                  <span className="text-emerald-400"></span>
                   <span className="text-slate-300">chocoaventurascuatri@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-3">
@@ -572,7 +572,7 @@ export default function Homepage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="text-slate-300 group-hover:text-white font-bold text-lg">📱</span>
+                  <span className="text-slate-300 group-hover:text-white font-bold text-lg"></span>
                 </a>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed">
@@ -695,7 +695,7 @@ export default function Homepage() {
             className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
             style={{ backgroundColor: '#49E670' }}
           >
-            <span className="text-white text-xl">📱</span>
+            <span className="text-white text-xl"></span>
           </a>
           <a
             href="mailto:chocoaventurascuatri@gmail.com"
@@ -715,7 +715,7 @@ export default function Homepage() {
             className="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
             style={{ backgroundColor: '#FF549C' }}
           >
-            <span className="text-white text-xl">💬</span>
+            <span className="text-white text-xl"></span>
           </a>
           <button
             className="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"

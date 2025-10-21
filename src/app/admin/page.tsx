@@ -256,7 +256,7 @@ export default function AdminDashboard() {
               <Card className="hover:shadow-lg transition-shadow cursor-pointer border-l-4 border-[#E53935]">
                 <CardHeader>
                   <CardTitle className="text-[#E53935] flex items-center gap-2">
-                    📄 Gestión de Páginas
+                     Gestión de Páginas
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -274,7 +274,7 @@ export default function AdminDashboard() {
             <Card className="opacity-60 border-l-4 border-gray-300">
               <CardHeader>
                 <CardTitle className="text-gray-500 flex items-center gap-2">
-                  🖼️ Gestión de Medios
+                   Gestión de Medios
                   <Badge variant="secondary" className="text-xs ml-auto">Próximamente</Badge>
                 </CardTitle>
               </CardHeader>
@@ -288,7 +288,7 @@ export default function AdminDashboard() {
             <Card className="opacity-60 border-l-4 border-gray-300">
               <CardHeader>
                 <CardTitle className="text-gray-500 flex items-center gap-2">
-                  🎨 Personalización
+                   Personalización
                   <Badge variant="secondary" className="text-xs ml-auto">Próximamente</Badge>
                 </CardTitle>
               </CardHeader>

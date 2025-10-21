@@ -377,7 +377,7 @@ export default function AdminReservas() {
                     )}
                     {reserva.estado === 'completada' && (
                       <div className="flex items-center gap-2">
-                        <span className="text-sm text-green-600 font-medium">✅ Completada</span>
+                        <span className="text-sm text-green-600 font-medium"> Completada</span>
                       </div>
                     )}
                     {reserva.estado === 'cancelada' && (

@@ -8,7 +8,14 @@ if (!process.env.POSTGRES_URL) {
 
 const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,
-  connectionTimeoutMillis: 5000, // 5 seconds
+  connectionTimeoutMillis: 10000, // 10 seconds
+  ssl: {
+    rejectUnauthorized: false
+  },
+  // Configuraciones adicionales para Supabase
+  max: 20,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 10000,
 });
 
 export const db = {

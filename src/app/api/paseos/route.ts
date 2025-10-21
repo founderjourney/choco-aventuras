@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/lib/db';
+import { getDb } from '@/lib/db';
 import { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
@@ -7,6 +7,7 @@ export async function GET(request: NextRequest) {
   const includeInactive = searchParams.get('include_inactive') === 'true';
 
   try {
+    const db = await getDb();
     const paseos = await db.paseos.findAll(includeInactive);
     return NextResponse.json({ paseos });
   } catch (error) {

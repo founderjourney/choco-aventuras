@@ -145,7 +145,7 @@ export default function NosotrosPage() {
                 <p className="text-sm opacity-90">Cuatrimotos por senderos únicos</p>
               </div>
               <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
-                <span className="text-white font-bold">🏍️</span>
+                <span className="text-white font-bold"></span>
               </div>
             </div>
 
@@ -161,7 +161,7 @@ export default function NosotrosPage() {
                 <p className="text-sm opacity-90">Biodiversidad única del Chocó</p>
               </div>
               <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
-                <span className="text-white font-bold">🌿</span>
+                <span className="text-white font-bold"></span>
               </div>
             </div>
 
@@ -177,7 +177,7 @@ export default function NosotrosPage() {
                 <p className="text-sm opacity-90">Paintball en escenarios naturales</p>
               </div>
               <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
-                <span className="text-white font-bold">🎯</span>
+                <span className="text-white font-bold"></span>
               </div>
             </div>
 
@@ -193,7 +193,7 @@ export default function NosotrosPage() {
                 <p className="text-sm opacity-90">Experiencias compartidas</p>
               </div>
               <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
-                <span className="text-white font-bold">👥</span>
+                <span className="text-white font-bold"></span>
               </div>
             </div>
           </div>

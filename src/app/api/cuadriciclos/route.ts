@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/lib/db';
+import { getDb } from '@/lib/db';
 
 export async function GET() {
   try {
     console.log('Fetching cuatrimotos...');
+    const db = await getDb();
     const cuatrimotos = await db.cuatrimotos.findAll();
     console.log('Cuatrimotos fetched successfully:', cuatrimotos);
     return NextResponse.json({ cuatrimotos });

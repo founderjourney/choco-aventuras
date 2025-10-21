@@ -74,42 +74,42 @@ export default function Homepage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="bg-[#145A32]/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🏍️</span>
+                <span className="text-2xl"></span>
               </div>
               <h3 className="font-semibold mb-2">Tours Extremos</h3>
               <p className="text-gray-600 text-sm">Aventura sobre barro, trochas y selva tropical</p>
             </div>
             <div className="text-center">
               <div className="bg-[#E53935]/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🎯</span>
+                <span className="text-2xl"></span>
               </div>
               <h3 className="font-semibold mb-2">Paintball Natural</h3>
               <p className="text-gray-600 text-sm">Combate con adrenalina en escenarios naturales</p>
             </div>
             <div className="text-center">
               <div className="bg-[#F1C40F]/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🌿</span>
+                <span className="text-2xl"></span>
               </div>
               <h3 className="font-semibold mb-2">Cultura Chocoana</h3>
               <p className="text-gray-600 text-sm">Identidad local, música y tradiciones auténticas</p>
             </div>
             <div className="text-center">
               <div className="bg-[#1565C0]/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">👨‍🏫</span>
+                <span className="text-2xl"></span>
               </div>
               <h3 className="font-semibold mb-2">Guías Locales</h3>
               <p className="text-gray-600 text-sm">Expertos que conocen cada rincón del territorio</p>
             </div>
             <div className="text-center">
               <div className="bg-[#FB8C00]/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🛡️</span>
+                <span className="text-2xl"></span>
               </div>
               <h3 className="font-semibold mb-2">Seguridad Total</h3>
               <p className="text-gray-600 text-sm">Equipos de protección y acompañamiento garantizado</p>
             </div>
             <div className="text-center">
               <div className="bg-[#145A32]/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">👥</span>
+                <span className="text-2xl"></span>
               </div>
               <h3 className="font-semibold mb-2">Grupos y Empresas</h3>
               <p className="text-gray-600 text-sm">Ideal para integración y team building</p>
