@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Play, ChevronDown, Facebook, Instagram, MessageCircle } from 'lucide-react';
 import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 export default function NosotrosPage() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -78,34 +79,35 @@ export default function NosotrosPage() {
 
               <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900">
                 <span className="text-emerald-600">ALQUILER</span> DE CUATRIMOTOS<br />
-                <span className="text-xl font-normal text-gray-600">Y AVENTURAS</span>
+                <span className="text-xl font-normal text-gray-600">EN EL CHOCÓ</span>
               </h2>
 
               <div className="space-y-6 text-gray-600 leading-relaxed">
                 <p className="text-base">
                   <strong className="text-gray-900">Chocó Aventuras</strong> se especializa en el alquiler
-                  de cuatrimotos para turismo de aventura. Ofrecemos experiencias únicas que combinan
-                  emoción y conexión con la naturaleza en la selva tropical del Chocó.
+                  de cuatrimotos para turismo de aventura en la selva tropical del Chocó.
+                  Ofrecemos experiencias únicas de adrenalina y conexión con la naturaleza.
                 </p>
 
                 <p>
                   Ubicados en el <strong className="text-emerald-600">
-                  KM7 Vía Yuto, Quibdó - Chocó</strong>, ofrecemos alquiler de cuatrimotos
-                  con guías especializados para aventuras seguras que te permiten explorar
-                  la biodiversidad y cultura de nuestra región.
+                  KM7 Vía Yuto, Quibdó - Chocó</strong>, somos tu puerta de entrada a
+                  aventuras emocionantes con equipos de seguridad profesionales y guías
+                  especializados que conocen cada rincón de nuestra exuberante selva.
                 </p>
 
                 <p>
-                  <strong className="text-gray-900">Servicios que Ofrecemos:</strong> Alquiler de cuatrimotos
-                  para recorridos por la selva tropical, con equipos de seguridad incluidos.
-                  Próximamente también tendremos disponible paintball para complementar tu experiencia de aventura.
+                  <strong className="text-gray-900">Lo que Ofrecemos:</strong> Alquiler de cuatrimotos
+                  para recorridos por senderos únicos de la selva tropical, con todos los
+                  equipos de seguridad incluidos. Próximamente también tendremos disponible
+                  paintball en escenarios naturales.
                 </p>
               </div>
 
               <div className="mt-8">
-                <Link href="/contacto">
+                <Link href="/reservas">
                   <Button className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-lg">
-                    Contactanos
+                    Reserva tu aventura
                   </Button>
                 </Link>
               </div>
@@ -122,10 +124,11 @@ export default function NosotrosPage() {
               NUESTRAS AVENTURAS
             </p>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
-              <span className="text-emerald-600">MOMENTOS</span> ÉPICOS
+              <span className="text-emerald-600">NUESTRA PASIÓN</span> POR LA AVENTURA
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Descubre la magia del Chocó a través de nuestras experiencias capturadas
+              Cada recorrido es una oportunidad de descubrir la biodiversidad y
+              cultura únicas del Chocó, creando memorias que durarán para siempre.
             </p>
           </div>
 
@@ -240,8 +243,8 @@ export default function NosotrosPage() {
 
           {/* Call to Action */}
           <div className="text-center mt-12">
-            <p className="text-gray-600 mb-6">¿Listo para crear tus propios momentos épicos?</p>
-            <Link href="/contacto">
+            <p className="text-gray-600 mb-6">¿Listo para vivir tu próxima gran aventura?</p>
+            <Link href="/reservas">
               <Button className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
                 Reserva Tu Aventura
               </Button>
@@ -253,7 +256,7 @@ export default function NosotrosPage() {
       {/* Contáctanos Section */}
       <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-4xl font-bold mb-8">
+          <h2 className="text-xl md:text-3xl font-bold mb-8">
             <span className="text-emerald-400">CONTÁCTANOS</span> EN UN CLIC
           </h2>
 
@@ -291,20 +294,24 @@ export default function NosotrosPage() {
           <div className="space-y-4">
             {[
               {
-                question: "¿Qué incluye el tour en cuatrimoto?",
-                answer: "Incluye equipo de seguridad, guía especializado, recorrido por la selva tropical y refrigerio."
+                question: "¿Qué incluye el alquiler de cuatrimoto?",
+                answer: "Incluye equipo de seguridad (casco), guía especializado, recorrido por la selva tropical e hidratación. No incluye seguro de accidentes."
               },
               {
                 question: "¿Cuánto dura una aventura típica?",
-                answer: "Nuestros tours varían entre 2 a 6 horas dependiendo del paquete seleccionado."
+                answer: "Nuestras experiencias en cuatrimoto duran entre 40 a 60 minutos, ideales para grupos y aventuras familiares."
               },
               {
-                question: "¿Es necesario tener experiencia previa?",
-                answer: "No, ofrecemos tours para principiantes y avanzados. Nuestros guías te enseñarán todo lo necesario."
+                question: "¿Cuál es la edad mínima y qué necesito?",
+                answer: "La edad mínima es 16 años y es obligatorio tener licencia de conducción vigente para el conductor."
               },
               {
-                question: "¿Cuál es la edad mínima para participar?",
-                answer: "La edad mínima es 16 años para cuatrimotos y 12 años para paintball con supervisión de adultos."
+                question: "¿Cómo es la política de cancelación?",
+                answer: "Ofrecemos reembolso íntegro si cancelas con mínimo 24 horas de antelación. Las rutas pueden variar por clima."
+              },
+              {
+                question: "¿Dónde están ubicados?",
+                answer: "Estamos ubicados en KM7 vía Yuto, Quibdó – Chocó. No manejamos múltiples ubicaciones."
               }
             ].map((faq, index) => (
               <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
@@ -327,72 +334,7 @@ export default function NosotrosPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            {/* Logo y descripción */}
-            <div className="space-y-4">
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold">CA</span>
-                </div>
-                <div className="ml-3">
-                  <div className="text-emerald-400 font-bold text-lg">CHOCÓ AVENTURAS</div>
-                </div>
-              </div>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Ofrecemos alquiler de cuatrimotos para turismo de aventura en la selva tropical del Chocó.
-                Próximamente también paintball y experiencias culturales locales.
-              </p>
-            </div>
-
-            {/* Links */}
-            <div>
-              <h3 className="text-white font-semibold mb-4 text-sm tracking-widest uppercase">LINKS</h3>
-              <div className="space-y-2">
-                {['Inicio', 'Tours', 'Cuatrimotos', 'Experiencias', 'Contáctanos'].map((link) => (
-                  <Link key={link} href="#" className="block text-gray-400 hover:text-emerald-400 text-sm transition-colors">
-                    {link}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* Acerca de */}
-            <div>
-              <h3 className="text-white font-semibold mb-4 text-sm tracking-widest uppercase">ACERCA DE</h3>
-              <div className="space-y-2">
-                {['KM7 Vía Yuto', 'Quibdó - Chocó', 'chocoaventurascuatri@gmail.com'].map((item) => (
-                  <div key={item} className="text-gray-400 text-sm">{item}</div>
-                ))}
-                <div className="text-emerald-400 text-sm">+57 311 703 0436</div>
-              </div>
-            </div>
-
-            {/* Social Media */}
-            <div>
-              <h3 className="text-white font-semibold mb-4 text-sm tracking-widest uppercase">SOCIAL MEDIA</h3>
-              <div className="flex space-x-4">
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-all duration-300">
-                  <Facebook className="w-5 h-5 text-gray-400 hover:text-white" />
-                </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-all duration-300">
-                  <MessageCircle className="w-5 h-5 text-gray-400 hover:text-green-400" />
-                </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-all duration-300">
-                  <Instagram className="w-5 h-5 text-gray-400 hover:text-pink-400" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-            <p className="text-gray-500 text-sm">
-              © 2024 Chocó Aventuras. Todos los derechos reservados.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

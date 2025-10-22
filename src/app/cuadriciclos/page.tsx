@@ -52,7 +52,7 @@ export default function CuatrimotosPage() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h2 className="text-2xl font-bold mb-4 jungle-text quad-vibration">YAMAHA GRIZZLY 700</h2>
-              <p className="text-xl mb-6">Modelo 2009 - Edición Especial Rojo</p>
+              <p className="text-xl mb-6">Modelo 2009</p>
               <div className="space-y-3 mb-6">
                 <div className="flex items-center gap-3">
                   <span className="text-[#F1C40F]"></span>
@@ -76,8 +76,8 @@ export default function CuatrimotosPage() {
               <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6">
                 <h3 className="text-2xl font-bold mb-4">Información de Reserva</h3>
                 <div className="space-y-2 text-left">
-                  <p><strong>Edad mínima:</strong> 14 años (menores con adulto responsable)</p>
-                  <p><strong>Documentos:</strong> Cédula o pasaporte</p>
+                  <p><strong>Edad mínima:</strong> 16 años</p>
+                  <p><strong>Licencia:</strong> Obligatoria para el conductor</p>
                   <p><strong>Depósito:</strong> 50% del valor del servicio</p>
                   <p><strong>Horarios:</strong> 7:00 AM - 5:00 PM</p>
                 </div>
@@ -145,7 +145,7 @@ export default function CuatrimotosPage() {
                   {cuatrimoto.descripcion && (
                     <p className="text-sm text-gray-700">{cuatrimoto.descripcion}</p>
                   )}
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap gap-1 mb-4">
                     {cuatrimoto.caracteristicas.map((caracteristica, index) => (
                       <span
                         key={index}
@@ -155,12 +155,14 @@ export default function CuatrimotosPage() {
                       </span>
                     ))}
                   </div>
-                  <Link
-                    href="/reservas"
-                    className="block w-full bg-[#E53935] hover:bg-[#D32F2F] text-white text-center py-2 rounded mt-4 transition-colors font-semibold adrenaline-button speed-lines"
-                  >
-                    RESERVA YA
-                  </Link>
+                  <div className="pt-4">
+                    <Link
+                      href="/reservas"
+                      className="block w-full bg-[#E53935] hover:bg-[#D32F2F] text-white text-center py-3 rounded transition-colors font-semibold adrenaline-button speed-lines relative z-10"
+                    >
+                      RESERVAR AQUÍ
+                    </Link>
+                  </div>
                 </div>
               </CardContent>
             </Card>

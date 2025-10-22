@@ -1,0 +1,256 @@
+Pagna inicial:
+
+Cuando llegamos en redes sociales, se muestra una experiencia de usuario incompleta cortando las frases, necesitamos areglar eso.
+
+Abajo en en el bloque 'contactanos en un clic' el boton RESERVAR AVENTURA, esta demasiado largo y no responsivo.
+
+Luego abajo, hay una frase que cambia: 'DESCUBRE EL CHOCÓ
+VIVE HOY TU AVENTURA...' creo que esta demasiado largo, podriamos disminuir.
+
+Hay dos elementos el primer dice "Aventura en la selva tropical" y segundo dice: "Batallas de paintball"
+
+El primer cuando el usuario de smarphone hace click, debe GIRAR Y salir el boton 'RESERVAR'  el segundo, debe girar y decir 'PROXIMAMENTE'
+
+Ademas, creo que los botones flotantes no deberian esta todo el tiempo activados, quizas una opcion de eventualmente el boton animarse para el usuario saber que hay mas opciones en el boton, pero estar todo el tiempo es peor para la experiencia de usuario.
+
+
+PAGINA NOSOSTROS:
+
+ABAJO EN EL BLOQUE 'contactanos en un click' esta demasiado largo.
+
+
+PAGINA CUATRIMOTOS:
+
+El footer no es el mismo que las otras paginas, toca areglar.
+
+PAGINA EXPERIENCIAS:
+
+El footer no es el mismo que las otras paginas, toca areglar.
+
+PAGINA DE RESERVAS:
+
+El footer no es el mismo que las otras paginas, toca areglar.
+
+PAGINA CONTACTO:
+
+la image sinalada esta como rara, toca un layout mejor para la experiencia de usuario.
+
+
+Ademas, comprobar en todas las paginas para que esten todos los botones funcionales,TAMBIEM REMOVER LA IDEA DE "CREAR" nosostros no creamos nada, apenas alquilamos cuatrimotos, dejar claro.
+
+La pagina sobre nosotros cambiar los textos, nosotros quitar nuestras ubicaciones, no tenemos todas esas ubicaciones, tampoco decir tiempo de empresa, no tenemos 10 anos, omitir esas cosas, apenas hablar sobre que es que hacemos, que ofrecemos paseos de cuatrimotos, paintball estamos trabajando y proximamente tendremos la opcion para reserva
+
+
+idade 16 anos para reservar los cuatrimotos
+
+Botón de reserva que lleve a la página de reservas
+
+Botón cuatrimotos que lleve a reservas
+
+Botón paintaball que diga próximamente (Ya estaba, volver a mostrar eso) 
+
+Botón experiencias que lleve a página experiencias
+
+Rutas en cuatrimotos que lleve a la página  de cuatrimotos
+
+Los botones reservar aquí se junta con el Yamaha grizzly (puedes quitar ese Yamaha grizzly rojo)
+
+También que los botones funcionen y lleven a la reserva
+
+Enlazar los vínculos a redes sociales reales de ellos:
+
+Instagram:
+https://www.instagram.com/choco.aventuras2025?igsh=NXJnMGUwZjV3MTNk
+
+TikTok:
+https://www.tiktok.com/@choco.aventuras2025?_t=ZS-90kLr23nJpp&_r=1
+
+Facebook:
+https://www.facebook.com/share/1D4semVk7u/?mibextid=wwXIfr
+
+
+En qué tipo de aventura te interesa poner las siguientes opciones:
+
+•alquiler de cuatrimotos
+•batalla Paintball 
+
+Que el mensaje que dejé el cliente llegue a número de WhatsApp por el momento: 3117030436
+Y al correo: chocoaventurascuatri@gmail.com
+
+Botón de reserva que lleve a página reservas
+
+en el menu flotante, Conectar los botones de redes sociales con los links de las redes
+
+
+cambiar los textos de la pagina de nosotros por eso: "Título:
+AVENTURA EN CUATRIMOTOS Y PAINTBALL EN EL CHOCÓ
+
+Información:
+Chocó Aventuras es una empresa pionera en el turismo de aventura en la región, creada para quienes buscan experiencias auténticas, llenas de adrenalina y diversión. Ofrecemos recorridos en cuatrimotos Yamaha diseñados para explorar la selva tropical del Chocó, sus paisajes naturales y su energía vibrante.
+Más que una guía, brindamos una experiencia inolvidable, ideal para quienes quieren vivir algo diferente en Quibdó, donde la emoción, la naturaleza y la libertad se encuentran en cada ruta.
+
+Nuestras instalaciones están ubicadas en el KM7 vía Yuto, Quibdó – Chocó, un punto estratégico rodeado de naturaleza donde podrás disfrutar de esta nueva forma de turismo activo en la región.
+Somos un espacio pensado para quienes quieren desconectarse de la rutina y vivir una experiencia única sobre cuatro ruedas.
+
+Nuestra Pasión por la Aventura:
+La selva tropical del Chocó nos inspira a crear momentos llenos de energía y emoción. Próximamente contaremos también con una zona de paintball, ideal para compartir con amigos, liberar adrenalina y vivir la acción al máximo"
+
+Botón reserva tu aventura que lleve a página de reservas
+
+Preguntas frecuentes, sustituir por esas: "¿Qué incluye el tour en cuatrimoto?
+
+El recorrido incluye motos automáticas Yamaha, casco de seguridad, acompañamiento durante todo el trayecto y asistencia médica.
+No incluye: seguro contra choques o daños a terceros, guantes ni botas.
+
+⸻
+
+¿Cuánto dura una aventura típica?
+
+Cada experiencia tiene una duración aproximada de 40 a 60 minutos, dependiendo de la ruta y el ritmo del grupo.
+
+⸻
+
+¿Es necesario tener experiencia previa?
+
+No es necesario tener experiencia previa para participar. Sin embargo, por motivos de seguridad, no se recomienda para personas con limitaciones físicas o motrices que puedan afectar el control del vehículo. Nuestro equipo brinda una breve inducción antes del recorrido para que todos disfruten la experiencia con confianza.
+
+⸻
+
+¿Cuál es la edad mínima para participar?
+
+La edad mínima para conducir una cuatrimoto es de 16 años, y es requisito obligatorio portar licencia de conducción vigente
+Que los links funcionen a las páginas que corresponden"
+
+En el footer, Que los links funcionen a las páginas que corresponden
+Inicio
+Tours
+etc
+
+
+Pagina Tours, Página tour:
+Clonar por la misma plantilla de las anteriores que se están utilizando ya que esta diferente el tema o estilo. (Es decir, usar los elementos de la pagina 'nosotros' o sea, el formato, que usamos en la pagina nosostros, es que la actual ta con otras colores y efectos. (observacion: El cliente esta se referindo a la pagina 'Experiencias' no hay pagina Tours.
+
+Aun en la pagina de Experiencias, mira que dijo el cliente: "Experiencias más popular, cambiar por:
+
+Título:
+Experiencias aventura 4x4 
+
+Subtítulo:
+Experiencias en cuatrimoto 
+
+Tiempo: 40min - 60min
+Grupos ✅
+
+Incluye:
+Solo cambiar equipo de seguridad completo por: equipo de seguridad (casco).
+Quitar seguro de accidentes
+
+Adicional agregar:
+Asistencia médica.
+Hidratación.
+
+Precio: $250.000
+Por cuatrimoto (pueden ir 2 pasajeros por moto por el mismo valor).
+
+
+Paintball en la selva:
+Cambiar el nombre por:
+Batalla de Paintball 
+
+Quitar la información y poner próximamente y poner en el fondo una imagen
+
+Quitarle el botón de reservar y ponerle ese botón próximamente
+Cambiar el título experiencias de aventura por:
+NUESTROS SERVICIOS
+
+(Desde tour extremos en cuatrimoto hasta experiencias culturales auténticas) reemplazar por:
+Tu próxima aventura comienza aquí…
+
+Cambiar el título experiencias de aventura por:
+NUESTROS SERVICIOS
+
+(Desde tour extremos en cuatrimoto hasta experiencias culturales auténticas) reemplazar por:
+Tu próxima aventura comienza aquí…
+
+Quitar en esa misma pagina las experiencias: Actividades Grupales y Cultura Chocoana.
+
+Requerimientos de seguridad solo cambiar:
+
+Protección: uso obligatorio de casco
+
+Adicional agregar:
+Obligatorio Licencia de conducción para el conductor 
+
+Políticas de reserva están bien✅
+
+Pero poner otro ítem que diga:
+Política de cancelación: 
+Para recibir el reembolso íntegro de la experiencia, debes cancelarla como mínimo con 24 horas de antelación 
+
+Poner otro ítem:
+Importante: Las rutas pueden variar según condiciones climáticas. En caso de lluvias intensas o aumento del nivel del río, el recorrido acuático será reemplazado por una ruta rural alternativa, garantizando siempre la seguridad de nuestros turistas.
+
+Agregar otro cuadro:
+
+Título: información adicional
+
+La confirmación se recibirá cuando se realice la reserva.
+
+No está adaptado para personas en silla de ruedas.
+
+No es recomendable para viajeros con problemas de espalda.
+
+No es recomendable para embarazadas.
+
+No es adecuado para viajeros con afecciones cardíacas u otros problemas médicos graves.
+
+La mayoría de viajeros pueden participar en la experiencia.
+
+Se trata de un tour o una actividad de carácter privado. Solo puede participar su grupo.
+
+
+En nuestros servicios sólo dejar:
+Tour en cuatrimoto 
+Batalla de paintball
+
+Página experiencias:
+Clonar el diseño de las ya aceptadas.
+
+Cambiar 4 experiencias por:
+Nuestras 2 experiencias
+
+Tour aventura 4x4
+Toda la información de esa está bien, solo modificar:
+•Yamaha grizzly 700 - Edición especial 2009 
+————————-
+
+Paintball natural:
+Cambiar título por:
+Batalla de Paintball
+Combate con adrenalina en escenarios naturales únicos 
+
+borrar todo lo demás y poner PRÓXIMAMENTE
+
+Verificar la area de testimonios y en esa parte que salen los testimonios pones la opcion de subir la foto del cliente que hizo el testimonio
+
+En la pagina de Experiencias, cambiar la palabra 'Colombia' Cambiar título por:
+
+"¿Por qué somos únicos en el Chocó?"
+
+En la información de la cuatrimoto:
+Yamaha grizzly 700 
+Quitarle el color rojo y ya.
+
+Cultura auténtica:
+Quitar música y tradiciones milenarias
+
+Mas abajo, en la misma pagina, quitar el bloque 'Que incluye cada Experiencia' Seguridade garantizada y las opciones, tambiem quitar Guias locales y las opciones, o sea, quitar el bloque completo, y en el mismo local anadir a cambio una opcion donde el cliente pueda ello mismo poner una galeria de fotos (ojo que eso toca anadir en el painel)
+
+Edad mínima para conducir: 16 años
+
+Agregar:
+Licencia de conducción obligatorio
+
+Quitar todo l bloque rojo mas abajo en la misma pagina
+
+Patronizar el footer, es decir, el footer en todas las paginas debe de ser el footer que esta en la pagina inicial

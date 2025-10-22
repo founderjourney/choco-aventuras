@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { MapPin, Phone, Mail, Facebook, Instagram, MessageCircle } from 'lucide-react';
 import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 export default function ContactoPage() {
   const [formData, setFormData] = useState({
@@ -315,73 +316,7 @@ export default function ContactoPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            {/* Logo y descripción */}
-            <div className="space-y-4">
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold">CA</span>
-                </div>
-                <div className="ml-3">
-                  <div className="text-emerald-400 font-bold text-lg">CHOCÓ AVENTURAS</div>
-                </div>
-              </div>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Nuestra amplia experiencia en el sector nos permite crear la gran variedad de
-                servicios. Contamos desde aventuras en cuatrimoto hasta combates de paintball
-                y experiencias culturales únicas.
-              </p>
-            </div>
-
-            {/* Links */}
-            <div>
-              <h3 className="text-white font-semibold mb-4 text-sm tracking-widest uppercase">LINKS</h3>
-              <div className="space-y-2">
-                {['Inicio', 'Tours', 'Cuatrimotos', 'Experiencias'].map((link) => (
-                  <Link key={link} href="#" className="block text-gray-400 hover:text-emerald-400 text-sm transition-colors">
-                    {link}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* Acerca de */}
-            <div>
-              <h3 className="text-white font-semibold mb-4 text-sm tracking-widest uppercase">ACERCA DE</h3>
-              <div className="space-y-2">
-                <div className="text-gray-400 text-sm">Chocó-Quibdó</div>
-                <div className="text-gray-400 text-sm">Aventuras</div>
-                <div className="text-gray-400 text-sm">Escríbenos</div>
-                <div className="text-emerald-400 text-sm">+57 311703 0436</div>
-              </div>
-            </div>
-
-            {/* Social Media */}
-            <div>
-              <h3 className="text-white font-semibold mb-4 text-sm tracking-widest uppercase">SOCIAL MEDIA</h3>
-              <div className="flex space-x-4">
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-all duration-300">
-                  <Facebook className="w-5 h-5 text-gray-400 hover:text-white" />
-                </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-all duration-300">
-                  <MessageCircle className="w-5 h-5 text-gray-400 hover:text-green-400" />
-                </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-all duration-300">
-                  <Instagram className="w-5 h-5 text-gray-400 hover:text-pink-400" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-            <p className="text-gray-500 text-sm">
-              © 2024 Chocó Aventuras. Todos los derechos reservados.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

@@ -12,55 +12,31 @@ export default function ExperienciasPage() {
   const experiencias = [
     {
       id: 1,
-      titulo: "Cuatrimotos en la Selva",
+      titulo: "Tour en cuatrimoto",
+      subtitulo: "Experiencias aventura 4x4",
+      subtitulo2: "Experiencias en cuatrimoto",
+      tiempo: "40min - 60min",
+      grupos: true,
       icono: <TreePine className="h-8 w-8" />,
       descripcion: "Aventura extrema sobre barro, trochas y selva tropical",
       detalles: [
-        "Contacto directo con la naturaleza chocoana",
-        "Rutas extremas diseñadas para la aventura",
-        "Yamaha Grizzly 700 - Edición Especial Roja 2009",
-        "Guías locales expertos en el territorio"
+        "Equipo de seguridad (casco)",
+        "Asistencia médica",
+        "Hidratación",
+        "Yamaha Grizzly 700"
       ],
-      color: "from-green-500 to-green-700"
+      precio: "$250.000 por cuatrimoto (hasta 2 pasajeros por moto, mismo precio)",
+      color: "from-green-500 to-green-700",
+      disponible: true
     },
     {
       id: 2,
-      titulo: "Paintball Natural",
+      titulo: "Batalla de Paintball",
       icono: <Target className="h-8 w-8" />,
-      descripcion: "Combate con adrenalina en escenarios naturales únicos",
-      detalles: [
-        "Escenarios en plena selva tropical",
-        "Combate estratégico entre la vegetación",
-        "Equipos profesionales de paintball",
-        "Experiencia única en Colombia"
-      ],
-      color: "from-red-500 to-red-700"
-    },
-    {
-      id: 3,
-      titulo: "Cultura Chocoana",
-      icono: <Music className="h-8 w-8" />,
-      descripcion: "Identidad auténtica con música y fiestas de San Pacho",
-      detalles: [
-        "Música tradicional del Pacífico",
-        "Fiestas de San Pacho auténticas",
-        "Historia y tradiciones locales",
-        "Gastronomía típica chocoana"
-      ],
-      color: "from-yellow-500 to-orange-600"
-    },
-    {
-      id: 4,
-      titulo: "Actividades Grupales",
-      icono: <Users className="h-8 w-8" />,
-      descripcion: "Team building y actividades empresariales",
-      detalles: [
-        "Ideal para integración empresarial",
-        "Actividades de team building",
-        "Experiencias para grupos grandes",
-        "Fortalecimiento de vínculos"
-      ],
-      color: "from-blue-500 to-blue-700"
+      descripcion: "PRÓXIMAMENTE",
+      detalles: [],
+      color: "from-red-500 to-red-700",
+      disponible: false
     }
   ];
 
@@ -72,10 +48,10 @@ export default function ExperienciasPage() {
       <section className="relative bg-gradient-to-r from-[#145A32] to-[#1565C0] py-20 jungle-particles mountain-parallax">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <h1 className="text-3xl font-bold mb-6 jungle-text wind-effect">
-            Experiencias Únicas
+            NUESTROS SERVICIOS
           </h1>
           <p className="text-xl mb-8 max-w-4xl mx-auto">
-            100% en la selva del Chocó - Vive la adrenalina, descubre la cultura y conecta con la naturaleza más pura de Colombia
+            Tu próxima aventura comienza aquí...
           </p>
         </div>
       </section>
@@ -85,10 +61,10 @@ export default function ExperienciasPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-2xl font-bold text-[#145A32] mb-4 jungle-text">
-              Nuestras 4 Experiencias Principales
+              NUESTROS SERVICIOS
             </h2>
             <p className="text-xl text-gray-600">
-              Cada experiencia diseñada para conectarte con la esencia del Chocó
+              Tu próxima aventura comienza aquí...
             </p>
           </div>
 
@@ -100,24 +76,47 @@ export default function ExperienciasPage() {
                     {exp.icono}
                   </div>
 
-                  <h3 className="text-2xl font-bold text-[#145A32] mb-4">{exp.titulo}</h3>
+                  <h3 className="text-2xl font-bold text-[#145A32] mb-2">{exp.titulo}</h3>
+                  {exp.subtitulo && <p className="text-lg font-semibold text-gray-800 mb-2">{exp.subtitulo}</p>}
+                  {exp.subtitulo2 && <p className="text-base text-gray-600 mb-2">{exp.subtitulo2}</p>}
+                  {exp.tiempo && <p className="text-sm text-gray-600 mb-2"><strong>Tiempo:</strong> {exp.tiempo}</p>}
+                  {exp.grupos && <p className="text-sm text-green-600 mb-4">✓ Grupos</p>}
+
                   <p className="text-gray-700 text-lg mb-6 leading-relaxed">{exp.descripcion}</p>
 
-                  <div className="space-y-3 mb-6">
-                    {exp.detalles.map((detalle, idx) => (
-                      <div key={idx} className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-[#F1C40F] rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-700">{detalle}</span>
+                  {exp.detalles.length > 0 && (
+                    <>
+                      <h4 className="font-semibold mb-3">Incluye:</h4>
+                      <div className="space-y-3 mb-6">
+                        {exp.detalles.map((detalle, idx) => (
+                          <div key={idx} className="flex items-start gap-3">
+                            <div className="w-2 h-2 bg-[#F1C40F] rounded-full mt-2 flex-shrink-0"></div>
+                            <span className="text-gray-700">{detalle}</span>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
+                    </>
+                  )}
 
-                  <Link href="/reservas">
-                    <Button className="w-full bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold py-3 adrenaline-button magnetic-button">
-                      RESERVAR EXPERIENCIA
-                      <ArrowRight className="h-4 w-4 ml-2" />
+                  {exp.precio && (
+                    <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+                      <h4 className="font-semibold mb-2">Precio:</h4>
+                      <p className="text-[#145A32] font-bold">{exp.precio}</p>
+                    </div>
+                  )}
+
+                  {exp.disponible ? (
+                    <Link href="/reservas">
+                      <Button className="w-full bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold py-3 adrenaline-button magnetic-button">
+                        RESERVAR
+                        <ArrowRight className="h-4 w-4 ml-2" />
+                      </Button>
+                    </Link>
+                  ) : (
+                    <Button className="w-full bg-gray-400 text-white font-bold py-3 cursor-not-allowed" disabled>
+                      PRÓXIMAMENTE
                     </Button>
-                  </Link>
+                  )}
                 </CardContent>
               </Card>
             ))}
@@ -130,7 +129,7 @@ export default function ExperienciasPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-2xl font-bold text-[#145A32] mb-6 jungle-text">
-              ¿Por qué somos únicos en Colombia?
+              ¿Por qué somos únicos en el Chocó?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Somos la primera experiencia de turismo extremo en Quibdó que combina todo en un solo lugar
@@ -145,7 +144,7 @@ export default function ExperienciasPage() {
                 </div>
                 <h3 className="text-xl font-bold text-[#145A32] mb-4">Yamaha Grizzly 700</h3>
                 <p className="text-gray-700">
-                  Edición Especial Roja 2009, las cuatrimotos más potentes y seguras para aventuras extremas en la selva.
+                  Las cuatrimotos más potentes y seguras para aventuras extremas en la selva.
                 </p>
               </CardContent>
             </Card>
@@ -293,6 +292,101 @@ export default function ExperienciasPage() {
                   <li>• Horarios: 7am - 5pm</li>
                   <li>• Ubicación: KM7 VIA YUTO</li>
                 </ul>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Políticas de Seguridad y Información Adicional */}
+      <section className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center text-[#145A32] mb-12 jungle-text">
+            Seguridad y Políticas
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <Card className="card-3d">
+              <CardContent className="p-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 bg-[#145A32] rounded-lg flex items-center justify-center">
+                    <Shield className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#145A32]">Protección</h3>
+                </div>
+                <ul className="space-y-3">
+                  <li className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
+                    <span>Uso obligatorio de casco</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
+                    <span>Obligatorio Licencia de conducción para el conductor</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
+                    <span>Edad mínima para conducir: 16 años</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="card-3d">
+              <CardContent className="p-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 bg-[#1565C0] rounded-lg flex items-center justify-center">
+                    <Clock className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#145A32]">Políticas</h3>
+                </div>
+                <ul className="space-y-3">
+                  <li className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
+                    <span>Política de cancelación: reembolso íntegro si cancelas con mínimo 24 horas de antelación</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
+                    <span>Rutas pueden variar por clima; alternativa (ruta rural) en caso de lluvia o subida del río</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12">
+            <h3 className="text-2xl font-bold text-center text-[#145A32] mb-8">Información Adicional</h3>
+            <Card className="card-3d">
+              <CardContent className="p-8">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <ul className="space-y-3">
+                      <li className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
+                        <span>Confirmación se recibe al realizar la reserva</span>
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
+                        <span>No adaptado para sillas de ruedas</span>
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
+                        <span>No recomendable para problemas de espalda, embarazadas, afecciones cardíacas graves</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <ul className="space-y-3">
+                      <li className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
+                        <span>La mayoría de viajeros pueden participar</span>
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
+                        <span>Actividad privada (solo su grupo)</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>

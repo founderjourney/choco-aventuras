@@ -139,6 +139,35 @@ export default function ReservasPage() {
 
     const fechaCompleta = new Date(`${formData.fecha_paseo}T${formData.hora_paseo}:00`);
 
+    // Crear mensaje para WhatsApp
+    const selectedCuatrimoto = cuatrimotosData?.cuatrimotos.find(c => c.id === parseInt(formData.cuatrimoto_id));
+    const selectedPaseo = paseosData?.paseos.find(p => p.id === parseInt(formData.paseo_id));
+    const precioTotal = selectedCuatrimoto && selectedPaseo
+      ? (selectedCuatrimoto.precio_hora * selectedPaseo.duracion_horas) + selectedPaseo.precio
+      : 0;
+
+    const whatsappMessage = `🏍️ *NUEVA RESERVA - CHOCÓ AVENTURAS*
+
+👤 *Cliente:* ${formData.cliente_nombre}
+📞 *Teléfono:* ${formData.cliente_telefono}
+📧 *Email:* ${formData.cliente_email}
+
+🏍️ *Cuatrimoto:* ${selectedCuatrimoto?.nombre}
+🎯 *Experiencia:* ${selectedPaseo?.nombre}
+📅 *Fecha:* ${new Date(formData.fecha_paseo).toLocaleDateString('es-CO')}
+🕐 *Hora:* ${formData.hora_paseo}
+💰 *Precio Total:* $${precioTotal.toLocaleString()}
+
+${formData.notas ? `📝 *Notas:* ${formData.notas}` : ''}
+
+¡Gracias por elegir Chocó Aventuras! 🌿`;
+
+    // Enviar a WhatsApp
+    const phoneNumber = '573117030436';
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappUrl, '_blank');
+
+    // También guardar en base de datos
     createReservaMutation.mutate({
       cuatrimoto_id: parseInt(formData.cuatrimoto_id),
       paseo_id: parseInt(formData.paseo_id),
@@ -148,6 +177,24 @@ export default function ReservasPage() {
       fecha_paseo: fechaCompleta,
       notas: formData.notas || undefined
     });
+
+    // Preparar email
+    const emailSubject = 'Nueva Reserva - Chocó Aventuras';
+    const emailBody = `Nueva reserva de ${formData.cliente_nombre}
+
+Detalles:
+- Cuatrimoto: ${selectedCuatrimoto?.nombre}
+- Experiencia: ${selectedPaseo?.nombre}
+- Fecha: ${new Date(formData.fecha_paseo).toLocaleDateString('es-CO')}
+- Hora: ${formData.hora_paseo}
+- Teléfono: ${formData.cliente_telefono}
+- Email: ${formData.cliente_email}
+- Precio Total: $${precioTotal.toLocaleString()}
+
+${formData.notas ? `Notas: ${formData.notas}` : ''}`;
+
+    const emailUrl = `mailto:chocoaventurascuatri@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    window.open(emailUrl);
   };
 
   const selectedCuatrimoto = cuatrimotosData?.cuatrimotos.find(c => c.id === parseInt(formData.cuatrimoto_id));

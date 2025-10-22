@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 export default function Homepage() {
   const [sideCartOpen, setSideCartOpen] = useState(false);
@@ -51,7 +52,7 @@ export default function Homepage() {
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <p className="text-sm text-white/80 mb-4">- Bienvenido -</p>
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
               <span className="text-emerald-400">CHOCÓ</span>
               <br />
               <span className="text-white">AVENTURAS</span>
@@ -94,7 +95,7 @@ export default function Homepage() {
 
         {/* Content */}
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4">
             EXPLORA ELIGE Y VIVE LA ACCIÓN
           </h2>
           <p className="text-lg text-white/90 mb-12">
@@ -102,15 +103,19 @@ export default function Homepage() {
           </p>
 
           <div className="flex flex-col md:flex-row gap-6 justify-center">
-            <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-8 py-4 backdrop-blur-sm">
-              CUATRIMOTOS
+            <Link href="/cuadriciclos">
+              <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 backdrop-blur-sm text-sm md:text-base">
+                CUATRIMOTOS
+              </Button>
+            </Link>
+            <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 backdrop-blur-sm text-sm md:text-base cursor-not-allowed">
+              PRÓXIMAMENTE
             </Button>
-            <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-8 py-4 backdrop-blur-sm">
-              PAINTBALL
-            </Button>
-            <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-8 py-4 backdrop-blur-sm">
-              EXPERIENCIAS
-            </Button>
+            <Link href="/experiencias">
+              <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 backdrop-blur-sm text-sm md:text-base">
+                EXPERIENCIAS
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -149,7 +154,7 @@ export default function Homepage() {
 
                 {/* Reverso */}
                 <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-emerald-600 flex items-center justify-center">
-                  <Link href="/cuadriciclos">
+                  <Link href="/reservas">
                     <Button className="bg-white text-emerald-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
                       RESERVAR
                     </Button>
@@ -188,7 +193,7 @@ export default function Homepage() {
 
                 {/* Reverso */}
                 <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-orange-600 flex items-center justify-center">
-                  <Button className="bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
+                  <Button className="bg-white text-orange-600 px-8 py-4 text-lg font-semibold cursor-not-allowed">
                     PRÓXIMAMENTE
                   </Button>
                 </div>
@@ -240,9 +245,11 @@ export default function Homepage() {
                 <div className="text-xl font-bold text-red-400">Consultar precios</div>
               </div>
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <Button className="bg-red-600 text-white hover:bg-red-700 px-8 py-3">
-                  RESERVAR
-                </Button>
+                <Link href="/reservas">
+                  <Button className="bg-red-600 text-white hover:bg-red-700 px-8 py-3">
+                    RESERVAR
+                  </Button>
+                </Link>
               </div>
             </div>
 
@@ -504,121 +511,30 @@ export default function Homepage() {
             Reserva tu aventura por WhatsApp
           </p>
 
-          <a
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block"
-          >
-            <Button className="bg-white text-green-600 hover:bg-gray-100 px-6 md:px-12 py-4 md:py-6 text-lg md:text-2xl font-bold rounded-full shadow-2xl hover:scale-105 transition-all duration-300">
-               RESERVAR
+          <Link href="/reservas" className="inline-block">
+            <Button className="bg-white text-green-600 hover:bg-gray-100 px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-bold rounded-full shadow-2xl hover:scale-105 transition-all duration-300">
+              RESERVAR AVENTURA
             </Button>
-          </a>
+          </Link>
         </div>
       </section>
 
       {/* Texto Animado */}
       <section className="py-20 bg-black text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold">
             DESCUBRE{' '}
             <span className="text-emerald-400 transition-all duration-1000">
               {animatedTexts[animatedTextIndex]}
             </span>
             <br />
-            VIVE LA AVENTURA
+            VIVE HOY TU AVENTURA
           </h2>
         </div>
       </section>
 
-      {/* Modern Footer */}
-      <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 text-white py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-12">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-r from-emerald-500 to-emerald-700 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold">CA</span>
-                </div>
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
-                  Chocó Aventuras
-                </h3>
-              </div>
-              <p className="text-slate-300 leading-relaxed mb-6">
-                Somos la primera experiencia de turismo extremo en Quibdó que combina cuatrimotos, paintball y cultura local en plena selva tropical.
-              </p>
-              <div className="flex items-center gap-2 text-emerald-400">
-                <Star className="h-5 w-5 fill-current" />
-                <span className="font-semibold">Experiencia Premium Garantizada</span>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-lg mb-6 text-emerald-400">Contacto</h4>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Phone className="h-5 w-5 text-emerald-400" />
-                  <span className="text-slate-300">KM7 VIA YUTO</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-emerald-400"></span>
-                  <span className="text-slate-300">chocoaventurascuatri@gmail.com</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-emerald-400" />
-                  <span className="text-slate-300">Quibdó, Chocó</span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-lg mb-6 text-emerald-400">Síguenos</h4>
-              <div className="flex space-x-4 mb-6">
-                <a
-                  href="#"
-                  className="w-12 h-12 bg-slate-700 hover:bg-emerald-600 rounded-xl flex items-center justify-center transition-all duration-300 group"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Facebook className="h-6 w-6 text-slate-300 group-hover:text-white" />
-                </a>
-                <a
-                  href="#"
-                  className="w-12 h-12 bg-slate-700 hover:bg-emerald-600 rounded-xl flex items-center justify-center transition-all duration-300 group"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Instagram className="h-6 w-6 text-slate-300 group-hover:text-white" />
-                </a>
-                <a
-                  href="#"
-                  className="w-12 h-12 bg-slate-700 hover:bg-emerald-600 rounded-xl flex items-center justify-center transition-all duration-300 group"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="text-slate-300 group-hover:text-white font-bold text-lg"></span>
-                </a>
-              </div>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                Mantente conectado para conocer nuestras últimas aventuras y ofertas especiales.
-              </p>
-            </div>
-          </div>
-
-          <div className="border-t border-slate-700/50 mt-12 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-slate-400 text-sm">
-                &copy; 2024 Chocó Aventuras. Todos los derechos reservados.
-              </p>
-              <div className="flex gap-6 text-sm text-slate-400">
-                <a href="#" className="hover:text-emerald-400 transition-colors">Términos</a>
-                <a href="#" className="hover:text-emerald-400 transition-colors">Privacidad</a>
-                <a href="#" className="hover:text-emerald-400 transition-colors">Política</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      {/* Footer */}
+      <Footer />
 
       {/* Side Cart */}
       {sideCartOpen && (
@@ -705,11 +621,11 @@ export default function Homepage() {
       )}
 
       {/* Chaty Widget */}
-      <div className="fixed left-6 bottom-6 z-40 group">
+      <div className="fixed left-6 bottom-6 z-40 group chaty-widget">
         <div className="flex flex-col gap-3">
           {/* Botón principal */}
           <button
-            className="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300 animate-pulse"
+            className="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300"
             onClick={() => document.querySelector('.contact-buttons')?.classList.toggle('show')}
           >
             <Phone className="h-6 w-6 text-white" />
@@ -732,7 +648,7 @@ export default function Homepage() {
               <Mail className="h-6 w-6 text-white" />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/chocoaventuras"
               className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
             >
               <Instagram className="h-6 w-6 text-white" />
@@ -757,6 +673,15 @@ export default function Homepage() {
         }
         .rotate-y-180 {
           transform: rotateY(180deg);
+        }
+
+        @keyframes pulse-hint {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.1); }
+        }
+
+        .chaty-widget {
+          animation: pulse-hint 2s ease-in-out 3s infinite 3;
         }
       `}</style>
 
