@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -14,9 +15,37 @@ import Footer from '@/components/Footer';
 import { usePageContent } from '@/hooks/use-page-content';
 import { migrateHomepageToCMS } from '@/scripts/migrate-homepage';
 
+interface Cuatrimoto {
+  id: number;
+  nombre: string;
+  marca: string;
+  modelo: string;
+  año: number | null;
+  color: string;
+  precio_hora: number;
+  precio_dia: number;
+  descripcion: string | null;
+  fotos: string[];
+  estado: 'disponible' | 'ocupado' | 'mantenimiento';
+  caracteristicas: string[];
+}
+
+async function fetchCuatrimotos(): Promise<{cuatrimotos: Cuatrimoto[]}> {
+  const response = await fetch('/api/cuadriciclos');
+  if (!response.ok) {
+    throw new Error('Error fetching cuatrimotos');
+  }
+  return response.json();
+}
+
 export default function Homepage() {
   const [sideCartOpen, setSideCartOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['cuatrimotos'],
+    queryFn: fetchCuatrimotos,
+  });
 
   // 🚀 Hook simple para CMS - con fallback seguro
   const pageContent = usePageContent('homepage');
@@ -167,14 +196,13 @@ export default function Homepage() {
                     </div>
                     {/* Botón para móvil */}
                     <div className="absolute inset-0 flex items-center justify-center md:hidden">
-                      <Button
-                        className="bg-emerald-600/90 text-white hover:bg-emerald-700 px-6 py-3 text-sm font-semibold backdrop-blur-sm"
-                        onClick={(e) => {
-                          e.currentTarget.closest('.group')?.classList.toggle('flipped');
-                        }}
-                      >
-                        Ver más
-                      </Button>
+                      <Link href="/reservas">
+                        <Button
+                          className="bg-emerald-600/90 text-white hover:bg-emerald-700 px-6 py-3 text-sm font-semibold backdrop-blur-sm"
+                        >
+                          Ver más
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -208,11 +236,9 @@ export default function Homepage() {
                     <div className="absolute inset-0 flex items-center justify-center md:hidden">
                       <Button
                         className="bg-orange-600/90 text-white hover:bg-orange-700 px-6 py-3 text-sm font-semibold backdrop-blur-sm"
-                        onClick={(e) => {
-                          e.currentTarget.closest('.group')?.classList.toggle('flipped');
-                        }}
+                        disabled
                       >
-                        Ver más
+                        PRÓXIMAMENTE
                       </Button>
                     </div>
                   </div>
@@ -254,67 +280,36 @@ export default function Homepage() {
 
           {/* Grid de Cuatrimotos */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Cuatrimoto Principal - YAMAHA GRIZZLY 700 */}
-            <div className="group relative h-80 rounded-lg overflow-hidden cursor-pointer">
-              <div
-                className="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
-                style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
-              />
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/60 transition-all duration-300" />
-              <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                <div className="mb-4">
-                  <span className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                     YAMAHA GRIZZLY
-                  </span>
+            {isLoading && <p className="text-white">Cargando cuatrimotos...</p>}
+            {error && <p className="text-white">Error al cargar las cuatrimotos.</p>}
+            {data?.cuatrimotos.slice(0, 3).map((cuatrimoto) => (
+              <div key={cuatrimoto.id} className="group relative h-80 rounded-lg overflow-hidden cursor-pointer">
+                <div
+                  className="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
+                  style={{ backgroundImage: `url(${cuatrimoto.fotos[0] || '/choco-aventuras-hero.jpg'})` }}
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/60 transition-all duration-300" />
+                <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                  <div className="mb-4">
+                    <span className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                      {cuatrimoto.marca}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">{cuatrimoto.nombre}</h3>
+                  <p className="text-sm text-white/90 mb-4">{cuatrimoto.descripcion}</p>
+                  <div className="text-xl font-bold text-red-400">
+                    ${cuatrimoto.precio_hora.toLocaleString()}/hora
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold mb-2">YAMAHA GRIZZLY 700</h3>
-                <p className="text-sm text-white/90 mb-4">Modelo 2009 - Edición Roja. Potencia máxima para aventura extrema</p>
-                <div className="text-xl font-bold text-red-400">Consultar precios</div>
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <Link href="/reservas">
-                  <Button className="bg-red-600 text-white hover:bg-red-700 px-8 py-3">
-                    RESERVAR
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Cuatrimoto 2 - Disponible según inventario */}
-            <div className="group relative h-80 rounded-lg overflow-hidden cursor-pointer opacity-60">
-              <div
-                className="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
-                style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
-              />
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/70 transition-all duration-300" />
-              <div className="absolute inset-0 flex flex-col justify-center items-center p-8 text-white text-center">
-                <div className="mb-4">
-                  <span className="bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                     PRÓXIMAMENTE
-                  </span>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <Link href="/reservas">
+                    <Button className="bg-red-600 text-white hover:bg-red-700 px-8 py-3">
+                      RESERVAR
+                    </Button>
+                  </Link>
                 </div>
-                <h3 className="text-xl font-bold mb-2">SEGUNDO CUATRIMOTO</h3>
-                <p className="text-sm text-white/90">Ampliando nuestra flota para más aventuras</p>
               </div>
-            </div>
-
-            {/* Cuatrimoto 3 - Futuro */}
-            <div className="group relative h-80 rounded-lg overflow-hidden cursor-pointer opacity-60">
-              <div
-                className="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
-                style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
-              />
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/70 transition-all duration-300" />
-              <div className="absolute inset-0 flex flex-col justify-center items-center p-8 text-white text-center">
-                <div className="mb-4">
-                  <span className="bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                     EN DESARROLLO
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold mb-2">TERCER CUATRIMOTO</h3>
-                <p className="text-sm text-white/90">Más opciones para tu aventura perfecta</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -648,8 +643,8 @@ export default function Homepage() {
       )}
 
       {/* Chaty Widget */}
-      <div className="fixed left-6 bottom-24 z-40 group chaty-widget">
-        <div className="flex flex-col gap-3">
+      <div className="fixed left-6 bottom-6 z-40 group chaty-widget">
+        <div className="flex flex-col-reverse gap-3">
           {/* Botón principal */}
           <button
             className="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300"
@@ -659,7 +654,7 @@ export default function Homepage() {
           </button>
 
           {/* Botones secundarios */}
-          <div className="contact-buttons flex flex-col gap-3 opacity-0 scale-95 transition-all duration-300 transform translate-y-4">
+          <div className="contact-buttons flex flex-col-reverse gap-3 opacity-0 scale-95 transition-all duration-300 transform translate-y-4">
             <a
               href="https://wa.me/573117030436"
               className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
@@ -727,7 +722,7 @@ export default function Homepage() {
       {/* Back to Top */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed right-6 bottom-24 w-12 h-12 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg shadow-lg hover:scale-110 transition-all"
+        className="fixed right-6 bottom-6 w-12 h-12 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg shadow-lg hover:scale-110 transition-all"
       >
         <ArrowUp className="h-6 w-6 mx-auto" />
       </button>

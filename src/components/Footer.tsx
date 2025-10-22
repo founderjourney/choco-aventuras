@@ -74,26 +74,15 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-lg mb-4 text-emerald-400">Nuestros Servicios</h4>
             <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <span className="text-emerald-400"></span>
-                <span className="text-gray-300 text-sm">Alquiler de Cuatrimotos</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-emerald-400"></span>
-                <span className="text-gray-300 text-sm">Paintball (Próximamente)</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-emerald-400"></span>
-                <span className="text-gray-300 text-sm">Experiencias de Selva</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-emerald-400"></span>
-                <span className="text-gray-300 text-sm">Cultura Chocoana</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-emerald-400"></span>
-                <span className="text-gray-300 text-sm">Team Building</span>
-              </div>
+              <Link href="/cuadriciclos" className="block text-gray-300 hover:text-emerald-400 transition-colors">
+                Alquiler de Cuatrimotos
+              </Link>
+              <span className="block text-gray-500 cursor-not-allowed">
+                Paintball (Próximamente)
+              </span>
+              <Link href="/experiencias" className="block text-gray-300 hover:text-emerald-400 transition-colors">
+                Experiencias de Selva
+              </Link>
             </div>
           </div>
         </div>

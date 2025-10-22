@@ -134,6 +134,79 @@ export default function ExperienciasPage() {
               </Card>
             ))}
           </div>
+
+          {/* Política de Cancelación */}
+          <div className="mt-16">
+            <div className="bg-blue-50 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-[#145A32] mb-4 flex items-center gap-3">
+                <Clock className="h-6 w-6" />
+                Política de cancelación
+              </h3>
+              <p className="text-gray-700 text-lg leading-relaxed">
+                Para recibir el reembolso íntegro de la experiencia, debes cancelarla como mínimo con <strong>24 horas de antelación</strong>.
+              </p>
+            </div>
+          </div>
+
+          {/* Información sobre Variaciones por Clima */}
+          <div className="mt-8">
+            <div className="bg-yellow-50 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-[#145A32] mb-4 flex items-center gap-3">
+                <Shield className="h-6 w-6" />
+                Importante
+              </h3>
+              <p className="text-gray-700 text-lg leading-relaxed">
+                Las rutas pueden variar según condiciones climáticas. En caso de lluvias intensas o aumento del nivel del río,
+                el recorrido acuático será reemplazado por una <strong>ruta rural alternativa</strong>, garantizando siempre la
+                <strong> seguridad de nuestros turistas</strong>.
+              </p>
+            </div>
+          </div>
+
+          {/* Información Adicional */}
+          <div className="mt-8">
+            <div className="bg-gray-100 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-[#145A32] mb-6 flex items-center gap-3">
+                <Users className="h-6 w-6" />
+                Información adicional
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-gray-700">La confirmación se recibirá cuando se realice la reserva</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-gray-700">La mayoría de viajeros pueden participar en la experiencia</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-gray-700">Se trata de un tour o una actividad de carácter privado. Solo puede participar su grupo</span>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <h4 className="font-semibold text-gray-800 mb-3">No recomendado para:</h4>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-gray-700">Personas en silla de ruedas (no está adaptado)</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-gray-700">Viajeros con problemas de espalda</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-gray-700">Embarazadas</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-gray-700">Viajeros con afecciones cardíacas u otros problemas médicos graves</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
