@@ -33,7 +33,7 @@ export default function ExperienciasPage() {
       id: 2,
       titulo: "Batalla de Paintball",
       icono: <Target className="h-8 w-8" />,
-      descripcion: "PRÓXIMAMENTE",
+      descripcion: "Prepárate para la acción y la estrategia en un campo de batalla natural. El paintball es una experiencia emocionante donde la adrenalina y el trabajo en equipo son clave. ¡Próximamente en Chocó Aventuras!",
       detalles: [],
       color: "from-red-500 to-red-700",
       disponible: false,
