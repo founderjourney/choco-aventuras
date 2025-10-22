@@ -36,7 +36,8 @@ export default function ExperienciasPage() {
       descripcion: "PRÓXIMAMENTE",
       detalles: [],
       color: "from-red-500 to-red-700",
-      disponible: false
+      disponible: false,
+      backgroundImage: "url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3')"
     }
   ];
 
@@ -70,8 +71,16 @@ export default function ExperienciasPage() {
 
           <div className="grid md:grid-cols-2 gap-8">
             {experiencias.map((exp, index) => (
-              <Card key={exp.id} className="overflow-hidden hover:shadow-2xl transition-all duration-300 card-3d particle-hover">
-                <CardContent className="p-8">
+              <Card key={exp.id} className="overflow-hidden hover:shadow-2xl transition-all duration-300 card-3d particle-hover relative">
+                {exp.backgroundImage && (
+                  <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: exp.backgroundImage }}
+                  >
+                    <div className="absolute inset-0 bg-black/50"></div> {/* Overlay */}
+                  </div>
+                )}
+                <CardContent className="p-8 relative z-10">
                   <div className={`bg-gradient-to-r ${exp.color} rounded-2xl w-16 h-16 flex items-center justify-center mb-6 text-white`}>
                     {exp.icono}
                   </div>
@@ -156,7 +165,7 @@ export default function ExperienciasPage() {
                 </div>
                 <h3 className="text-xl font-bold text-[#145A32] mb-4">100% Selva Tropical</h3>
                 <p className="text-gray-700">
-                  Experiencias auténticas en el corazón de la selva del Pacífico colombiano, biodiversidad única en el mundo.
+                  Experiencias auténticas en el corazón de la selva del Pacífico chocoano, biodiversidad única en el mundo.
                 </p>
               </CardContent>
             </Card>
@@ -176,127 +185,9 @@ export default function ExperienciasPage() {
         </div>
       </section>
 
-      {/* Lo que incluye cada experiencia */}
-      <section className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-center text-[#145A32] mb-12 jungle-text">
-            Qué Incluye Cada Experiencia
-          </h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="card-3d">
-              <CardContent className="p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 bg-[#145A32] rounded-lg flex items-center justify-center">
-                    <Shield className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-[#145A32]">Seguridad Garantizada</h3>
-                </div>
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                    <span>Equipos de protección profesionales</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                    <span>Casco, chaleco y protección completa</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                    <span>Acompañamiento de guías expertos</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                    <span>Seguro de accidentes incluido</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
 
-            <Card className="card-3d">
-              <CardContent className="p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 bg-[#1565C0] rounded-lg flex items-center justify-center">
-                    <Users className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-[#145A32]">Guías Locales</h3>
-                </div>
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                    <span>Personas expertas que conocen el territorio</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                    <span>Conocimiento ancestral de la selva</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                    <span>Historias y tradiciones auténticas</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                    <span>Apoyo constante durante la aventura</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
 
-      {/* Requerimientos */}
-      <section className="py-16 bg-[#F5F5F5]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-[#145A32] mb-12 jungle-text">
-            Requerimientos para las Experiencias
-          </h2>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            <Card className="text-center card-3d">
-              <CardContent className="p-6">
-                <div className="w-16 h-16 bg-[#E53935] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white text-xl"></span>
-                </div>
-                <h3 className="font-bold text-[#145A32] mb-3">Edad y Documentos</h3>
-                <ul className="text-sm text-gray-700 space-y-2">
-                  <li>• Edad mínima: 14 años</li>
-                  <li>• Menores con adulto responsable</li>
-                  <li>• Cédula o pasaporte obligatorio</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center card-3d">
-              <CardContent className="p-6">
-                <div className="w-16 h-16 bg-[#F1C40F] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white text-xl"></span>
-                </div>
-                <h3 className="font-bold text-[#145A32] mb-3">Ropa Adecuada</h3>
-                <ul className="text-sm text-gray-700 space-y-2">
-                  <li>• Ropa cómoda y resistente</li>
-                  <li>• Que se pueda ensuciar</li>
-                  <li>• Calzado cerrado obligatorio</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center card-3d">
-              <CardContent className="p-6">
-                <div className="w-16 h-16 bg-[#145A32] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white text-xl"></span>
-                </div>
-                <h3 className="font-bold text-[#145A32] mb-3">Reserva</h3>
-                <ul className="text-sm text-gray-700 space-y-2">
-                  <li>• Depósito: 50% del valor</li>
-                  <li>• Horarios: 7am - 5pm</li>
-                  <li>• Ubicación: KM7 VIA YUTO</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
 
       {/* Políticas de Seguridad y Información Adicional */}
       <section className="py-16 bg-white">
@@ -392,6 +283,9 @@ export default function ExperienciasPage() {
           </div>
         </div>
       </section>
+
+      {/* TODO: Implement Gallery Component (requires CMS integration for client uploads) */}
+      {/* TODO: Implement Testimonials Section (requires CMS integration for client photos and testimonials) */}
 
       {/* Call to Action */}
       <CallToAction
