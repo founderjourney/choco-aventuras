@@ -149,19 +149,35 @@ export default function AdminCuatrimotos() {
             <div className="space-y-4">
               {data?.cuatrimotos.map((cuatrimoto) => (
                 <div key={cuatrimoto.id} className="flex items-center justify-between p-6 border rounded-lg hover:shadow-md transition-shadow">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-4 mb-2">
-                      <h3 className="text-xl font-semibold">{cuatrimoto.nombre}</h3>
-                      <Badge variant={
-                        cuatrimoto.estado === 'disponible' ? 'default' :
-                        cuatrimoto.estado === 'ocupado' ? 'destructive' :
-                        'secondary'
-                      }>
-                        {cuatrimoto.estado}
-                      </Badge>
-                    </div>
+                  <div className="flex gap-4 flex-1">
+                    {/* Foto del vehículo */}
+                    {cuatrimoto.fotos && cuatrimoto.fotos.length > 0 && (
+                      <div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img
+                          src={cuatrimoto.fotos[0]}
+                          alt={cuatrimoto.nombre}
+                          className="w-full h-full object-cover"
+                        />
+                        {cuatrimoto.fotos.length > 1 && (
+                          <div className="absolute bottom-0 right-0 bg-black/70 text-white px-1 text-xs">
+                            +{cuatrimoto.fotos.length - 1}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    <div className="flex-1">
+                      <div className="flex items-center gap-4 mb-2">
+                        <h3 className="text-xl font-semibold">{cuatrimoto.nombre}</h3>
+                        <Badge variant={
+                          cuatrimoto.estado === 'disponible' ? 'default' :
+                          cuatrimoto.estado === 'ocupado' ? 'destructive' :
+                          'secondary'
+                        }>
+                          {cuatrimoto.estado}
+                        </Badge>
+                      </div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-600">
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-600">
                       <div>
                         <span className="font-medium">Marca:</span> {cuatrimoto.marca}
                       </div>
@@ -198,6 +214,7 @@ export default function AdminCuatrimotos() {
                           {caracteristica}
                         </span>
                       ))}
+                      </div>
                     </div>
                   </div>
 

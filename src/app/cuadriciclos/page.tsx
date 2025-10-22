@@ -2,6 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import CallToAction from '@/components/CallToAction';
@@ -115,6 +116,21 @@ export default function CuatrimotosPage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {data?.cuatrimotos.map((cuatrimoto) => (
             <Card key={cuatrimoto.id} className="overflow-hidden adventure-card">
+              {/* Foto principal del vehículo */}
+              {cuatrimoto.fotos && cuatrimoto.fotos.length > 0 && (
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={cuatrimoto.fotos[0]}
+                    alt={cuatrimoto.nombre}
+                    className="w-full h-full object-cover transition-transform hover:scale-105"
+                  />
+                  {cuatrimoto.fotos.length > 1 && (
+                    <div className="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-xs">
+                      +{cuatrimoto.fotos.length - 1} fotos
+                    </div>
+                  )}
+                </div>
+              )}
               <CardHeader>
                 <CardTitle className="text-xl">{cuatrimoto.nombre}</CardTitle>
                 <p className="text-gray-600">{cuatrimoto.marca} {cuatrimoto.modelo}</p>
