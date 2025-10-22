@@ -11,10 +11,25 @@ import {
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import { usePageContent } from '@/hooks/use-page-content';
+import { migrateHomepageToCMS } from '@/scripts/migrate-homepage';
 
 export default function Homepage() {
   const [sideCartOpen, setSideCartOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
+
+  // 🚀 Hook simple para CMS - con fallback seguro
+  const pageContent = usePageContent('homepage');
+
+  // 🔧 Migración automática: crea homepage en CMS si no existe
+  useEffect(() => {
+    if (!pageContent.isLoading && !pageContent.titulo) {
+      console.log('🔄 Migrando homepage al CMS...');
+      migrateHomepageToCMS();
+      // Recargar para ver los cambios
+      window.location.reload();
+    }
+  }, [pageContent.isLoading, pageContent.titulo]);
   const [accountModalOpen, setAccountModalOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [animatedTextIndex, setAnimatedTextIndex] = useState(0);
@@ -53,9 +68,21 @@ export default function Homepage() {
           <div className="mb-8">
             <p className="text-sm text-white/80 mb-4">- Bienvenido -</p>
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
-              <span className="text-emerald-400">CHOCÓ</span>
-              <br />
-              <span className="text-white">AVENTURAS</span>
+              {/* 🚀 CMS Integration - Si falla, usa el texto original */}
+              {pageContent.titulo ? (
+                pageContent.titulo.split('\n').map((line, i) => (
+                  <span key={i} className={i === 0 ? "text-emerald-400" : "text-white"}>
+                    {line}
+                    {i === 0 && <br />}
+                  </span>
+                ))
+              ) : (
+                <>
+                  <span className="text-emerald-400">CHOCÓ</span>
+                  <br />
+                  <span className="text-white">AVENTURAS</span>
+                </>
+              )}
             </h1>
             <p className="text-lg text-white/90 mb-8">
               Dispara, acelera y conquista la aventura

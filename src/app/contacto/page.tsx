@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { MapPin, Phone, Mail, Facebook, Instagram, MessageCircle } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import { usePageContent } from '@/hooks/use-page-content';
 
 export default function ContactoPage() {
   const [formData, setFormData] = useState({

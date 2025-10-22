@@ -7,8 +7,12 @@ import { TreePine, Target, Music, Users, Clock, Shield, MapPin, ArrowRight } fro
 import Footer from '@/components/Footer';
 import CallToAction from '@/components/CallToAction';
 import Navigation from '@/components/Navigation';
+import { usePageContent } from '@/hooks/use-page-content';
 
 export default function ExperienciasPage() {
+  // 🚀 CMS Integration - Simple y seguro
+  const pageContent = usePageContent('experiencias');
+
   const experiencias = [
     {
       id: 1,
@@ -49,10 +53,10 @@ export default function ExperienciasPage() {
       <section className="relative bg-gray-500 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <h1 className="text-3xl font-bold mb-6 jungle-text wind-effect">
-            NUESTROS SERVICIOS
+            {pageContent.titulo || 'NUESTROS SERVICIOS'}
           </h1>
           <p className="text-xl mb-8 max-w-4xl mx-auto">
-            Tu próxima aventura comienza aquí...
+            {pageContent.contenido || 'Tu próxima aventura comienza aquí...'}
           </p>
         </div>
       </section>

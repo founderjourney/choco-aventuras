@@ -6,10 +6,14 @@ import Link from 'next/link';
 import { Play, ChevronDown, Facebook, Instagram, MessageCircle } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import { usePageContent } from '@/hooks/use-page-content';
 
 export default function NosotrosPage() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // 🚀 CMS Integration - Simple y seguro
+  const pageContent = usePageContent('nosotros');
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -27,7 +31,7 @@ export default function NosotrosPage() {
 
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl md:text-5xl font-bold mb-8 text-white">
-            AVENTURA EN CUATRIMOTOS Y PAINTBALL EN EL CHOCÓ
+            {pageContent.titulo || 'AVENTURA EN CUATRIMOTOS Y PAINTBALL EN EL CHOCÓ'}
           </h1>
         </div>
       </section>
@@ -73,7 +77,11 @@ export default function NosotrosPage() {
 
               <div className="space-y-6 text-gray-600 leading-relaxed">
                 <p className="text-base">
-                  <strong className="text-gray-900">Chocó Aventuras</strong> es una empresa pionera en el turismo de aventura en la región, creada para quienes buscan experiencias auténticas, llenas de adrenalina y diversión. Ofrecemos recorridos en cuatrimotos Yamaha diseñados para explorar la selva tropical del Chocó, sus paisajes naturales y su energía vibrante.
+                  {pageContent.contenido || (
+                    <>
+                      <strong className="text-gray-900">Chocó Aventuras</strong> es una empresa pionera en el turismo de aventura en la región, creada para quienes buscan experiencias auténticas, llenas de adrenalina y diversión. Ofrecemos recorridos en cuatrimotos Yamaha diseñados para explorar la selva tropical del Chocó, sus paisajes naturales y su energía vibrante.
+                    </>
+                  )}
                 </p>
                 <p className="text-base">
                   Más que una guía, brindamos una experiencia inolvidable, ideal para quienes quieren vivir algo diferente en Quibdó, donde la emoción, la naturaleza y la libertad se encuentran en cada ruta.
@@ -273,7 +281,7 @@ export default function NosotrosPage() {
           </div>
 
           <div className="space-y-4">
-            [
+            {[
               {
                 question: "¿Qué incluye el alquiler de cuatrimoto?",
                 answer: "Incluye equipo de seguridad (casco), guía especializado, recorrido por la selva tropical e hidratación. No incluye seguro de accidentes."

@@ -62,6 +62,29 @@ export function getPageBySlug(slug: string): PageContent | null {
 function getDefaultPages(): PageContent[] {
   return [
     {
+      id: 'homepage',
+      titulo: 'CHOCÓ\nAVENTURAS',
+      slug: 'homepage',
+      contenido: 'Dispara, acelera y conquista la aventura',
+      estado: 'publicada',
+      fechaCreacion: '2024-01-10',
+      ultimaModificacion: '2024-10-22',
+      elementos: [
+        {
+          id: 'hero-title',
+          tipo: 'titulo',
+          contenido: 'CHOCÓ\nAVENTURAS',
+          orden: 1
+        },
+        {
+          id: 'hero-subtitle',
+          tipo: 'texto',
+          contenido: 'Dispara, acelera y conquista la aventura',
+          orden: 2
+        }
+      ]
+    },
+    {
       id: 'nosotros',
       titulo: 'Nosotros',
       slug: 'nosotros',

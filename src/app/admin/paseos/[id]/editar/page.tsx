@@ -12,7 +12,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/hooks/use-auth';
 import Link from 'next/link';
-import { ArrowLeft, Save, X, Plus, Trash2 } from 'lucide-react';
+import { ArrowLeft, Save, X, Plus, Trash2, Upload, Image as ImageIcon } from 'lucide-react';
 import { useRouter, useParams } from 'next/navigation';
 
 interface Paseo {
@@ -38,6 +38,7 @@ interface PaseoForm {
   dificultad: 'facil' | 'intermedio' | 'dificil';
   ubicacion: string;
   incluye: string[];
+  fotos: string[];
   activo: boolean;
 }
 
@@ -81,10 +82,12 @@ export default function EditarPaseo() {
     dificultad: 'facil',
     ubicacion: '',
     incluye: [],
+    fotos: [],
     activo: true
   });
 
   const [newIncluye, setNewIncluye] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   const { data: paseoData, isLoading: loadingPaseo } = useQuery({
     queryKey: ['paseo', paseoId],
@@ -109,6 +112,7 @@ export default function EditarPaseo() {
         dificultad: paseo.dificultad,
         ubicacion: paseo.ubicacion,
         incluye: paseo.incluye,
+        fotos: paseo.fotos || [],
         activo: paseo.activo
       });
     }
@@ -151,7 +155,7 @@ export default function EditarPaseo() {
       ...formData,
       duracion_horas: parseInt(formData.duracion_horas),
       precio: parseInt(formData.precio),
-      fotos: [] // Por ahora sin fotos
+      fotos: formData.fotos // Incluir fotos
     };
 
     updateMutation.mutate(paseoData);
@@ -178,6 +182,75 @@ export default function EditarPaseo() {
       addIncluye(newIncluye.trim());
       setNewIncluye('');
     }
+  };
+
+  // Función para subir foto
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
+
+    setUploading(true);
+
+    try {
+      for (const file of Array.from(files)) {
+        // Validar tipo de archivo
+        if (!file.type.startsWith('image/')) {
+          toast({
+            title: "Error",
+            description: "Solo se permiten archivos de imagen.",
+            variant: "destructive",
+          });
+          continue;
+        }
+
+        // Validar tamaño (máximo 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+          toast({
+            title: "Error",
+            description: `La imagen ${file.name} es muy grande. Máximo 5MB.`,
+            variant: "destructive",
+          });
+          continue;
+        }
+
+        // Crear FormData para envío
+        const formData = new FormData();
+        formData.append('file', file);
+
+        // Subir a servicio (por ahora simularemos con URL temporal)
+        // En producción esto se conectaría a Cloudinary/AWS S3
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const imageUrl = e.target?.result as string;
+          setFormData(prev => ({
+            ...prev,
+            fotos: [...prev.fotos, imageUrl]
+          }));
+        };
+        reader.readAsDataURL(file);
+      }
+
+      toast({
+        title: "¡Fotos subidas!",
+        description: "Las fotos han sido agregadas exitosamente.",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Hubo un problema al subir las fotos.",
+        variant: "destructive",
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  // Función para remover foto
+  const removeFoto = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      fotos: prev.fotos.filter((_, i) => i !== index)
+    }));
   };
 
   const getDificultadColor = (dificultad: string) => {
@@ -390,8 +463,81 @@ export default function EditarPaseo() {
             </Card>
           </div>
 
-          {/* Sidebar - Incluye */}
+          {/* Sidebar - Fotos e Incluye */}
           <div className="space-y-6">
+            {/* Gestión de Fotos */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <ImageIcon className="h-5 w-5" />
+                  Fotos del Paseo
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {/* Upload de fotos */}
+                <div className="space-y-2">
+                  <Label className="text-sm font-semibold">Agregar Fotos:</Label>
+                  <div className="flex items-center justify-center w-full">
+                    <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                        <Upload className="w-8 h-8 mb-2 text-gray-500" />
+                        <p className="mb-2 text-sm text-gray-500">
+                          <span className="font-semibold">Clic para subir</span> o arrastra fotos aquí
+                        </p>
+                        <p className="text-xs text-gray-500">PNG, JPG, JPEG (máx. 5MB)</p>
+                      </div>
+                      <input
+                        type="file"
+                        className="hidden"
+                        multiple
+                        accept="image/*"
+                        onChange={handleFileUpload}
+                        disabled={uploading}
+                      />
+                    </label>
+                  </div>
+                  {uploading && (
+                    <p className="text-sm text-gray-500 text-center">Subiendo fotos...</p>
+                  )}
+                </div>
+
+                {/* Galería de fotos */}
+                {formData.fotos.length > 0 && (
+                  <div className="space-y-2">
+                    <Label className="text-sm font-semibold">Fotos agregadas ({formData.fotos.length}):</Label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {formData.fotos.map((foto, index) => (
+                        <div key={index} className="relative group">
+                          <img
+                            src={foto}
+                            alt={`Foto ${index + 1}`}
+                            className="w-full h-20 object-cover rounded border"
+                          />
+                          <Button
+                            type="button"
+                            variant="destructive"
+                            size="sm"
+                            onClick={() => removeFoto(index)}
+                            className="absolute top-1 right-1 h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X className="h-3 w-3" />
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {formData.fotos.length === 0 && (
+                  <div className="text-center py-4 text-gray-500 text-sm">
+                    <ImageIcon className="h-8 w-8 mx-auto mb-2 opacity-50" />
+                    No hay fotos agregadas
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Qué Incluye */}
             <Card>
               <CardHeader>
                 <CardTitle>¿Qué Incluye?</CardTitle>
@@ -504,6 +650,27 @@ export default function EditarPaseo() {
                           <li className="text-xs text-gray-500">+ {formData.incluye.length - 3} más...</li>
                         )}
                       </ul>
+                    </div>
+                  )}
+
+                  {formData.fotos.length > 0 && (
+                    <div className="text-sm">
+                      <span className="font-medium">Fotos:</span>
+                      <div className="mt-2 grid grid-cols-2 gap-1">
+                        {formData.fotos.slice(0, 4).map((foto, index) => (
+                          <img
+                            key={index}
+                            src={foto}
+                            alt={`Foto ${index + 1}`}
+                            className="w-full h-12 object-cover rounded border"
+                          />
+                        ))}
+                        {formData.fotos.length > 4 && (
+                          <div className="flex items-center justify-center h-12 bg-gray-100 rounded border text-xs text-gray-500">
+                            +{formData.fotos.length - 4} más
+                          </div>
+                        )}
+                      </div>
                     </div>
                   )}
                 </div>
