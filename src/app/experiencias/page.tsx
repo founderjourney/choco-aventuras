@@ -133,159 +133,139 @@ export default function ExperienciasPage() {
         </div>
       </section>
 
-      {/* Sección Destacada - ¿Por qué somos únicos? */}
-      <section className="py-16 bg-[#F5F5F5]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl font-bold text-[#145A32] mb-6 jungle-text">
-              ¿Por qué somos únicos en el Chocó?
+
+
+
+
+
+
+
+
+      {/* Galería de Experiencias - Sección de Fotos */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
+              <span className="text-emerald-600">NUESTRAS AVENTURAS</span> EN IMÁGENES
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Somos la primera experiencia de turismo extremo en Quibdó que combina todo en un solo lugar
+              Descubre la emoción y la belleza del Chocó a través de nuestras fotos. Cada imagen es un recuerdo de la aventura que te espera.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center card-3d">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-[#145A32] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-white text-2xl"></span>
-                </div>
-                <h3 className="text-xl font-bold text-[#145A32] mb-4">Yamaha Grizzly 700</h3>
-                <p className="text-gray-700">
-                  Las cuatrimotos más potentes y seguras para aventuras extremas en la selva.
-                </p>
-              </CardContent>
-            </Card>
+          {/* Photo Grid Slider */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Photo 1 - Cuatrimotos */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[4/5] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3')"}}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-xl font-bold mb-2">Rutas Extremas</h3>
+                <p className="text-sm opacity-90">Cuatrimotos por senderos únicos</p>
+              </div>
+              <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
+                <span></span>
+              </div>
+            </div>
 
-            <Card className="text-center card-3d">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-[#1565C0] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-white text-2xl"></span>
-                </div>
-                <h3 className="text-xl font-bold text-[#145A32] mb-4">100% Selva Tropical</h3>
-                <p className="text-gray-700">
-                  Experiencias auténticas en el corazón de la selva del Pacífico chocoano, biodiversidad única en el mundo.
-                </p>
-              </CardContent>
-            </Card>
+            {/* Photo 2 - Selva */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[4/5] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3')"}}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-xl font-bold mb-2">Selva Tropical</h3>
+                <p className="text-sm opacity-90">Biodiversidad única del Chocó</p>
+              </div>
+              <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
+                <span></span>
+              </div>
+            </div>
 
-            <Card className="text-center card-3d">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-[#F1C40F] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-white text-2xl"></span>
-                </div>
-                <h3 className="text-xl font-bold text-[#145A32] mb-4">Cultura Auténtica</h3>
-                <p className="text-gray-700">
-                  Guías locales que te introducen a la verdadera identidad chocoana, música y tradiciones milenarias.
-                </p>
-              </CardContent>
-            </Card>
+            {/* Photo 3 - Paintball */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[4/5] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3')"}}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-xl font-bold mb-2">Combate Extremo</h3>
+                <p className="text-sm opacity-90">Paintball en escenarios naturales</p>
+              </div>
+              <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
+                <span></span>
+              </div>
+            </div>
+
+            {/* Photo 4 - Aventura Grupal */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[4/5] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1530549387789-4c1017266635?ixlib=rb-4.0.3')"}}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-xl font-bold mb-2">Aventura Grupal</h3>
+                <p className="text-sm opacity-90">Experiencias compartidas</p>
+              </div>
+              <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
+                <span></span>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Photos Row */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+            {/* Photo 5 - Panorámica */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[3/2] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3')"}}/>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-xl font-bold mb-2">Paisajes Únicos</h3>
+                <p className="text-sm opacity-90">Vistas panorámicas del Chocó</p>
+              </div>
+            </div>
+
+            {/* Photo 6 - Equipos */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[3/2] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3')"}}/>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-xl font-bold mb-2">Equipos Premium</h3>
+                <p className="text-sm opacity-90">Tecnología de última generación</p>
+              </div>
+            </div>
+
+            {/* Photo 7 - Cultura Local */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[3/2] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{backgroundImage: "url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3')"}}/>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-xl font-bold mb-2">Cultura Chocoana</h3>
+                <p className="text-sm opacity-90">Tradiciones y gastronomía local</p>
+              </div>
+            </div>
+          </div>
+
+          {/* TODO: Placeholder for client photo uploads / testimonials within the gallery structure */}
+          <div className="text-center mt-12 text-gray-600">
+            <p className="mb-2">Aquí se podrán subir fotos de la experiencia y testimonios de clientes.</p>
+            <p>Se requiere integración con CMS para que el cliente pueda gestionar este contenido.</p>
           </div>
         </div>
       </section>
-
-
-
-
-
-      {/* Políticas de Seguridad y Información Adicional */}
-      <section className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-[#145A32] mb-12 jungle-text">
-            Seguridad y Políticas
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="card-3d">
-              <CardContent className="p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 bg-[#145A32] rounded-lg flex items-center justify-center">
-                    <Shield className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-[#145A32]">Protección</h3>
-                </div>
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                    <span>Uso obligatorio de casco</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                    <span>Obligatorio Licencia de conducción para el conductor</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                    <span>Edad mínima para conducir: 16 años</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="card-3d">
-              <CardContent className="p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 bg-[#1565C0] rounded-lg flex items-center justify-center">
-                    <Clock className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-[#145A32]">Políticas</h3>
-                </div>
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                    <span>Política de cancelación: reembolso íntegro si cancelas con mínimo 24 horas de antelación</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                    <span>Rutas pueden variar por clima; alternativa (ruta rural) en caso de lluvia o subida del río</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="mt-12">
-            <h3 className="text-2xl font-bold text-center text-[#145A32] mb-8">Información Adicional</h3>
-            <Card className="card-3d">
-              <CardContent className="p-8">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <ul className="space-y-3">
-                      <li className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                        <span>Confirmación se recibe al realizar la reserva</span>
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                        <span>No adaptado para sillas de ruedas</span>
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                        <span>No recomendable para problemas de espalda, embarazadas, afecciones cardíacas graves</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <ul className="space-y-3">
-                      <li className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                        <span>La mayoría de viajeros pueden participar</span>
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-[#F1C40F] rounded-full"></div>
-                        <span>Actividad privada (solo su grupo)</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* TODO: Implement Gallery Component (requires CMS integration for client uploads) */}
-      {/* TODO: Implement Testimonials Section (requires CMS integration for client photos and testimonials) */}
 
       {/* Call to Action */}
       <CallToAction
