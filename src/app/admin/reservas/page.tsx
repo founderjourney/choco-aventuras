@@ -221,7 +221,7 @@ export default function AdminReservas() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium mb-2">Estado</label>
-                <Select value={filters.estado} onValueChange={(value) => setFilters(prev => ({...prev, estado: value === 'todos' ? '' : value}))}>
+                <Select value={filters.estado} onValueChange={(value) => setFilters(prev => ({...prev, estado: value}))}>
                   <SelectTrigger>
                     <SelectValue placeholder="Todos los estados" />
                   </SelectTrigger>
@@ -247,7 +247,7 @@ export default function AdminReservas() {
               <div className="flex items-end">
                 <Button
                   variant="outline"
-                  onClick={() => setFilters({ estado: '', fecha: '' })}
+                  onClick={() => setFilters({ estado: 'todos', fecha: '' })}
                   className="w-full"
                 >
                   Limpiar Filtros
@@ -414,7 +414,7 @@ export default function AdminReservas() {
                   {(filters.estado || filters.fecha) && (
                     <Button
                       variant="outline"
-                      onClick={() => setFilters({ estado: '', fecha: '' })}
+                      onClick={() => setFilters({ estado: 'todos', fecha: '' })}
                     >
                       Limpiar Filtros
                     </Button>

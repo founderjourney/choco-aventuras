@@ -236,9 +236,9 @@ export default function NuevoCuatrimoto() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="año">Año</Label>
+                  <Label htmlFor="anio">Año</Label>
                   <Input
-                    id="año"
+                    id="anio"
                     type="number"
                     value={formData.año}
                     onChange={(e) => setFormData(prev => ({...prev, año: e.target.value}))}

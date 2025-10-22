@@ -126,6 +126,26 @@ export const db = {
       };
       mockCuatrimotos.push(newCuatrimoto);
       return newCuatrimoto;
+    },
+    update: async (id: number, data: Partial<Omit<Cuatrimoto, 'id' | 'created_at' | 'updated_at'>>): Promise<Cuatrimoto | null> => {
+      await new Promise(resolve => setTimeout(resolve, 100));
+      const index = mockCuatrimotos.findIndex(c => c.id === id);
+      if (index === -1) return null;
+
+      mockCuatrimotos[index] = {
+        ...mockCuatrimotos[index],
+        ...data,
+        updated_at: new Date()
+      };
+      return mockCuatrimotos[index];
+    },
+    delete: async (id: number): Promise<boolean> => {
+      await new Promise(resolve => setTimeout(resolve, 100));
+      const index = mockCuatrimotos.findIndex(c => c.id === id);
+      if (index === -1) return false;
+
+      mockCuatrimotos.splice(index, 1);
+      return true;
     }
   },
   paseos: {
@@ -223,6 +243,30 @@ export const db = {
 
       mockReservas.push(newReserva);
       return newReserva;
+    },
+    findById: async (id: number): Promise<Reserva | null> => {
+      await new Promise(resolve => setTimeout(resolve, 100));
+      return mockReservas.find(r => r.id === id) || null;
+    },
+    update: async (id: number, data: Partial<Omit<Reserva, 'id' | 'created_at' | 'updated_at'>>): Promise<Reserva | null> => {
+      await new Promise(resolve => setTimeout(resolve, 100));
+      const index = mockReservas.findIndex(r => r.id === id);
+      if (index === -1) return null;
+
+      mockReservas[index] = {
+        ...mockReservas[index],
+        ...data,
+        updated_at: new Date()
+      };
+      return mockReservas[index];
+    },
+    delete: async (id: number): Promise<boolean> => {
+      await new Promise(resolve => setTimeout(resolve, 100));
+      const index = mockReservas.findIndex(r => r.id === id);
+      if (index === -1) return false;
+
+      mockReservas.splice(index, 1);
+      return true;
     }
   }
 };
