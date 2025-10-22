@@ -81,6 +81,13 @@ export default function CuatrimotosPage() {
                   <p><strong>Depósito:</strong> 50% del valor del servicio</p>
                   <p><strong>Horarios:</strong> 7:00 AM - 5:00 PM</p>
                 </div>
+                <div className="mt-6">
+                  <Link href="/reservas">
+                    <Button className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-lg">
+                      RESERVAR AHORA
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
