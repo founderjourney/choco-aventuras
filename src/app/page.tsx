@@ -103,7 +103,7 @@ export default function Homepage() {
           </p>
 
           <div className="flex flex-col md:flex-row gap-6 justify-center">
-            <Link href="/cuadriciclos">
+            <Link href="/reservas">
               <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 backdrop-blur-sm text-sm md:text-base">
                 CUATRIMOTOS
               </Button>
@@ -304,7 +304,7 @@ export default function Homepage() {
               />
               <div className="absolute inset-0 bg-gradient-to-br from-pink-500/60 to-purple-600/60" />
               <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                <h3 className="text-lg md:text-xl font-bold mb-4 leading-tight">Únete a nuestra comunidad</h3>
+                <h3 className="text-lg md:text-xl font-bold mb-4">Únete a nuestra comunidad</h3>
                 <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white w-fit text-sm px-4 py-2">
                   Instagram
                 </Button>
@@ -319,7 +319,7 @@ export default function Homepage() {
               />
               <div className="absolute inset-0 bg-gradient-to-br from-red-500/60 to-red-700/60" />
               <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                <h3 className="text-lg md:text-xl font-bold mb-4 leading-tight">Mira nuestras aventuras</h3>
+                <h3 className="text-lg md:text-xl font-bold mb-4">Mira nuestras aventuras</h3>
                 <Button className="bg-red-600 hover:bg-red-700 text-white w-fit text-sm px-4 py-2">
                   <Youtube className="h-4 w-4 mr-2" />
                   YouTube
@@ -335,7 +335,7 @@ export default function Homepage() {
               />
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/60 to-blue-700/60" />
               <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                <h3 className="text-lg md:text-xl font-bold mb-4 leading-tight">Explora el Chocó</h3>
+                <h3 className="text-lg md:text-xl font-bold mb-4">Explora el Chocó</h3>
                 <Button className="bg-blue-600 hover:bg-blue-700 text-white w-fit text-sm px-4 py-2">
                   <Facebook className="h-4 w-4 mr-2" />
                   Facebook
@@ -511,8 +511,8 @@ export default function Homepage() {
             Reserva tu aventura por WhatsApp
           </p>
 
-          <Link href="/reservas" className="inline-block">
-            <Button className="bg-white text-green-600 hover:bg-gray-100 px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-bold rounded-full shadow-2xl hover:scale-105 transition-all duration-300">
+          <Link href="/reservas" className="inline-block w-full sm:w-auto">
+            <Button className="bg-white text-green-600 hover:bg-gray-100 px-4 py-3 text-base font-bold rounded-full shadow-2xl hover:scale-105 transition-all duration-300 w-full max-w-xs sm:max-w-none sm:px-8 sm:py-4 sm:text-lg">
               RESERVAR AVENTURA
             </Button>
           </Link>
@@ -522,7 +522,7 @@ export default function Homepage() {
       {/* Texto Animado */}
       <section className="py-20 bg-black text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold">
+          <h2 className="text-xl md:text-4xl lg:text-5xl font-bold">
             DESCUBRE{' '}
             <span className="text-emerald-400 transition-all duration-1000">
               {animatedTexts[animatedTextIndex]}
@@ -621,7 +621,7 @@ export default function Homepage() {
       )}
 
       {/* Chaty Widget */}
-      <div className="fixed left-6 bottom-6 z-40 group chaty-widget">
+      <div className="fixed left-6 bottom-24 z-40 group chaty-widget">
         <div className="flex flex-col gap-3">
           {/* Botón principal */}
           <button
@@ -648,10 +648,22 @@ export default function Homepage() {
               <Mail className="h-6 w-6 text-white" />
             </a>
             <a
-              href="https://www.instagram.com/chocoaventuras"
+              href="https://www.instagram.com/choco.aventuras2025?igsh=NXJnMGUwZjV3MTNk"
               className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
             >
               <Instagram className="h-6 w-6 text-white" />
+            </a>
+            <a
+              href="https://www.facebook.com/share/1D4semVk7u/?mibextid=wwXIfr"
+              className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+            >
+              <Facebook className="h-6 w-6 text-white" />
+            </a>
+            <a
+              href="https://www.tiktok.com/@choco.aventuras2025?_t=ZS-90kLr23nJpp&_r=1"
+              className="w-12 h-12 bg-black rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+            >
+              <span className="text-white font-bold text-xs">TikTok</span>
             </a>
           </div>
         </div>
@@ -688,7 +700,7 @@ export default function Homepage() {
       {/* Back to Top */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed right-6 bottom-6 w-12 h-12 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg shadow-lg hover:scale-110 transition-all"
+        className="fixed right-6 bottom-24 w-12 h-12 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg shadow-lg hover:scale-110 transition-all"
       >
         <ArrowUp className="h-6 w-6 mx-auto" />
       </button>

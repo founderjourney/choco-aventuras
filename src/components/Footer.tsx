@@ -106,22 +106,22 @@ export default function Footer() {
               <h4 className="font-bold mb-3 text-[#F1C40F]">Síguenos</h4>
               <div className="flex gap-4">
                 <a
-                  href="#"
+                  href="https://www.facebook.com/share/1D4semVk7u/?mibextid=wwXIfr"
                   className="w-10 h-10 bg-[#1877F2] rounded-lg flex items-center justify-center hover:scale-110 transition-transform"
                 >
                   <Facebook className="h-5 w-5 text-white" />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/choco.aventuras2025?igsh=NXJnMGUwZjV3MTNk"
                   className="w-10 h-10 bg-gradient-to-r from-[#F58529] to-[#DD2A7B] rounded-lg flex items-center justify-center hover:scale-110 transition-transform"
                 >
                   <Instagram className="h-5 w-5 text-white" />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.tiktok.com/@choco.aventuras2025?_t=ZS-90kLr23nJpp&_r=1"
                   className="w-10 h-10 bg-black rounded-lg flex items-center justify-center hover:scale-110 transition-transform"
                 >
-                  <span className="text-white font-bold text-sm">TT</span>
+                  <span className="text-white font-bold text-xs">TikTok</span>
                 </a>
               </div>
             </div>
