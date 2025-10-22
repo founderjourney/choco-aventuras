@@ -27,18 +27,8 @@ export default function NosotrosPage() {
 
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl md:text-5xl font-bold mb-8 text-white">
-            <span className="text-emerald-400">SOBRE</span>{" "}
-            <span className="text-white">NOSOTROS</span>
+            AVENTURA EN CUATRIMOTOS Y PAINTBALL EN EL CHOCÓ
           </h1>
-
-          <div className="w-24 h-1 bg-emerald-400 mx-auto mb-8"></div>
-
-          <p className="text-lg text-gray-200 mb-4">
-            OFRECEMOS ALQUILER DE CUATRIMOTOS EN LA
-          </p>
-          <p className="text-base text-emerald-400 font-semibold">
-            SELVA DEL CHOCÓ
-          </p>
         </div>
       </section>
 
@@ -78,29 +68,21 @@ export default function NosotrosPage() {
               </p>
 
               <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900">
-                <span className="text-emerald-600">ALQUILER</span> DE CUATRIMOTOS<br />
-                <span className="text-xl font-normal text-gray-600">EN EL CHOCÓ</span>
+                <span className="text-emerald-600">NUESTRA</span> HISTORIA
               </h2>
 
               <div className="space-y-6 text-gray-600 leading-relaxed">
                 <p className="text-base">
-                  <strong className="text-gray-900">Chocó Aventuras</strong> se especializa en el alquiler
-                  de cuatrimotos para turismo de aventura en la selva tropical del Chocó.
-                  Ofrecemos experiencias únicas de adrenalina y conexión con la naturaleza.
+                  <strong className="text-gray-900">Chocó Aventuras</strong> es una empresa pionera en el turismo de aventura en la región, creada para quienes buscan experiencias auténticas, llenas de adrenalina y diversión. Ofrecemos recorridos en cuatrimotos Yamaha diseñados para explorar la selva tropical del Chocó, sus paisajes naturales y su energía vibrante.
                 </p>
-
-                <p>
-                  Ubicados en el <strong className="text-emerald-600">
-                  KM7 Vía Yuto, Quibdó - Chocó</strong>, somos tu puerta de entrada a
-                  aventuras emocionantes con equipos de seguridad profesionales y guías
-                  especializados que conocen cada rincón de nuestra exuberante selva.
+                <p className="text-base">
+                  Más que una guía, brindamos una experiencia inolvidable, ideal para quienes quieren vivir algo diferente en Quibdó, donde la emoción, la naturaleza y la libertad se encuentran en cada ruta.
                 </p>
-
-                <p>
-                  <strong className="text-gray-900">Lo que Ofrecemos:</strong> Alquiler de cuatrimotos
-                  para recorridos por senderos únicos de la selva tropical, con todos los
-                  equipos de seguridad incluidos. Próximamente también tendremos disponible
-                  paintball en escenarios naturales.
+                <p className="text-base">
+                  Nuestras instalaciones están ubicadas en el <strong className="text-emerald-600">KM7 vía Yuto, Quibdó – Chocó</strong>, un punto estratégico rodeado de naturaleza donde podrás disfrutar de esta nueva forma de turismo activo en la región.
+                </p>
+                <p className="text-base">
+                  Somos un espacio pensado para quienes quieren desconectarse de la rutina y vivir una experiencia única sobre cuatro ruedas.
                 </p>
               </div>
 
@@ -127,8 +109,7 @@ export default function NosotrosPage() {
               <span className="text-emerald-600">NUESTRA PASIÓN</span> POR LA AVENTURA
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Cada recorrido es una oportunidad de descubrir la biodiversidad y
-              cultura únicas del Chocó, creando memorias que durarán para siempre.
+              La selva tropical del Chocó nos inspira a forjar momentos llenos de energía y emoción. Próximamente contaremos también con una zona de paintball, ideal para compartir con amigos, liberar adrenalina y vivir la acción al máximo.
             </p>
           </div>
 
@@ -271,9 +252,9 @@ export default function NosotrosPage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Button className="bg-green-600 hover:bg-green-700 text-white px-8 md:px-12 py-4 md:py-6 text-base md:text-lg rounded-full shadow-xl flex items-center gap-2 md:gap-4 mx-auto">
-              <MessageCircle className="w-5 h-5 md:w-7 md:h-7" />
-              <span className="font-bold text-lg md:text-xl">+57 311 703 0436</span>
+            <Button className="bg-green-600 hover:bg-green-700 text-white px-4 py-3 text-base rounded-full shadow-xl flex items-center gap-2 mx-auto max-w-full sm:max-w-none sm:px-8 sm:py-4 sm:text-lg">
+              <MessageCircle className="w-5 h-5" />
+              <span className="font-bold text-lg">+57 311 703 0436</span>
             </Button>
           </a>
         </div>
@@ -292,7 +273,7 @@ export default function NosotrosPage() {
           </div>
 
           <div className="space-y-4">
-            {[
+            [
               {
                 question: "¿Qué incluye el alquiler de cuatrimoto?",
                 answer: "Incluye equipo de seguridad (casco), guía especializado, recorrido por la selva tropical e hidratación. No incluye seguro de accidentes."
