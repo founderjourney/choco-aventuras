@@ -202,14 +202,18 @@ export default function AdminCuatrimotos() {
                   </div>
 
                   <div className="flex flex-col gap-2 ml-6">
-                    <Button variant="outline" size="sm">
-                      <Eye className="h-4 w-4 mr-2" />
-                      Ver
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      <Edit2 className="h-4 w-4 mr-2" />
-                      Editar
-                    </Button>
+                    <Link href={`/admin/cuadriciclos/${cuatrimoto.id}`}>
+                      <Button variant="outline" size="sm">
+                        <Eye className="h-4 w-4 mr-2" />
+                        Ver
+                      </Button>
+                    </Link>
+                    <Link href={`/admin/cuadriciclos/${cuatrimoto.id}/editar`}>
+                      <Button variant="outline" size="sm">
+                        <Edit2 className="h-4 w-4 mr-2" />
+                        Editar
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               ))}

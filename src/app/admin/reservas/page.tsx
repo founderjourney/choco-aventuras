@@ -390,9 +390,11 @@ export default function AdminReservas() {
                         Reactivar
                       </Button>
                     )}
-                    <Button size="sm" variant="outline">
-                      Ver Detalles
-                    </Button>
+                    <Link href={`/admin/reservas/${reserva.id}`}>
+                      <Button size="sm" variant="outline">
+                        Ver Detalles
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               ))}

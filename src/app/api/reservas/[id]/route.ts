@@ -15,19 +15,19 @@ export async function GET(
     }
 
     const db = await getDb();
-    const cuatrimoto = await db.cuatrimotos.findById(id);
-    if (!cuatrimoto) {
+    const reserva = await db.reservas.findById(id);
+    if (!reserva) {
       return NextResponse.json(
-        { error: 'Cuatrimoto not found' },
+        { error: 'Reserva not found' },
         { status: 404 }
       );
     }
 
-    return NextResponse.json({ cuatrimoto });
+    return NextResponse.json({ reserva });
   } catch (error) {
-    console.error('Error fetching cuatrimoto:', error);
+    console.error('Error fetching reserva:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch cuatrimoto' },
+      { error: 'Failed to fetch reserva' },
       { status: 500 }
     );
   }
@@ -49,29 +49,29 @@ export async function PUT(
     const data = await request.json();
     const db = await getDb();
 
-    // Verificar que la cuatrimoto existe
-    const existingCuatrimoto = await db.cuatrimotos.findById(id);
-    if (!existingCuatrimoto) {
+    // Verificar que la reserva existe
+    const existingReserva = await db.reservas.findById(id);
+    if (!existingReserva) {
       return NextResponse.json(
-        { error: 'Cuatrimoto not found' },
+        { error: 'Reserva not found' },
         { status: 404 }
       );
     }
 
-    // Actualizar la cuatrimoto
-    const updatedCuatrimoto = await db.cuatrimotos.update(id, {
+    // Actualizar la reserva
+    const updatedReserva = await db.reservas.update(id, {
       ...data,
       updated_at: new Date()
     });
 
     return NextResponse.json({
       success: true,
-      cuatrimoto: updatedCuatrimoto
+      reserva: updatedReserva
     });
   } catch (error) {
-    console.error('Error updating cuatrimoto:', error);
+    console.error('Error updating reserva:', error);
     return NextResponse.json(
-      { error: 'Failed to update cuatrimoto' },
+      { error: 'Failed to update reserva' },
       { status: 500 }
     );
   }
@@ -92,26 +92,26 @@ export async function DELETE(
 
     const db = await getDb();
 
-    // Verificar que la cuatrimoto existe
-    const existingCuatrimoto = await db.cuatrimotos.findById(id);
-    if (!existingCuatrimoto) {
+    // Verificar que la reserva existe
+    const existingReserva = await db.reservas.findById(id);
+    if (!existingReserva) {
       return NextResponse.json(
-        { error: 'Cuatrimoto not found' },
+        { error: 'Reserva not found' },
         { status: 404 }
       );
     }
 
-    // Eliminar la cuatrimoto
-    await db.cuatrimotos.delete(id);
+    // Eliminar la reserva
+    await db.reservas.delete(id);
 
     return NextResponse.json({
       success: true,
-      message: 'Cuatrimoto deleted successfully'
+      message: 'Reserva deleted successfully'
     });
   } catch (error) {
-    console.error('Error deleting cuatrimoto:', error);
+    console.error('Error deleting reserva:', error);
     return NextResponse.json(
-      { error: 'Failed to delete cuatrimoto' },
+      { error: 'Failed to delete reserva' },
       { status: 500 }
     );
   }
