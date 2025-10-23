@@ -37,11 +37,13 @@
 - Gestión completa de galerías
 - Integrado en formularios de paseos
 
-✅ **Sistema CMS Base Implementado**
-- Hook `usePageContent()` para contenido dinámico
-- Gestión de páginas con elementos tipados
-- Migración automática de contenido
-- Storage con fallback inteligente
+✅ **Sistema CMS Completamente Conectado a PostgreSQL**
+- Integración total con base de datos Supabase/PostgreSQL
+- APIs REST completas para gestión de páginas (`/api/paginas`)
+- Hook `usePageContent()` conectado a base de datos en tiempo real
+- Migración automática de contenido predefinido (`/api/migrate-pages`)
+- Sincronización perfecta entre desarrollo y producción
+- Fallback inteligente a mock data en desarrollo
 
 ✅ **Frontend Responsivo Premium**
 - Diseño mobile-first optimizado
@@ -220,6 +222,36 @@ CREATE TABLE reservas (
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NOW()
 );
+
+-- ✅ NUEVA TABLA: Sistema CMS integrado
+CREATE TABLE paginas (
+  id VARCHAR(50) PRIMARY KEY,
+  titulo VARCHAR(255) NOT NULL,
+  slug VARCHAR(100) UNIQUE NOT NULL,
+  contenido TEXT,
+  estado VARCHAR(20) DEFAULT 'publicada',
+  elementos JSONB DEFAULT '[]'::jsonb,
+  faqs JSONB DEFAULT '[]'::jsonb,
+  gallery JSONB DEFAULT '[]'::jsonb,
+  video_url TEXT,
+  history_subtitle TEXT,
+  booking_button_text TEXT,
+  hero_image_url TEXT,
+  gallery_title TEXT,
+  gallery_description TEXT,
+  contact_title TEXT,
+  contact_description TEXT,
+  whatsapp_number TEXT,
+  whatsapp_link TEXT,
+  -- Secciones específicas como JSONB
+  sections JSONB DEFAULT '{}'::jsonb,           -- homepage
+  nosotros_sections JSONB DEFAULT '{}'::jsonb,  -- nosotros
+  cuatrimotos_sections JSONB DEFAULT '{}'::jsonb, -- cuatrimotos
+  experiencias_sections JSONB DEFAULT '{}'::jsonb, -- experiencias
+  contacto_sections JSONB DEFAULT '{}'::jsonb,  -- contacto
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
 ```
 
 ---
@@ -305,6 +337,15 @@ GET    /api/reservas             # Listar con filtros
 POST   /api/reservas             # Crear nueva con validación
 PUT    /api/reservas/[id]        # Actualizar estado
 DELETE /api/reservas/[id]        # Cancelar reserva
+```
+
+#### 📄 Sistema CMS (NUEVO)
+```
+GET    /api/paginas              # Listar todas las páginas
+GET    /api/paginas/[slug]       # Obtener página específica
+POST   /api/paginas              # Crear/actualizar página
+DELETE /api/paginas/[slug]       # Eliminar página
+POST   /api/migrate-pages        # Migrar contenido inicial
 ```
 
 #### 📊 Dashboard y Analytics
@@ -430,10 +471,10 @@ psql -d tu-database -f scripts/create-tables.sql
 [████████████████████████████████] 100% Sistema Base
 [████████████████████████████████] 100% Panel Administrativo
 [████████████████████████████████] 100% Sistema de Fotos
-[████████████████████████████████] 100% Sistema CMS Base
+[████████████████████████████████] 100% Sistema CMS + PostgreSQL
 [████████████████████████████████] 100% Frontend Responsivo
 [████████████████████████████████] 100% API Completa
-[████████████████████████████████] 100% Base de Datos Dual
+[████████████████████████████████] 100% Base de Datos Completa
 [████████████████████████████████] 100% Autenticación
 [████████████████████████████████] 100% Sistema de Reservas
 [████████████████████████████████] 100% Deploy y Producción
