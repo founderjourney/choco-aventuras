@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import Link from 'next/link';
-import { ArrowLeft, Plus, Edit, Eye, Trash2, Save, Image, Type, Layout } from 'lucide-react';
-import { getPages, savePage, deletePage, PageContent, PageElement } from '@/lib/pageContent';
+import { ArrowLeft, Plus, Edit, Eye, Trash2, Save, Image, Type, Layout, HelpCircle, GalleryHorizontal } from 'lucide-react';
+import { getPages, savePage, deletePage, PageContent, PageElement, FAQ, GalleryItem } from '@/lib/pageContent';
 import { useToast } from '@/hooks/use-toast';
 
 export default function AdminPaginasPage() {
@@ -22,6 +22,8 @@ export default function AdminPaginasPage() {
     estado: 'borrador' as 'publicada' | 'borrador'
   });
   const [elementos, setElementos] = useState<PageElement[]>([]);
+  const [faqs, setFaqs] = useState<FAQ[]>([]);
+  const [gallery, setGallery] = useState<GalleryItem[]>([]);
   const { toast } = useToast();
 
   // Cargar páginas al montar el componente
@@ -40,6 +42,8 @@ export default function AdminPaginasPage() {
       estado: 'borrador'
     });
     setElementos([]);
+    setFaqs([]);
+    setGallery([]);
   };
 
   const handleEditarPagina = (pagina: PageContent) => {
@@ -53,6 +57,8 @@ export default function AdminPaginasPage() {
       estado: pagina.estado
     });
     setElementos(pagina.elementos || []);
+    setFaqs(pagina.faqs || []);
+    setGallery(pagina.gallery || []);
   };
 
   const handleGuardarPagina = () => {
@@ -66,7 +72,9 @@ export default function AdminPaginasPage() {
           estado: formData.estado,
           fechaCreacion: new Date().toISOString(),
           ultimaModificacion: new Date().toISOString(),
-          elementos: elementos
+          elementos: elementos,
+          faqs: faqs,
+          gallery: gallery
         };
         savePage(nuevaPag);
         setPaginas(getPages());
@@ -81,7 +89,9 @@ export default function AdminPaginasPage() {
           slug: formData.slug,
           contenido: formData.contenido,
           estado: formData.estado,
-          elementos: elementos
+          elementos: elementos,
+          faqs: faqs,
+          gallery: gallery
         };
         savePage(paginaActualizada);
         setPaginas(getPages());
@@ -139,6 +149,45 @@ export default function AdminPaginasPage() {
 
   const eliminarElemento = (id: string) => {
     setElementos(elementos.filter(el => el.id !== id));
+  };
+
+  const agregarFaq = () => {
+    const nuevaFaq: FAQ = {
+      id: Date.now().toString(),
+      question: '',
+      answer: ''
+    };
+    setFaqs([...faqs, nuevaFaq]);
+  };
+
+  const actualizarFaq = (id: string, field: 'question' | 'answer', value: string) => {
+    setFaqs(faqs.map(faq =>
+      faq.id === id ? { ...faq, [field]: value } : faq
+    ));
+  };
+
+  const eliminarFaq = (id: string) => {
+    setFaqs(faqs.filter(faq => faq.id !== id));
+  };
+
+  const agregarGalleryItem = () => {
+    const nuevoItem: GalleryItem = {
+      id: Date.now().toString(),
+      imageUrl: '',
+      title: '',
+      description: ''
+    };
+    setGallery([...gallery, nuevoItem]);
+  };
+
+  const actualizarGalleryItem = (id: string, field: 'imageUrl' | 'title' | 'description', value: string) => {
+    setGallery(gallery.map(item =>
+      item.id === id ? { ...item, [field]: value } : item
+    ));
+  };
+
+  const eliminarGalleryItem = (id: string) => {
+    setGallery(gallery.filter(item => item.id !== id));
   };
 
   return (
@@ -467,6 +516,109 @@ export default function AdminPaginasPage() {
                     {elementos.length === 0 && (
                       <div className="text-center py-8 text-gray-500">
                         No hay elementos adicionales. Usa el panel lateral para agregar contenido.
+                      </div>
+                    )}
+                  </div>
+
+                  {/* FAQs */}
+                  <div className="space-y-4 mt-6">
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-bold text-[#145A32]">Preguntas Frecuentes (FAQ)</h3>
+                      <Button size="sm" onClick={agregarFaq}>
+                        <Plus className="h-4 w-4 mr-2" />
+                        Agregar FAQ
+                      </Button>
+                    </div>
+
+                    {faqs.map((faq) => (
+                      <Card key={faq.id} className="border-l-4 border-blue-500">
+                        <CardContent className="p-4">
+                          <div className="flex justify-between items-center mb-3">
+                            <span className="font-medium text-[#145A32] capitalize">
+                              FAQ
+                            </span>
+                            <Button
+                              size="sm"
+                              variant="destructive"
+                              onClick={() => eliminarFaq(faq.id)}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                          <div className="space-y-2">
+                            <Input
+                              value={faq.question}
+                              onChange={(e) => actualizarFaq(faq.id, 'question', e.target.value)}
+                              placeholder="Pregunta..."
+                            />
+                            <Textarea
+                              value={faq.answer}
+                              onChange={(e) => actualizarFaq(faq.id, 'answer', e.target.value)}
+                              rows={3}
+                              placeholder="Respuesta..."
+                            />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+
+                    {faqs.length === 0 && (
+                      <div className="text-center py-8 text-gray-500">
+                        No hay preguntas frecuentes.
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Gallery */}
+                  <div className="space-y-4 mt-6">
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-bold text-[#145A32]">Galería de Imágenes</h3>
+                      <Button size="sm" onClick={agregarGalleryItem}>
+                        <Plus className="h-4 w-4 mr-2" />
+                        Agregar Imagen a Galería
+                      </Button>
+                    </div>
+
+                    {gallery.map((item) => (
+                      <Card key={item.id} className="border-l-4 border-purple-500">
+                        <CardContent className="p-4">
+                          <div className="flex justify-between items-center mb-3">
+                            <span className="font-medium text-[#145A32] capitalize">
+                              Imagen de Galería
+                            </span>
+                            <Button
+                              size="sm"
+                              variant="destructive"
+                              onClick={() => eliminarGalleryItem(item.id)}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                          <div className="space-y-2">
+                            <Input
+                              value={item.imageUrl}
+                              onChange={(e) => actualizarGalleryItem(item.id, 'imageUrl', e.target.value)}
+                              placeholder="URL de la imagen..."
+                            />
+                            <Input
+                              value={item.title}
+                              onChange={(e) => actualizarGalleryItem(item.id, 'title', e.target.value)}
+                              placeholder="Título..."
+                            />
+                            <Textarea
+                              value={item.description}
+                              onChange={(e) => actualizarGalleryItem(item.id, 'description', e.target.value)}
+                              rows={2}
+                              placeholder="Descripción..."
+                            />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+
+                    {gallery.length === 0 && (
+                      <div className="text-center py-8 text-gray-500">
+                        No hay imágenes en la galería.
                       </div>
                     )}
                   </div>

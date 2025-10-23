@@ -35,9 +35,9 @@ export default function ExperienciasPage() {
     },
     {
       id: 2,
-      titulo: "Batalla de Paintball",
+      titulo: "Batalla de Paintball (proximamente)",
       icono: <Target className="h-8 w-8" />,
-      descripcion: "Prepárate para la acción y la estrategia en un campo de batalla natural. El paintball es una experiencia emocionante donde la adrenalina y el trabajo en equipo son clave. ¡Próximamente en Chocó Aventuras!",
+      descripcion: "Prepárate para la acción y la estrategia en un campo de batalla natural. El paintball (proximamente) es una experiencia emocionante donde la adrenalina y el trabajo en equipo son clave. ¡Próximamente en Chocó Aventuras!",
       detalles: [],
       color: "from-red-500 to-red-700",
       disponible: false,
@@ -273,7 +273,7 @@ export default function ExperienciasPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
                 <h3 className="text-xl font-bold mb-2">Combate Extremo</h3>
-                <p className="text-sm opacity-90">Paintball en escenarios naturales</p>
+                <p className="text-sm opacity-90">Paintball (proximamente) en escenarios naturales</p>
               </div>
               <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
                 <span></span>
