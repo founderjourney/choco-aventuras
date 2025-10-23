@@ -82,7 +82,42 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
+-- Tabla paginas (CMS content management)
+CREATE TABLE IF NOT EXISTS paginas (
+    id VARCHAR(50) PRIMARY KEY, -- Usamos VARCHAR para IDs como 'homepage', 'nosotros', etc.
+    titulo VARCHAR(255) NOT NULL,
+    slug VARCHAR(100) UNIQUE NOT NULL,
+    contenido TEXT,
+    estado VARCHAR(20) DEFAULT 'publicada' CHECK (estado IN ('publicada', 'borrador')),
+    elementos JSONB DEFAULT '[]'::jsonb, -- Array de elementos de página
+    faqs JSONB DEFAULT '[]'::jsonb, -- Array de FAQs
+    gallery JSONB DEFAULT '[]'::jsonb, -- Array de galería
+    video_url TEXT,
+    history_subtitle TEXT,
+    booking_button_text TEXT,
+    hero_image_url TEXT,
+    gallery_title TEXT,
+    gallery_description TEXT,
+    contact_title TEXT,
+    contact_description TEXT,
+    whatsapp_number TEXT,
+    whatsapp_link TEXT,
+    -- Secciones específicas como JSONB para flexibilidad
+    sections JSONB DEFAULT '{}'::jsonb, -- homepage sections
+    nosotros_sections JSONB DEFAULT '{}'::jsonb, -- nosotros sections
+    cuatrimotos_sections JSONB DEFAULT '{}'::jsonb, -- cuatrimotos sections
+    experiencias_sections JSONB DEFAULT '{}'::jsonb, -- experiencias sections
+    contacto_sections JSONB DEFAULT '{}'::jsonb, -- contacto sections
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Índices para optimizar consultas de páginas
+CREATE INDEX IF NOT EXISTS idx_paginas_slug ON paginas(slug);
+CREATE INDEX IF NOT EXISTS idx_paginas_estado ON paginas(estado);
+
 -- Triggers para actualizar updated_at
 CREATE TRIGGER update_cuadriciclos_updated_at BEFORE UPDATE ON cuadriciclos FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 CREATE TRIGGER update_paseos_updated_at BEFORE UPDATE ON paseos FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 CREATE TRIGGER update_reservas_updated_at BEFORE UPDATE ON reservas FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+CREATE TRIGGER update_paginas_updated_at BEFORE UPDATE ON paginas FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();

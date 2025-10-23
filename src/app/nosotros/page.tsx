@@ -15,6 +15,9 @@ export default function NosotrosPage() {
   // 🚀 CMS Integration - Simple y seguro
   const pageContent = usePageContent('nosotros');
 
+  // 🎯 Secciones específicas de nosotros con fallbacks
+  const sections = pageContent.nosotros_sections || {};
+
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
   };
@@ -26,12 +29,12 @@ export default function NosotrosPage() {
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center"
-             style={{backgroundImage: `url('${pageContent.heroImageUrl || 'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80'}')`}} />
+             style={{backgroundImage: `url('${sections.bloque1_hero?.hero_image || pageContent.heroImageUrl || 'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80'}')`}} />
         <div className="absolute inset-0 bg-black/40" />
 
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl md:text-5xl font-bold mb-8 text-white">
-            {pageContent.titulo || 'AVENTURA EN CUATRIMOTOS Y PAINTBALL (PROXIMAMENTE) EN EL CHOCÓ'}
+            {sections.bloque1_hero?.title || pageContent.titulo || 'AVENTURA EN CUATRIMOTOS Y PAINTBALL (PROXIMAMENTE) EN EL CHOCÓ'}
           </h1>
         </div>
       </section>
@@ -52,12 +55,12 @@ export default function NosotrosPage() {
                       <Play className="w-8 h-8 text-white ml-1 group-hover:scale-110 transition-transform" />
                     </div>
                     <div className="absolute inset-0 bg-cover bg-center"
-                         style={{backgroundImage: "url('https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3')"}} />
+                         style={{backgroundImage: `url('${sections.bloque2_historia?.video_thumbnail || "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3"}')`}} />
                   </div>
                 ) : (
                   <iframe
                     className="w-full h-full"
-                    src={pageContent.videoUrl || "https://www.youtube.com/embed/uq49IDyz4e4?autoplay=1"}
+                    src={sections.bloque2_historia?.video_url || pageContent.videoUrl || "https://www.youtube.com/embed/uq49IDyz4e4?autoplay=1"}
                     allow="autoplay; fullscreen"
                     allowFullScreen
                   />
@@ -68,36 +71,59 @@ export default function NosotrosPage() {
             {/* Right Column - Content */}
             <div className="order-2 lg:order-2">
               <p className="text-emerald-600 text-sm font-semibold tracking-widest uppercase mb-4">
-                {pageContent.historySubtitle || 'NUESTRA HISTORIA'}
+                {sections.bloque2_historia?.section_subtitle || pageContent.historySubtitle || 'NUESTRA HISTORIA'}
               </p>
 
               <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900">
-                <span className="text-emerald-600">NUESTRA</span> HISTORIA
+                <span className="text-emerald-600">
+                  {sections.bloque2_historia?.section_title?.split(' ')[0] || 'NUESTRA'}
+                </span> {sections.bloque2_historia?.section_title?.split(' ').slice(1).join(' ') || 'HISTORIA'}
               </h2>
 
               <div className="space-y-6 text-gray-600 leading-relaxed">
-                <p className="text-base">
-                  {pageContent.contenido || (
-                    <>
-                      <strong className="text-gray-900">Chocó Aventuras</strong> es una empresa pionera en el turismo de aventura en la región, creada para quienes buscan experiencias auténticas, llenas de adrenalina y diversión. Ofrecemos recorridos en cuatrimotos Yamaha diseñados para explorar la selva tropical del Chocó, sus paisajes naturales y su energía vibrante.
-                    </>
-                  )}
-                </p>
-                <p className="text-base">
-                  Más que una guía, brindamos una experiencia inolvidable, ideal para quienes quieren vivir algo diferente en Quibdó, donde la emoción, la naturaleza y la libertad se encuentran en cada ruta.
-                </p>
-                <p className="text-base">
-                  Nuestras instalaciones están ubicadas en el <strong className="text-emerald-600">KM7 vía Yuto, Quibdó – Chocó</strong>, un punto estratégico rodeado de naturaleza donde podrás disfrutar de esta nueva forma de turismo activo en la región.
-                </p>
-                <p className="text-base">
-                  Somos un espacio pensado para quienes quieren desconectarse de la rutina y vivir una experiencia única sobre cuatro ruedas.
-                </p>
+                {sections.bloque2_historia?.content_paragraphs?.map((paragraph, index) => (
+                  <p key={index} className="text-base">
+                    {index === 0 ? (
+                      <>
+                        <strong className="text-gray-900">Chocó Aventuras</strong> {paragraph.replace('Chocó Aventuras', '')}
+                      </>
+                    ) : paragraph.includes('KM7 vía Yuto') ? (
+                      <>
+                        {paragraph.split('KM7 vía Yuto, Quibdó – Chocó')[0]}
+                        <strong className="text-emerald-600">KM7 vía Yuto, Quibdó – Chocó</strong>
+                        {paragraph.split('KM7 vía Yuto, Quibdó – Chocó')[1]}
+                      </>
+                    ) : (
+                      paragraph
+                    )}
+                  </p>
+                )) || (
+                  // Fallback a párrafos originales
+                  <>
+                    <p className="text-base">
+                      {pageContent.contenido || (
+                        <>
+                          <strong className="text-gray-900">Chocó Aventuras</strong> es una empresa pionera en el turismo de aventura en la región, creada para quienes buscan experiencias auténticas, llenas de adrenalina y diversión. Ofrecemos recorridos en cuatrimotos Yamaha diseñados para explorar la selva tropical del Chocó, sus paisajes naturales y su energía vibrante.
+                        </>
+                      )}
+                    </p>
+                    <p className="text-base">
+                      Más que una guía, brindamos una experiencia inolvidable, ideal para quienes quieren vivir algo diferente en Quibdó, donde la emoción, la naturaleza y la libertad se encuentran en cada ruta.
+                    </p>
+                    <p className="text-base">
+                      Nuestras instalaciones están ubicadas en el <strong className="text-emerald-600">KM7 vía Yuto, Quibdó – Chocó</strong>, un punto estratégico rodeado de naturaleza donde podrás disfrutar de esta nueva forma de turismo activo en la región.
+                    </p>
+                    <p className="text-base">
+                      Somos un espacio pensado para quienes quieren desconectarse de la rutina y vivir una experiencia única sobre cuatro ruedas.
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="mt-8">
                 <Link href="/reservas">
                   <Button className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-lg">
-                    {pageContent.bookingButtonText || 'Reserva tu aventura'}
+                    {sections.bloque2_historia?.booking_button_text || pageContent.bookingButtonText || 'Reserva tu aventura'}
                   </Button>
                 </Link>
               </div>
@@ -111,13 +137,15 @@ export default function NosotrosPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <p className="text-emerald-600 text-sm font-semibold tracking-widest uppercase mb-4">
-              NUESTRAS AVENTURAS
+              {sections.bloque3_galeria?.section_subtitle || 'NUESTRAS AVENTURAS'}
             </p>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
-              <span className="text-emerald-600">{pageContent.galleryTitle || 'NUESTRA PASIÓN'}</span> POR LA AVENTURA
+              <span className="text-emerald-600">
+                {sections.bloque3_galeria?.section_title_part1 || 'NUESTRA PASIÓN'}
+              </span> {sections.bloque3_galeria?.section_title_part2 || 'POR LA AVENTURA'}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              {pageContent.galleryDescription || 'La selva tropical del Chocó nos inspira a forjar momentos llenos de energía y emoción. Próximamente contaremos también con una zona de paintball (proximamente), ideal para compartir con amigos, liberar adrenalina y vivir la acción al máximo.'}
+              {sections.bloque3_galeria?.gallery_description || pageContent.galleryDescription || 'La selva tropical del Chocó nos inspira a forjar momentos llenos de energía y emoción. Próximamente contaremos también con una zona de paintball (proximamente), ideal para compartir con amigos, liberar adrenalina y vivir la acción al máximo.'}
             </p>
           </div>
 

@@ -50,6 +50,9 @@ export default function Homepage() {
   // 🚀 Hook simple para CMS - con fallback seguro
   const pageContent = usePageContent('homepage');
 
+  // 🎯 Secciones específicas de homepage con fallbacks
+  const sections = pageContent.sections || {};
+
   // 🔧 Migración automática: crea homepage en CMS si no existe
   useEffect(() => {
     if (!pageContent.isLoading && !pageContent.titulo) {
@@ -66,11 +69,14 @@ export default function Homepage() {
   const animatedTexts = ["LA AVENTURA", "TU ADRENALINA", "EL CHOCÓ"];
 
   useEffect(() => {
+    const texts = sections.bloque8_animated_text?.animated_words || animatedTexts;
+    const speed = sections.bloque8_animated_text?.animation_speed || 2000;
+
     const interval = setInterval(() => {
-      setAnimatedTextIndex((prev) => (prev + 1) % animatedTexts.length);
-    }, 2000);
+      setAnimatedTextIndex((prev) => (prev + 1) % texts.length);
+    }, speed);
     return () => clearInterval(interval);
-  }, []);
+  }, [sections.bloque8_animated_text, animatedTexts]);
 
 
   return (
@@ -83,7 +89,7 @@ export default function Homepage() {
         <div className="absolute inset-0 w-full h-full">
           <iframe
             className="absolute inset-0 w-full h-full object-cover"
-            src="https://www.youtube.com/embed/1vISNKDpBno?autoplay=1&mute=1&loop=1&controls=0&playlist=1vISNKDpBno"
+            src={sections.bloque1_hero?.video_url || "https://www.youtube.com/embed/1vISNKDpBno?autoplay=1&mute=1&loop=1&controls=0&playlist=1vISNKDpBno"}
             allow="autoplay; fullscreen"
             style={{ pointerEvents: 'none' }}
           />
@@ -95,11 +101,13 @@ export default function Homepage() {
         {/* Content */}
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <p className="text-sm text-white/80 mb-4">- Bienvenido -</p>
+            <p className="text-sm text-white/80 mb-4">
+              {sections.bloque1_hero?.welcome_text || "- Bienvenido -"}
+            </p>
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
-              {/* 🚀 CMS Integration - Si falla, usa el texto original */}
-              {pageContent.titulo ? (
-                pageContent.titulo.split('\n').map((line, i) => (
+              {/* 🚀 CMS Integration - Usar secciones específicas */}
+              {sections.bloque1_hero?.title ? (
+                sections.bloque1_hero.title.split('\n').map((line, i) => (
                   <span key={i} className={i === 0 ? "text-emerald-400" : "text-white"}>
                     {line}
                     {i === 0 && <br />}
@@ -114,13 +122,13 @@ export default function Homepage() {
               )}
             </h1>
             <p className="text-lg text-white/90 mb-8">
-              Dispara, acelera y conquista la aventura
+              {sections.bloque1_hero?.subtitle || "Dispara, acelera y conquista la aventura"}
             </p>
             <Button
               className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg rounded-none uppercase font-semibold"
               onClick={() => document.getElementById('cuatrimotos')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Reservar
+              {sections.bloque1_hero?.button_text || "Reservar"}
               <ArrowDown className="ml-2 h-5 w-5" />
             </Button>
           </div>
@@ -140,7 +148,7 @@ export default function Homepage() {
         <div className="absolute inset-0 w-full h-full">
           <iframe
             className="absolute inset-0 w-full h-full object-cover"
-            src="https://www.youtube.com/embed/uq49IDyz4e4?autoplay=1&mute=1&loop=1&controls=0&playlist=uq49IDyz4e4"
+            src={sections.bloque2_hero_secondary?.video_url || "https://www.youtube.com/embed/uq49IDyz4e4?autoplay=1&mute=1&loop=1&controls=0&playlist=uq49IDyz4e4"}
             allow="autoplay; fullscreen"
             style={{ pointerEvents: 'none' }}
           />
@@ -152,26 +160,45 @@ export default function Homepage() {
         {/* Content */}
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4">
-            EXPLORA ELIGE Y VIVE LA ACCIÓN
+            {sections.bloque2_hero_secondary?.title || "EXPLORA ELIGE Y VIVE LA ACCIÓN"}
           </h2>
           <p className="text-lg text-white/90 mb-12">
-            Cuatrimotos y paintball en el corazón del Chocó: pensados para aventureros como tú.
+            {sections.bloque2_hero_secondary?.subtitle || "Cuatrimotos y paintball en el corazón del Chocó: pensados para aventureros como tú."}
           </p>
 
           <div className="flex flex-col md:flex-row gap-6 justify-center">
-            <Link href="/reservas">
-              <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 backdrop-blur-sm text-sm md:text-base">
-                CUATRIMOTOS
-              </Button>
-            </Link>
-            <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 backdrop-blur-sm text-sm md:text-base cursor-not-allowed">
-              PRÓXIMAMENTE
-            </Button>
-            <Link href="/experiencias">
-              <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 backdrop-blur-sm text-sm md:text-base">
-                EXPERIENCIAS
-              </Button>
-            </Link>
+            {sections.bloque2_hero_secondary?.buttons?.map((button, index) => (
+              <div key={index}>
+                {button.enabled ? (
+                  <Link href={button.link}>
+                    <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 backdrop-blur-sm text-sm md:text-base">
+                      {button.text}
+                    </Button>
+                  </Link>
+                ) : (
+                  <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 backdrop-blur-sm text-sm md:text-base cursor-not-allowed">
+                    {button.text}
+                  </Button>
+                )}
+              </div>
+            )) || (
+              // Fallback a botones originales
+              <>
+                <Link href="/reservas">
+                  <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 backdrop-blur-sm text-sm md:text-base">
+                    CUATRIMOTOS
+                  </Button>
+                </Link>
+                <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 backdrop-blur-sm text-sm md:text-base cursor-not-allowed">
+                  PRÓXIMAMENTE
+                </Button>
+                <Link href="/experiencias">
+                  <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 backdrop-blur-sm text-sm md:text-base">
+                    EXPERIENCIAS
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -180,27 +207,31 @@ export default function Homepage() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Card 1 - Paseo Selva */}
+            {/* Card 1 - Cuatrimotos */}
             <div className="group relative h-80 perspective-1000">
               <div className="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d group-hover:rotate-y-180 md:group-hover:rotate-y-180 [&.flipped]:rotate-y-180">
                 {/* Frente */}
                 <div className="absolute inset-0 backface-hidden rounded-2xl overflow-hidden">
                   <div
                     className="w-full h-full bg-cover bg-center relative"
-                    style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
+                    style={{ backgroundImage: `url("${sections.bloque3_services?.cuatrimotos?.image || '/choco-aventuras-hero.jpg'}")` }}
                   >
                     <div className="absolute inset-0 bg-black/40" />
                     <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                      <p className="text-sm mb-2">Aventura en la selva tropical</p>
-                      <h3 className="text-3xl font-bold">RUTAS EN CUATRIMOTO</h3>
+                      <p className="text-sm mb-2">
+                        {sections.bloque3_services?.cuatrimotos?.subtitle || "Aventura en la selva tropical"}
+                      </p>
+                      <h3 className="text-3xl font-bold">
+                        {sections.bloque3_services?.cuatrimotos?.title || "RUTAS EN CUATRIMOTO"}
+                      </h3>
                     </div>
                     {/* Botón para móvil */}
                     <div className="absolute inset-0 flex items-center justify-center md:hidden">
-                      <Link href="/reservas">
+                      <Link href={sections.bloque3_services?.cuatrimotos?.link || "/reservas"}>
                         <Button
                           className="bg-emerald-600/90 text-white hover:bg-emerald-700 px-6 py-3 text-sm font-semibold backdrop-blur-sm"
                         >
-                          Ver más
+                          {sections.bloque3_services?.cuatrimotos?.button_text || "Ver más"}
                         </Button>
                       </Link>
                     </div>
@@ -209,7 +240,7 @@ export default function Homepage() {
 
                 {/* Reverso */}
                 <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-emerald-600 flex items-center justify-center">
-                  <Link href="/reservas">
+                  <Link href={sections.bloque3_services?.cuatrimotos?.link || "/reservas"}>
                     <Button className="bg-white text-emerald-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
                       RESERVAR
                     </Button>
@@ -218,37 +249,57 @@ export default function Homepage() {
               </div>
             </div>
 
-            {/* Card 2 - Aventura Extrema */}
+            {/* Card 2 - Paintball */}
             <div className="group relative h-80 perspective-1000">
               <div className="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d group-hover:rotate-y-180 md:group-hover:rotate-y-180 [&.flipped]:rotate-y-180">
                 {/* Frente */}
                 <div className="absolute inset-0 backface-hidden rounded-2xl overflow-hidden">
                   <div
                     className="w-full h-full bg-cover bg-center relative"
-                    style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
+                    style={{ backgroundImage: `url("${sections.bloque3_services?.paintball?.image || '/choco-aventuras-hero.jpg'}")` }}
                   >
                     <div className="absolute inset-0 bg-black/40" />
                     <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                      <p className="text-sm mb-2">Combate con adrenalina pura</p>
-                      <h3 className="text-3xl font-bold">BATALLAS DE PAINTBALL</h3>
+                      <p className="text-sm mb-2">
+                        {sections.bloque3_services?.paintball?.subtitle || "Combate con adrenalina pura"}
+                      </p>
+                      <h3 className="text-3xl font-bold">
+                        {sections.bloque3_services?.paintball?.title || "BATALLAS DE PAINTBALL"}
+                      </h3>
                     </div>
                     {/* Botón para móvil */}
                     <div className="absolute inset-0 flex items-center justify-center md:hidden">
-                      <Button
-                        className="bg-orange-600/90 text-white hover:bg-orange-700 px-6 py-3 text-sm font-semibold backdrop-blur-sm"
-                        disabled
-                      >
-                        PRÓXIMAMENTE
-                      </Button>
+                      {sections.bloque3_services?.paintball?.enabled ? (
+                        <Link href={sections.bloque3_services.paintball.link}>
+                          <Button className="bg-orange-600/90 text-white hover:bg-orange-700 px-6 py-3 text-sm font-semibold backdrop-blur-sm">
+                            {sections.bloque3_services.paintball.button_text}
+                          </Button>
+                        </Link>
+                      ) : (
+                        <Button
+                          className="bg-orange-600/90 text-white hover:bg-orange-700 px-6 py-3 text-sm font-semibold backdrop-blur-sm"
+                          disabled
+                        >
+                          {sections.bloque3_services?.paintball?.button_text || "PRÓXIMAMENTE"}
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </div>
 
                 {/* Reverso */}
                 <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-orange-600 flex items-center justify-center">
-                  <Button className="bg-white text-orange-600 px-8 py-4 text-lg font-semibold cursor-not-allowed">
-                    PRÓXIMAMENTE
-                  </Button>
+                  {sections.bloque3_services?.paintball?.enabled ? (
+                    <Link href={sections.bloque3_services.paintball.link}>
+                      <Button className="bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
+                        RESERVAR
+                      </Button>
+                    </Link>
+                  ) : (
+                    <Button className="bg-white text-orange-600 px-8 py-4 text-lg font-semibold cursor-not-allowed">
+                      {sections.bloque3_services?.paintball?.button_text || "PRÓXIMAMENTE"}
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
@@ -270,11 +321,24 @@ export default function Homepage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center text-white mb-16">
-            <p className="text-lg mb-4">Vive la aventura, siente la adrenalina.</p>
+            <p className="text-lg mb-4">
+              {sections.bloque4_vehicles?.section_subtitle || "Vive la aventura, siente la adrenalina."}
+            </p>
             <h2 className="text-3xl md:text-5xl font-bold mb-4">
-              <span className="text-emerald-400">CHOCÓ</span>
-              <br />
-              <span className="text-white">CUATRIMOTOS</span>
+              {sections.bloque4_vehicles?.section_title ? (
+                sections.bloque4_vehicles.section_title.split('\n').map((line, i) => (
+                  <span key={i} className={i === 0 ? "text-emerald-400" : "text-white"}>
+                    {line}
+                    {i === 0 && <br />}
+                  </span>
+                ))
+              ) : (
+                <>
+                  <span className="text-emerald-400">CHOCÓ</span>
+                  <br />
+                  <span className="text-white">CUATRIMOTOS</span>
+                </>
+              )}
             </h2>
           </div>
 
@@ -282,7 +346,7 @@ export default function Homepage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {isLoading && <p className="text-white">Cargando cuatrimotos...</p>}
             {error && <p className="text-white">Error al cargar las cuatrimotos.</p>}
-            {data?.cuatrimotos.slice(0, 3).map((cuatrimoto) => (
+            {data?.cuatrimotos.slice(0, sections.bloque4_vehicles?.vehicles_to_show || 3).map((cuatrimoto) => (
               <div key={cuatrimoto.id} className="group relative h-80 rounded-lg overflow-hidden cursor-pointer">
                 <div
                   className="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
@@ -525,17 +589,28 @@ export default function Homepage() {
       <section className="py-20 bg-gradient-to-r from-green-600 to-green-700">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <h2 className="text-2xl md:text-4xl font-bold mb-8">
-            Contáctanos
-            <br />
-            en un clic
+            {sections.bloque7_cta?.title ? (
+              sections.bloque7_cta.title.split('\n').map((line, i) => (
+                <span key={i}>
+                  {line}
+                  {i === 0 && <br />}
+                </span>
+              ))
+            ) : (
+              <>
+                Contáctanos
+                <br />
+                en un clic
+              </>
+            )}
           </h2>
           <p className="text-xl mb-12">
-            Reserva tu aventura por WhatsApp
+            {sections.bloque7_cta?.subtitle || "Reserva tu aventura por WhatsApp"}
           </p>
 
-          <Link href="/reservas" className="inline-block w-full sm:w-auto">
+          <Link href={sections.bloque7_cta?.button_link || "/reservas"} className="inline-block w-full sm:w-auto">
             <Button className="bg-white text-green-600 hover:bg-gray-100 px-4 py-3 text-base font-bold rounded-full shadow-2xl hover:scale-105 transition-all duration-300 w-full max-w-xs sm:max-w-none sm:px-8 sm:py-4 sm:text-lg">
-              RESERVAR AVENTURA
+              {sections.bloque7_cta?.button_text || "RESERVAR AVENTURA"}
             </Button>
           </Link>
         </div>
@@ -545,12 +620,12 @@ export default function Homepage() {
       <section className="py-20 bg-black text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-xl md:text-4xl lg:text-5xl font-bold">
-            DESCUBRE{' '}
+            {sections.bloque8_animated_text?.prefix || "DESCUBRE"}{' '}
             <span className="text-emerald-400 transition-all duration-1000">
-              {animatedTexts[animatedTextIndex]}
+              {(sections.bloque8_animated_text?.animated_words || animatedTexts)[animatedTextIndex]}
             </span>
             <br />
-            VIVE HOY TU AVENTURA
+            {sections.bloque8_animated_text?.suffix || "VIVE HOY TU AVENTURA"}
           </h2>
         </div>
       </section>

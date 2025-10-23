@@ -12,7 +12,7 @@ export default function Navigation() {
   const navItems = [
     { href: '/', label: 'INICIO' },
     { href: '/nosotros', label: 'NOSOTROS' },
-    { href: '/cuadriciclos', label: 'CUATRIMOTOS' },
+    { href: '/cuatrimotos', label: 'CUATRIMOTOS' },
     { href: '/experiencias', label: 'EXPERIENCIAS' },
     { href: '/reservas', label: 'RESERVAS' },
     { href: '/contacto', label: 'CONTACTO' },

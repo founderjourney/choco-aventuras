@@ -13,7 +13,11 @@ export default function ExperienciasPage() {
   // 🚀 CMS Integration - Simple y seguro
   const pageContent = usePageContent('experiencias');
 
-  const experiencias = [
+  // 🎯 Secciones específicas de experiencias con fallbacks
+  const sections = pageContent.experiencias_sections || {};
+
+  // 🎯 Determinar qué experiencias mostrar (CMS o por defecto)
+  const experienciasDefault = [
     {
       id: 1,
       titulo: "Tour en cuatrimoto",
@@ -45,18 +49,79 @@ export default function ExperienciasPage() {
     }
   ];
 
+  // Usar experiencias personalizadas del CMS si están disponibles, sino usar las por defecto
+  const experiencias = sections.bloque2_servicios?.custom_experiences?.length > 0
+    ? sections.bloque2_servicios.custom_experiences.map(exp => ({
+        id: parseInt(exp.id),
+        titulo: exp.title,
+        subtitulo: exp.subtitle,
+        subtitulo2: exp.subtitle2,
+        tiempo: exp.time,
+        grupos: exp.groups,
+        icono: exp.title.toLowerCase().includes('cuatrimoto') ? <TreePine className="h-8 w-8" /> : <Target className="h-8 w-8" />,
+        descripcion: exp.description,
+        detalles: exp.details,
+        precio: exp.price,
+        color: exp.color,
+        disponible: exp.available,
+        backgroundImage: exp.background_image ? `url('${exp.background_image}')` : undefined
+      }))
+    : experienciasDefault;
+
+  // 🎯 Determinar qué fotos mostrar en la galería (CMS personalizadas o BD/fallback)
+  const galleryPhotos = sections.bloque4_galeria?.sync_with_gallery_db
+    ? (pageContent.gallery || [])  // Usar galería de la BD si está sincronizada
+    : sections.bloque4_galeria?.gallery_photos?.length > 0
+      ? sections.bloque4_galeria.gallery_photos  // Usar fotos personalizadas del CMS
+      : [  // Fotos por defecto
+          {
+            id: '1',
+            image_url: 'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3',
+            title: 'Rutas Extremas',
+            description: 'Cuatrimotos por senderos únicos'
+          },
+          {
+            id: '2',
+            image_url: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3',
+            title: 'Selva Tropical',
+            description: 'Biodiversidad única del Chocó'
+          },
+          {
+            id: '3',
+            image_url: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3',
+            title: 'Combate Extremo',
+            description: 'Paintball (proximamente) en escenarios naturales'
+          },
+          {
+            id: '4',
+            image_url: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?ixlib=rb-4.0.3',
+            title: 'Aventura Grupal',
+            description: 'Experiencias compartidas'
+          }
+        ];
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative bg-gray-500 py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+      <section
+        className="relative bg-gray-500 py-20"
+        style={{
+          backgroundImage: sections.bloque1_hero?.background_image
+            ? `url('${sections.bloque1_hero.background_image}')`
+            : "url('https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white relative z-10">
           <h1 className="text-3xl font-bold mb-6 jungle-text wind-effect">
-            {pageContent.titulo || 'NUESTROS SERVICIOS'}
+            {sections.bloque1_hero?.title || pageContent.titulo || 'NUESTROS SERVICIOS'}
           </h1>
           <p className="text-xl mb-8 max-w-4xl mx-auto">
-            {pageContent.contenido || 'Tu próxima aventura comienza aquí...'}
+            {sections.bloque1_hero?.description || pageContent.contenido || 'Tu próxima aventura comienza aquí...'}
           </p>
         </div>
       </section>
@@ -66,10 +131,10 @@ export default function ExperienciasPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-2xl font-bold text-[#145A32] mb-4 jungle-text">
-              NUESTROS SERVICIOS
+              {sections.bloque2_servicios?.section_title || 'NUESTROS SERVICIOS'}
             </h2>
             <p className="text-xl text-gray-600">
-              Tu próxima aventura comienza aquí...
+              {sections.bloque2_servicios?.section_description || 'Tu próxima aventura comienza aquí...'}
             </p>
           </div>
 
@@ -140,10 +205,10 @@ export default function ExperienciasPage() {
             <div className="bg-blue-50 rounded-2xl p-8">
               <h3 className="text-2xl font-bold text-[#145A32] mb-4 flex items-center gap-3">
                 <Clock className="h-6 w-6" />
-                Política de cancelación
+                {sections.bloque3_politicas?.cancellation_policy?.title || 'Política de cancelación'}
               </h3>
               <p className="text-gray-700 text-lg leading-relaxed">
-                Para recibir el reembolso íntegro de la experiencia, debes cancelarla como mínimo con <strong>24 horas de antelación</strong>.
+                {sections.bloque3_politicas?.cancellation_policy?.description || 'Para recibir el reembolso íntegro de la experiencia, debes cancelarla como mínimo con 24 horas de antelación.'}
               </p>
             </div>
           </div>
@@ -153,12 +218,10 @@ export default function ExperienciasPage() {
             <div className="bg-yellow-50 rounded-2xl p-8">
               <h3 className="text-2xl font-bold text-[#145A32] mb-4 flex items-center gap-3">
                 <Shield className="h-6 w-6" />
-                Importante
+                {sections.bloque3_politicas?.weather_policy?.title || 'Importante'}
               </h3>
               <p className="text-gray-700 text-lg leading-relaxed">
-                Las rutas pueden variar según condiciones climáticas. En caso de lluvias intensas o aumento del nivel del río,
-                el recorrido acuático será reemplazado por una <strong>ruta rural alternativa</strong>, garantizando siempre la
-                <strong> seguridad de nuestros turistas</strong>.
+                {sections.bloque3_politicas?.weather_policy?.description || 'Las rutas pueden variar según condiciones climáticas. En caso de lluvias intensas o aumento del nivel del río, el recorrido acuático será reemplazado por una ruta rural alternativa, garantizando siempre la seguridad de nuestros turistas.'}
               </p>
             </div>
           </div>
@@ -168,41 +231,34 @@ export default function ExperienciasPage() {
             <div className="bg-gray-100 rounded-2xl p-8">
               <h3 className="text-2xl font-bold text-[#145A32] mb-6 flex items-center gap-3">
                 <Users className="h-6 w-6" />
-                Información adicional
+                {sections.bloque3_politicas?.additional_info?.title || 'Información adicional'}
               </h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <span className="text-gray-700">La confirmación se recibirá cuando se realice la reserva</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <span className="text-gray-700">La mayoría de viajeros pueden participar en la experiencia</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <span className="text-gray-700">Se trata de un tour o una actividad de carácter privado. Solo puede participar su grupo</span>
-                  </div>
+                  {(sections.bloque3_politicas?.additional_info?.general_info || [
+                    'La confirmación se recibirá cuando se realice la reserva',
+                    'La mayoría de viajeros pueden participar en la experiencia',
+                    'Se trata de un tour o una actividad de carácter privado. Solo puede participar su grupo'
+                  ]).map((info, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <span className="text-gray-700">{info}</span>
+                    </div>
+                  ))}
                 </div>
                 <div className="space-y-4">
                   <h4 className="font-semibold text-gray-800 mb-3">No recomendado para:</h4>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <span className="text-gray-700">Personas en silla de ruedas (no está adaptado)</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <span className="text-gray-700">Viajeros con problemas de espalda</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <span className="text-gray-700">Embarazadas</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <span className="text-gray-700">Viajeros con afecciones cardíacas u otros problemas médicos graves</span>
-                  </div>
+                  {(sections.bloque3_politicas?.additional_info?.not_recommended || [
+                    'Personas en silla de ruedas (no está adaptado)',
+                    'Viajeros con problemas de espalda',
+                    'Embarazadas',
+                    'Viajeros con afecciones cardíacas u otros problemas médicos graves'
+                  ]).map((item, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <span className="text-gray-700">{item}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -223,117 +279,86 @@ export default function ExperienciasPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
-              <span className="text-emerald-600">NUESTRAS AVENTURAS</span> EN IMÁGENES
+              <span className="text-emerald-600">{sections.bloque4_galeria?.section_title_part1 || 'NUESTRAS AVENTURAS'}</span> {sections.bloque4_galeria?.section_title_part2 || 'EN IMÁGENES'}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Descubre la emoción y la belleza del Chocó a través de nuestras fotos. Cada imagen es un recuerdo de la aventura que te espera.
+              {sections.bloque4_galeria?.section_description || 'Descubre la emoción y la belleza del Chocó a través de nuestras fotos. Cada imagen es un recuerdo de la aventura que te espera.'}
             </p>
           </div>
 
           {/* Photo Grid Slider */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Photo 1 - Cuatrimotos */}
-            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[4/5] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                style={{backgroundImage: "url('https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3')"}}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-xl font-bold mb-2">Rutas Extremas</h3>
-                <p className="text-sm opacity-90">Cuatrimotos por senderos únicos</p>
+            {galleryPhotos.slice(0, 4).map((photo) => (
+              <div key={photo.id} className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[4/5] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+                <div
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                  style={{backgroundImage: `url('${photo.image_url || photo.imageUrl}')`}}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 className="text-xl font-bold mb-2">{photo.title}</h3>
+                  <p className="text-sm opacity-90">{photo.description}</p>
+                </div>
+                <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
+                  <span></span>
+                </div>
               </div>
-              <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
-                <span></span>
-              </div>
-            </div>
-
-            {/* Photo 2 - Selva */}
-            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[4/5] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                style={{backgroundImage: "url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3')"}}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-xl font-bold mb-2">Selva Tropical</h3>
-                <p className="text-sm opacity-90">Biodiversidad única del Chocó</p>
-              </div>
-              <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
-                <span></span>
-              </div>
-            </div>
-
-            {/* Photo 3 - Paintball */}
-            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[4/5] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                style={{backgroundImage: "url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3')"}}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-xl font-bold mb-2">Combate Extremo</h3>
-                <p className="text-sm opacity-90">Paintball (proximamente) en escenarios naturales</p>
-              </div>
-              <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
-                <span></span>
-              </div>
-            </div>
-
-            {/* Photo 4 - Aventura Grupal */}
-            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[4/5] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                style={{backgroundImage: "url('https://images.unsplash.com/photo-1530549387789-4c1017266635?ixlib=rb-4.0.3')"}}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-xl font-bold mb-2">Aventura Grupal</h3>
-                <p className="text-sm opacity-90">Experiencias compartidas</p>
-              </div>
-              <div className="absolute top-4 right-4 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100">
-                <span></span>
-              </div>
-            </div>
+            ))}
           </div>
 
           {/* Bottom Photos Row */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-            {/* Photo 5 - Panorámica */}
-            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[3/2] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                style={{backgroundImage: "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3')"}}/>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-xl font-bold mb-2">Paisajes Únicos</h3>
-                <p className="text-sm opacity-90">Vistas panorámicas del Chocó</p>
+            {galleryPhotos.slice(4, 7).map((photo) => (
+              <div key={photo.id} className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[3/2] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+                <div
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                  style={{backgroundImage: `url('${photo.image_url || photo.imageUrl}')`}}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 className="text-xl font-bold mb-2">{photo.title}</h3>
+                  <p className="text-sm opacity-90">{photo.description}</p>
+                </div>
               </div>
-            </div>
-
-            {/* Photo 6 - Equipos */}
-            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[3/2] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                style={{backgroundImage: "url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3')"}}/>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-xl font-bold mb-2">Equipos Premium</h3>
-                <p className="text-sm opacity-90">Tecnología de última generación</p>
-              </div>
-            </div>
-
-            {/* Photo 7 - Cultura Local */}
-            <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[3/2] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                style={{backgroundImage: "url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3')"}}/>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-xl font-bold mb-2">Cultura Chocoana</h3>
-                <p className="text-sm opacity-90">Tradiciones y gastronomía local</p>
-              </div>
-            </div>
+            ))}
+            {/* Mostrar fotos adicionales por defecto si no hay suficientes en CMS */}
+            {galleryPhotos.length < 7 && (
+              <>
+                <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[3/2] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                    style={{backgroundImage: "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3')"}}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="text-xl font-bold mb-2">Paisajes Únicos</h3>
+                    <p className="text-sm opacity-90">Vistas panorámicas del Chocó</p>
+                  </div>
+                </div>
+                <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[3/2] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                    style={{backgroundImage: "url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3')"}}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="text-xl font-bold mb-2">Equipos Premium</h3>
+                    <p className="text-sm opacity-90">Tecnología de última generación</p>
+                  </div>
+                </div>
+                <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[3/2] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                    style={{backgroundImage: "url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3')"}}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="text-xl font-bold mb-2">Cultura Chocoana</h3>
+                    <p className="text-sm opacity-90">Tradiciones y gastronomía local</p>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
 
           {/* TODO: Placeholder for client photo uploads / testimonials within the gallery structure */}
@@ -346,10 +371,16 @@ export default function ExperienciasPage() {
 
       {/* Call to Action */}
       <CallToAction
-        titulo="¿Listo para Vivir la Aventura?"
-        descripcion="Experimenta lo que solo el Chocó puede ofrecerte: naturaleza, adrenalina y cultura en un solo lugar"
-        botonPrimario={{ texto: "RESERVAR EXPERIENCIA", href: "/reservas" }}
-        botonSecundario={{ texto: "VER CUATRIMOTOS", href: "/cuatrimotos" }}
+        titulo={sections.bloque5_cta?.title || "¿Listo para Vivir la Aventura?"}
+        descripcion={sections.bloque5_cta?.description || "Experimenta lo que solo el Chocó puede ofrecerte: naturaleza, adrenalina y cultura en un solo lugar"}
+        botonPrimario={{
+          texto: sections.bloque5_cta?.primary_button?.text || "RESERVAR EXPERIENCIA",
+          href: sections.bloque5_cta?.primary_button?.link || "/reservas"
+        }}
+        botonSecundario={{
+          texto: sections.bloque5_cta?.secondary_button?.text || "VER CUATRIMOTOS",
+          href: sections.bloque5_cta?.secondary_button?.link || "/cuatrimotos"
+        }}
       />
 
       {/* Footer */}

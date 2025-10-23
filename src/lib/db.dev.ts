@@ -1,4 +1,5 @@
 import { Cuatrimoto, Paseo, Reserva } from '@/types';
+import { PageContent, getDefaultPages } from './pageContent';
 
 // Mock data for development
 const mockCuatrimotos: Cuatrimoto[] = [
@@ -269,6 +270,30 @@ export const db = {
       if (index === -1) return false;
 
       mockReservas.splice(index, 1);
+      return true;
+    }
+  },
+  paginas: {
+    findAll: async (): Promise<PageContent[]> => {
+      await new Promise(resolve => setTimeout(resolve, 100));
+      return getDefaultPages();
+    },
+    findBySlug: async (slug: string): Promise<PageContent | null> => {
+      await new Promise(resolve => setTimeout(resolve, 100));
+      const pages = getDefaultPages();
+      return pages.find(p => p.slug === slug) || null;
+    },
+    save: async (page: PageContent): Promise<PageContent> => {
+      await new Promise(resolve => setTimeout(resolve, 100));
+      // En desarrollo, simplemente retorna la página con timestamp actualizado
+      return {
+        ...page,
+        ultimaModificacion: new Date().toISOString()
+      };
+    },
+    delete: async (id: string): Promise<boolean> => {
+      await new Promise(resolve => setTimeout(resolve, 100));
+      // En desarrollo, siempre retorna true
       return true;
     }
   }

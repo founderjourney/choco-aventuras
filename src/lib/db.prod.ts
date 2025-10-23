@@ -1,6 +1,7 @@
 
 import { Pool } from 'pg';
 import { Cuatrimoto, Paseo, Reserva } from '@/types';
+import { PageContent } from './pageContent';
 
 if (!process.env.POSTGRES_URL) {
   throw new Error('POSTGRES_URL environment variable is not set');
@@ -165,4 +166,169 @@ export const db = {
         };
     },
   },
+  paginas: {
+    findAll: async (): Promise<PageContent[]> => {
+      const result = await pool.query(`
+        SELECT id, titulo, slug, contenido, estado, elementos, faqs, gallery,
+               video_url, history_subtitle, booking_button_text, hero_image_url,
+               gallery_title, gallery_description, contact_title, contact_description,
+               whatsapp_number, whatsapp_link, sections, nosotros_sections,
+               cuatrimotos_sections, experiencias_sections, contacto_sections,
+               created_at::text as fechaCreacion, updated_at::text as ultimaModificacion
+        FROM paginas
+        ORDER BY created_at DESC
+      `);
+
+      return result.rows.map(row => ({
+        ...row,
+        elementos: row.elementos || [],
+        faqs: row.faqs || [],
+        gallery: row.gallery || [],
+        sections: row.sections || {},
+        nosotros_sections: row.nosotros_sections || {},
+        cuatrimotos_sections: row.cuatrimotos_sections || {},
+        experiencias_sections: row.experiencias_sections || {},
+        contacto_sections: row.contacto_sections || {},
+        fechaCreacion: row.fechacreacion,
+        ultimaModificacion: row.ultimamodificacion
+      }));
+    },
+
+    findBySlug: async (slug: string): Promise<PageContent | null> => {
+      const result = await pool.query(`
+        SELECT id, titulo, slug, contenido, estado, elementos, faqs, gallery,
+               video_url, history_subtitle, booking_button_text, hero_image_url,
+               gallery_title, gallery_description, contact_title, contact_description,
+               whatsapp_number, whatsapp_link, sections, nosotros_sections,
+               cuatrimotos_sections, experiencias_sections, contacto_sections,
+               created_at::text as fechaCreacion, updated_at::text as ultimaModificacion
+        FROM paginas
+        WHERE slug = $1
+      `, [slug]);
+
+      if (result.rows.length === 0) return null;
+
+      const row = result.rows[0];
+      return {
+        ...row,
+        elementos: row.elementos || [],
+        faqs: row.faqs || [],
+        gallery: row.gallery || [],
+        sections: row.sections || {},
+        nosotros_sections: row.nosotros_sections || {},
+        cuatrimotos_sections: row.cuatrimotos_sections || {},
+        experiencias_sections: row.experiencias_sections || {},
+        contacto_sections: row.contacto_sections || {},
+        fechaCreacion: row.fechacreacion,
+        ultimaModificacion: row.ultimamodificacion,
+        videoUrl: row.video_url,
+        historySubtitle: row.history_subtitle,
+        bookingButtonText: row.booking_button_text,
+        heroImageUrl: row.hero_image_url,
+        galleryTitle: row.gallery_title,
+        galleryDescription: row.gallery_description,
+        contactTitle: row.contact_title,
+        contactDescription: row.contact_description,
+        whatsappNumber: row.whatsapp_number,
+        whatsappLink: row.whatsapp_link
+      };
+    },
+
+    save: async (page: PageContent): Promise<PageContent> => {
+      const {
+        id, titulo, slug, contenido, estado, elementos, faqs, gallery,
+        videoUrl, historySubtitle, bookingButtonText, heroImageUrl,
+        galleryTitle, galleryDescription, contactTitle, contactDescription,
+        whatsappNumber, whatsappLink, sections, nosotros_sections,
+        cuatrimotos_sections, experiencias_sections, contacto_sections
+      } = page;
+
+      const result = await pool.query(`
+        INSERT INTO paginas (
+          id, titulo, slug, contenido, estado, elementos, faqs, gallery,
+          video_url, history_subtitle, booking_button_text, hero_image_url,
+          gallery_title, gallery_description, contact_title, contact_description,
+          whatsapp_number, whatsapp_link, sections, nosotros_sections,
+          cuatrimotos_sections, experiencias_sections, contacto_sections,
+          created_at, updated_at
+        ) VALUES (
+          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, NOW(), NOW()
+        )
+        ON CONFLICT (id) DO UPDATE SET
+          titulo = EXCLUDED.titulo,
+          slug = EXCLUDED.slug,
+          contenido = EXCLUDED.contenido,
+          estado = EXCLUDED.estado,
+          elementos = EXCLUDED.elementos,
+          faqs = EXCLUDED.faqs,
+          gallery = EXCLUDED.gallery,
+          video_url = EXCLUDED.video_url,
+          history_subtitle = EXCLUDED.history_subtitle,
+          booking_button_text = EXCLUDED.booking_button_text,
+          hero_image_url = EXCLUDED.hero_image_url,
+          gallery_title = EXCLUDED.gallery_title,
+          gallery_description = EXCLUDED.gallery_description,
+          contact_title = EXCLUDED.contact_title,
+          contact_description = EXCLUDED.contact_description,
+          whatsapp_number = EXCLUDED.whatsapp_number,
+          whatsapp_link = EXCLUDED.whatsapp_link,
+          sections = EXCLUDED.sections,
+          nosotros_sections = EXCLUDED.nosotros_sections,
+          cuatrimotos_sections = EXCLUDED.cuatrimotos_sections,
+          experiencias_sections = EXCLUDED.experiencias_sections,
+          contacto_sections = EXCLUDED.contacto_sections,
+          updated_at = NOW()
+        RETURNING
+          id, titulo, slug, contenido, estado, elementos, faqs, gallery,
+          video_url, history_subtitle, booking_button_text, hero_image_url,
+          gallery_title, gallery_description, contact_title, contact_description,
+          whatsapp_number, whatsapp_link, sections, nosotros_sections,
+          cuatrimotos_sections, experiencias_sections, contacto_sections,
+          created_at::text as fechaCreacion, updated_at::text as ultimaModificacion
+      `, [
+        id, titulo, slug, contenido, estado,
+        JSON.stringify(elementos || []),
+        JSON.stringify(faqs || []),
+        JSON.stringify(gallery || []),
+        videoUrl, historySubtitle, bookingButtonText, heroImageUrl,
+        galleryTitle, galleryDescription, contactTitle, contactDescription,
+        whatsappNumber, whatsappLink,
+        JSON.stringify(sections || {}),
+        JSON.stringify(nosotros_sections || {}),
+        JSON.stringify(cuatrimotos_sections || {}),
+        JSON.stringify(experiencias_sections || {}),
+        JSON.stringify(contacto_sections || {})
+      ]);
+
+      const row = result.rows[0];
+      return {
+        ...row,
+        elementos: row.elementos || [],
+        faqs: row.faqs || [],
+        gallery: row.gallery || [],
+        sections: row.sections || {},
+        nosotros_sections: row.nosotros_sections || {},
+        cuatrimotos_sections: row.cuatrimotos_sections || {},
+        experiencias_sections: row.experiencias_sections || {},
+        contacto_sections: row.contacto_sections || {},
+        fechaCreacion: row.fechacreacion,
+        ultimaModificacion: row.ultimamodificacion,
+        videoUrl: row.video_url,
+        historySubtitle: row.history_subtitle,
+        bookingButtonText: row.booking_button_text,
+        heroImageUrl: row.hero_image_url,
+        galleryTitle: row.gallery_title,
+        galleryDescription: row.gallery_description,
+        contactTitle: row.contact_title,
+        contactDescription: row.contact_description,
+        whatsappNumber: row.whatsapp_number,
+        whatsappLink: row.whatsapp_link
+      };
+    },
+
+    delete: async (id: string): Promise<boolean> => {
+      const result = await pool.query('DELETE FROM paginas WHERE id = $1', [id]);
+      return result.rowCount > 0;
+    }
+  }
 };

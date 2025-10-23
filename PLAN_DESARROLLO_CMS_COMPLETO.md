@@ -205,6 +205,266 @@ src/
 
 ---
 
+---
+
+## 🎯 **PLAN SIMPLIFICADO: MÁXIMO IMPACTO, MÍNIMA COMPLEJIDAD**
+
+**📅 Fecha de Actualización:** 23 de Octubre 2025
+**🚀 Objetivo:** Sistema CMS que permita al propietario controlar TODOS los aspectos de cada página
+**⚡ Filosofía:** APROVECHAR LO EXISTENTE + LOCALSTORAGE + INTERFACES SIMPLES
+
+### 🔥 **ANÁLISIS SENIOR: EVITANDO SOBREINGENIERÍA**
+
+**✅ LO QUE YA FUNCIONA PERFECTO:**
+- Sistema localStorage con usePageContent ✅
+- Interfaces admin existentes ✅
+- Estructura de páginas dinámicas ✅
+- Base de datos PostgreSQL ✅
+
+**❌ COMPLEJIDADES INNECESARIAS A EVITAR:**
+- ❌ Múltiples tablas nuevas (usar JSON en localStorage)
+- ❌ APIs complejas (extender las existentes)
+- ❌ Drag & drop editors (formularios simples)
+- ❌ Preview en tiempo real (refresh simple)
+- ❌ Versionado complejo (backup simple)
+
+**🎯 ENFOQUE SIMPLIFICADO:**
+1. **Extender localStorage** existente con nuevas secciones
+2. **Reutilizar interfaces** admin actuales
+3. **Formularios simples** en lugar de editores complejos
+4. **JSON plano** en lugar de tablas relacionales
+
+### **📋 PLAN ULTRA-SIMPLIFICADO: 3 PASOS, 2 HORAS**
+
+#### **PASO 1: EXTENDER LOCALSTORAGE (30 min)**
+```json
+// Simplemente agregar a src/lib/pageContent.ts
+{
+  "homepage_sections": {
+    "hero": {
+      "video_url": "https://youtube.com/embed/...",
+      "welcome_text": "Bienvenido",
+      "title": "CHOCÓ\nAVENTURAS",
+      "subtitle": "Dispara, acelera y conquista la aventura",
+      "button_text": "Reservar",
+      "button_action": "scroll"
+    },
+    "hero_secondary": {
+      "video_url": "https://youtube.com/embed/...",
+      "title": "EXPLORA ELIGE Y VIVE LA ACCIÓN",
+      "subtitle": "Cuatrimotos y paintball...",
+      "buttons": [
+        {"text": "CUATRIMOTOS", "link": "/reservas", "enabled": true},
+        {"text": "PAINTBALL", "link": "#", "enabled": false}
+      ]
+    },
+    "services": {
+      "cuatrimotos": {
+        "title": "RUTAS EN CUATRIMOTO",
+        "subtitle": "Aventura en la selva tropical",
+        "image": "/choco-aventuras-hero.jpg",
+        "enabled": true
+      },
+      "paintball": {
+        "title": "BATALLAS DE PAINTBALL",
+        "subtitle": "Combate con adrenalina pura",
+        "image": "/choco-aventuras-hero.jpg",
+        "enabled": false
+      }
+    },
+    "social_media": {
+      "instagram": {"url": "https://instagram.com/...", "text": "Únete a nuestra comunidad"},
+      "youtube": {"url": "https://youtube.com/...", "text": "Mira nuestras aventuras"},
+      "facebook": {"url": "https://facebook.com/...", "text": "Explora el Chocó"}
+    },
+    "cta": {
+      "title": "Contáctanos\nen un clic",
+      "subtitle": "Reserva tu aventura por WhatsApp",
+      "button_text": "RESERVAR AVENTURA",
+      "button_link": "/reservas"
+    },
+    "animated_text": {
+      "prefix": "DESCUBRE",
+      "words": ["LA AVENTURA", "TU ADRENALINA", "EL CHOCÓ"],
+      "suffix": "VIVE HOY TU AVENTURA",
+      "speed": 2000
+    }
+  }
+}
+```
+
+#### **PASO 2: FORMULARIOS SUPER SIMPLES EN ADMIN EXISTENTE (60 min)**
+```typescript
+// Agregar a src/app/admin/paginas/page.tsx
+// Solo campos de texto simples, nada de drag & drop
+<Card>
+  <CardHeader>
+    <CardTitle>Editar Página de Inicio</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <Tabs>
+      <TabsList>
+        <TabsTrigger value="hero">Hero</TabsTrigger>
+        <TabsTrigger value="services">Servicios</TabsTrigger>
+        <TabsTrigger value="social">Redes</TabsTrigger>
+        <TabsTrigger value="cta">CTA</TabsTrigger>
+      </TabsList>
+
+      <TabsContent value="hero">
+        <Input label="Video URL" value={hero.video_url} />
+        <Input label="Título" value={hero.title} />
+        <Input label="Subtítulo" value={hero.subtitle} />
+        <Button>Guardar</Button>
+      </TabsContent>
+    </Tabs>
+  </CardContent>
+</Card>
+```
+
+#### **PASO 3: CONECTAR CON PÁGINA EXISTENTE (30 min)**
+```typescript
+// Modificar src/app/page.tsx
+const { data: sections } = usePageContent('homepage_sections');
+
+// Reemplazar valores hardcodeados:
+// ❌ <h1>CHOCÓ AVENTURAS</h1>
+// ✅ <h1>{sections?.hero?.title || 'CHOCÓ AVENTURAS'}</h1>
+
+// ❌ src="https://youtube.com/embed/1vISNKDpBno"
+// ✅ src={sections?.hero?.video_url || "https://youtube.com/embed/1vISNKDpBno"}
+```
+
+### **📋 CHECKLIST SIMPLIFICADO (2 HORAS TOTAL)**
+
+#### **IMPLEMENTACIÓN INMEDIATA**
+- [ ] **30min:** Extender pageContent.ts con secciones
+- [ ] **60min:** Agregar tabs simples en admin/paginas
+- [ ] **30min:** Conectar variables en page.tsx
+- [ ] **LISTO:** Sistema funcionando al 100%
+
+#### **NO HACER (EVITAR COMPLEJIDAD):**
+- ❌ Nuevas tablas en base de datos
+- ❌ APIs complejas
+- ❌ Editores visuales
+- ❌ Drag & drop
+- ❌ Preview en tiempo real
+- ❌ Sistemas de versionado
+
+### **🚀 ENFOQUE PRAGMÁTICO: MÁXIMA SIMPLICIDAD**
+
+#### **✅ LO QUE USAMOS (YA EXISTE):**
+- ✅ localStorage + usePageContent (ya funciona perfectamente)
+- ✅ Interfaces admin existentes (solo agregar tabs)
+- ✅ Sistema de fallbacks actual (nada que cambiar)
+- ✅ Estructura de componentes (solo modificar valores)
+
+#### **❌ LO QUE NO NECESITAMOS:**
+- ❌ **Cero tablas nuevas** - JSON en localStorage es suficiente
+- ❌ **Cero APIs nuevas** - extender pageContent.ts existente
+- ❌ **Cero editores complejos** - inputs simples funcionan mejor
+- ❌ **Cero drag & drop** - formularios tradicionales son más rápidos
+
+#### **🎯 RESULTADO ESPERADO:**
+- ⚡ **2 horas de desarrollo** vs 114 horas del plan original
+- 🔧 **Cero riesgo** - no tocamos nada que funciona
+- 📈 **100% funcional** - el admin puede editar todo lo que necesita
+- 🛡️ **Máxima simplicidad** - fácil de mantener y extender
+
+### **📋 HISTORIAS DE USUARIO SIMPLIFICADAS**
+
+#### **Historia Única: Editor Simple de Página de Inicio**
+```
+Como dueño del sistema
+Quiero tener una página en el admin con formularios simples
+Para editar todos los textos, videos y enlaces de la página de inicio
+```
+
+**Criterios de Aceptación:**
+- [ ] Veo una página `/admin/paginas/inicio` con tabs simples
+- [ ] En tab "Hero" puedo editar: video, títulos, subtítulos, botón
+- [ ] En tab "Servicios" puedo editar: títulos, imágenes, estado activo/inactivo
+- [ ] En tab "Redes Sociales" puedo editar: URLs y textos
+- [ ] En tab "CTA" puedo editar: títulos y enlaces
+- [ ] Al hacer clic en "Guardar" los cambios se reflejan en la página
+
+#### **🎯 CONTROL TOTAL POR BLOQUES IDENTIFICADOS:**
+
+**BLOQUE 1: HERO PRINCIPAL** _(Video superior con título)_
+- ✅ Video de YouTube
+- ✅ Texto "Bienvenido"
+- ✅ Título "CHOCÓ AVENTURAS"
+- ✅ Subtítulo "Dispara, acelera..."
+- ✅ Botón "Reservar"
+
+**BLOQUE 2: HERO SECUNDARIO** _(Video "EXPLORA")_
+- ✅ Video de fondo
+- ✅ Título "EXPLORA ELIGE Y VIVE LA ACCIÓN"
+- ✅ Subtítulo explicativo
+- ✅ Botones de servicios
+- ✅ Estado "PRÓXIMAMENTE"
+
+**BLOQUE 3: SERVICIOS** _(Tarjetas flip Cuatrimotos/Paintball)_
+- ✅ Título "RUTAS EN CUATRIMOTO"
+- ✅ Subtítulo "Aventura en la selva..."
+- ✅ Imagen de fondo
+- ✅ Título "BATALLAS DE PAINTBALL"
+- ✅ Estado activo/inactivo
+
+**BLOQUE 4: VEHÍCULOS** _(Sección cuatrimotos - YA FUNCIONA)_
+- ✅ Ya sincronizado automáticamente
+- ✅ Control de títulos de sección
+- ✅ Cantidad a mostrar
+
+**BLOQUE 5: REDES SOCIALES** _(Acordeón de redes)_
+- ✅ URLs Instagram, YouTube, Facebook, TikTok
+- ✅ Textos de cada panel
+- ✅ Activar/desactivar redes
+
+**BLOQUE 6: FORMULARIO** _(Formulario multi-step)_
+- ✅ Control total del formulario actual
+- ✅ Textos de pasos
+- ✅ Campos y validaciones
+
+**BLOQUE 7: CTA WHATSAPP** _(Sección verde "Contáctanos")_
+- ✅ Título "Contáctanos en un clic"
+- ✅ Subtítulo
+- ✅ Texto del botón
+- ✅ Enlace del botón
+
+**BLOQUE 8: TEXTO ANIMADO** _(Sección negra final)_
+- ✅ Texto fijo "DESCUBRE"
+- ✅ Palabras animadas ["LA AVENTURA", "TU ADRENALINA", "EL CHOCÓ"]
+- ✅ Texto final "VIVE HOY TU AVENTURA"
+- ✅ Velocidad de animación
+
+#### **📱 INTERFAZ DE ADMIN ORGANIZADA:**
+```typescript
+// El admin verá tabs claramente identificados:
+<Tabs>
+  <TabsList>
+    <TabsTrigger value="bloque1">🎬 BLOQUE 1: Hero Principal</TabsTrigger>
+    <TabsTrigger value="bloque2">🎥 BLOQUE 2: Hero Secundario</TabsTrigger>
+    <TabsTrigger value="bloque3">🎯 BLOQUE 3: Servicios</TabsTrigger>
+    <TabsTrigger value="bloque4">🏍️ BLOQUE 4: Vehículos</TabsTrigger>
+    <TabsTrigger value="bloque5">📱 BLOQUE 5: Redes Sociales</TabsTrigger>
+    <TabsTrigger value="bloque6">📝 BLOQUE 6: Formulario</TabsTrigger>
+    <TabsTrigger value="bloque7">💪 BLOQUE 7: CTA WhatsApp</TabsTrigger>
+    <TabsTrigger value="bloque8">✨ BLOQUE 8: Texto Animado</TabsTrigger>
+  </TabsList>
+</Tabs>
+```
+
+#### **🎯 RESULTADO FINAL:**
+**EL USUARIO PODRÁ EDITAR:**
+- ✅ **TODOS los textos** de la página
+- ✅ **TODOS los videos** (URLs de YouTube)
+- ✅ **TODAS las imágenes** (URLs)
+- ✅ **TODOS los enlaces** (botones y redes sociales)
+- ✅ **TODOS los estados** (activar/desactivar secciones)
+- ✅ **TODO el formulario** (campos, textos, pasos)
+
+**SIN TOCAR CÓDIGO** - Solo desde el panel admin con formularios súper simples.
+
 ## 4. 📋 **PLAN DE IMPLEMENTACIÓN**
 
 ### **🚩 FASE 1: INFRAESTRUCTURA BASE (Días 1-3)**
