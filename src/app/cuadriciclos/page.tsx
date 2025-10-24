@@ -106,7 +106,7 @@ export default function CuatrimotosPage() {
               <p><strong>Protección:</strong> Uso obligatorio de casco, chaleco y protección provista</p>
             </div>
             <div className="space-y-2">
-              <p><strong>Guías:</strong> Locales expertos que conocen el territorio</p>
+              <p><strong>Libertad total:</strong> Explora a tu ritmo con mapas de rutas recomendadas</p>
               <p><strong>Grupos:</strong> Ideal para integración y team building empresarial</p>
               <p><strong>Responsabilidad:</strong> Cliente responsable por daños por mal uso</p>
             </div>

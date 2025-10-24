@@ -189,9 +189,24 @@ export default function Homepage() {
                     CUATRIMOTOS
                   </Button>
                 </Link>
-                <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 backdrop-blur-sm text-sm md:text-base cursor-not-allowed">
-                  PRÓXIMAMENTE
-                </Button>
+                <div className="relative group">
+                  <Button
+                    className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 backdrop-blur-sm text-sm md:text-base cursor-pointer transition-all duration-300"
+                    onClick={() => {
+                      // Para móviles - mostrar alert
+                      if (window.innerWidth < 768) {
+                        alert('Próximamente disponible');
+                      }
+                    }}
+                  >
+                    PAINTBALL
+                  </Button>
+                  {/* Tooltip para hover en desktop */}
+                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-black/90 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap hidden md:block">
+                    Próximamente disponible
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/90"></div>
+                  </div>
+                </div>
                 <Link href="/experiencias">
                   <Button className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 backdrop-blur-sm text-sm md:text-base">
                     EXPERIENCIAS
@@ -378,52 +393,116 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* Image Accordion */}
-      <section className="py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row h-96 rounded-2xl overflow-hidden shadow-2xl">
-            {/* Panel 1 - Instagram Community */}
-            <div className="group flex-1 relative overflow-hidden cursor-pointer transition-all duration-500 hover:flex-[2]">
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-pink-500/60 to-purple-600/60" />
-              <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                <h3 className="text-lg md:text-xl font-bold mb-4">Únete a nuestra comunidad</h3>
-                <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white w-fit text-sm px-4 py-2">
+      {/* Social Media Section - Modern Cards */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <span className="text-emerald-600">SÍGUENOS</span> EN REDES
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Únete a nuestra comunidad y vive las aventuras más emocionantes del Chocó
+            </p>
+          </div>
+
+          {/* Social Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Instagram Card */}
+            <a
+              href="https://www.instagram.com/choco.aventuras2025"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden"
+            >
+              {/* Background Pattern */}
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-purple-600/5 group-hover:from-pink-500/10 group-hover:to-purple-600/10 transition-all duration-500"></div>
+
+              {/* Content */}
+              <div className="relative z-10">
+                <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Instagram className="h-8 w-8 text-white" />
+                </div>
+
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Instagram</h3>
+                <p className="text-gray-600 mb-6">Fotos y stories de nuestras aventuras diarias</p>
+
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-semibold text-pink-600">@choco.aventuras2025</span>
+                  <ArrowRight className="h-5 w-5 text-gray-400 group-hover:text-pink-600 group-hover:translate-x-1 transition-all duration-300" />
+                </div>
+              </div>
+            </a>
+
+            {/* YouTube Card */}
+            <a
+              href="https://youtube.com/@chocoaventuras"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden"
+            >
+              {/* Background Pattern */}
+              <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-red-700/5 group-hover:from-red-500/10 group-hover:to-red-700/10 transition-all duration-500"></div>
+
+              {/* Content */}
+              <div className="relative z-10">
+                <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Play className="h-8 w-8 text-white ml-1" />
+                </div>
+
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">YouTube</h3>
+                <p className="text-gray-600 mb-6">Videos épicos de nuestras rutas extremas</p>
+
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-semibold text-red-600">Ver videos</span>
+                  <ArrowRight className="h-5 w-5 text-gray-400 group-hover:text-red-600 group-hover:translate-x-1 transition-all duration-300" />
+                </div>
+              </div>
+            </a>
+
+            {/* Facebook Card */}
+            <a
+              href="https://www.facebook.com/share/1D4semVk7u/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden"
+            >
+              {/* Background Pattern */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-blue-700/5 group-hover:from-blue-500/10 group-hover:to-blue-700/10 transition-all duration-500"></div>
+
+              {/* Content */}
+              <div className="relative z-10">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Facebook className="h-8 w-8 text-white" />
+                </div>
+
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Facebook</h3>
+                <p className="text-gray-600 mb-6">Eventos, noticias y comunidad activa</p>
+
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-semibold text-blue-600">Únete a la comunidad</span>
+                  <ArrowRight className="h-5 w-5 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all duration-300" />
+                </div>
+              </div>
+            </a>
+          </div>
+
+          {/* CTA Section */}
+          <div className="text-center mt-16">
+            <div className="bg-white rounded-2xl p-8 shadow-lg max-w-4xl mx-auto">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">¡No te pierdas nada!</h3>
+              <p className="text-gray-600 mb-6">Síguenos en todas nuestras redes sociales para estar al día con las últimas aventuras, promociones especiales y contenido exclusivo.</p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Button className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-6 py-3 rounded-lg">
+                  <Instagram className="h-5 w-5 mr-2" />
                   Instagram
                 </Button>
-              </div>
-            </div>
-
-            {/* Panel 2 - YouTube Adventures (Activo por defecto) */}
-            <div className="group flex-[2] relative overflow-hidden cursor-pointer transition-all duration-500 hover:flex-[3]">
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-red-500/60 to-red-700/60" />
-              <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                <h3 className="text-lg md:text-xl font-bold mb-4">Mira nuestras aventuras</h3>
-                <Button className="bg-red-600 hover:bg-red-700 text-white w-fit text-sm px-4 py-2">
-                  <Youtube className="h-4 w-4 mr-2" />
+                <Button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg">
+                  <Play className="h-5 w-5 mr-2" />
                   YouTube
                 </Button>
-              </div>
-            </div>
-
-            {/* Panel 3 - Facebook Discovery */}
-            <div className="group flex-1 relative overflow-hidden cursor-pointer transition-all duration-500 hover:flex-[2]">
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{ backgroundImage: 'url("/choco-aventuras-hero.jpg")' }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/60 to-blue-700/60" />
-              <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                <h3 className="text-lg md:text-xl font-bold mb-4">Explora el Chocó</h3>
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white w-fit text-sm px-4 py-2">
-                  <Facebook className="h-4 w-4 mr-2" />
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg">
+                  <Facebook className="h-5 w-5 mr-2" />
                   Facebook
                 </Button>
               </div>

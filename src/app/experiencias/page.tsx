@@ -342,8 +342,8 @@ export default function ExperienciasPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
-                    <h3 className="text-xl font-bold mb-2">Equipos Premium</h3>
-                    <p className="text-sm opacity-90">Tecnología de última generación</p>
+                    <h3 className="text-xl font-bold mb-2">Cuatrimotos Potentes</h3>
+                    <p className="text-sm opacity-90">Vehículos 4x4 de alto rendimiento</p>
                   </div>
                 </div>
                 <div className="group relative overflow-hidden rounded-2xl bg-gray-200 aspect-[3/2] cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
@@ -353,8 +353,8 @@ export default function ExperienciasPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
-                    <h3 className="text-xl font-bold mb-2">Cultura Chocoana</h3>
-                    <p className="text-sm opacity-90">Tradiciones y gastronomía local</p>
+                    <h3 className="text-xl font-bold mb-2">Senderos Extremos</h3>
+                    <p className="text-sm opacity-90">Rutas desafiantes por terrenos únicos</p>
                   </div>
                 </div>
               </>

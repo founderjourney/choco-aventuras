@@ -292,12 +292,12 @@ export default function ContactoPage() {
                 available: false
               },
               {
-                id: 'experiencias',
-                title: 'Experiencias Culturales',
-                description: 'Conoce la cultura chocoana auténtica',
+                id: 'tours-cuatrimoto',
+                title: 'Tours en Cuatrimoto',
+                description: 'Explora senderos únicos y paisajes increíbles',
                 image_url: '/choco-aventuras-hero.jpg',
-                button_text: 'EXPLORAR',
-                button_link: '/experiencias',
+                button_text: 'RESERVAR',
+                button_link: '/cuadriciclos',
                 available: true
               }
             ]).map((service) => (
