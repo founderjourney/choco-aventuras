@@ -135,56 +135,56 @@ export default function NuevoCuatrimoto() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="font-bold text-xl text-[#145A32]">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-14 sm:h-16">
+            <Link href="/" className="font-bold text-base sm:text-xl text-[#145A32] truncate">
               Chocó Aventuras - Admin
             </Link>
-            <div className="flex items-center space-x-6">
-              <nav className="flex space-x-6">
-                <Link href="/" className="text-gray-700 hover:text-[#145A32]">
+            <div className="flex items-center space-x-2 sm:space-x-6">
+              <nav className="hidden md:flex space-x-6">
+                <Link href="/" className="text-gray-700 hover:text-[#145A32] text-sm">
                   Inicio
                 </Link>
-                <Link href="/cuadriciclos" className="text-gray-700 hover:text-[#145A32]">
+                <Link href="/cuadriciclos" className="text-gray-700 hover:text-[#145A32] text-sm">
                   Cuatrimotos
                 </Link>
-                <Link href="/reservas" className="text-gray-700 hover:text-[#145A32]">
+                <Link href="/reservas" className="text-gray-700 hover:text-[#145A32] text-sm">
                   Reservar
                 </Link>
-                <Link href="/admin" className="text-[#145A32] font-semibold">
+                <Link href="/admin" className="text-[#145A32] font-semibold text-sm">
                   Admin
                 </Link>
               </nav>
-              <span className="text-sm text-gray-600">Hola, {user.name}</span>
+              <span className="text-xs sm:text-sm text-gray-600 hidden sm:block truncate max-w-24">Hola, {user.name}</span>
             </div>
           </div>
         </div>
       </header>
 
       {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 mb-6">
-          <Link href="/admin" className="text-gray-600 hover:text-[#145A32]">
+        <div className="flex items-center gap-1 sm:gap-2 mb-4 sm:mb-6 text-sm overflow-x-auto">
+          <Link href="/admin" className="text-gray-600 hover:text-[#145A32] whitespace-nowrap">
             Admin
           </Link>
           <span className="text-gray-400">/</span>
-          <Link href="/admin/cuatrimotos" className="text-gray-600 hover:text-[#145A32]">
+          <Link href="/admin/cuatrimotos" className="text-gray-600 hover:text-[#145A32] whitespace-nowrap">
             Cuatrimotos
           </Link>
           <span className="text-gray-400">/</span>
-          <span className="text-[#145A32]">Nuevo</span>
+          <span className="text-[#145A32] whitespace-nowrap">Nuevo</span>
         </div>
 
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-[#145A32]">Agregar Cuatrimoto</h1>
-            <p className="text-gray-600 mt-2">Completa la información del nuevo cuatrimoto</p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8 gap-4">
+          <div className="flex-1">
+            <h1 className="text-xl sm:text-3xl font-bold text-[#145A32]">Agregar Cuatrimoto</h1>
+            <p className="text-gray-600 mt-1 sm:mt-2 text-sm sm:text-base">Completa la información del nuevo cuatrimoto</p>
           </div>
-          <Link href="/admin/cuatrimotos">
-            <Button variant="outline" className="flex items-center gap-2">
-              <ArrowLeft className="h-4 w-4" />
+          <Link href="/admin/cuatrimotos" className="w-full sm:w-auto">
+            <Button variant="outline" className="flex items-center gap-2 w-full sm:w-auto text-sm">
+              <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
               Volver
             </Button>
           </Link>
@@ -192,25 +192,26 @@ export default function NuevoCuatrimoto() {
 
         {/* Form */}
         <Card>
-          <CardHeader>
-            <CardTitle>Información del Cuatrimoto</CardTitle>
+          <CardHeader className="pb-4">
+            <CardTitle className="text-base sm:text-lg">Información del Cuatrimoto</CardTitle>
           </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <CardContent className="pt-0">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               {/* Información Básica */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="nombre">Nombre *</Label>
+                  <Label htmlFor="nombre" className="text-sm font-medium">Nombre *</Label>
                   <Input
                     id="nombre"
                     value={formData.nombre}
                     onChange={(e) => setFormData(prev => ({...prev, nombre: e.target.value}))}
                     placeholder="Ej: Yamaha Grizzly 700 Rojo"
+                    className="text-sm"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="marca">Marca *</Label>
+                  <Label htmlFor="marca" className="text-sm font-medium">Marca *</Label>
                   <Select value={formData.marca} onValueChange={(value) => setFormData(prev => ({...prev, marca: value}))}>
                     <SelectTrigger>
                       <SelectValue />
@@ -226,17 +227,18 @@ export default function NuevoCuatrimoto() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="modelo">Modelo *</Label>
+                  <Label htmlFor="modelo" className="text-sm font-medium">Modelo *</Label>
                   <Input
                     id="modelo"
                     value={formData.modelo}
                     onChange={(e) => setFormData(prev => ({...prev, modelo: e.target.value}))}
                     placeholder="Ej: Grizzly 700"
+                    className="text-sm"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="anio">Año</Label>
+                  <Label htmlFor="anio" className="text-sm font-medium">Año</Label>
                   <Input
                     id="anio"
                     type="number"
@@ -245,21 +247,23 @@ export default function NuevoCuatrimoto() {
                     placeholder="2009"
                     min="1990"
                     max="2025"
+                    className="text-sm"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="color">Color *</Label>
+                  <Label htmlFor="color" className="text-sm font-medium">Color *</Label>
                   <Input
                     id="color"
                     value={formData.color}
                     onChange={(e) => setFormData(prev => ({...prev, color: e.target.value}))}
                     placeholder="Ej: Rojo Edition Special"
+                    className="text-sm"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="estado">Estado</Label>
+                  <Label htmlFor="estado" className="text-sm font-medium">Estado</Label>
                   <Select value={formData.estado} onValueChange={(value: 'disponible' | 'ocupado' | 'mantenimiento') => setFormData(prev => ({...prev, estado: value}))}>
                     <SelectTrigger>
                       <SelectValue />
@@ -274,9 +278,9 @@ export default function NuevoCuatrimoto() {
               </div>
 
               {/* Precios */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="precio_hora">Precio por Hora (COP) *</Label>
+                  <Label htmlFor="precio_hora" className="text-sm font-medium">Precio por Hora (COP) *</Label>
                   <Input
                     id="precio_hora"
                     type="number"
@@ -284,11 +288,12 @@ export default function NuevoCuatrimoto() {
                     onChange={(e) => setFormData(prev => ({...prev, precio_hora: e.target.value}))}
                     placeholder="150000"
                     min="0"
+                    className="text-sm"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="precio_dia">Precio por Día (COP) *</Label>
+                  <Label htmlFor="precio_dia" className="text-sm font-medium">Precio por Día (COP) *</Label>
                   <Input
                     id="precio_dia"
                     type="number"
@@ -296,26 +301,28 @@ export default function NuevoCuatrimoto() {
                     onChange={(e) => setFormData(prev => ({...prev, precio_dia: e.target.value}))}
                     placeholder="800000"
                     min="0"
+                    className="text-sm"
                   />
                 </div>
               </div>
 
               {/* Descripción */}
               <div className="space-y-2">
-                <Label htmlFor="descripcion">Descripción</Label>
+                <Label htmlFor="descripcion" className="text-sm font-medium">Descripción</Label>
                 <Textarea
                   id="descripcion"
                   value={formData.descripcion}
                   onChange={(e) => setFormData(prev => ({...prev, descripcion: e.target.value}))}
                   placeholder="Describe las características principales del cuatrimoto..."
                   rows={3}
+                  className="text-sm resize-none"
                 />
               </div>
 
               {/* Características */}
-              <div className="space-y-4">
-                <Label>Características</Label>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <div className="space-y-3 sm:space-y-4">
+                <Label className="text-sm font-medium">Características</Label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
                   {CARACTERISTICAS_DISPONIBLES.map((caracteristica) => (
                     <div key={caracteristica} className="flex items-center space-x-2">
                       <Checkbox
@@ -323,7 +330,7 @@ export default function NuevoCuatrimoto() {
                         checked={formData.caracteristicas.includes(caracteristica)}
                         onCheckedChange={(checked) => handleCaracteristicaChange(caracteristica, checked as boolean)}
                       />
-                      <Label htmlFor={caracteristica} className="text-sm">
+                      <Label htmlFor={caracteristica} className="text-xs sm:text-sm cursor-pointer">
                         {caracteristica}
                       </Label>
                     </div>
@@ -332,18 +339,18 @@ export default function NuevoCuatrimoto() {
               </div>
 
               {/* Actions */}
-              <div className="flex gap-4 pt-6">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 sm:pt-6">
                 <Button
                   type="submit"
-                  className="bg-[#145A32] hover:bg-[#0f4428] flex items-center gap-2"
+                  className="bg-[#145A32] hover:bg-[#0f4428] flex items-center justify-center gap-2 w-full sm:w-auto text-sm"
                   disabled={createMutation.isPending}
                 >
-                  <Save className="h-4 w-4" />
+                  <Save className="h-3 w-3 sm:h-4 sm:w-4" />
                   {createMutation.isPending ? 'Guardando...' : 'Guardar Cuatrimoto'}
                 </Button>
-                <Link href="/admin/cuatrimotos">
-                  <Button variant="outline" className="flex items-center gap-2">
-                    <X className="h-4 w-4" />
+                <Link href="/admin/cuatrimotos" className="w-full sm:w-auto">
+                  <Button variant="outline" className="flex items-center justify-center gap-2 w-full text-sm">
+                    <X className="h-3 w-3 sm:h-4 sm:w-4" />
                     Cancelar
                   </Button>
                 </Link>

@@ -415,57 +415,57 @@ export default function AdminPaginasPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="font-bold text-xl text-[#145A32]">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-14 sm:h-16">
+            <Link href="/" className="font-bold text-base sm:text-xl text-[#145A32] truncate">
               Chocó Aventuras - CMS
             </Link>
-            <nav className="flex space-x-6">
-              <Link href="/admin" className="text-gray-700 hover:text-[#145A32]">
+            <nav className="flex space-x-3 sm:space-x-6">
+              <Link href="/admin" className="text-gray-700 hover:text-[#145A32] text-sm">
                 Dashboard
               </Link>
-              <Link href="/admin/paginas" className="text-[#145A32] font-semibold">
-                Gestión de Páginas
+              <Link href="/admin/paginas" className="text-[#145A32] font-semibold text-sm">
+                <span className="hidden sm:inline">Gestión de </span>Páginas
               </Link>
             </nav>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 mb-6">
-          <Link href="/admin" className="flex items-center gap-2 text-gray-600 hover:text-[#145A32]">
-            <ArrowLeft className="h-4 w-4" />
-            Volver al Panel Admin
+        <div className="flex items-center gap-2 mb-4 sm:mb-6">
+          <Link href="/admin" className="flex items-center gap-2 text-gray-600 hover:text-[#145A32] text-sm">
+            <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden xs:inline">Volver al </span>Panel Admin
           </Link>
         </div>
 
         {!modoEdicion ? (
           <>
             {/* Header con botón crear */}
-            <div className="flex justify-between items-center mb-8">
-              <div>
-                <h1 className="text-3xl font-bold text-[#145A32]">Gestión de Páginas</h1>
-                <p className="text-gray-600 mt-2">Crea, edita y gestiona las páginas de tu sitio web</p>
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 sm:mb-8 gap-4">
+              <div className="flex-1">
+                <h1 className="text-xl sm:text-3xl font-bold text-[#145A32]">Gestión de Páginas</h1>
+                <p className="text-gray-600 mt-1 sm:mt-2 text-sm sm:text-base">Crea, edita y gestiona las páginas de tu sitio web</p>
               </div>
               <Button
                 onClick={handleCrearPagina}
-                className="bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold px-6 py-3"
+                className="bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base w-full sm:w-auto"
               >
-                <Plus className="h-4 w-4 mr-2" />
+                <Plus className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                 Nueva Página
               </Button>
             </div>
 
             {/* Lista de páginas */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {paginas.map((pagina) => (
                 <Card key={pagina.id} className="hover:shadow-lg transition-all duration-300">
-                  <CardHeader>
-                    <div className="flex justify-between items-start">
-                      <CardTitle className="text-xl text-[#145A32]">{pagina.titulo}</CardTitle>
-                      <span className={`px-2 py-1 rounded text-xs font-medium ${
+                  <CardHeader className="pb-3">
+                    <div className="flex justify-between items-start gap-2">
+                      <CardTitle className="text-base sm:text-xl text-[#145A32] truncate flex-1">{pagina.titulo}</CardTitle>
+                      <span className={`px-2 py-1 rounded text-xs font-medium whitespace-nowrap ${
                         pagina.estado === 'publicada'
                           ? 'bg-green-100 text-green-800'
                           : 'bg-yellow-100 text-yellow-800'
@@ -473,44 +473,44 @@ export default function AdminPaginasPage() {
                         {pagina.estado}
                       </span>
                     </div>
-                    <p className="text-gray-600">/{pagina.slug}</p>
+                    <p className="text-gray-600 text-sm truncate">/{pagina.slug}</p>
                   </CardHeader>
 
-                  <CardContent>
-                    <div className="space-y-2 mb-4">
-                      <p className="text-sm text-gray-600">
+                  <CardContent className="pt-0">
+                    <div className="space-y-1 sm:space-y-2 mb-3 sm:mb-4">
+                      <p className="text-xs sm:text-sm text-gray-600">
                         <strong>Creada:</strong> {new Date(pagina.fechaCreacion).toLocaleDateString()}
                       </p>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-xs sm:text-sm text-gray-600">
                         <strong>Modificada:</strong> {new Date(pagina.ultimaModificacion).toLocaleDateString()}
                       </p>
                     </div>
 
-                    <div className="flex gap-2">
+                    <div className="flex flex-col sm:flex-row gap-2">
                       <Button
                         size="sm"
                         variant="outline"
                         onClick={() => window.open(`/${pagina.slug}`, '_blank')}
-                        className="flex-1"
+                        className="flex-1 text-xs sm:text-sm"
                       >
-                        <Eye className="h-4 w-4 mr-1" />
+                        <Eye className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
                         Ver
                       </Button>
                       <Button
                         size="sm"
                         onClick={() => handleEditarPagina(pagina)}
-                        className="flex-1 bg-[#1565C0] hover:bg-[#1565C0]/90 text-white"
+                        className="flex-1 bg-[#1565C0] hover:bg-[#1565C0]/90 text-white text-xs sm:text-sm"
                       >
-                        <Edit className="h-4 w-4 mr-1" />
+                        <Edit className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
                         Editar
                       </Button>
                       <Button
                         size="sm"
                         variant="destructive"
                         onClick={() => handleEliminarPagina(pagina.id)}
-                        className="px-3"
+                        className="px-2 sm:px-3 sm:flex-initial"
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
                       </Button>
                     </div>
                   </CardContent>
@@ -521,40 +521,41 @@ export default function AdminPaginasPage() {
         ) : (
           <>
             {/* Editor de páginas */}
-            <div className="flex justify-between items-center mb-8">
-              <div>
-                <h1 className="text-3xl font-bold text-[#145A32]">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 sm:mb-8 gap-4">
+              <div className="flex-1">
+                <h1 className="text-xl sm:text-3xl font-bold text-[#145A32] truncate">
                   {nuevaPagina ? 'Nueva Página' : `Editando: ${formData.titulo}`}
                 </h1>
-                <p className="text-gray-600 mt-2">Editor visual de contenido</p>
+                <p className="text-gray-600 mt-1 sm:mt-2 text-sm sm:text-base">Editor visual de contenido</p>
               </div>
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                 <Button
                   variant="outline"
                   onClick={() => {
                     setModoEdicion(false);
                     setNuevaPagina(false);
                   }}
+                  className="text-sm sm:text-base"
                 >
                   Cancelar
                 </Button>
                 <Button
                   onClick={handleGuardarPagina}
-                  className="bg-[#145A32] hover:bg-[#145A32]/90 text-white"
+                  className="bg-[#145A32] hover:bg-[#145A32]/90 text-white text-sm sm:text-base"
                 >
-                  <Save className="h-4 w-4 mr-2" />
+                  <Save className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                   Guardar Página
                 </Button>
               </div>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-3 gap-4 sm:gap-8">
               {/* Panel de configuración */}
               <Card className="lg:col-span-1">
-                <CardHeader>
-                  <CardTitle>Configuración de Página</CardTitle>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base sm:text-lg">Configuración de Página</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-3 sm:space-y-4 pt-0">
                   <div>
                     <label className="block text-sm font-medium text-[#145A32] mb-2">
                       Título de la Página
@@ -563,6 +564,7 @@ export default function AdminPaginasPage() {
                       value={formData.titulo}
                       onChange={(e) => setFormData({...formData, titulo: e.target.value})}
                       placeholder="Ej: Sobre Nosotros"
+                      className="text-sm"
                     />
                   </div>
 
@@ -574,6 +576,7 @@ export default function AdminPaginasPage() {
                       value={formData.slug}
                       onChange={(e) => setFormData({...formData, slug: e.target.value})}
                       placeholder="Ej: nosotros"
+                      className="text-sm"
                     />
                   </div>
 
@@ -584,7 +587,7 @@ export default function AdminPaginasPage() {
                     <select
                       value={formData.estado}
                       onChange={(e) => setFormData({...formData, estado: e.target.value as 'publicada' | 'borrador'})}
-                      className="w-full p-2 border border-gray-300 rounded-lg"
+                      className="w-full p-2 border border-gray-300 rounded-lg text-sm"
                     >
                       <option value="borrador">Borrador</option>
                       <option value="publicada">Publicada</option>
@@ -594,42 +597,42 @@ export default function AdminPaginasPage() {
                   <hr />
 
                   <div>
-                    <h3 className="font-bold text-[#145A32] mb-3">Agregar Elementos</h3>
+                    <h3 className="font-bold text-[#145A32] mb-2 sm:mb-3 text-sm sm:text-base">Agregar Elementos</h3>
                     <div className="space-y-2">
                       <Button
                         size="sm"
                         variant="outline"
                         onClick={() => agregarElemento('titulo')}
-                        className="w-full justify-start"
+                        className="w-full justify-start text-xs sm:text-sm"
                       >
-                        <Type className="h-4 w-4 mr-2" />
+                        <Type className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                         Título
                       </Button>
                       <Button
                         size="sm"
                         variant="outline"
                         onClick={() => agregarElemento('texto')}
-                        className="w-full justify-start"
+                        className="w-full justify-start text-xs sm:text-sm"
                       >
-                        <Layout className="h-4 w-4 mr-2" />
+                        <Layout className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                         Texto
                       </Button>
                       <Button
                         size="sm"
                         variant="outline"
                         onClick={() => agregarElemento('imagen')}
-                        className="w-full justify-start"
+                        className="w-full justify-start text-xs sm:text-sm"
                       >
-                        <Image className="h-4 w-4 mr-2" />
+                        <Image className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                         Imagen
                       </Button>
                       <Button
                         size="sm"
                         variant="outline"
                         onClick={() => agregarElemento('boton')}
-                        className="w-full justify-start"
+                        className="w-full justify-start text-xs sm:text-sm"
                       >
-                        <Plus className="h-4 w-4 mr-2" />
+                        <Plus className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                         Botón
                       </Button>
                     </div>
@@ -639,8 +642,8 @@ export default function AdminPaginasPage() {
 
               {/* Editor de contenido */}
               <Card className="lg:col-span-2">
-                <CardHeader>
-                  <CardTitle>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base sm:text-lg">
                     {isHomepage ? '🎯 Editor de Bloques - Página de Inicio' :
                      isNosotros ? '📋 Editor de Bloques - Página Nosotros' :
                      'Editor de Contenido'}

@@ -57,22 +57,22 @@ export default function AdminCuatrimotos() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="font-bold text-xl text-[#145A32]">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-14 sm:h-16">
+            <Link href="/" className="font-bold text-base sm:text-xl text-[#145A32] truncate">
               Chocó Aventuras - Admin
             </Link>
-            <nav className="flex space-x-6">
-              <Link href="/" className="text-gray-700 hover:text-[#145A32]">
+            <nav className="flex space-x-3 sm:space-x-6">
+              <Link href="/" className="text-gray-700 hover:text-[#145A32] text-sm hidden md:block">
                 Inicio
               </Link>
-              <Link href="/cuadriciclos" className="text-gray-700 hover:text-[#145A32]">
+              <Link href="/cuadriciclos" className="text-gray-700 hover:text-[#145A32] text-sm hidden md:block">
                 Cuatrimotos
               </Link>
-              <Link href="/reservas" className="text-gray-700 hover:text-[#145A32]">
+              <Link href="/reservas" className="text-gray-700 hover:text-[#145A32] text-sm hidden md:block">
                 Reservar
               </Link>
-              <Link href="/admin" className="text-[#145A32] font-semibold">
+              <Link href="/admin" className="text-[#145A32] font-semibold text-sm">
                 Admin
               </Link>
             </nav>
@@ -81,23 +81,23 @@ export default function AdminCuatrimotos() {
       </header>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 mb-6">
-          <Link href="/admin" className="flex items-center gap-2 text-gray-600 hover:text-[#145A32]">
-            <ArrowLeft className="h-4 w-4" />
-            Volver al Panel
+        <div className="flex items-center gap-2 mb-4 sm:mb-6">
+          <Link href="/admin" className="flex items-center gap-2 text-gray-600 hover:text-[#145A32] text-sm">
+            <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden xs:inline">Volver al </span>Panel
           </Link>
         </div>
 
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-[#145A32]">Gestión de Cuatrimotos</h1>
-            <p className="text-gray-600 mt-2">Administra el inventario de cuatrimotos</p>
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 sm:mb-8 gap-4">
+          <div className="flex-1">
+            <h1 className="text-xl sm:text-3xl font-bold text-[#145A32]">Gestión de Cuatrimotos</h1>
+            <p className="text-gray-600 mt-1 sm:mt-2 text-sm sm:text-base">Administra el inventario de cuatrimotos</p>
           </div>
-          <Link href="/admin/cuatrimotos/nuevo">
-            <Button className="bg-[#145A32] hover:bg-[#0f4428]">
+          <Link href="/admin/cuatrimotos/nuevo" className="w-full sm:w-auto">
+            <Button className="bg-[#145A32] hover:bg-[#0f4428] w-full sm:w-auto text-sm sm:text-base">
               <Plus className="h-4 w-4 mr-2" />
               Agregar Cuatrimoto
             </Button>
