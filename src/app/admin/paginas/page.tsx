@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Link from 'next/link';
 import { ArrowLeft, Plus, Edit, Eye, Trash2, Save, Image, Type, Layout, HelpCircle, GalleryHorizontal } from 'lucide-react';
@@ -31,6 +32,13 @@ export default function AdminPaginasPage() {
   const [experienciasSections, setExperienciasSections] = useState<any>({});
   const [contactoSections, setContactoSections] = useState<any>({});
   const { toast } = useToast();
+  const [activeTab, setActiveTab] = useState('bloque1');
+
+  useEffect(() => {
+    if (paginaSeleccionada) {
+      setActiveTab('bloque1');
+    }
+  }, [paginaSeleccionada]);
 
   // Detectar el tipo de página que estamos editando
   const isHomepage = paginaSeleccionada?.slug === 'homepage';
@@ -652,8 +660,25 @@ export default function AdminPaginasPage() {
                 <CardContent>
                   {isHomepage ? (
                     // 🚀 EDITOR ESPECÍFICO PARA HOMEPAGE CON 8 BLOQUES
-                    <Tabs defaultValue="bloque1" className="w-full">
-                      <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8">
+                    <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+                      <div className="md:hidden mb-4">
+                        <Select onValueChange={setActiveTab} value={activeTab}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Seleccionar bloque" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="bloque1">🎬 Hero</SelectItem>
+                            <SelectItem value="bloque2">🎥 Explora</SelectItem>
+                            <SelectItem value="bloque3">🎯 Servicios</SelectItem>
+                            <SelectItem value="bloque4">🏍️ Vehículos</SelectItem>
+                            <SelectItem value="bloque5">📱 Redes</SelectItem>
+                            <SelectItem value="bloque6">📝 Formulario</SelectItem>
+                            <SelectItem value="bloque7">💪 CTA</SelectItem>
+                            <SelectItem value="bloque8">✨ Animado</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <TabsList className="hidden md:grid w-full grid-cols-4 lg:grid-cols-8">
                         <TabsTrigger value="bloque1">🎬 Hero</TabsTrigger>
                         <TabsTrigger value="bloque2">🎥 Explora</TabsTrigger>
                         <TabsTrigger value="bloque3">🎯 Servicios</TabsTrigger>
@@ -1038,8 +1063,22 @@ export default function AdminPaginasPage() {
                     </Tabs>
                   ) : isNosotros ? (
                     // 🚀 EDITOR ESPECÍFICO PARA NOSOTROS CON 5 BLOQUES
-                    <Tabs defaultValue="bloque1" className="w-full">
-                      <TabsList className="grid w-full grid-cols-5">
+                    <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+                      <div className="md:hidden mb-4">
+                        <Select onValueChange={setActiveTab} value={activeTab}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Seleccionar bloque" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="bloque1">🎬 Hero</SelectItem>
+                            <SelectItem value="bloque2">📹 Historia</SelectItem>
+                            <SelectItem value="bloque3">🖼️ Galería</SelectItem>
+                            <SelectItem value="bloque4">💬 Contacto</SelectItem>
+                            <SelectItem value="bloque5">❓ FAQs</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <TabsList className="hidden md:grid w-full grid-cols-5">
                         <TabsTrigger value="bloque1">🎬 Hero</TabsTrigger>
                         <TabsTrigger value="bloque2">📹 Historia</TabsTrigger>
                         <TabsTrigger value="bloque3">🖼️ Galería</TabsTrigger>
@@ -1297,8 +1336,21 @@ export default function AdminPaginasPage() {
                     </Tabs>
                   ) : isCuatrimotos ? (
                     // 🚀 EDITOR DE CUATRIMOTOS CON TABS
-                    <Tabs defaultValue="bloque1" className="space-y-4">
-                      <TabsList className="grid w-full grid-cols-4">
+                    <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
+                      <div className="md:hidden mb-4">
+                        <Select onValueChange={setActiveTab} value={activeTab}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Seleccionar bloque" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="bloque1">BLOQUE 1: Hero</SelectItem>
+                            <SelectItem value="bloque2">BLOQUE 2: Seguridad</SelectItem>
+                            <SelectItem value="bloque3">BLOQUE 3: Vehículos</SelectItem>
+                            <SelectItem value="bloque4">BLOQUE 4: CTA</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <TabsList className="hidden md:grid w-full grid-cols-4">
                         <TabsTrigger value="bloque1">BLOQUE 1: Hero</TabsTrigger>
                         <TabsTrigger value="bloque2">BLOQUE 2: Seguridad</TabsTrigger>
                         <TabsTrigger value="bloque3">BLOQUE 3: Vehículos</TabsTrigger>
@@ -1571,8 +1623,22 @@ export default function AdminPaginasPage() {
                     </Tabs>
                   ) : isExperiencias ? (
                     // 🚀 EDITOR DE EXPERIENCIAS CON TABS
-                    <Tabs defaultValue="bloque1" className="space-y-4">
-                      <TabsList className="grid w-full grid-cols-5">
+                    <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
+                      <div className="md:hidden mb-4">
+                        <Select onValueChange={setActiveTab} value={activeTab}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Seleccionar bloque" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="bloque1">BLOQUE 1: Hero</SelectItem>
+                            <SelectItem value="bloque2">BLOQUE 2: Servicios</SelectItem>
+                            <SelectItem value="bloque3">BLOQUE 3: Políticas</SelectItem>
+                            <SelectItem value="bloque4">BLOQUE 4: Galería</SelectItem>
+                            <SelectItem value="bloque5">BLOQUE 5: CTA</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <TabsList className="hidden md:grid w-full grid-cols-5">
                         <TabsTrigger value="bloque1">BLOQUE 1: Hero</TabsTrigger>
                         <TabsTrigger value="bloque2">BLOQUE 2: Servicios</TabsTrigger>
                         <TabsTrigger value="bloque3">BLOQUE 3: Políticas</TabsTrigger>
@@ -1831,8 +1897,22 @@ export default function AdminPaginasPage() {
                     </Tabs>
                   ) : isContacto ? (
                     // 🚀 EDITOR DE CONTACTO CON TABS
-                    <Tabs defaultValue="bloque1" className="space-y-4">
-                      <TabsList className="grid w-full grid-cols-5">
+                    <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
+                      <div className="md:hidden mb-4">
+                        <Select onValueChange={setActiveTab} value={activeTab}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Seleccionar bloque" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="bloque1">BLOQUE 1: Hero</SelectItem>
+                            <SelectItem value="bloque2">BLOQUE 2: Info</SelectItem>
+                            <SelectItem value="bloque3">BLOQUE 3: Formulario</SelectItem>
+                            <SelectItem value="bloque4">BLOQUE 4: Servicios</SelectItem>
+                            <SelectItem value="bloque5">BLOQUE 5: WhatsApp</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <TabsList className="hidden md:grid w-full grid-cols-5">
                         <TabsTrigger value="bloque1">BLOQUE 1: Hero</TabsTrigger>
                         <TabsTrigger value="bloque2">BLOQUE 2: Info</TabsTrigger>
                         <TabsTrigger value="bloque3">BLOQUE 3: Formulario</TabsTrigger>
