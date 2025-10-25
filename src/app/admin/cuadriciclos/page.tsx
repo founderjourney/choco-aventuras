@@ -148,7 +148,7 @@ export default function AdminCuatrimotos() {
           <CardContent>
             <div className="space-y-4">
               {data?.cuatrimotos.map((cuatrimoto) => (
-                <div key={cuatrimoto.id} className="flex items-center justify-between p-6 border rounded-lg hover:shadow-md transition-shadow">
+                <div key={cuatrimoto.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-6 border rounded-lg hover:shadow-md transition-shadow gap-4">
                   <div className="flex gap-4 flex-1">
                     {/* Foto del vehículo */}
                     {cuatrimoto.fotos && cuatrimoto.fotos.length > 0 && (
@@ -218,15 +218,15 @@ export default function AdminCuatrimotos() {
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-2 ml-6">
-                    <Link href={`/admin/cuadriciclos/${cuatrimoto.id}`}>
-                      <Button variant="outline" size="sm">
+                  <div className="flex flex-row sm:flex-col gap-2 w-full sm:w-auto">
+                    <Link href={`/cuadriciclos/${cuatrimoto.id}`} className="flex-1 sm:flex-none">
+                      <Button variant="outline" size="sm" className="w-full">
                         <Eye className="h-4 w-4 mr-2" />
                         Ver
                       </Button>
                     </Link>
-                    <Link href={`/admin/cuadriciclos/${cuatrimoto.id}/editar`}>
-                      <Button variant="outline" size="sm">
+                    <Link href={`/admin/cuadriciclos/${cuatrimoto.id}/editar`} className="flex-1 sm:flex-none">
+                      <Button variant="outline" size="sm" className="w-full">
                         <Edit2 className="h-4 w-4 mr-2" />
                         Editar
                       </Button>

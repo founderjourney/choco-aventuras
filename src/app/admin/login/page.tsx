@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/hooks/use-auth';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,6 +14,7 @@ import { Eye, EyeOff, Lock, User } from 'lucide-react';
 export default function AdminLogin() {
   const router = useRouter();
   const { toast } = useToast();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -26,21 +28,25 @@ export default function AdminLogin() {
 
     // Simulación de autenticación básica
     if (formData.email === 'admin@chocoaventuras.com' && formData.password === 'admin123') {
-      // Guardar estado de autenticación
-      localStorage.setItem('admin_authenticated', 'true');
-      localStorage.setItem('admin_user', JSON.stringify({
+      const userData = {
         email: formData.email,
         name: 'Administrador',
         role: 'admin',
         loginTime: new Date().toISOString()
-      }));
+      };
+
+      // Usar el hook de autenticación para manejar el login
+      login(userData);
 
       toast({
         title: "¡Bienvenido!",
         description: "Has iniciado sesión correctamente.",
       });
 
-      router.push('/admin');
+      // Usar setTimeout para asegurar que el estado se actualice antes de navegar
+      setTimeout(() => {
+        router.push('/admin');
+      }, 100);
     } else {
       toast({
         title: "Error de autenticación",

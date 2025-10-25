@@ -155,8 +155,8 @@ export default function AdminPaseos() {
           <CardContent>
             <div className="space-y-6">
               {data?.paseos.map((paseo) => (
-                <div key={paseo.id} className="border rounded-lg p-6 hover:shadow-md transition-shadow">
-                  <div className="flex items-start justify-between mb-4">
+                <div key={paseo.id} className="border rounded-lg p-4 sm:p-6 hover:shadow-md transition-shadow">
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4 gap-4">
                     <div>
                       <div className="flex items-center gap-3 mb-2">
                         <h3 className="text-xl font-semibold">{paseo.nombre}</h3>
@@ -170,14 +170,14 @@ export default function AdminPaseos() {
                       <p className="text-gray-600 max-w-2xl">{paseo.descripcion}</p>
                     </div>
 
-                    <div className="flex flex-col gap-2">
-                      <Link href={`/admin/paseos/${paseo.id}`}>
+                    <div className="flex flex-row sm:flex-col gap-2 w-full sm:w-auto">
+                      <Link href={`/paseos/${paseo.id}`} className="flex-1 sm:flex-none">
                         <Button variant="outline" size="sm" className="w-full">
                           <Eye className="h-4 w-4 mr-2" />
                           Ver
                         </Button>
                       </Link>
-                      <Link href={`/admin/paseos/${paseo.id}/editar`}>
+                      <Link href={`/admin/paseos/${paseo.id}/editar`} className="flex-1 sm:flex-none">
                         <Button variant="outline" size="sm" className="w-full">
                           <Edit2 className="h-4 w-4 mr-2" />
                           Editar

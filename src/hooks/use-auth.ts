@@ -38,9 +38,15 @@ export function useAuth() {
   }, []);
 
   const login = (userData: User) => {
-    localStorage.setItem('admin_authenticated', 'true');
-    localStorage.setItem('admin_user', JSON.stringify(userData));
-    setUser(userData);
+    try {
+      localStorage.setItem('admin_authenticated', 'true');
+      localStorage.setItem('admin_user', JSON.stringify(userData));
+      setUser(userData);
+      return true;
+    } catch (error) {
+      console.error('Error saving auth data:', error);
+      return false;
+    }
   };
 
   const logout = () => {

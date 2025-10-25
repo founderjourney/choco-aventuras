@@ -1,6 +1,6 @@
 import { db as devDb } from './db.dev';
 
-let db = devDb; // Por defecto usar mock data
+const db = devDb; // Por defecto usar mock data
 
 // Función para obtener la base de datos correcta con fallback automático
 export async function getDb() {
@@ -10,7 +10,7 @@ export async function getDb() {
       const prodModule = await import('./db.prod');
 
       // Test the connection with a simple query
-      const testResult = await prodModule.db.cuatrimotos.findAll();
+      await prodModule.db.cuatrimotos.findAll();
       console.log('✅ Production database connected successfully');
       return prodModule.db;
     } catch (error) {

@@ -62,7 +62,7 @@ export const db = {
     },
     update: async (id: number, data: Partial<Omit<Paseo, 'id' | 'created_at' | 'updated_at'>>): Promise<Paseo | null> => {
         const updates: string[] = [];
-        const values: any[] = [];
+        const values: (string | number | boolean | null)[] = [];
         let paramCount = 1;
 
         Object.entries(data).forEach(([key, value]) => {
@@ -102,7 +102,7 @@ export const db = {
             JOIN paseos p ON p.id = r.paseo_id
         `;
         const conditions: string[] = [];
-        const values: any[] = [];
+        const values: (string | number | boolean | null)[] = [];
         let paramCount = 1;
 
         if (filters?.estado) {
